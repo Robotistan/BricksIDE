@@ -28,4 +28,4 @@ You may obtain a copy of the License at
  See the License for the specific language governing permissions and
  limitations under the License.
 
-![Logo](https://user-images.githubusercontent.com/96052488/204985653-2f4abb78-9bd9-479f-b04d-71d595c210e7.jpeg)
+![Logo](https://github.com/Robotistan/BricksIDE/assets/112697142/b89545c6-508d-4de4-b33f-e88599584196)
