@@ -1,0 +1,198 @@
+// ----------------------------------------------------------------------
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+// --
+// Copyright 2016-2019 Andi Dittrich <https://andidittrich.de>
+// ----------------------------------------------------------------------
+
+@import "flags.less";
+@import "views.less";
+
+// detached rulesets
+// ------------------------------------------
+
+// code container
+.STYLE_CODE_CONTAINER(@rules){
+    .enlighter{
+        @rules();
+    }
+}
+
+// code+raw wrapper container
+.STYLE_CODE_WRAPPER(@rules){
+    .enlighter-code{
+        @rules();
+    }
+}
+
+
+// block code container
+.STYLE_CODE_CONTAINER_BLOCK(@rules){
+    div.enlighter{
+        @rules();
+    }
+}
+
+// inline code container
+.STYLE_CODE_CONTAINER_INLINE(@rules){
+    span.enlighter{
+        @rules();
+    }
+}
+
+// raw code container
+.STYLE_CODE_CONTAINER_RAW(@rules){
+    .enlighter-raw{
+        @rules();
+    }
+}
+
+// match linenumber container
+.STYLE_LINENUMBERS(@rules, @firstChild, @lastChild){
+
+    // match the wrapper class attribute
+    .OPT_LINENUMBERS({
+
+        // line container
+        div.enlighter > div{
+            // virtual line counter
+            &::before{
+                @rules();
+            }
+
+            &:FIRST-CHILD{
+                &::before{
+                    @firstChild();
+                }
+            }
+
+            &:LAST-CHILD{
+                &::before{
+                    @lastChild();
+                }
+            }
+        }
+    });
+}
+
+// match single line
+.STYLE_LINE(@rules, @rulesOdd, @rulesEven){
+    // line container
+    div.enlighter > div{
+        // default (each line)
+        @rules();
+
+        // odd lines
+        &:nth-child(odd){
+            @rulesOdd();
+        }
+
+        // even lines
+        &:nth-child(even){
+            @rulesEven();
+        }
+    }
+}
+
+// match hover
+.STYLE_LINEHOVER(@rulesLinenumbers, @rulesPlain){
+
+    // hover enabled
+    .OPT_HOVER({
+
+        // hover + linenumbering enabled
+        .OPT_LINENUMBERS({
+            .STYLE_LINE({
+                &:hover{
+                    @rulesLinenumbers();
+                }
+            }, {}, {});
+        });
+
+        // hover effect of each line
+        .STYLE_LINE({
+            &:hover{
+                @rulesPlain();
+            }
+        }, {}, {});
+
+        // hover effect of each line in case line-numbers are also enabled
+    });
+}
+
+// toolbar
+.STYLE_TOOLBAR(@rules){
+    .enlighter-toolbar{
+        @rules();
+    }
+}
+.STYLE_TOOLBAR_TOP(@rules){
+    .enlighter-toolbar-top{
+        @rules();
+    }
+}
+.STYLE_TOOLBAR_BOTTOM(@rules){
+    .enlighter-toolbar-bottom{
+        @rules();
+    }
+}
+
+// toolbar button
+.STYLE_TOOLBAR_BUTTON(@rules){
+    .enlighter-toolbar .enlighter-btn{
+        @rules();
+    }
+}
+.STYLE_TOOLBAR_BUTTON(@name, @text, @rules){
+    .enlighter-toolbar .enlighter-btn-@{name}{
+
+        @rules();
+
+        // remove bg image in case text label is set
+        & when not (@text = '') {
+            background-image: none;
+        }
+
+        // button text
+        &:after when not (@text = '') {
+            content: @text;
+        }
+    }
+}
+
+// default token container
+.STYLE_TOKEN_DEFAULT(@rules){
+    .enlighter span{
+        @rules();
+    }   
+}
+
+// default button style
+.STYLE_BUTTON(@rules){
+    .enlighter-btn{
+        @rules();
+    }   
+}
+
+// tooltip style
+.STYLE_TOOLTIP(@rules){
+    .enlighter-tooltip{
+        @rules();
+    }   
+}
+
+
+// match theme name
+.THEME(@name, @rules){
+    .enlighter-t-@{name}{
+        @rules();
+    }
+}
+
+// match token
+.TOKEN(@name, @rules){
+    .enlighter-@{name}{
+        @rules();
+    }
+}

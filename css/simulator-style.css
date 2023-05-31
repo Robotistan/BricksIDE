@@ -1,0 +1,331 @@
+  img {
+    -drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+  }
+
+  .slidecontainer {
+    width: 80%;
+  }
+
+  .sliderLDR {
+    -webkit-slider-thumb: none;
+    width: 80%;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+  .sliderTemp{
+    -webkit-slider-thumb: none;
+    width: 80%;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+  .sliderHumodity{
+    -webkit-slider-thumb: none;
+    width: 80%;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+  .sliderPot{
+    -webkit-slider-thumb: none;
+    width: 80%;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+
+  .slider:hover {
+    opacity: 1;
+  }
+
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #e9102d;
+    cursor: pointer;
+  }
+
+  .slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #e9102d;
+    cursor: pointer;
+  }
+
+.image {
+  margin: 50px auto;
+  width: 600px;
+  position: relative
+}
+
+.image #svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.buttons {
+  display: flex;
+  position: fixed;
+  bottom: 2em;
+  right: 2em;
+  z-index: 3;
+}
+
+.potRotateRight1{
+  content: url('../images/buttons/potRight.png');
+  width: 4vh;
+  height: 4vh;
+  visibility: visible;
+  border-style: none;
+  border-width: 0px;
+  z-index: 101;
+  cursor: pointer;
+  padding: 0.1vh;
+
+  -ms-transform: rotate(0deg); /* IE 9 */
+  -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
+  transform: rotate(0deg);
+}
+
+.potRotateRight2{
+  content: url('../images/buttons/potRight.png');
+  width: 4vh;
+  height: 4vh;
+  visibility: visible;
+  border-style: none;
+  border-width: 0px;
+  z-index: 101;
+  cursor: pointer;
+  padding: 0.1vh;
+
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+  transform: rotate(90deg);
+}
+
+.potRotateLeft1{
+  content: url('../images/buttons/potLeft.png');
+  width: 4vh;
+  height: 4vh;
+  visibility: visible;
+  border-style: none;
+  border-width: 0px;
+  z-index: 101;
+  cursor: pointer;
+  padding: 0.1vh;
+}
+
+.potRotateLeft2{
+  content: url('../images/buttons/potLeft.png');
+  width: 4vh;
+  height: 4vh;
+  visibility: visible;
+  border-style: none;
+  border-width: 0px;
+  z-index: 101;
+  cursor: pointer;
+  padding: 0.1vh;
+
+  -moz-transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+}
+
+.encRotateRight1{
+  content: url('../images/buttons/encRight.png');
+  width: 4vh;
+  height: 4vh;
+  visibility: visible;
+  border-style: none;
+  border-width: 0px;
+  z-index: 101;
+  cursor: pointer;
+  padding: 0.1vh;
+
+  -ms-transform: rotate(0deg); /* IE 9 */
+  -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
+  transform: rotate(0deg);
+}
+
+.encRotateRight2{
+  content: url('../images/buttons/encRight.png');
+  width: 4vh;
+  height: 4vh;
+  visibility: visible;
+  border-style: none;
+  border-width: 0px;
+  z-index: 101;
+  cursor: pointer;
+  padding: 0.1vh;
+
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+  transform: rotate(90deg);
+}
+
+.encRotateLeft1{
+  content: url('../images/buttons/encLeft.png');
+  width: 4vh;
+  height: 4vh;
+  visibility: visible;
+  border-style: none;
+  border-width: 0px;
+  z-index: 101;
+  cursor: pointer;
+  padding: 0.1vh;
+}
+
+.encRotateLeft2{
+  content: url('../images/buttons/encLeft.png');
+  width: 4vh;
+  height: 4vh;
+  visibility: visible;
+  border-style: none;
+  border-width: 0px;
+  z-index: 101;
+  cursor: pointer;
+  padding: 0.1vh;
+
+  -moz-transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+}
+
+#ldcEkran {
+  position: absolute;
+  top: 10;
+  left: 50;
+}
+
+#myCanvas {
+  background-color: #2658d6;
+  position: absolute;
+  top: 8.5%;
+  left: 8%;
+}
+
+#canvasScreen {
+  background-color: #2658d6;
+  position: absolute;
+  width: 84 ;
+  height: 42;
+  left: 6.5%;
+  top: 8%;
+  width: 16.8%;
+  border: 2px solid black;
+}
+
+#canvasButton1 {
+  background-color: black;
+  border-radius: 50%;
+  position: absolute;
+  width: 5.9%;
+  height: 7.2%;
+  left: 14%;
+  top: 51%;
+}
+
+#canvasRedLed {
+  background-color: rgb(104, 57, 57);
+  border-radius: 50%;
+  position: absolute;
+  width: 4%;
+  height: 5%;
+  left: 5.6%;
+  top: 51.5%;
+}
+
+#canvasRgbLed {
+  background-color: grey;
+  border-radius: 50%;
+  position: absolute;
+  width: 3%;
+  height: 4%;
+  left: 16%;
+  top: 36.5%;
+}
+
+#canvasRelay {
+  background-color: black;
+  border-radius: 50%;
+  position: absolute;
+  width: 2.2%;
+  height: 3%;
+  left: 18%;
+  top: 89%;
+}
+
+#canvasResetButton {
+  background-color: red;
+  border-radius: 50%;
+  position: absolute;
+  width: 3%;
+  height: 4%;
+  left: 51.8%;
+  top: 52.8%;
+}
+
+/* Aktif olduktan sonraki renk kodu Motor1  #88cc004e */
+#canvasMotor1 {
+  background-color: transparent; 
+  position: absolute;
+  width: 4%;
+  height: 7%;
+  left: 90%;
+  top: 6%;
+}
+
+/* Aktif olduktan sonraki renk kodu Motor2  #88cc004e */
+#canvasMotor2 {
+  background-color: transparent;
+  position: absolute;
+  width: 4%;
+  height: 7%;
+  left: 90%;
+  top: 14.5%;
+}
+
+/* Aktif olduktan sonraki renk kodu Buzzer #ffffff97 */
+#canvasBuzzer {
+  background-color: transparent;
+  border-radius: 50%;
+  position: absolute;
+  width: 7.8%;
+  height: 10.5%;
+  left: 85.9%;
+  top: 52%;
+}
+
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  padding: 6px 0px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.42857;
+}

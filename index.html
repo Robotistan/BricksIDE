@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index-style.css">
+    <link rel="icon" href="img/pbico.ico" type="icon" />
+    <script src="js/index.js"></script>
+    <title>PicoBricks IDE</title>
+</head>
+<body>
+    
+    <nav class="navbar">
+        <img src="img/logo.png" alt="picologo" class="logo">
+        <ul>
+            <li><a href="https://picobricks.com/">Homepage</a></li>
+            <li><a href="https://docs.picobricks.com/en/latest/">Documents</a></li>
+            <li><a href="https://www.robotistan.com/">Buy</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+    
+    <div class="banner">
+        <div class="video">
+            <img src="img/pico1.png" alt="pico" class="picovideo">
+           
+        </div>
+        <div class="text">
+            <h2>PicoBricks IDE</h2>
+            <h3>Make, Run, Split, Merge.</h3>
+            <p>PicoBricks is a fantastic project development kit for STEM educators and<br> makers of all levels. 
+            No soldering and wiring. There is unlimited creativity!
+            </p>
+            <a href="#" onclick="GotoHorizontal()">PicoJr</a>&nbsp &nbsp
+            <a href="#" onclick="GotoVertical(0)">PicoBlocks</a>&nbsp &nbsp
+        </div>
+    </div>
+   
+    <div class="exp">
+        <h2>What is PicoBricks IDE?</h2><br>
+        <p>Pico Bricks is an electronic development board + software which is designed for use in maker projects. 
+            With ten detachable modules included, Pico Bricks can be used to create a wide variety of projects. It also includes a protoboard that you can use to add your own modules!
+        </p><br><br>
+        <hr style="width:50%;text-align:left;margin-left:0">
+
+    </div>
+
+    <div class="editor">
+        <div class="jr">
+            <img src="img/jr.png" alt="jr" class="responsive" onclick="GotoHorizontal()" style="cursor: pointer;">
+            <h2>PicoJr</h2>
+            <p>Pico Bricks Dev & Learning Board designed for great flexibility! 
+                 
+                With its Pico Bricks IDE + Simulator, you can use both, block coding and code editor feature!
+            </p>
+        </div>
+        <div class="blok">
+            <img src="img/bl.png" alt="blockly" class="responsive" onclick="GotoVertical(0)" style="cursor: pointer;">
+            <h2>PicoBlockly</h2>
+            <p>Pico Bricks Dev & Learning Board designed for great flexibility! 
+               
+                With its Pico Bricks IDE + Simulator, you can use both, block coding and code editor feature!
+            </p>
+        </div>
+        <div class="py">
+            <img src="img/py.png" alt="python" class="responsive" onclick="GotoVertical(1)" style="cursor: pointer;">
+            <h2>PicoPy</h2>
+            <p>Pico Bricks Dev & Learning Board designed for great flexibility! 
+                 
+                With its Pico Bricks IDE + Simulator, you can use both, block coding and code editor feature!
+            </p>
+        </div>
+        <div class="sim">
+            <img src="img/sim.png" alt="simulator" class="responsive" onclick="GotoSimulator()" style="cursor: pointer;">
+            <h2>PicoSimulator</h2>
+            <p>Pico Bricks Dev & Learning Board designed for great flexibility! 
+                 
+                With its Pico Bricks IDE + Simulator, you can use both, block coding and code editor feature!
+            </p>
+        </div>
+        
+
+    </div>
+    <footer>
+        <div class="footer-container">
+            <p>Copyright © 2023 Robotistan. PicoBricks is a brand of Robotistan. All Rights Reserved. </p>
+          </div>
+    </footer>
+    </div>
+   
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html>

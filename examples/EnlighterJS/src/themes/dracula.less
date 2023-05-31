@@ -1,0 +1,370 @@
+// ----------------------------------------------------------------------
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+// --
+// Copyright 2016-2019 Andi Dittrich <https://andidittrich.de>
+// ----------------------------------------------------------------------
+
+@import "core/selectors.less";
+
+// dracula theme colors
+// @see https://github.com/dracula/dracula-theme#color-palette
+@dracula_background: #282a36;
+@dracula_currentline: #44475a;
+@dracula_selection: #44475a;
+@dracula_foreground: #f8f8f2;
+@dracula_comment: #6272a4;
+@dracula_cyan: #8be9fd;
+@dracula_green: #50fa7b;
+@dracula_orange: #ffb86c;
+@dracula_pink: #ff79c6;
+@dracula_purple: #bd93f9;
+@dracula_red: #ff5555;
+@dracula_yellow: #f1fa8c;
+@dracula_font_label: Arial, Helvetica, sans-serif;
+
+.THEME(dracula, {
+
+    background-color: @dracula_background;
+    
+    .STYLE_TOOLBAR({
+        top: 10px;
+        right: 10px;
+    });
+
+    .STYLE_BUTTON({
+        background-image: none;
+        background-color: @dracula_selection;
+        color: @dracula_foreground;
+        font-size: 1em;
+        padding: 2px 8px 2px 8px;
+        margin: 0px 5px 0px 5px;
+        border: none;
+        border-radius: 4px;
+        font-family: @dracula_font_label;
+
+        &:hover{
+            background-color: @dracula_comment;
+            color: @dracula_foreground;
+        }
+    });
+
+    // set button labels
+    .STYLE_TOOLBAR_BUTTON(raw, 'Raw', {
+    });
+
+    .STYLE_TOOLBAR_BUTTON(copy, 'Copy', {
+    });
+
+    .STYLE_TOOLBAR_BUTTON(window, 'Extern', {
+    });
+
+    .STYLE_TOOLBAR_BUTTON(website, 'EnlighterJS', {
+    });
+
+    // line hover color
+    .STYLE_LINEHOVER({
+    }, {
+        background-color: @dracula_currentline;
+    });
+
+    // RAW code pane
+    .STYLE_CODE_CONTAINER_RAW({
+        font-size: 1.25em;
+        color: @dracula_foreground;
+        line-height: 1.85em;
+        padding: 4px 5px 4px 55px;
+    });
+
+
+    // line styles
+    .STYLE_LINE({
+        padding: 1px 5px 1px 14px;
+        line-height: 1.6em;
+        color: @dracula_comment;
+        background-color: @dracula_background;
+
+        // top+bottom offsets + borders
+        &:FIRST-CHILD {
+            padding-top: 5px;
+        }
+
+        &:LAST-CHILD {
+            padding-bottom: 5px;
+        }
+
+        &:AFTER {
+            content: ' ';
+        }
+
+        // special line highlight color
+        &.enlighter-special{
+            background-color: @dracula_selection;
+        }
+    }, {}, {});
+
+    // Line Number Styles
+    .STYLE_LINENUMBERS({
+        font-size: 1em;
+        color: @dracula_comment;
+
+    // borders
+    }, {
+
+    }, {
+
+    });
+
+    // text size
+    .STYLE_TOKEN_DEFAULT({
+        font-size: 1.25em;
+    });
+
+    // default text fragment color
+    .TOKEN(text, {
+        color: @dracula_foreground;
+    });
+
+    // comments
+    .TOKEN(c0, {
+        color: @dracula_comment;
+    });
+    .TOKEN(c1, {
+        color: @dracula_comment;
+    });
+    .TOKEN(c2, {
+        color: @dracula_comment;
+    });
+    .TOKEN(c9, {
+        color: @dracula_comment;
+    });
+
+    // keywords
+    .TOKEN(k0, {
+        color: @dracula_pink;
+        font-weight: bold;
+    });
+    .TOKEN(k1, {
+        color: @dracula_cyan;
+        font-weight: bold;
+    });
+    .TOKEN(k2, {
+        color: @dracula_pink;
+        font-weight: bold;
+    });
+    .TOKEN(k3, {
+        color: @dracula_pink;
+    });
+    .TOKEN(k4, {
+        color: @dracula_cyan;
+    });
+    .TOKEN(k5, {
+        color: @dracula_cyan;
+    });
+    .TOKEN(k6, {
+        color: @dracula_cyan;
+    });
+    .TOKEN(k7, {
+        color: @dracula_orange;
+    });
+    .TOKEN(k8, {
+        color: @dracula_cyan;
+    });
+    .TOKEN(k9, {
+        color: @dracula_green;
+    });
+    .TOKEN(k10, {
+        color: @dracula_green;
+    });
+    .TOKEN(k11, {
+        color: @dracula_comment;
+    });
+
+    // expressions
+    .TOKEN(e0, {
+        color: @dracula_purple;
+        font-weight: bold;
+    });
+    .TOKEN(e1, {
+        color: @dracula_purple;
+        font-weight: bold;
+    });
+    .TOKEN(e2, {
+        color: @dracula_yellow;
+    });
+    .TOKEN(e3, {
+        color: @dracula_purple;
+    });
+    .TOKEN(e4, {
+        color: @dracula_purple;
+        font-style: italic;
+    });
+
+    // strings
+    .TOKEN(s0, {
+        color: @dracula_yellow;
+    });
+    .TOKEN(s1, {
+        color: @dracula_yellow;
+    });
+    .TOKEN(s2, {
+        color: @dracula_yellow;
+    });
+    .TOKEN(s3, {
+        color: @dracula_yellow;
+    });
+    .TOKEN(s4, {
+        color: @dracula_yellow;
+        font-weight: bold;
+    });
+    .TOKEN(s5, {
+        color: @dracula_yellow;
+        font-style: italic;
+    });
+
+    // numbers
+    .TOKEN(n0, {
+        color: @dracula_purple;
+    });
+    .TOKEN(n1, {
+        color: @dracula_purple;
+    });
+    .TOKEN(n2, {
+        color: @dracula_purple;
+    });
+    .TOKEN(n3, {
+        color: @dracula_purple;
+    });
+    .TOKEN(n4, {
+        color: @dracula_purple;
+    });
+    .TOKEN(n5, {
+        color: @dracula_purple;
+    });
+
+    // methods/functions
+    .TOKEN(m0, {
+        color: @dracula_cyan;
+    });
+    .TOKEN(m1, {
+        color: @dracula_cyan;
+    });
+    .TOKEN(m2, {
+        color: @dracula_cyan;
+    });
+    .TOKEN(m3, {
+        color: @dracula_cyan;
+    });
+
+    // generic
+    .TOKEN(g0, {
+        color: @dracula_foreground;
+        font-weight: bold;
+    });
+    .TOKEN(g1, {
+        color: @dracula_foreground;
+        font-weight: bold;
+    });
+
+    // Text Documents
+    .TOKEN(t0, {
+        color: @dracula_comment;
+    });
+    .TOKEN(t1, {
+        color: @dracula_cyan;
+        font-weight: bold;
+    });
+    .TOKEN(t2, {
+        color: @dracula_cyan;
+        font-weight: bold;
+    });
+    .TOKEN(t3, {
+        color: @dracula_pink;
+    });
+    .TOKEN(t4, {
+        color: @dracula_orange;
+    });
+    .TOKEN(t5, {
+        color: @dracula_green
+    });
+    .TOKEN(t6, {
+        color: @dracula_red;
+    });
+    .TOKEN(t7, {
+        color: @dracula_foreground;
+        font-weight: bold;
+    });
+    .TOKEN(t8, {
+        color: @dracula_foreground;
+    });
+
+    // XML
+    .TOKEN(x1, {
+        color: @dracula_pink;
+        font-weight: bold;
+    });
+    .TOKEN(x2, {
+        color: @dracula_green;
+    });
+
+    // CSS
+    .TOKEN(x10, {
+        color: @dracula_foreground;
+        font-weight: bold;
+    });
+    .TOKEN(x11, {
+        color: @dracula_green;
+        font-weight: bold;
+    });
+    .TOKEN(x12, {
+        color: @dracula_cyan;
+        font-style: italic;
+    });
+    .TOKEN(x13, {
+        color: @dracula_purple;
+    });
+    .TOKEN(x14, {
+        color: @dracula_purple;
+        font-style: italic;
+    });
+    .TOKEN(x15, {
+        color: @dracula_orange;
+        font-style: italic;
+    });
+
+
+     /* Object Wrapper - layout::INLINE
+    ----------------------------------------------------------------------------------- */
+    .VIEW_INLINE({
+
+    });
+
+    /* Object Wrapper - layout::CODEGROUPS
+    ----------------------------------------------------------------------------------- */
+    .VIEW_CODEGROUP({
+        // contains the buttons
+        .enlighter-codegroup-switch{
+            background-color: @dracula_background;
+            padding: 10px;
+
+            .enlighter-btn{
+                background-image: none;
+                background-color: transparent;
+                color: @dracula_foreground;
+                font-size: 1.15em;
+                padding: 2px 8px 2px 8px;
+                margin: 0px 5px 0px 5px;
+                border: none;
+                border-radius: 4px;
+                font-family: @dracula_font_label;
+
+                &.enlighter-active{
+                    background-color: @dracula_currentline;
+                    color: @dracula_foreground;
+                }
+            }
+        }
+    });
+
+});

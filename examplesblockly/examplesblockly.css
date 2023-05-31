@@ -1,0 +1,26 @@
+textarea {
+    background-color: black;
+    color: white;
+  }
+
+  #kod-cerceve {
+    border: 1px solid #ccc;
+    margin: 20px;
+    padding: 10px;
+    overflow: auto;
+  }
+
+  pre {
+    counter-reset: line-number;
+  }
+  code {
+    counter-increment: line-number;
+  }
+  code:before {
+    content: counter(line-number);
+    display: inline-block;
+    padding-right: 1em;
+    width: 2em;
+    color: #ccc;
+    text-align: right;
+  }

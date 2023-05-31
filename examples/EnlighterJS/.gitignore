@@ -1,0 +1,6 @@
+.credentials/*
+node_modules/*
+.tmp/*
+.hidden/*
+PublicHtml/*
+Development.html

@@ -1,0 +1,12 @@
+.sidepanel  {
+  width: 0;
+  position: fixed;
+  z-index: 99;
+  height: 85vh;
+  top: 10vh;
+  right: 0;
+  background-color: #fff;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 0px;
+}

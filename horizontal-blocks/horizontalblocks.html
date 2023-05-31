@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>PicoBricks Blocks</title>
+    <link rel="icon" type="image/x-icon" href="images/pbico.ico">
+
+    <script src="blockly_uncompressed_horizontal.js"></script>
+    <script src="msg/messages.js"></script>
+    <script src="generators/arduino.js"></script>
+    <script src="generators/arduino/picobricks-horizontal.js"></script>
+    <script src="generators/arduino/event.js"></script>
+    <script src="generators/arduino/control.js"></script>
+    <script src="generators/arduino/colour.js"></script>
+
+    <script src="blocks_common/math.js"></script>
+    <script src="blocks_common/text.js"></script>
+    <script src="blocks_common/colour.js"></script>
+
+    <script src="blocks_horizontal/control.js"></script>
+    <script src="blocks_horizontal/event.js"></script>
+    <script src="blocks_horizontal/picobricks.js"></script>
+    
+    <script src="blocks_horizontal/default_toolbox.js"></script>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/leftpanel.css">
+    <link rel="stylesheet" href="../css/spinner.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/modal.css">
+    <link rel="stylesheet" href="../css/dropdown.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+    <script src="../js/pins.js"></script>
+    <script src="../js/codegenerator.js"></script>
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/serial.js"></script>
+    <script src="../js/fileoperations.js"></script>
+    <script src="../js/appearange-general.js"></script>
+    <script src="js/pico-uploader.js"></script>
+    <script src="js/appearange-horizontal.js"></script>
+    
+    <script src="https://kit.fontawesome.com/bc06efbf60.js" crossorigin="anonymous"></script>
+
+    <script>
+      window.fwSettings={
+      'widget_id':150000003453
+      };
+      !function(){if("function"!=typeof window.FreshworksWidget){var n=function(){n.q.push(arguments)};n.q=[],window.FreshworksWidget=n}}() 
+    </script>
+    <script type='text/javascript' src='https://widget.freshworks.com/widgets/150000003453.js' async defer></script>
+    
+  </head>
+
+
+  <body style="background-color: #c3cbdf border;" onload="PageLoad()">
+    <!--CSS Spinner-->
+      <div class="spinner-wrapper" id="preloader">
+        <div class="spinner">
+             <span class="loader"></span>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+
+      <img class="savingButton" id="btSaving"/>
+      
+      <div class="row" style="height: 4rem; background-color:rgb(196, 27, 27);">
+        <div class="col-md-9">
+          <nav class="navbar navbar-expand-lg navbar-light">
+            <a href="../index.html"><img src="images/picobricks-logo.png" style="height: 3.0vh"></a>
+            
+            <div class="navbar-brand" style="width: 2rem"></div>
+
+            <div class="dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
+                  File
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <a class="dropdown-item" href="#" id="btOpenProject" onclick="NewProject()">New</a>
+                <a class="dropdown-item" href="#" id="btOpenProject" onclick="OpenProject(dispFile)">Open Project</a>
+                <a class="dropdown-item" href="#" id="btSaveProject" onclick="SaveProject()">Save Project</a>
+                <hr>
+                <a class="dropdown-item" href="#" id="btSaveProject" onclick="SaveCode()">Upload Python File to Board</a>
+              </ul>
+            </div>
+
+            <div style="margin: 2px; color:white;">|</div>
+            <div id="projectName" style="color: white;">PicoProject</div>
+            <div style="margin: 2px; color:white;">|</div>
+
+            <div class="navbar-brand" style="width: 2rem"></div>
+
+            <img class="runPythonButton" id="btRun" onclick="RunCode()"/>
+            <img class="stopButton" id="btStopCode" onclick="StopCode()" />
+            
+            <div class="navbar-brand" style="width: 2rem"></div>
+
+            <img class="notConnectedButton" onclick="OpenConnectionForm();" id="btConnect"/>
+            <img class="documentsButton" id="btDocuments" onclick="ShowDocumentsPanel()"/>
+            
+            <div class="navbar-brand" style="width: 2rem"></div>
+          </nav>
+        </div>
+
+        <div class="col-md-3 topnav-right" style="float: right; text-align: right;">
+          <nav class="navbar navbar-expand-lg navbar-light" style="float: right;">
+            <div class="dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
+                PicoBricks
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <a class="dropdown-item" href="#" id="btFirmware" onclick="UploadFirmware()">Upload Firmware</a>
+                <a class="dropdown-item" href="#" id="btLibrary" onclick="UploadLibrary()">Upload Library</a>
+              </ul>
+            </div>
+
+            <div class="navbar-brand" style="width: 2rem"></div>
+          </nav>
+        </div>
+      </div>
+
+        <div class="row">
+            <div class="col-md-12" id="BlocksPannel">
+                <div id="blocklyDiv"></div>
+            </div>
+        </div>
+    </div>
+
+<div id="documentsPanel" class="sidepanel">
+    <iframe src="../exampleshorizontal/examplesblockly.html" width="100%" height="99%" id="documentsFrame"></iframe>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modalDialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Info</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="dialogText">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modalConfirm">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body" id="dialogText">
+        Do you want to close the connection?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="disConnectSerial()">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modalNewProjectConfirm">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body" id="dialogText">
+        Do you want to close the project?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" onclick="NewProjectConfirm()">Okey</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modalFirmware">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="color: #57b45b; font-weight: bold;">🚀 FIRMWARE UPDATE</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row" style="text-align: left; align-items: left; margin-bottom: 2rem">
+           <div class="col-md-12">
+              to firmware update hold down the <b>BOOTSEL</b> button while plugging the board into USB
+            </div>
+        </div>
+
+        <div class="row" style="text-align: center; align-items: center; margin: 10px;">
+          <div class="col-md-6">
+            <span style="color: rgb(196, 27, 27)">Pico</span>
+            <img src="images/pico.png" style="width: 100%">
+          </div>
+          <div class="col-md-6">
+              <button type="button" class="btn btn-success" onclick="PicoFirmware()"><i class="fa fa-download" aria-hidden="true"></i></button>
+          </div>
+        </div>
+
+        <div class="row" style="text-align: center; align-items: center; margin: 10px;">
+          <div class="col-md-12">
+            <hr/>
+          </div>
+        </div>
+
+        <div class="row" style="text-align: center; align-items: center; margin: 10px;">
+          <div class="col-md-6">
+            <span style="color: rgb(196, 27, 27)">Pico W</span>
+            <img src="images/picow.png" style="width: 100%">
+          </div>
+          <div class="col-md-6">
+              <button type="button" class="btn btn-success" onclick="PicoWFirmware()"><i class="fa fa-download" aria-hidden="true"></i></button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+<xml id="toolbox" style="display: none"> 
+
+  <block type="event_whenplayclicked"></block> 
+
+  <block type="control_repeat"> 
+     <value name="TIMES"> 
+         <shadow type="math_whole_number"> 
+             <field name="NUM">4</field> 
+         </shadow> 
+     </value> 
+  </block> 
+
+  <block type="control_forever"> 
+  </block> 
+  
+  <block type="control_wait"> 
+     <value name="DURATION"> 
+         <shadow type="math_positive_number"> 
+             <field name="NUM">1</field> 
+         </shadow> 
+     </value> 
+  </block> 
+
+  <block type="setLedValue">
+    <value name="VALUE">
+         <shadow type="ledStates">
+             <field name="VALUE">0</field>
+         </shadow>
+     </value>
+  </block>
+
+  <block type="playBuzzer"> 
+     <value name="FREQUENCY"> 
+         <shadow type="math_positive_number"> 
+             <field name="NUM">300</field> 
+         </shadow> 
+     </value> 
+  </block> 
+
+  <block type="neoPixelColour">
+    <value name="VALUE">
+      <shadow type="colour_picker">
+        <field name="COLOUR">#00ff00</field>
+      </shadow>
+  </block>
+
+  <block type="servoMotor1"> 
+     <value name="ANGLE"> 
+         <shadow type="math_positive_number"> 
+             <field name="NUM">90</field> 
+         </shadow> 
+     </value> 
+  </block> 
+
+  <block type="servoMotor2"> 
+     <value name="ANGLE"> 
+         <shadow type="math_positive_number"> 
+             <field name="NUM">90</field> 
+         </shadow> 
+     </value> 
+  </block> 
+
+  <block type="motor1">
+    <value name="VALUE">
+         <shadow type="motor1States">
+             <field name="VALUE">0</field>
+         </shadow>
+     </value>
+  </block>
+
+  <block type="motor2">
+    <value name="VALUE">
+         <shadow type="motor2States">
+             <field name="VALUE">0</field>
+         </shadow>
+     </value>
+  </block>
+</xml>
+</body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      
+        <link rel="stylesheet" href="examples.css">
+        <link rel="stylesheet" href="EnlighterJS/dist/enlighterjs.min.css" />
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Deneme</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    </head>
+    <body>
+        
+   <div class="col-md-12 shadow" id="exampleColumn" style="background-color:#dfd8d8;">
+
+      <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingOne">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                Blink
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                  <p>
+                    The first step to robotic c oding, also known as physical programming, is the Blink application. 
+                    It means winking at robotic coding. By simply connecting an LED to the circuit board, the coding is made to keep the 
+                    LED blinking continuously.</p> 
+                  <p>
+                    Ask people who have developed themselves in the field of robotic coding how they got to this level. 
+                    The answer they will give you starts like this; it all started with a flashing LED! LEDs are the language of electronic devices. 
+                  </p>
+                  <h5>Wiring Diagram</h5><hr>
+                  <img src="images/blink.png" width="500" height="297" alt="blink">
+
+                <div><br>
+                  <h5>Project Code</h5><hr>
+                  <iframe
+                  src="https://carbon.now.sh/embed?bg=rgba%28171%2C+184%2C+195%2C+1%29&t=seti&wt=none&l=auto&width=680&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=from%2520time%2520import%2520sleep%250Aimport%2520machine%250Aimport%2520time%250A%250Apin_led%2520%253D%2520machine.Pin%287%252C%2520machine.Pin.OUT%29%250A%250Awhile%2520True%253A%250A%2520%2520pin_led.on%28%29%250A%2520%2520time.sleep%28%280.5%29%29%250A%2520%2520pin_led.off%28%29%250A%2520%2520time.sleep%28%280.5%29%29"
+                  style="width: 496px; height: 391px; border:0; transform: scale(1); overflow:hidden;"
+                  sandbox="allow-scripts allow-same-origin">
+                </iframe>
+                </div>
+               </div>
+             </div>
+           </div>
+         </div>
+
+         <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+              Action-Reaction
+            </button>
+          </h2>
+          <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+              <p>
+                Different types of buttons are used in electronic systems. Locked buttons, push buttons, switched buttons...
+              </p>
+              <p>
+                There is 1 push button on Picobricks. They work like a switch, they conduct current when pressed and do not conduct current when released. In the project, we will understand the pressing status by checking whether the button conducts current or not. 
+                If it is pressed, it will light the LED, if it is not pressed, we will turn off the LED.            </p>
+              </p><br>
+              <h5>Project Video</h5><hr>
+              <video width="500px" height="300px" controls="controls">
+                <source src="images/actionreaction.mp4" type="video/mp4">
+                Tarayıcınız video etiketini desteklemiyor.
+            </video>
+            </div><br>
+            <h5>Project Code</h5><hr>
+            <iframe
+              src="https://carbon.now.sh/embed?bg=rgba%28171%2C+184%2C+195%2C+1%29&t=seti&wt=none&l=auto&width=680&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=from%2520time%2520import%2520sleep%250Aimport%2520machine%250Aimport%2520time%250A%250Apin_button%2520%253D%2520machine.Pin%2810%252C%2520machine.Pin.IN%29%250Apin_led%2520%253D%2520machine.Pin%287%252C%2520machine.Pin.OUT%29%250A%250Awhile%2520True%253A%250A%2520%2520if%2520%28pin_button.value%28%29%29%2520%253D%253D%2520%281%29%253A%250A%2520%2520%2520%2520pin_led.on%28%29%250A%2520%2520else%253A%250A%2520%2520%2520%2520pin_led.off%28%29%250A%250Awhile%2520True%253A%250A%2520%2520pin_led.on%28%29%250A%2520%2520time.sleep%28%280.5%29%29%250A%2520%2520pin_led.off%28%29%250A%2520%2520time.sleep%28%280.5%29%29"
+              style="width: 521px; height: 560px; border:0; transform: scale(1); overflow:hidden;"
+              sandbox="allow-scripts allow-same-origin">
+            </iframe>
+            
+          </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingThree">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+            Autonomous Lighting
+          </button>
+        </h2>
+        <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+            <p>
+              It is called the state of being autonomous when electronic systems make a decision based on the data they collect and perform the given task automatically. </p> 
+            <p>
+              The components that enable electronic systems to collect data from their environment are called sensors. 
+              Many data such as the level of light in the environment, how many degrees the air temperature is, 
+              how many lt/min water flow rate, how loud the sound is, are collected by the sensors and transmitted to PicoBricks as 
+              electrical signals, that is data. 
+            </p>
+            <h5>Wiring Diagram</h5><hr>
+                <img src="images/autonomouslighting.png" width="500" height="297" alt="blink">
+
+          </div></br>
+          <h5>Project Code</h5><hr>
+          <iframe
+            src="https://carbon.now.sh/embed?bg=rgba%28171%2C+184%2C+195%2C+1%29&t=seti&wt=none&l=python&width=680&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=from%2520time%2520import%2520sleep%250Aimport%2520machine%250Afrom%2520machine%2520import%2520Pin%250Afrom%2520picobricks%2520import%2520WS2812%250A%250Aws2812%2520%253D%2520WS2812%286%252C%2520brightness%2520%253D%25201%29%250A%250Aldr%2520%253D%2520machine.ADC%2827%29%250A%250Awhile%2520True%253A%250A%2520%2520print%28ldr.read_u16%28%29%29%250A%2520%2520if%2520%28ldr.read_u16%28%29%29%2520%253E%2520%2820000%29%253A%250A%2520%2520%2520%2520ws2812.pixels_fill%28%28255%252C%2520255%252C%2520255%29%29%250A%2520%2520%2520%2520ws2812.pixels_show%28%29%250A%2520%2520else%253A%250A%2520%2520%2520%2520ws2812.pixels_fill%28%280%2520%252C0%2520%252C0%2520%29%29%250A%2520%2520%2520%2520ws2812.pixels_show%28%29"
+            style="width: 500px; height: 500px; border:0; transform: scale(1); overflow:hidden;"
+            sandbox="allow-scripts allow-same-origin">
+          </iframe>
+          
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingFour">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+            Thermometer
+          </button>
+        </h2>
+        <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+            <p>
+              Sensors are the sense organs of electronic systems. We use our skin to feel, our eyes to see, our ears to hear, our tongue to taste, and our nose to smell. </p> 
+            <p>
+              Project Details and Algorithm Picobricks has a DHT11 module. This module can sense the temperature and humidity 
+              in the environment and send data to the microcontroller. In this project, we will write the necessary codes to print the 
+              temperature values measured by the DHT11 temperature and humidity sensor on the OLED screen.
+            </p>
+            <h5>Wiring Diagram</h5><hr>
+                <img src="images/thermometer.png" width="500" height="297" alt="blink">
+          </div>
+          <h5>Project Code</h5><hr>
+          <iframe
+            src="https://carbon.now.sh/embed?bg=rgba%28171%2C+184%2C+195%2C+1%29&t=seti&wt=none&l=python&width=680&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=from%2520time%2520import%2520sleep%250Aimport%2520time%250Afrom%2520machine%2520import%2520Pin%250Afrom%2520machine%2520import%2520I2C%250Afrom%2520picobricks%2520import%2520SSD1306_I2C%250Afrom%2520picobricks%2520import%2520DHT11%250A%250Ai2c%2520%253D%2520I2C%280%252C%2520scl%253DPin%285%29%252C%2520sda%253DPin%284%29%252C%2520freq%253D200000%29%250Aoled%2520%253D%2520SSD1306_I2C%28128%252C%252064%252C%2520i2c%252C%2520addr%253D0x3c%29%250Adht_sensor%2520%253D%2520DHT11%28Pin%2811%29%29%250A%250Adht_read_time%2520%253D%2520time.time%28%29%250A%250Atemp%2520%253D%25200%250A%250Adef%2520getTemp%28%29%253A%250A%2520%2520%2520global%2520dht_read_time%250A%2520%2520%2520global%2520temp%250A%2520%2520%2520if%2520time.time%28%29%2520-%2520dht_read_time%2520%253E%253D%25203%253A%250A%2520%2520%2520%2520%2520%2520%2520dht_read_time%2520%253D%2520time.time%28%29%250A%2520%2520%2520%2520%2520%2520%2520try%253A%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520dht_sensor.measure%28%29%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520temp%2520%253D%2520dht_sensor.temperature%250A%2520%2520%2520%2520%2520%2520%2520except%2520Exception%2520as%2520e%253A%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520pass%250A%2520%2520%2520return%2520temp%250A%250Awhile%2520True%253A%250A%2520%2520time.sleep%28%281%29%29%250A%2520%2520oled.fill%280%29%250A%2520%2520oled.text%28%2522%257B%257D%2522.format%28%2522Temperature%253A%2520%2522%29%252C%252015%252C%252010%29%250A%2520%2520oled.text%28%2522%257B%257D%2522.format%28getTemp%28%29%29%252C%252055%252C%252030%29%250A%2520%2520oled.text%28%2522%257B%257D%2522.format%28%2522degrees%2522%29%252C%252035%252C%252050%29%250A%2520%2520else%253A%250A%2520%2520%2520%2520ws2812.pixels_fill%28%280%2520%252C0%2520%252C0%2520%29%29%250A%2520%2520%2520%2520ws2812.pixels_show%28%29"
+            style="width: 546px; height: 900px; border:0; transform: scale(1); overflow:hidden;"
+            sandbox="allow-scripts allow-same-origin">
+          </iframe>
+          
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingFive">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+            Graphic Monitor
+          </button>
+        </h2>
+        <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+            <p>
+              When we look at the electronic items around us, you realize that they have many replaceable features and they are designed by engineers to be most useful to the user. 
+              Such as lighting systems, cooking systems, sound systems, cleaning systems.
+              
+            </p> 
+            <p>
+              Graphic monitors make it very easy to detect the fault. In this project, we will prepare a project in which we increase or decrease the brightness of the red LED with a potentiometer. 
+              In addition, we will simultaneously monitor the electrical change occurring during this process on the Microblocks graphic monitor. 
+            </p>
+            <h5>Wiring Diagram</h5><hr>
+                <img src="images/graphicmonitor.png" width="500" height="297" alt="blink">
+          </div>
+          <h5>Project Code</h5><hr>
+          <iframe
+            src="https://carbon.now.sh/embed?bg=rgba%28171%2C+184%2C+195%2C+1%29&t=seti&wt=none&l=python&width=681&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=false&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=from%2520time%2520import%2520sleep%250Aimport%2520machine%250Afrom%2520machine%2520import%2520Pin%250Afrom%2520picobricks%2520import%2520WS2812%250A%250Aimport%2520math%250Aws2812%2520%253D%2520WS2812%286%252C%2520brightness%2520%253D%25201%29%250A%250Apot%2520%253D%2520machine.ADC%2826%29%250A%250Awhile%2520True%253A%250A%2520%2520color%2520%253D%2520round%28%28%28%28pot.read_u16%28%29%29%2520*%2520%28255%29%29%2520%252F%2520%2865535%29%29%2520*%2520%281%29%29%250A%2520%2520ws2812.pixels_fill%28%28color%252C%2520color%252C%2520color%29%29%250A%2520%2520ws2812.pixels_show%28%29"
+            style="width: 681px; height: 480px; border:0; transform: scale(1); overflow:hidden;"
+            sandbox="allow-scripts allow-same-origin">
+          </iframe>
+          
+        </div>
+      </div>
+
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingSeven">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven" aria-expanded="false" aria-controls="flush-collapseSeven">
+            Dinosaur Game
+          </button>
+        </h2>
+        <div id="flush-collapseSeven" class="accordion-collapse collapse" aria-labelledby="flush-headingSeven" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+            <p>
+              If the electronic systems to be developed will fulfill their duties by pushing, pulling, turning, lifting, lowering, etc., pneumatic systems or electric motor systems are used as actuators in the project.             </p> 
+            <p>
+              In this project, we will automatically play Google Chrome offline dinasour game to picobricks. In the game, Picobricks will automatically control the dinosaur’s movements by detecting obstacles.
+
+            </p>
+            <h5>Wiring Diagram</h5><hr>
+                <img src="images/dinasourgame.png" width="500" height="297" alt="blink">
+          </div>
+          <h5>Project Code</h5><hr>
+          <iframe
+            src="https://carbon.now.sh/embed?bg=rgba%28171%2C+184%2C+195%2C+1%29&t=seti&wt=none&l=python&width=681&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=false&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=from%2520time%2520import%2520sleep%250Aimport%2520machine%250Afrom%2520machine%2520import%2520Pin%250Afrom%2520machine%2520import%2520PWM%250A%250Apwm_1%2520%253D%2520PWM%28Pin%2821%29%29%250Apwm_1.freq%2850%29%250A%250Aldr%2520%253D%2520machine.ADC%2827%29%250A%250Awhile%2520True%253A%250A%2520%2520print%28ldr.read_u16%28%29%29%250A%2520%2520if%2520%28ldr.read_u16%28%29%29%2520%253C%2520%2820000%29%253A%250A%2520%2520%2520%2520pwm_1.duty_u16%285000%29%250A%2520%2520else%253A%250A%2520%2520%2520%2520pwm_1.duty_u16%282000%29"
+            style="width: 681px; height: 480px; border:0; transform: scale(1); overflow:hidden;"
+            sandbox="allow-scripts allow-same-origin">
+          </iframe>
+          
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingEight">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseEight" aria-expanded="false" aria-controls="flush-collapseEight">
+            Alarm Clock
+          </button>
+        </h2>
+        <div id="flush-collapseEight" class="accordion-collapse collapse" aria-labelledby="flush-headingEight" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+            <p>
+              In this project, we will create a timer alarm that adjusts for daylight using the light sensor in Picobricks. 
+            </p> 
+            <p>
+              Global warming is affecting the climate of our world worse every day. Countries take many precautions and sign agreements to reduce the effects of global warming. The use of renewable energy sources and the efficient use of energy is an issue that needs attention everywhere, 
+              from factories to our rooms. 
+              
+            </p>
+            <h5>Wiring Diagram</h5><hr>
+                <img src="images/alarmclock.png" width="500" height="297" alt="blink">
+          </div>
+          <h5>Project Code</h5> <hr>
+          <iframe
+            src="https://carbon.now.sh/embed?bg=rgba%28171%2C+184%2C+195%2C+1%29&t=seti&wt=none&l=python&width=681&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=false&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=from%2520time%2520import%2520sleep%250Afrom%2520machine%2520import%2520Pin%250Afrom%2520machine%2520import%2520I2C%250Afrom%2520picobricks%2520import%2520SSD1306_I2C%250Aimport%2520time%250Aimport%2520machine%250Afrom%2520picobricks%2520import%2520WS2812%250Afrom%2520machine%2520import%2520PWM%250A%250Ai2c%2520%253D%2520I2C%280%252C%2520scl%253DPin%285%29%252C%2520sda%253DPin%284%29%252C%2520freq%253D200000%29%250Aoled%2520%253D%2520SSD1306_I2C%28128%252C%252064%252C%2520i2c%252C%2520addr%253D0x3c%29%250Aws2812%2520%253D%2520WS2812%286%252C%2520brightness%2520%253D%25201%29%250Abuzzer%2520%253D%2520PWM%28Pin%2820%29%29%250A%250Apin_button%2520%253D%2520machine.Pin%2810%252C%2520machine.Pin.IN%29%250A%250Aldr%2520%253D%2520machine.ADC%2827%29%250A%250Aoled.text%28%2522%257B%257D%2522.format%28%2522Good%2520night%2522%29%252C%252025%252C%252032%29%250Aoled.show%28%29%250Atime.sleep%28%282%29%29%250Awhile%2520True%253A%250A%2520%2520time.sleep%28%281%29%29%250A%2520%2520oled.fill%280%29%250A%2520%2520if%2520%28ldr.read_u16%28%29%29%2520%253C%2520%2820000%29%253A%250A%2520%2520%2520%2520oled.text%28%2522%257B%257D%2522.format%28%2522Good%2520Morning%2522%29%252C%252015%252C%252032%29%250A%2520%2520%2520%2520oled.show%28%29%250A%2520%2520%2520%2520ws2812.pixels_fill%28%28255%252C%2520255%252C%2520255%29%29%250A%2520%2520%2520%2520ws2812.pixels_show%28%29%250A%2520%2520%2520%2520buzzer.freq%28300%29%250A%2520%2520%2520%2520buzzer.duty_u16%28100%29%250A%2520%2520%2520%2520if%2520%28pin_button.value%28%29%29%2520%253D%253D%2520%281%29%253A%250A%2520%2520%2520%2520%2520%2520oled.fill%280%29%250A%2520%2520%2520%2520%2520%2520oled.text%28%2522%257B%257D%2522.format%28%2522Have%2520a%2520nice%2520day%2522%29%252C%25200%252C%252032%29%250A%2520%2520%2520%2520%2520%2520oled.show%28%29%250A%2520%2520%2520%2520%2520%2520ws2812.pixels_fill%28%280%2520%252C0%2520%252C0%2520%29%29%250A%2520%2520%2520%2520%2520%2520ws2812.pixels_show%28%29%250A%2520%2520%2520%2520%2520%2520sleep%280.25%29%250A%2520%2520%2520%2520%2520%2520buzzer.duty_u16%280%29%250A%2520%2520%2520%2520%2520%2520break"
+            style="width: 681px; height: 950px; border:0; transform: scale(1); overflow:hidden;"
+            sandbox="allow-scripts allow-same-origin">
+          </iframe>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingNine">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseNine" aria-expanded="false" aria-controls="flush-collapseNine">
+            Smart Cooler
+          </button>
+        </h2>
+        <div id="flush-collapseNine" class="accordion-collapse collapse" aria-labelledby="flush-headingNine" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+            <p>
+              In our project, we will firstly display the temperature values measured by the DHT11 temperature and humidity sensor on Picobricks.
+            </p> 
+            <p>
+              Air conditioners are used to cool in the summer and warm up in the winter. Air conditioners adjust the degree of heating and cooling according to the temperature of the environment. While cooking the food, 
+              the ovens try to rise to the temperature value set by the user and maintain that temperature. 
+              
+            </p>
+            <h5>Wiring Diagram</h5><hr>
+                <img src="images/smartcooler.png" width="500" height="297" alt="blink">
+          </div>
+          <h5>Project Code</h5> <hr>
+          <iframe
+            src="https://carbon.now.sh/embed?bg=rgba%28171%2C+184%2C+195%2C+1%29&t=seti&wt=none&l=python&width=681&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=false&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=from%2520time%2520import%2520sleep%250Afrom%2520machine%2520import%2520Pin%250Afrom%2520picobricks%2520import%2520DHT11%250Aimport%2520time%250Afrom%2520machine%2520import%2520PWM%250Afrom%2520machine%2520import%2520ADC%250A%250Adht_sensor%2520%253D%2520DHT11%28Pin%2811%29%29%250A%250Adht_read_time%2520%253D%2520time.time%28%29%250A%250Atemp%2520%253D%25200%250A%250Adef%2520getTemp%28%29%253A%250A%2520%2520%2520global%2520dht_read_time%250A%2520%2520%2520global%2520temp%250A%2520%2520%2520if%2520time.time%28%29%2520-%2520dht_read_time%2520%253E%253D%25203%253A%250A%2520%2520%2520%2520%2520%2520%2520dht_read_time%2520%253D%2520time.time%28%29%250A%2520%2520%2520%2520%2520%2520%2520try%253A%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520dht_sensor.measure%28%29%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520temp%2520%253D%2520dht_sensor.temperature%250A%2520%2520%2520%2520%2520%2520%2520except%2520Exception%2520as%2520e%253A%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520pass%250A%2520%2520%2520return%2520temp%250A%250Amotor_2%2520%253D%2520PWM%28Pin%2822%29%29%250Amotor_2.duty_u16%280%29%250A%250Awhile%2520True%253A%250A%2520%2520print%28getTemp%28%29%29%250A%2520%2520if%2520%28getTemp%28%29%29%2520%253E%253D%2520%2828%29%253A%250A%2520%2520%2520%2520motor_2.duty_u16%28100%29%250A%2520%2520else%253A%250A%2520%2520%2520%2520motor_2.duty_u16%280%29"
+            style="width: 681px; height: 830px; border:0; transform: scale(1); overflow:hidden;"
+            sandbox="allow-scripts allow-same-origin">
+          </iframe>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingTen">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTen" aria-expanded="false" aria-controls="flush-collapseTen">
+            Show Your Reaction
+          </button>
+        </h2>
+        <div id="flush-collapseTen" class="accordion-collapse collapse" aria-labelledby="flush-headingTen" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+            <p>
+              In this project you will learn about the randomness used in every programming language. 
+            </p> 
+            <p>
+              Now we will prepare a game that develops attention and reflexes. Moving quickly and being able to provide attention for a long time are important developmental characteristics of children. Preschool and primary school children do activities that increase their attention span and reflexes, 
+              as they are liked by their parents and teachers. 
+              
+            </p>
+            <h5>Wiring Diagram</h5><hr>
+                <img src="images/showyourreaction.png" width="500" height="297" alt="blink">
+          </div>
+          <h5>Project Code<hr>
+          <iframe
+            src="https://carbon.now.sh/embed?bg=rgba%28171%2C+184%2C+195%2C+1%29&t=seti&wt=none&l=python&width=681&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=false&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=from%2520time%2520import%2520sleep%250Aimport%2520machine%250Afrom%2520machine%2520import%2520Pin%250Afrom%2520machine%2520import%2520I2C%250Afrom%2520picobricks%2520import%2520SSD1306_I2C%250Aimport%2520time%250A%250Apin_led%2520%253D%2520machine.Pin%287%252C%2520machine.Pin.OUT%29%250Ai2c%2520%253D%2520I2C%280%252C%2520scl%253DPin%285%29%252C%2520sda%253DPin%284%29%252C%2520freq%253D200000%29%250Aoled%2520%253D%2520SSD1306_I2C%28128%252C%252064%252C%2520i2c%252C%2520addr%253D0x3c%29%250Apin_button%2520%253D%2520machine.Pin%2810%252C%2520machine.Pin.IN%29%250Aimport%2520random%250A%250Adef%2520CountDown%28%29%253A%250A%2520%2520global%2520counter%252C%2520TimeF%250A%2520%2520counter%2520%253D%25203%250A%2520%2520while%2520counter%2520%253E%2520%280%29%253A%250A%2520%2520%2520%2520oled.fill%280%29%250A%2520%2520%2520%2520oled.text%28%2522%257B%257D%2522.format%28counter%29%252C%252060%252C%252030%29%250A%2520%2520%2520%2520oled.show%28%29%250A%2520%2520%2520%2520time.sleep%28%281%29%29%250A%2520%2520%2520%2520counter%2520-%253D%25201%250A%250A%250Adef%2520TimerFunc%28%29%253A%250A%2520%2520global%2520counter%252C%2520TimeF%250A%2520%2520TimeF%2520%253D%25200%250A%2520%2520while%2520%28pin_button.value%28%29%29%2520%253D%253D%2520%280%29%253A%250A%2520%2520%2520%2520TimeF%2520%252B%253D%25201%250A%2520%2520%2520%2520time.sleep%28%281%29%29%250A%250A%2520%2520pin_led.off%28%29%250A%2520%2520print%28TimeF%29%250A%2520%2520oled.fill%280%29%250A%2520%2520oled.text%28%2522%257B%257D%2522.format%28%2522Press%2520the%2520button%2522%29%252C%25200%252C%252010%29%250A%2520%2520oled.text%28%2522%257B%257D%2522.format%28%2522to%2520repeat%2522%29%252C%252025%252C%252025%29%250A%2520%2520oled.show%28%29%250A%2520%2520oled.text%28%2522%257B%257D%2522.format%28%2522Score%253A%2522%29%252C%252025%252C%252040%29%250A%2520%2520oled.text%28%2522%257B%257D%2522.format%28TimeF%29%252C%252070%252C%252040%29%250A%2520%2520time.sleep%28%281%29%29%250A%2520%2520oled.show%28%29%250A%250Apin_led.off%28%29%250Aoled.text%28%2522%257B%257D%2522.format%28%2522Press%2520the%2520button%2522%29%252C%25200%252C%252010%29%250Aoled.text%28%2522%257B%257D%2522.format%28%2522TO%2520START%21%2522%29%252C%252025%252C%252035%29%250Aoled.show%28%29%250Awhile%2520True%253A%250A%2520%2520while%2520%28pin_button.value%28%29%29%2520%253D%253D%2520%281%29%253A%250A%2520%2520%2520%2520oled.fill%280%29%250A%2520%2520%2520%2520CountDown%28%29%250A%2520%2520%2520%2520oled.fill%280%29%250A%2520%2520%2520%2520oled.text%28%2522%257B%257D%2522.format%28%2522GO%21%21%21%2522%29%252C%252060%252C%252030%29%250A%2520%2520%2520%2520oled.show%28%29%250A%2520%2520%2520%2520time.sleep%28%28random.randint%281%252C%25205%29%29%29%250A%2520%2520%2520%2520pin_led.on%28%29%250A%2520%2520%2520%2520TimerFunc%28%29%250A"
+            style="width: 681px; height: 1250px; border:0; transform: scale(1); overflow:hidden;"
+            sandbox="allow-scripts allow-same-origin">
+          </iframe>
+        </div>
+      </div>
+      
+      </div>
+    </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+      <script src="examples.js"></script>
+      <script type="text/javascript" src="EnlighterJS/dist/enlighterjs.min.js"></script>
+
+    </body>
+</html>

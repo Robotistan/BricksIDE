@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PicoBricks Blocks</title>
+  <link rel="icon" type="image/x-icon" href="images/pbico.ico">
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/spinner.css">
+  <link rel="stylesheet" href="css/simulator-style.css">
+  <link rel="stylesheet" href="css/leftpanel.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/acorn.js"></script>
+  <script src="js/interpreter.js"></script>
+  <script src="js/assetmanager.js"></script>
+  <script src="js/appearange-simulator.js"></script>
+  <script src="js/interpreterfunctions.js"></script>
+  <script src="js/pins.js"></script>
+  <script src="js/codegenerator.js"></script>
+
+  <script src="js/blockly/blockly_uncompressed.js"></script>
+
+  <script src="js/blockly/generators/javascript.js"></script>
+  <script src="js/blockly/generators/javascript/logic.js"></script>
+  <script src="js/blockly/generators/javascript/loops.js"></script>
+  <script src="js/blockly/generators/javascript/math.js"></script>
+  <script src="js/blockly/generators/javascript/text.js"></script>
+  <script src="js/blockly/generators/javascript/lists.js"></script>
+  <script src="js/blockly/generators/javascript/colour.js"></script>
+  <script src="js/blockly/generators/javascript/variables.js"></script>
+  <script src="js/blockly/generators/javascript/variables_dynamic.js"></script>
+  <script src="js/blockly/generators/javascript/procedures.js"></script>
+  <script src="js/blockly/generators/javascript/picobricks.js"></script>
+
+  <script src="js/blockly/msg/messages.js"></script>
+  <script src="js/blockly/blocks/extensions.js"></script>
+  <script src="js/blockly/blocks/logic.js"></script>
+  <script src="js/blockly/blocks/loops.js"></script>
+  <script src="js/blockly/blocks/math.js"></script>
+  <script src="js/blockly/blocks/text.js"></script>
+  <script src="js/blockly/blocks/lists.js"></script>
+  <script src="js/blockly/blocks/colour.js"></script>
+  <script src="js/blockly/blocks/variables.js"></script>
+  <script src="js/blockly/blocks/variables_dynamic.js"></script>
+  <script src="js/blockly/blocks/procedures.js"></script>
+  <script src="js/blockly/blocks/pxt_blockly_functions.js"></script>
+  <script src="js/blockly/blocks/test_blocks.js"></script>
+  <script src="js/blockly/blocks/pxt_test_blocks.js"></script>
+  <script src="js/blockly/blocks/picobricks.js"></script>
+  <script src="js/blockly/msg/js/en.js"></script>
+  
+  <script src="editorsrc/ace.js"></script>
+  <script src="editorsrc/ext-language_tools.js"></script>
+
+  <!-- our project just needs Font Awesome Solid + Brands -->
+  <script src="https://kit.fontawesome.com/bc06efbf60.js" crossorigin="anonymous"></script>
+
+  <script>
+    window.fwSettings={
+    'widget_id':150000003453
+    };
+    !function(){if("function"!=typeof window.FreshworksWidget){var n=function(){n.q.push(arguments)};n.q=[],window.FreshworksWidget=n}}() 
+  </script>
+  <script type='text/javascript' src='https://widget.freshworks.com/widgets/150000003453.js' async defer></script>
+
+</head>
+
+<body style="background-color: #c3cbdf border;" onload="PageLoad()">
+<!--CSS Spinner-->
+  <div class="spinner-wrapper" id="preloader">
+    <div class="spinner">
+         <span class="loader"></span>
+    </div>
+  </div>
+
+<div class="container-fluid">
+  
+      <div class="row" style="height: 4rem; background-color:rgb(196, 27, 27);">
+        <div class="col-md-112">
+          <nav class="navbar navbar-expand-lg navbar-light">
+            <a href="index.html"><img src="images/picobricks-logo.png" style="height: 3.0vh"></a>
+            
+            <div class="navbar-brand" style="width: 5rem"></div>
+            
+            <img class="runButton" id="btRunCode" onclick="runCode()" />
+            <img class="stopButton-d" id="btStopCode" onclick="restart()" />
+            
+          </nav>
+        </div>
+      </div>
+
+      <div class="row">
+          <div class="col-md-8" id="simulatorColumn">
+            <div class="row">
+                <div class="col-md-12" id="BlocksPannel" style="margin: 0px; padding:0px;">
+                    <div id="blocklyDiv"></div>
+                </div>
+            </div> 
+          </div>
+
+          <div class="col-md-4 shadow" id="simulatorColumn" style="background-color:#F5F5F5;">
+            
+            <div class="row">
+              <div class="image" >
+                <img src="picobricks.png" alt="" id="simulatorImage" class="img-fluid" >
+                <canvas id="canvasScreen"></canvas>
+                <canvas id="canvasButton1"></canvas>
+                <canvas id="canvasRedLed"></canvas>
+                <canvas id="canvasRgbLed"></canvas>
+                <canvas id="canvasRelay"></canvas>
+                <canvas id="canvasResetButton"></canvas>
+                <canvas id="canvasMotor1"></canvas>
+                <canvas id="canvasMotor2"></canvas>
+                <canvas id="canvasBuzzer"></canvas>
+               
+              </div>
+
+              <div class="container-fluid">
+                 
+                <div class="row" style="margin: 10px">
+                  <div class="col-md-4" style="color: rgb(84, 75, 75); font-weight: bold"><span id="LDRLabel"> Işık Seviyesi: </span></div>
+                  <div class="col-md-6"><input type="range" min="0" max="1024" value="512" class="sliderLDR" id="lightSource"></div>
+                  <div class="col-md-2">
+                    <div class="btn-group float-right">
+                      <input type="number" name="" min="1" max="1024" maxlength="4" value="512" class="inputLDR" id="lightSourceInput" oninput="checkValueLDR(this)">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row" style="margin: 10px">
+                  <div class="col-md-4" style="color: rgb(84, 75, 75); font-weight: bold;"><span id="tempLabel"> Sıcaklık Seviyesi: </span></div>
+                  <div class="col-md-6"><input type="range" min="0" max="50" value="30" class="sliderTemp" id="tempSource"></div>
+                  <div class="col-md-2">
+                    <div class="btn-group float-right">
+                     <input type="number" name="" min="1" max="50.0" size="2" value="30" class="inputTemp" id="tempSourceInput" oninput="checkValueTemp(this)">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row" style="margin: 10px">
+                  <div class="col-md-4" style="color: rgb(84, 75, 75); font-weight: bold;"><span id="humodityLabel"> Nem Seviyesi: </span></div>
+                  <div class="col-md-6"><input type="range" min="0" max="50" value="30" class="sliderHumodity" id="humoditySource"></div>
+                  <div class="col-md-2">
+                    <div class="btn-group float-right">
+                      <input type="number" name="" min="1" max="50.0" maxlength="2" value="30" class="inputHumodity" id="humoditySourceInput" oninput="checkValueHumodity(this)">
+                    </div>
+                  </div>
+                </div>
+            
+                <div class="row" style="margin: 10px">
+                  <div class="col-md-4" style="color: rgb(84, 75, 75); font-weight: bold;"><span id="potLabel"><span class="glyphicon glyphicon-signal"></span> Potansiyometre: </span></div>
+                  <div class="col-md-6"><input type="range" min="0" max="1024" value="500" class="sliderPot" id="potSource"></div>
+                  <div class="col-md-2">
+                    <div class="btn-group float-right">
+                     <input type="number" name="" min="1" max="1024" maxlength="4" value="500" class="inputPot" id="potSourceInput" oninput="checkValuePot(this)">
+                   </div>
+                  </div>
+                </div>
+                  
+                <div class="row" style="margin: 10px">
+                  <div class="col-md-4" style="color: rgb(84, 75, 75); font-weight: bold;"><span id="irLabel"> Infrared: </span></div>
+                  <div class="col-md-8">
+                      <button type="button" class="btn btn-info btn-circle btn-lg" onmousedown="IRButtonClick('0x18')" onmouseup="IRButtonClick('0')"><i class="fa fa-chevron-up"></i></button>
+                      <button type="button" class="btn btn-info btn-circle btn-lg" onmousedown="IRButtonClick('0x52')" onmouseup="IRButtonClick('0')"><i class="fa fa-chevron-down"></i></button>
+                      <button type="button" class="btn btn-info btn-circle btn-lg" onmousedown="IRButtonClick('0x1c')" onmouseup="IRButtonClick('0')"><i class="fa fa-check"></i></button>
+                      <button type="button" class="btn btn-info btn-circle btn-lg" onmousedown="IRButtonClick('0x08')" onmouseup="IRButtonClick('0')"><i class="fa fa-chevron-left"></i></button>
+                      <button type="button" class="btn btn-info btn-circle btn-lg" onmousedown="IRButtonClick('0x5a')" onmouseup="IRButtonClick('0')"><i class="fa fa-chevron-right"></i></button>
+                  </div>
+                  </div>
+                </div>
+
+            </div>
+          </div>
+      </div>
+</div>
+
+<div id="documentsPanel" class="sidepanel">
+  <iframe src="https://docs.picobricks.com/en/latest/" width="100%" height="99%"></iframe>
+</div>
+
+<script type="text/javascript">
+  var slider1 = document.getElementById("lightSource");
+  var outputInput1 = document.getElementById("lightSourceInput");
+
+  slider1.oninput = function() {
+    outputInput1.value = this.value;
+  }
+</script>
+
+<script type="text/javascript">
+  var slider2 = document.getElementById("tempSource");
+  var outputInput2 = document.getElementById("tempSourceInput");
+
+  slider2.oninput = function() {
+    outputInput2.value = this.value;
+  }
+</script>
+
+<script type="text/javascript">
+  var slider3 = document.getElementById("humoditySource");
+  var outputInput3 = document.getElementById("humoditySourceInput");
+
+  slider3.oninput = function() {
+    outputInput3.value = this.value;
+  }
+</script>
+
+<script type="text/javascript">
+  var slider4 = document.getElementById("potSource");
+  var outputInput4 = document.getElementById("potSourceInput");
+
+  slider4.oninput = function() {
+    outputInput4.value = this.value;
+  }
+</script>
+
+
+<script src="js/soundplayer.js"></script>
+<script src="js/draw.js"></script>
+<script src="js/simulatorpage.js"></script>
+<script src="js/p5.min.js"></script>
+
+<xml xmlns="https://www.w3.org/1999/xhtml" id="toolbox" style="display: none;"> 
+
+  <category name="Basic" id="picobasic" colour="#19b5fe" secondaryColour="#3373CC" iconclass="blocklyTreeIconCustom fas fa-circle fa-2x">   
+  
+    <block type="Robotistan_Start">   
+    </block>
+
+    <block type="print">   
+        <value name="WriteValue">   
+           <shadow type="text">   
+             <field name="TEXT">PicoBricks</field>   
+           </shadow>   
+        </value>   
+    </block>   
+
+  </category>   
+
+  <category name="Bricks" id="picosensors" colour="#935df5" secondaryColour="#7a38f1" iconclass="blocklyTreeIconCustom fas fa-th-large fa-2x">
+
+     <block type="setLedValue">   
+       <field name="VALUE">1</field>   
+     </block>   
+
+     <block type="setRelayValue">   
+       <field name="VALUE">1</field>   
+     </block>   
+
+    <block type="playBuzzer">   
+        <value name="FREQUENCY">   
+           <shadow type="math_positive_number">   
+             <field name="NUM">300</field>   
+           </shadow>   
+        </value>   
+    </block>   
+
+    <block type="buzzerInterval">   
+    </block>  
+
+    <block type="readPotentiometer">   
+    </block>   
+
+    <block type="readLightSersor">   
+    </block>   
+
+    <block type="readButton">   
+    </block>   
+
+    <block type="readIR">   
+    </block>   
+
+    <block type="readTemperature">   
+    </block>   
+
+    <block type="readHumidity">   
+    </block>   
+  </category>   
+
+  <category name="%{BKY_PINOO_LOGIC}" categorystyle="logic_category" iconclass="blocklyTreeIconCustom fas fa-arrow-right-arrow-left fa-2x">
+
+        <!--<label text="Eğer Kontrolü" web-line="1.0"></label>-->
+        <block type="controls_if">
+        </block>
+
+        <block type="controls_if">
+        <mutation else="1"></mutation>
+        </block>
+
+        <block type="logic_operation">
+        </block>
+
+        <block type="logic_compare">
+          <field name="OP">EQ</field>
+          <value name="A">
+            <shadow type="math_number">
+              <field name="NUM"></field>
+            </shadow>
+          </value>
+          <value name="B">
+            <shadow type="math_number">
+              <field name="NUM"></field>
+            </shadow>
+          </value>
+        </block>
+
+       <block type="logic_negate">
+        </block>
+
+        <block type="logic_boolean">
+          <field name="BOOL">TRUE</field>
+        </block>
+        <block type="logic_null"></block>
+  </category>
+
+  <category name="%{BKY_PINOO_LOOPS}" iconclass="blocklyTreeIconCustom fas fa-arrow-rotate-right fa-2x" categorystyle="loop_category">
+
+    <!--<label text="Temel" web-line="1.0"></label>-->
+    <block type="control_repeat">
+      <value name="TIMES">
+        <shadow type="math_number">
+          <field name="NUM">10</field>
+        </shadow>
+      </value>
+    </block>
+    
+    <block type="for_loop2"> 
+      <value name="VAR">
+        <block type="variables_get"> <field name="VAR" id="v:-ouP}S_3%8Q75+R5}B">i</field> </block>
+      </value>
+
+      <value name="TIMES">
+        <shadow type="math_number">
+          <field name="NUM">10</field>
+        </shadow>
+      </value>
+    </block>
+
+    <block type="range1" id="range1">
+      <value name="START">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+
+      <value name="STOP">
+        <shadow type="math_number">
+          <field name="NUM">10</field>
+        </shadow>
+      </value>
+    </block>
+
+    <block type="range2" id="range2">
+      <value name="START">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+
+      <value name="STOP">
+        <shadow type="math_number">
+          <field name="NUM">10</field>
+        </shadow>
+      </value>
+
+      <value name="STEP">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+    </block>
+
+    <block type="control_forever"></block>
+
+    <block type="control_wait">
+      <value name="DURATION">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+    </block>
+
+    <block type="while_loop">
+    </block>
+    
+  </category>
+
+  <category name="%{BKY_PINOO_MATH}" categorystyle="math_category" iconclass="blocklyTreeIconCustom fas fa-calculator fa-2x">
+
+    <block type="math_number">
+      <field name="NUM">0</field>
+    </block>
+    <block type="math_arithmetic">
+      <field name="OP">ADD</field>
+      <value name="A">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="B">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_single">
+      <field name="OP">ROOT</field>
+      <value name="NUM">
+        <shadow type="math_number">
+          <field name="NUM">9</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_trig">
+      <field name="OP">SIN</field>
+      <value name="NUM">
+        <shadow type="math_number">
+          <field name="NUM">45</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_constant">
+      <field name="CONSTANT">PI</field>
+    </block>
+    <block type="math_number_property">
+      <mutation divisor_input="false"></mutation>
+      <field name="PROPERTY">EVEN</field>
+      <value name="NUMBER_TO_CHECK">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_round">
+      <field name="OP">ROUND</field>
+      <value name="NUM">
+        <shadow type="math_number">
+          <field name="NUM">3.1</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_on_list">
+      <mutation op="SUM"></mutation>
+      <field name="OP">SUM</field>
+    </block>
+    <block type="math_modulo">
+      <value name="DIVIDEND">
+        <shadow type="math_number">
+          <field name="NUM">64</field>
+        </shadow>
+      </value>
+      <value name="DIVISOR">
+        <shadow type="math_number">
+          <field name="NUM">10</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_random_int">
+      <value name="FROM">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="TO">
+        <shadow type="math_number">
+          <field name="NUM">100</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_random_float"></block>
+  </category>
+  
+  <category name="%{BKY_PINOO_LIST}" categorystyle="list_category" iconclass="blocklyTreeIconCustom fas fa-list fa-2x">
+
+    <block type="lists_create_with">
+      <mutation items="0"></mutation>
+    </block>
+    <block type="lists_create_with">
+      <mutation items="3"></mutation>
+    </block>
+    <block type="lists_repeat">
+      <value name="NUM">
+        <shadow type="math_number">
+          <field name="NUM">5</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="lists_length"></block>
+    <block type="lists_isEmpty"></block>
+    <block type="lists_indexOf">
+      <field name="END">FIRST</field>
+      <value name="VALUE">
+        <block type="variables_get">
+          <field name="VAR" id="iel@#q]V(SW2-:.5z0wO">list</field>
+        </block>
+      </value>
+    </block>
+    <block type="lists_getIndex">
+      <mutation statement="false" at="true"></mutation>
+      <field name="MODE">GET</field>
+      <field name="WHERE">FROM_START</field>
+      <value name="VALUE">
+        <block type="variables_get">
+          <field name="VAR" id="iel@#q]V(SW2-:.5z0wO">list</field>
+        </block>
+      </value>
+    </block>
+    <block type="lists_setIndex">
+      <mutation at="true"></mutation>
+      <field name="MODE">SET</field>
+      <field name="WHERE">FROM_START</field>
+      <value name="LIST">
+        <block type="variables_get">
+          <field name="VAR" id="iel@#q]V(SW2-:.5z0wO">list</field>
+        </block>
+      </value>
+    </block>
+    <block type="lists_getSublist">
+      <mutation at1="true" at2="true"></mutation>
+      <field name="WHERE1">FROM_START</field>
+      <field name="WHERE2">FROM_START</field>
+      <value name="LIST">
+        <block type="variables_get">
+          <field name="VAR" id="iel@#q]V(SW2-:.5z0wO">list</field>
+        </block>
+      </value>
+    </block>
+    <block type="lists_split">
+      <mutation mode="SPLIT"></mutation>
+      <field name="MODE">SPLIT</field>
+      <value name="DELIM">
+        <shadow type="text">
+          <field name="TEXT">,</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="lists_sort">
+      <field name="TYPE">NUMERIC</field>
+      <field name="DIRECTION">1</field>
+    </block>
+  </category>
+
+  <category name="%{BKY_PINOO_VARIABLES}" categorystyle="variable_category" iconclass="blocklyTreeIconCustom fas fa-times fa-2x" custom="VARIABLE">
+    <!--custom="VARIABLE"-->
+  </category>
+
+  <category name="Functions" categorystyle="procedure_category" iconclass="blocklyTreeIconCustom fas puzzle-piece fa-2x" custom="PROCEDURE">
+    
+  </category>
+
+  <category name="Display" id="oled" colour="#2658d6" secondaryColour="#2658d6" iconclass="blocklyTreeIconCustom fas fa-tablet fa-2x"> 
+    
+     <block type="writeTextScreen">   
+      <value name="XPos">   
+         <shadow type="math_positive_number">   
+           <field name="NUM">0</field>   
+         </shadow>   
+      </value>   
+
+      <value name="YPos">   
+         <shadow type="math_positive_number">   
+           <field name="NUM">0</field>   
+         </shadow>   
+      </value>   
+  
+       <value name="WriteValue">   
+         <shadow type="text">   
+           <field name="TEXT">PicoBricks</field>   
+         </shadow>   
+       </value>   
+      </block>   
+
+      <block type="showScreen">   
+      </block>  
+
+      <block type="clearScreen">   
+      </block>   
+  </category>
+
+  <category name="RGB LED" id=" RGB LED" colour="#fb59ce" secondaryColour="#fb59ce" iconclass="blocklyTreeIconCustom fas fa-circle-stop fa-2x">
+
+     <block type="neoPixelColour">   
+       <value name="ColourValue">   
+         <shadow type="colour_picker">   
+           <field name="COLOUR">#ffffff</field>   
+         </shadow>   
+         <block type="colour_picker">   
+           <field name="COLOUR">#ffffff</field>   
+         </block>   
+       </value>   
+     </block>   
+
+     <block type="neoPixelColourRGB">   
+        <value name="RED">   
+           <shadow type="math_positive_number">   
+             <field name="NUM">255</field>   
+           </shadow>   
+        </value>   
+
+        <value name="GREEN">   
+           <shadow type="math_positive_number">   
+             <field name="NUM">255</field>   
+           </shadow>   
+        </value>   
+
+        <value name="BLUE">   
+           <shadow type="math_positive_number">   
+             <field name="NUM">255</field>   
+           </shadow>   
+        </value>   
+     </block>   
+
+     <block type="neoPixelClear">  
+  </category>
+
+  <category name="Motor" id="picomotor" colour="#0a6939" secondaryColour="#0a6939" iconclass="blocklyTreeIconCustom fas fa-gear fa-2x"> 
+
+     <block type="servoMotor">   
+        <value name="ANGLE">   
+           <shadow type="math_positive_number">   
+             <field name="NUM">180</field>   
+           </shadow>   
+        </value>   
+     </block>   
+
+     <block type="dcMotor">   
+        <value name="SPEED">   
+           <shadow type="math_positive_number">   
+             <field name="NUM">100</field>   
+           </shadow>   
+        </value>   
+     </block>   
+  </category>  
+  
+</xml>
+
+<xml xmlns="https://www.w3.org/1999/xhtml" id="workspaceBlocks" style="display:none"></xml>
+
+</body>
+</html>

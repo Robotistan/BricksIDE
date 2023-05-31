@@ -1,0 +1,76 @@
+{
+    "name": "enlighterjs",
+    "description": "an open source syntax highlighter written in pure javascript",
+    "version": "3.7.0",
+    "homepage": "https://enlighterjs.org",
+    "author": {
+        "name": "Andi Dittrich",
+        "url": "https://andidittrich.com"
+    },
+    "license": "MPL-2.0",
+    "repository": "EnlighterJS/EnlighterJS",
+    "bugs": {
+        "url": "https://github.com/EnlighterJS/EnlighterJS/issues"
+    },
+    "scripts": {
+        "test": "eslint src/"
+    },
+    "browser": "./dist/enlighterjs.min.js",
+    "files": [
+        "dist/"
+    ],
+    "keywords": [
+        "c++",
+        "code",
+        "coding",
+        "cpp",
+        "css",
+        "customizable",
+        "html",
+        "java",
+        "javascript",
+        "mootools",
+        "php",
+        "Python",
+        "Ruby",
+        "shell",
+        "sourcecode",
+        "sql",
+        "syntax",
+        "highlighting",
+        "themes",
+        "visual",
+        "editor",
+        "xml"
+    ],
+    "devDependencies": {
+        "@babel/core": "^7.12.9",
+        "@babel/plugin-external-helpers": "^7.8.3",
+        "@babel/plugin-transform-react-jsx": "^7.12.7",
+        "@babel/plugin-transform-runtime": "^7.9.0",
+        "@babel/preset-env": "^7.12.7",
+        "@babel/preset-react": "^7.12.7",
+        "@rollup/plugin-babel": "^5.3.0",
+        "@rollup/plugin-node-resolve": "^13.0.5",
+        "clean-css": "~5.2.1",
+        "eslint": "^8.0.1",
+        "eslint-config-aenondynamics": "^0.2.0",
+        "eslint-plugin-react": "^7.19.0",
+        "express": "^4.16.2",
+        "fancy-log": "^2.0.0",
+        "fs-magic": "^2.1.1",
+        "gulp": "^4.0.2",
+        "gulp-clean-css": "^4.3.0",
+        "gulp-concat": "^2.6.1",
+        "gulp-header": "^2.0.9",
+        "gulp-less": "^5.0.0",
+        "gulp-prettyerror": "^2.0.0",
+        "gulp-replace": "^1.0.0",
+        "gulp-uglify": "^3.0.0",
+        "rollup": "^2.33.3",
+        "uglify-js": "~3.15.0"
+    },
+    "dependencies": {
+        "dom-magic": "^1.0.0"
+    }
+}

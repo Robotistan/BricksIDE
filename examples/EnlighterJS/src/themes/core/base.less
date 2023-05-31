@@ -1,0 +1,349 @@
+// ----------------------------------------------------------------------
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+// --
+// Copyright 2016-2019 Andi Dittrich <https://andidittrich.de>
+// ----------------------------------------------------------------------
+
+@import "fonts.less";
+@import "selectors.less";
+@import "tooltip.less";
+
+/* Object Wrapper - ALL
+----------------------------------------------------------------------------------- */
+.enlighter-default{
+    font-family: @font_SourceCodePro;
+    font-size: 12px;
+    line-height: 1.35em;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin: 0px 0px 20px 0px;
+    padding: 0px;
+    position: relative;
+
+    // enforce text direction
+    text-align: left;
+    direction: ltr;
+
+    // special line highlight color
+    .enlighter-special:hover{
+        background-color: #F4F8FC;
+    }
+
+    // RAW code pane
+    .STYLE_CODE_CONTAINER_RAW({
+        display: none;
+        min-width: 100%;
+        line-height: inherit;
+        font-size: 1.0em;
+        font-family: inherit;
+        margin: 0px;
+        padding: 0px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        border: none;
+        box-shadow: none;
+    });
+
+    // show toolbar on hover
+    &:hover .enlighter-toolbar{
+        display: block;
+    }
+
+    // buttons used in codegroups + toolbar
+    .STYLE_BUTTON({
+        display: inline-block;
+        margin: 0px 5px 0px 5px;
+        padding: 3px 5px 3px 5px;
+        border: solid 1px #333333;
+        background-color: #f0f0f0;
+        cursor: pointer;
+        font-family: inherit;
+
+        // show toolbar on over
+        &:hover .enlighter-tooltip{
+            visibility: visible;
+        }
+    });
+
+    // buttons
+    .STYLE_TOOLBAR_BUTTON(raw, '', {
+        background-image: data-uri('../icons/enlighter_code.svg');
+    });
+
+    .STYLE_TOOLBAR_BUTTON(copy, '', {
+        background-image: data-uri('../icons/enlighter_copy.svg');
+    });
+
+    .STYLE_TOOLBAR_BUTTON(window, '', {
+        background-image: data-uri('../icons/enlighter_window.svg');
+    });
+
+    .STYLE_TOOLBAR_BUTTON(website, '', {
+        background-image: data-uri('../icons/enlighter_icon_white.svg');
+    });
+}
+
+/* Utility
+----------------------------------------------------------------------------------- */
+
+// enlighter code container (code+raw)
+.STYLE_CODE_WRAPPER({
+    overflow: hidden;
+});
+
+// hide original codeblock (pre container marked to highlight)
+.enlighter-origin{
+    display: none !important;
+}
+
+// invisble clipboard copy container
+.enlighter-clipboard{
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+/* Object Wrapper - layout::INLINE
+----------------------------------------------------------------------------------- */
+.VIEW_INLINE({
+    display: inline-block;
+    overflow: inherit;
+    margin: 0px;
+});
+
+/* Object Wrapper - layout::BLOCK
+----------------------------------------------------------------------------------- */
+.VIEW_STANDARD({
+    display: block;
+});
+
+/* Object Wrapper - layout::CODEGROUPS
+----------------------------------------------------------------------------------- */
+.VIEW_CODEGROUP({
+    display: block;
+
+    // contains the tabs
+    .enlighter-codegroup-wrapper{
+        position: relative;
+    }
+
+    // contains the buttons
+    .enlighter-codegroup-switch{
+
+    }
+
+    // hide all code containers by default
+    .STYLE_CODE_WRAPPER({
+        display: none;
+    });
+
+    // moved toolbar into code area
+    .STYLE_TOOLBAR({
+        top: 44px;
+    });
+});
+
+/* Highlighted Object (Block Style)
+----------------------------------------------------------------------------------- */
+.STYLE_CODE_CONTAINER_BLOCK({
+    // fallback: table layout
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+    
+    // used for flex layout
+    //display: inline-block;
+    
+
+    // styling
+    min-width: 100%;
+    font-size: 1em;
+    //background-color: #f2f2f2;
+    //color: #939393;
+    margin: 0px;
+    padding: 0px;
+    text-indent: 0px;
+
+    // note: the counter is set by the block-renderer in case a line-offset was provided
+    counter-reset: enlighter 0;
+
+    // line container
+    & > div{
+        // fallback: table layout
+        display: table-row;
+
+        // prefer flex layout
+        //display: flex;
+
+        // styling
+        //background-color: #333333;
+        margin: 0px;
+        //background-color: #ffffff;
+        border: solid 0px #ffffff;
+        //color: #939393;
+        list-style: none;
+        font-size: inherit;
+
+        line-height: 1.15em;
+        min-height: 14px;
+
+        // line token container
+        & > div{
+            // fallback: table layout
+            display: table-cell;
+            
+            // prefer flex layout
+            //display: inline-block;
+            //width: auto;
+            //flex: 1 1;
+
+            // styling
+            padding-left: 10px;
+
+            &::before{
+                // add a single whitespace char to ensure the table row is rendered in case it's empty
+                content: " ";
+            }
+        }
+    }
+});
+
+/* Highlighted Object (Inline Style)
+----------------------------------------------------------------------------------- */
+.STYLE_CODE_CONTAINER_INLINE({
+    display: inline-block;
+    padding: 3px 5px 1px 5px;
+
+    margin: 0px 2px 0px 2px;
+});
+
+/* default symbole/token style
+----------------------------------------------------------------------------------- */
+.STYLE_TOKEN_DEFAULT({
+    margin: 0px;
+    padding: 0px;
+    line-height: inherit;
+    font-size: 1em;
+    font-family: inherit;
+});
+
+/* Enlighter line-numbering
+----------------------------------------------------------------------------------- */
+.STYLE_LINENUMBERS({
+    white-space: nowrap;
+    display: block;
+
+    // flex layout
+    //flex: 0 0 40px;
+
+    // fallback: table layout
+    display: table-cell;
+
+    // enforce width
+    width: 45px;
+    min-width: 45px;
+
+    // line counter
+    counter-increment: enlighter;
+    content: counter(enlighter, decimal) + ".";
+    
+    text-align: right;
+    padding-right: 8px;
+}, {}, {});
+
+/* Enlighter Overlay Toolbar
+----------------------------------------------------------------------------------- */
+.STYLE_TOOLBAR({
+    display: none;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 10;
+});
+.STYLE_TOOLBAR_BOTTOM({
+    top: unset;
+    bottom: 0px;
+});
+
+/* Enlighter textOverflow === scroll
+----------------------------------------------------------------------------------- */
+.enlighter-overflow-scroll{
+
+    &.@{VIEW_STANDARD},
+    &.@{VIEW_CODEGROUP}{
+        .STYLE_CODE_WRAPPER({
+            // scrollbar on x axis
+            overflow-x: auto;
+            word-wrap: normal !important;
+        });
+
+        // code container
+        .STYLE_CODE_CONTAINER({
+
+            // match token container
+            & > div > div {
+                // disable auto line wrapping
+                white-space: pre !important;
+            }
+        });
+
+        // raw code container
+        .STYLE_CODE_CONTAINER_RAW({
+            // disable auto line wrapping
+            white-space: pre !important;
+        });
+    }
+}
+
+/* Enlighter collapse
+----------------------------------------------------------------------------------- */
+.enlighter-collapse{
+
+    // tabbed layout - use inner container a scroll wrapper!
+    &.@{VIEW_STANDARD},
+    &.@{VIEW_CODEGROUP}{
+
+        // scrollbar on y axis
+        .STYLE_CODE_WRAPPER({
+            overflow-y: auto;
+            max-height: 500px;
+        });
+    }
+
+    // override in case the full sourcecode should be displayed
+    &.enlighter-collapse-full.@{VIEW_STANDARD}{
+        .STYLE_CODE_WRAPPER({
+            max-height: none;
+        });
+    }
+    &.enlighter-collapse-full.@{VIEW_CODEGROUP} .enlighter-codegroup-wrapper{
+        max-height: none;
+    }
+}
+
+/* Object Wrapper Property: show raw code
+----------------------------------------------------------------------------------- */
+.enlighter-show-rawcode{
+    .enlighter-raw{
+        display: block;
+    }
+    .enlighter{
+        display: none !important;
+    }
+
+    /*
+    .enlighter span{
+        font-weight: inherit !important;
+        color: inherit !important;
+        background-color: none !important;
+        font-style: inherit !important;
+    }
+    */
+}

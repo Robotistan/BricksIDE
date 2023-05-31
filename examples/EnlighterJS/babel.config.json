@@ -1,0 +1,24 @@
+{
+    "plugins": [
+        ["@babel/plugin-transform-react-jsx", {
+        }]
+    ],
+    "presets": [
+        [
+            "@babel/preset-env",
+            {
+                "targets": {
+                    "browsers": [
+                        "safari >= 7",
+                        "IE >= 9",
+                        "ios >= 9",
+                        "firefox >= 50",
+                        "chrome >= 50",
+                        "edge >= 11"
+                    ]
+                },
+                "debug": false
+            }
+        ]
+    ]
+}

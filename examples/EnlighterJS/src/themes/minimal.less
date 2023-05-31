@@ -1,0 +1,377 @@
+// ----------------------------------------------------------------------
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+// --
+// Copyright 2016-2019 Andi Dittrich <https://andidittrich.de>
+// ----------------------------------------------------------------------
+
+@import "core/selectors.less";
+@import "core/fonts.less";
+
+.THEME(minimal, {
+
+    border-top: solid 3px #e0e0e0;
+    border-bottom: solid 3px #e0e0e0;
+    background-color: transparent;
+    padding: 10px 0px 10px 0px;
+
+    .STYLE_BUTTON({
+        background-color: #ffffff;
+        color: #717171;
+        font-size: 1em;
+        padding: 0;
+        border: 1px solid #e0e0e0;
+        margin: 0 0 0 8px;
+        text-decoration: none;
+        width: 23px;
+        height: 23px;
+        background-position: 0 0;
+        background-size: contain;
+
+        &:hover{
+        }
+
+        // hide text
+        &:after{
+            content: '';
+        }
+    });
+
+    // line hover color
+    .STYLE_LINEHOVER({
+    }, {
+        background-color: #f0f0f0;
+    });
+
+    // RAW code pane
+    .STYLE_CODE_CONTAINER_RAW({
+        font-size: 1.1em;
+        color: #404141;
+        line-height: 1.75em;
+        padding: 13px 5px 15px 50px;
+        color: #404141;
+    });
+
+    // line styles
+    .STYLE_LINE({
+        border: solid 0px #ffffff;
+        background-color: transparent;
+        padding: 1px 5px 1px 0px;
+        line-height: 1.5em;
+        color: #a0a0a0;
+
+        // top+bottom offsets + borders
+        &:FIRST-CHILD {
+            padding-top: 5px;
+        }
+
+        &:LAST-CHILD {
+            padding-bottom: 5px;
+        }
+
+        &:AFTER {
+            content: ' ';
+        }
+
+        // special line highlight color
+        &.enlighter-special{
+            background-color: #f9f9f9;
+        }
+    }, {}, {});
+
+    // Line Number Styles
+    .STYLE_LINENUMBERS({
+        padding: 1px 10px 1px 10px;
+        font-size: 0.8em;
+        color: #404141;
+
+    // borders
+    }, {
+
+    }, {
+
+    });
+
+    // text size
+    .STYLE_TOKEN_DEFAULT({
+        font-size: 1.1em;
+    });
+    
+    // default text fragment color
+    .TOKEN(text, {
+        color: #2a2a2a;
+    });
+
+    // comments
+    .TOKEN(c0, {
+        color: #a0a0a0;
+    });
+    .TOKEN(c1, {
+        color: #a0a0a0;
+    });
+    .TOKEN(c2, {
+        color: #a0a0a0;
+    });
+    .TOKEN(c9, {
+        color: #a0a0a0;
+    });
+
+    // keywords
+    .TOKEN(k0, {
+        color: #12217c;
+        font-weight: bold;
+    });
+    .TOKEN(k1, {
+        color: #12217c;
+        font-weight: bold;
+    });
+    .TOKEN(k2, {
+        color: #445588;
+        border-bottom: dotted 1px #445588;
+    });
+    .TOKEN(k3, {
+        color: #445588;
+        border-bottom: dotted 1px #445588;
+    });
+    .TOKEN(k4, {
+        color: #445588;
+        border-bottom: dotted 1px #445588;
+    });
+    .TOKEN(k5, {
+        color: #12217c;
+        font-weight: bold;
+    });
+    .TOKEN(k6, {
+        color: #12217c;
+        font-style: italic;
+    });
+    .TOKEN(k7, {
+        color: #12217c;
+        font-weight: bold;
+    });
+    .TOKEN(k8, {
+        color: #445588;
+    });
+    .TOKEN(k9, {
+        color: #990073;
+    });
+    .TOKEN(k10, {
+        color: #990073;
+    });
+    .TOKEN(k11, {
+        color: #a0a0a0;
+    });
+
+
+    // expressions
+    .TOKEN(e0, {
+        color: #445588; 
+        border-bottom: dotted 1px #445588;
+    });
+    .TOKEN(e1, {
+        color: #445588; 
+        border-bottom: dotted 1px #445588;
+    });
+    .TOKEN(e2, {
+        color: #996700; 
+        border-bottom: solid 1px #996700;
+    });
+    .TOKEN(e3, {
+        color: #445588; 
+        border-bottom: dotted 1px #445588;
+    });
+    .TOKEN(e4, {
+        color: #445588; 
+        border-bottom: dotted 1px #445588;
+    });
+
+    // strings
+    .TOKEN(s0, {
+        color: #217908; 
+        border-bottom: dotted 1px #387905;
+    });
+    .TOKEN(s1, {
+        color: #217908; 
+        border-bottom: dotted 1px #387905;
+    });
+    .TOKEN(s2, {
+        color: #CF6A4C;
+    });
+    .TOKEN(s3, {
+        color: #217908;
+        border-bottom: dotted 1px #387905;
+    });
+    .TOKEN(s4, {
+        color: #217908; 
+        border-bottom: dotted 1px #387905;
+    });
+    .TOKEN(s5, {
+        color: #217908; 
+        border-bottom: dotted 1px #387905;
+    });
+
+    // numbers
+    .TOKEN(n0, {
+        color: #a61d1b; 
+        font-weight:bold;
+    });
+    .TOKEN(n1, {
+        color: #a61d1b; 
+        font-weight:bold;
+    });
+    .TOKEN(n2, {
+        color: #a61d1b; 
+        font-weight:bold;
+    });
+    .TOKEN(n3, {
+        color: #a61d1b; 
+        font-weight:bold;
+    });
+    .TOKEN(n4, {
+        color: #a61d1b; 
+        font-weight:bold;
+    });
+    .TOKEN(n5, {
+        color: #a61d1b; 
+        font-weight:bold;
+    });
+
+    // methods/functions
+    .TOKEN(m0, {
+        color: #12217c; 
+        background-color: #e0e0e0;
+    });
+    .TOKEN(m1, {
+        color: #12217c; 
+        background-color: #e0e0e0;
+    });
+    .TOKEN(m2, {
+        color: #12217c; 
+        background-color: #e0e0e0;
+    });
+    .TOKEN(m3, {
+        color: #12217c; 
+        background-color: #e0e0e0;
+    });
+
+    // generic
+    .TOKEN(g0, {
+        color: #12217c;
+    });
+    .TOKEN(g1, {
+        color: #2a2a2a;
+    });
+
+    // Text Documents
+    .TOKEN(t0, {
+        color: #a0a0a0;
+    });
+    .TOKEN(t1, {
+        color: #387905;
+        font-weight: bold;
+    });
+    .TOKEN(t2, {
+        color: #990073;
+        font-weight: bold;
+    });
+    .TOKEN(t3, {
+        color: #445588;
+    });
+    .TOKEN(t4, {
+        color: #445588;
+    });
+    .TOKEN(t5, {
+        color: #445588;
+    });
+    .TOKEN(t6, {
+        color: #387905;
+    });
+    .TOKEN(t7, {
+        color: #a0a0a0;
+        font-weight: bold;
+    });
+    .TOKEN(t8, {
+        color: #a0a0a0;
+        font-style: italic;
+    });
+
+    // XML
+    .TOKEN(x1, {
+        color: #12217c;
+        font-weight: bold;
+    });
+    .TOKEN(x2, {
+        color: #445588; 
+        border-bottom: dotted 1px #445588;
+    });
+
+    // CSS
+    .TOKEN(x10, {
+        color: #12217c;
+        font-weight: bold;
+    });
+    .TOKEN(x11, {
+        color: #12217c;
+        font-weight: bold;
+    });
+    .TOKEN(x12, {
+        color: #445588;
+    });
+    .TOKEN(x13, {
+        color: #a61d1b; 
+        font-weight:bold;
+    });
+    .TOKEN(x14, {
+        color: #a61d1b; 
+        font-weight:bold;
+    });
+    .TOKEN(x15, {
+        color: #990073;
+    });
+
+      /* Object Wrapper - layout::INLINE
+    ----------------------------------------------------------------------------------- */
+    .VIEW_INLINE({
+        background-color: transparent;
+        border: none;
+        padding: 0px;
+    });
+
+    /* Object Wrapper - layout::CODEGROUPS
+    ----------------------------------------------------------------------------------- */
+    .VIEW_CODEGROUP({
+
+        border-top: none;
+        padding-top: 0px;
+        
+        // contains the tabs
+        .enlighter-codegroup-wrapper{
+            border-top: solid 3px #e0e0e0;
+            padding-top: 10px;
+        }
+        
+        // contains the buttons
+        .enlighter-codegroup-switch{
+            padding-left: 5px;
+            padding-bottom: 5px;
+
+            .enlighter-btn{
+                font-size: 1em;
+                color: #000000;
+                background-color: transparent;
+                font-weight: bold;
+                text-transform: uppercase;
+                padding: 1px 6px 1px 6px;
+                border: none;
+                width: auto;
+                height: auto;
+
+                &.enlighter-active{
+                    background-color: #e0e0e0;
+                    color: #2a2a2a;
+                }
+            }
+        }
+    });
+});

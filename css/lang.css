@@ -1,0 +1,133 @@
+
+.ct-language__dropdown{
+	padding-top: 10vw;
+	max-height: 0;
+	overflow: hidden;
+	position: absolute;
+	top: 110%;
+	left: -50%;
+	-webkit-transition: all 0.25s ease-in-out;
+	transition: all 0.25s ease-in-out;
+	width: 5vw;
+	text-align: center;
+	padding-top: 0;
+    z-index:200;
+}
+.ct-language__dropdown li{
+	background: #222;
+	padding: 5px;
+}
+.ct-language__dropdown li a{
+	display: block;
+}
+.ct-language__dropdown li:first-child{
+	padding-top: 10px;
+	border-radius: 3px 3px 0 0;
+}
+.ct-language__dropdown li:last-child{
+	padding-bottom: 10px;
+	border-radius: 0 0 3px 3px;
+}
+.ct-language__dropdown li:hover{
+	background: #444;
+}
+.ct-language__dropdown:before{
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	width: 8px;
+	height: 0;
+	border: 0 solid transparent;
+	border-right-width: 8px;
+	border-left-width: 8px;
+	border-bottom: 8px solid #222;
+}
+.ct-language{
+  position: relative;
+  background: transparent;
+  color: #eee;
+  padding: 10px 0;
+}
+.ct-language:hover .ct-language__dropdown{
+	max-height: 350px;
+	padding-top: 8px;
+}
+.list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}
+
+/* OVERRIDE GOOGLE TRANSLATE WIDGET CSS BEGIN */
+        div#google_translate_element div.goog-te-gadget-simple {
+            border: none;
+            background-color: transparent;
+            /*background-color: #17548d;*/ /*#e3e3ff*/
+        }
+
+        div#google_translate_element div.goog-te-gadget-simple a.goog-te-menu-value:hover {
+            text-decoration: none;
+        }
+
+        div#google_translate_element div.goog-te-gadget-simple a.goog-te-menu-value span {
+            color: #696969;
+        }
+
+        div#google_translate_element div.goog-te-gadget-simple a.goog-te-menu-value span:hover {
+            color: white;
+        }
+        
+        .goog-te-gadget-icon {
+            display: none !important;
+            /*background: url("url for the icon") 0 0 no-repeat !important;*/
+        }
+
+        /* Remove the down arrow */
+        /* when dropdown open */
+        div#google_translate_element div.goog-te-gadget-simple a.goog-te-menu-value span[style="color: rgb(213, 213, 213);"] {
+            display: none;
+        }
+        /* after clicked/touched */
+        div#google_translate_element div.goog-te-gadget-simple a.goog-te-menu-value span[style="color: rgb(118, 118, 118);"] {
+            display: none;
+        }
+        /* on page load (not yet touched or clicked) */
+        div#google_translate_element div.goog-te-gadget-simple a.goog-te-menu-value span[style="color: rgb(155, 155, 155);"] {
+            display: none;
+        }
+
+        /* Remove span with left border line | (next to the arrow) in Chrome & Firefox */
+        div#google_translate_element div.goog-te-gadget-simple a.goog-te-menu-value span[style="border-left: 1px solid rgb(187, 187, 187);"] {
+            display: none;
+        }
+        /* Remove span with left border line | (next to the arrow) in Edge & IE11 */
+        div#google_translate_element div.goog-te-gadget-simple a.goog-te-menu-value span[style="border-left-color: rgb(187, 187, 187); border-left-width: 1px; border-left-style: solid;"] {
+            display: none;
+        }
+        /* HIDE the google translate toolbar */
+        .goog-te-banner-frame.skiptranslate {
+            display: none !important;
+        }
+
+        #google_translate_element{width:300px;float:right;text-align:right;display:block}
+
+		.goog-te-banner-frame.skiptranslate { display: none !important;} 
+
+		#goog-gt-tt{display: none !important; top: 0px !important; } 
+
+		.goog-tooltip skiptranslate{display: none !important; top: 0px !important; } 
+
+		.activity-root { display: hide !important;} 
+
+		.status-message { display: hide !important;}
+
+		.started-activity-container { display: hide !important;}
+
+        body {
+            top: 0px !important;
+        }
+        /* OVERRIDE GOOGLE TRANSLATE WIDGET CSS END */
+
+        

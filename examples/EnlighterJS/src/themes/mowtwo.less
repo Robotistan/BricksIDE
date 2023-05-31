@@ -1,0 +1,334 @@
+// ----------------------------------------------------------------------
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+// --
+// Copyright 2016-2019 Andi Dittrich <https://andidittrich.de>
+// ----------------------------------------------------------------------
+
+@import "core/selectors.less";
+@import "core/fonts.less";
+
+.THEME(mowtwo, {
+
+    background-color: #f0f0f1;
+    border: solid 1px #f0f0f1;
+    border-radius: 7px;
+    
+    .STYLE_BUTTON({
+        background-color: #ffffff;
+        color: #717171;
+        font-size: 1em;
+        padding: 0;
+        border: 1px solid #e0e0e0;
+        margin: 0 0 0 8px;
+        text-decoration: none;
+        width: 23px;
+        height: 23px;
+        background-position: 0 0;
+        background-size: contain;
+
+        &:hover{
+        }
+
+        // hide text
+        &:after{
+            content: '';
+        }
+    });
+
+    // line hover color
+    .STYLE_LINEHOVER({
+    }, {
+        background-color: #e9e9e9;
+    });
+
+    // RAW code pane
+    .STYLE_CODE_CONTAINER_RAW({
+        font-size: 1.15em;
+        line-height: 1.75em;
+        color: #313437;
+        padding: 5px 5px 5px 51px;
+        background-color: transparent;
+    });
+
+    // line styles
+    .STYLE_LINE({
+        line-height: 1.5em;
+        padding: 1px 5px 1px 14px;
+        color: #9c9ea0;
+
+        // top+bottom offsets + borders
+        &:FIRST-CHILD {
+            padding-top: 5px;
+        }
+
+        &:LAST-CHILD {
+            padding-bottom: 5px;
+        }
+
+        &:AFTER {
+            content: ' ';
+        }
+
+        // special line highlight color
+        &.enlighter-special{
+            background-color: #e9e9e9;
+        }
+    }, {}, {});
+
+    // Line Number Styles
+    .STYLE_LINENUMBERS({
+        padding: 1px 10px 1px 10px;
+        font-size: 0.9em;
+
+    // borders
+    }, {
+        border-radius: 0px 8px 0px 0px;
+    }, {
+        border-radius: 0px 0px 8px 0px;
+    });
+
+    // text size
+    .STYLE_TOKEN_DEFAULT({
+        font-size: 1.15em;
+    });
+
+    // default text fragment color
+    .TOKEN(text, {
+        color: #313437;
+    });
+
+    // comments
+    .TOKEN(c0, {
+        color: #9c9ea0;
+    });
+    .TOKEN(c1, {
+        color: #9c9ea0;
+    });
+    .TOKEN(c2, {
+        color: #9c9ea0;
+    });
+    .TOKEN(c9, {
+        color: #9c9ea0;
+    });
+
+    // keywords
+    .TOKEN(k0, {
+        color: #b05098;
+        font-weight: bold;
+    });
+    .TOKEN(k1, {
+        color: #b05098;
+        font-weight: bold;
+    });
+    .TOKEN(k2, {
+        color: #b05098;
+    });
+    .TOKEN(k3, {
+        color: #b05098;
+    });
+    .TOKEN(k4, {
+        color: #b05098;
+    });
+    .TOKEN(k5, {
+        color: #b05098;
+    });
+    .TOKEN(k6, {
+        color: #b05098;
+    });
+    .TOKEN(k7, {
+        color: #b05098;
+    });
+    .TOKEN(k8, {
+        color: #313437;
+    });
+    .TOKEN(k9, {
+        color: #313437;
+    });
+    .TOKEN(k10, {
+        color: #313437;
+    });
+    .TOKEN(k11, {
+        color: #9c9ea0;
+    });
+
+    // expressions
+    .TOKEN(e0, {
+        color: #b05098;
+    });
+    .TOKEN(e1, {
+        color: #b05098;
+    });
+    .TOKEN(e2, {
+        color:#864c08; 
+    });
+    .TOKEN(e3, {
+        color: #b05098;
+    });
+    .TOKEN(e4, {
+        color: #b05098;
+    });
+
+    // strings
+    .TOKEN(s0, {
+        color: #83a440;
+    });
+    .TOKEN(s1, {
+        color: #83a440;
+    });
+    .TOKEN(s2, {
+        color: #83a440;
+    });
+    .TOKEN(s3, {
+        color: #83a440;
+    });
+    .TOKEN(s4, {
+        color: #83a440;
+    });
+    .TOKEN(s5, {
+        color: #83a440;
+    });
+
+    // numbers
+    .TOKEN(n0, {
+        color: #429bc1;
+    });
+    .TOKEN(n1, {
+        color: #429bc1;
+    });
+    .TOKEN(n2, {
+        color: #429bc1;
+    });
+    .TOKEN(n3, {
+        color: #429bc1;
+    });
+    .TOKEN(n4, {
+        color: #429bc1;
+    });
+    .TOKEN(n5, {
+        color: #429bc1;
+    });
+
+    // methods/functions
+    .TOKEN(m0, {
+        color: #666666;
+    });
+    .TOKEN(m1, {
+        color: #666666;
+    });
+    .TOKEN(m2, {
+        color: #666666;
+    });
+    .TOKEN(m3, {
+        color: #666666;
+    });
+
+    // generic
+    .TOKEN(g0, {
+        color: #864c08;
+    });
+    .TOKEN(g1, {
+        color: #909090;
+    });
+
+    // Text Documents
+    .TOKEN(t0, {
+        color: #909090;
+    });
+    .TOKEN(t1, {
+        color: #b05098;
+        font-weight: bold;
+    });
+    .TOKEN(t2, {
+        color: #b05098;
+        font-weight: bold;
+    });
+    .TOKEN(t3, {
+        color: #b05098;
+    });
+    .TOKEN(t4, {
+        color: #b05098;
+    });
+    .TOKEN(t5, {
+        color: #83a440;
+    });
+    .TOKEN(t6, {
+        color: #b05098;
+    });
+    .TOKEN(t7, {
+        color: #909090;
+        font-weight: bold;
+    });
+    .TOKEN(t8, {
+        color: #909090;
+        font-style: italic;
+    });
+
+    // XML
+    .TOKEN(x1, {
+        color: #b05098;
+        font-weight: bold;
+    });
+    .TOKEN(x2, {
+        color: #b05098;
+    });
+
+    // CSS
+    .TOKEN(x10, {
+        color: #b05098;
+        font-weight: bold;
+    });
+    .TOKEN(x11, {
+        color: #b05098;
+        font-weight: bold;
+    });
+    .TOKEN(x12, {
+        color: #313437;
+    });
+    .TOKEN(x13, {
+        color: #429bc1;
+    });
+    .TOKEN(x14, {
+        color: #429bc1;
+    });
+    .TOKEN(x15, {
+        color: #313437;
+    });
+
+    /* Object Wrapper - layout::INLINE
+    ----------------------------------------------------------------------------------- */
+    .VIEW_INLINE({
+        border-radius: 4px;
+    });
+
+    /* Object Wrapper - layout::CODEGROUPS
+    ----------------------------------------------------------------------------------- */
+    .VIEW_CODEGROUP({
+        // contains the buttons
+        .enlighter-codegroup-switch{
+            background-color: #585b5e;
+            padding: 10px 0px 10px 20px;
+            border-radius: 8px;
+            margin-bottom: 5px;
+
+            .enlighter-btn{
+                border-radius: 0px;
+                background-color: transparent;
+                line-height: 1.7em;
+                font-size: 1.25em;
+                color: #f0f0f0;
+                border: none;
+                padding: 0px 10px 0px 10px;
+                width: auto;
+                height: auto;
+                font-family: @font_sans;
+
+                &.enlighter-active{
+                    text-decoration: underline;
+                }
+            }
+        }
+    });
+
+});

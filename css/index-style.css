@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&family=Ubuntu:wght@400;500;700&display=swap');
+
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
+
+}
+
+
+.logo{
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+}
+
+.navbar{
+    height: 8vh;
+    width: 100%;
+    background-color: #2222;
+    color: whitesmoke;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: orangered;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  /* Change the link color to #111 (black) on hover */
+  li a:hover {
+    background-color: whitesmoke;
+  }
+
+.banner{
+    position: relative;
+    width: 100%;
+    min-height: 65vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background: #fd5d0aff; 
+    transition: .5s;
+    
+}
+
+.video
+{
+position: relative;
+display: flex;
+width: 100%;
+height: auto;
+display: flex;
+align-items: center;
+justify-content: center;
+
+}
+.video img{
+    max-width: 100%;
+    height: auto;
+    
+  
+}
+
+
+.text{
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    z-index: 10;
+}
+.text h2{
+    font-size: 4em;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1em;
+}
+.text h3{
+    font-size: 2em;
+    font-weight: 300;
+    color: #fff;
+    line-height: 1em;
+    
+}
+.text p{
+    position: relative;
+    font-size: 1.1em;
+    margin: 20px 0;
+    font-weight: 400;
+    max-width: 700px;
+    color: #fff;
+}
+
+
+.text a{
+    position: relative;
+    display: inline-block;
+    padding: 12px 36px;
+    margin: 15px 0;
+    color: orangered;
+    text-decoration: none;
+    font-size: 20px;
+    letter-spacing: 2px;
+    border-radius: 40px;
+    background:white;
+}
+.text a:hover{
+    opacity: 0.8;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.exp{
+    margin: 50px;
+    margin-top: 100px;
+    margin-left: 250px;
+    margin-right: 250px;
+    margin-bottom: 100px;
+    display: flex; 
+    flex-direction: column; /* yatay düzende sıralanacak */
+    justify-content: center; /* dikeyde merkez */
+    align-items: center; /* yatayda merkez */
+  
+  
+
+}
+.exp h2{
+    text-align: center;
+    font-size:40px;
+    font-style:bold;
+    color: rgb(67, 64, 64);
+   
+}
+
+.exp p{
+    text-align: center;
+    font-size:20px;
+    color: rgb(67, 64, 64);
+}
+
+.editor {
+    display: flex;
+    justify-content: space-between;
+    margin:50px;
+    margin-left: 250px;
+    margin-right: 250px;
+    
+  }
+  
+  .jr, .blok, .py, .sim {
+    width: 40%;
+    text-align: center;
+  }
+  
+  .jr img, .blok img, .py img, .sim img {
+    width: 50%;
+    height: auto;
+  }
+  
+  .jr h2, .blok h2, .py h2, .sim h2 {
+    margin: 10px 0;
+  }
+  
+  .jr p, .blok p, .py p, .sim p {
+    margin: 20px 0;
+    margin-left: 50px;
+    margin-right: 50px;
+    
+  }
+  
+
+  .editor img:hover {
+    opacity: 0.8;
+    transition: opacity 0.5s ease-in-out;
+
+    transform: translateY(-8px);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .plan{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin:50px;
+    margin-left: 250px;
+    margin-right: 250px;
+    background-color: #e9e1e1;
+  }
+
+  footer {
+    background-color: #f5f5f5;
+    padding: 20px 0;
+    text-align: center;
+  }
+  
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .footer-container p {
+    font-size: 14px;
+    margin: 0;
+    padding: 10px;
+  }
