@@ -138,7 +138,7 @@ Blockly.Arduino['readAnalogPinValue'] = function(block) {
 
     Blockly.Arduino.definitions_['define_adc' + pin] = 'adc_' + pin + ' = machine.ADC(' + pin + ')';  
     
-    code = 'adc_' + pin + '.read()';
+    code = 'adc_' + pin + '.read_u16()';
     return [code, Blockly.Arduino.ORDER_NONE];  
 };
 
@@ -319,6 +319,40 @@ Blockly.Arduino['readHumidity'] = function(block) {
     return [code, Blockly.Arduino.ORDER_NONE];  
 };
 
+Blockly.Arduino['readDistance'] = function(block) {
+    
+    var trig =  Blockly.Arduino.valueToCode(block, 'TRIG', Blockly.Arduino.ORDER_NONE) || '0';
+    var echo =  Blockly.Arduino.valueToCode(block, 'ECHO', Blockly.Arduino.ORDER_NONE) || '0';
+
+    Blockly.Arduino.imports_['import_Pin']= 'from machine import Pin';
+    Blockly.Arduino.imports_['import_PWM']= 'from machine import PWM';
+    Blockly.Arduino.imports_['import_utime']= 'import utime';
+
+    Blockly.Arduino.definitions_['define_distance_trig' + trig] = 'trigger = Pin(' + trig + ', Pin.OUT)';
+    Blockly.Arduino.definitions_['define_distance_echo' + echo] = 'echo = Pin(' + echo + ', Pin.IN)';
+
+    Blockly.Arduino.definitions_['define_distance_func'] = 
+                                                       '\n' +
+                                                       'def getDistance(): \n' +
+                                                       '   trigger.low() \n' +
+                                                       '   utime.sleep_us(2) \n' +
+                                                       '   trigger.high() \n' +
+                                                       '   utime.sleep_us(5) \n' +
+                                                       '   trigger.low() \n' +
+                                                       '   while echo.value() == 0: \n' +
+                                                       '      signaloff = utime.ticks_us() \n' +
+                                                       '   while echo.value() == 1: \n' +
+                                                       '      signalon = utime.ticks_us() \n' +
+                                                       '   timepassed = signalon - signaloff \n' +
+                                                       '   distance = (timepassed * 0.0343) / 2 \n' +
+                                                       '   print("The distance from object is ",distance,"cm") \n' +
+                                                       '   return distance \n';
+
+    var code = 'getDistance()';
+
+    return [code, Blockly.Arduino.ORDER_NONE];  
+}
+
 Blockly.Arduino['servoMotor'] = function(block) {
 
     var motor = block.getFieldValue('MOTOR');
@@ -333,13 +367,18 @@ Blockly.Arduino['servoMotor'] = function(block) {
 
     Blockly.Arduino.imports_['import_Pin'] = 'from machine import Pin';
     Blockly.Arduino.imports_['import_PWM'] = 'from machine import PWM';
+     Blockly.Arduino.imports_['import_fabs'] = 'from math import fabs';
 
     Blockly.Arduino.definitions_['define_servo1' + motor] = 'pwm_' + motor + ' = PWM(Pin(' + pin + '))';
     Blockly.Arduino.definitions_['define_servo2' + motor] = 'pwm_' + motor + '.freq(50)';
 
-    angle = Math.abs((angle * (6000 / 180)) + 2000);
-    angle = Math.round(angle);
-    code = 'pwm_' + motor + '.duty_u16(' + angle + ')\n';
+    Blockly.Arduino.definitions_['define_angleFunc'] = 
+                                                        'def CalculateAngle(angle): \n' +
+                                                        '   angle = fabs((angle * (6000 / 180)) + 2000) \n' +
+                                                        '   angle = round(angle) \n' +
+                                                        '   return angle \n';
+    
+    code = 'pwm_' + motor + '.duty_u16(CalculateAngle(' + angle + '))\n';
 
     return code;
 };
@@ -364,7 +403,7 @@ Blockly.Arduino['dcMotor'] = function(block) {
     Blockly.Arduino.definitions_['define_motor1' + motor] = 'motor_' + motor + ' = PWM(Pin(' + pin + '))';
     Blockly.Arduino.definitions_['define_motor2' + motor] = 'motor_' + motor + '.duty_u16(0)';
 
-    code = 'motor_' + motor + '.duty_u16(' + speed + ')\n';
+    code = 'motor_' + motor + '.duty_u16(' + speed + ' * 650) \n';
 
     return code;
 };
@@ -576,15 +615,78 @@ Blockly.Arduino['request'] = function(block) {
     return code;
 }
 
-
 Blockly.Arduino['request_find'] = function(block) {
 
     var find =  Blockly.Arduino.valueToCode(block, 'Find', Blockly.Arduino.ORDER_NONE);
     
-    var code = "";
+    var code = "request.find(" + find + ")"
 
-    code = 
-            "request.find(" + find + ")"
+    return [code, Blockly.Arduino.ORDER_NONE];  
+}
 
+Blockly.Arduino['onIRReceiving'] = function(block) {
+
+    var branch = Blockly.Arduino.statementToCode(block, 'DO') ;
+    branch = Blockly.Arduino.addLoopTrap(branch, block);
+
+    Blockly.Arduino.imports_['import_Pin'] = "from machine import Pin";
+    Blockly.Arduino.imports_['import_NEC_16'] = "from picobricks import NEC_16";
+    Blockly.Arduino.imports_['import_IR_RX'] = "from picobricks import IR_RX";
+
+    Blockly.Arduino.definitions_['define_ir_callback'] =         
+                                                "def ir_callback(data, addr, ctrl): \n" +
+                                                "    global ir_data \n" +
+                                                "    global ir_addr, data_rcvd \n" +
+                                                "    if data > 0: \n" +
+                                                "        ir_data = data \n" +
+                                                "        ir_addr = addr \n" +
+                                                "        print('Data {:02x} Addr {:04x}'.format(data, addr)) \n" +
+                                                "        data_rcvd = True \n" +
+                                                "ir = NEC_16(Pin(0, Pin.IN), ir_callback) \n" +
+                                                "ir_data = 0 \n" +
+                                                "data_rcvd = False \n";
+
+    var code = 
+               "if data_rcvd == True: \n" +
+               "    data_rcvd = False \n" +
+               branch;
+    
     return code;
+}
+
+Blockly.Arduino['isButtonPressed'] = function(block) {
+
+    var value = block.getFieldValue('VALUE');
+  
+    var code = "ir_data == " + value;
+
+    return [code, Blockly.Arduino.ORDER_NONE];
+};
+
+Blockly.Arduino['RFIDActivated'] = function(block) {
+
+    var branch = Blockly.Arduino.statementToCode(block, 'DO') ;
+    branch = Blockly.Arduino.addLoopTrap(branch, block);
+
+    Blockly.Arduino.imports_['import_MFRC522'] = 'from picobricks import MFRC522';
+    Blockly.Arduino.definitions_['define_reader'] = 'reader = MFRC522(spi_id=0, sck=18, miso=16, mosi=19, cs=17, rst=0)';
+
+    Blockly.Arduino.definitions_['define_activated'] =         
+                                                'def activated(): \n' +
+                                                '   print("Card ID: " + str(card) + " PASS: Activated") \n';
+
+    var code = 
+                'reader.init() \n' +
+                '(stat, tag_type) = reader.request(reader.REQIDL) \n' +
+                '(stat, uid) = reader.SelectTagSN() \n' +
+                'card = int.from_bytes(bytes(uid), "little", False) \n' +
+                'activated() \n';
+    
+    return code;
+}
+
+Blockly.Arduino['RFIDCode'] = function(block) {
+    var code = 'card'; 
+
+    return [code, Blockly.Arduino.ORDER_NONE];  
 }

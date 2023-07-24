@@ -621,6 +621,30 @@ Blockly.Blocks['lists_getIndex'] = {
   }
 };
 
+Blockly.Blocks['get_list_item'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("item");
+
+    this.appendValueInput("INDEX")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_CENTRE);
+
+    this.appendDummyInput()
+        .appendField("of");
+
+    this.appendValueInput("VARIABLE")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_CENTRE);
+
+    this.setOutput(true, null);
+    this.setColour("#d400d4", "#9f009f");
+    this.setTooltip("");
+    this.setHelpUrl("");
+    this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND)
+  }
+}
+
 Blockly.Blocks['lists_setIndex'] = {
   /**
    * Block for setting the element at index.

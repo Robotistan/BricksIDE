@@ -84,7 +84,7 @@
   </div>
  
 <div class="container-fluid">
-
+      
       <img class="savingButton" id="btSaving"/>
 
       <div class="row" style="background-color:rgb(196, 27, 27);">
@@ -329,23 +329,6 @@
     </block>   
 
     <block type="setAnalogPinValue">   
-      <value name="PIN">   
-         <shadow type="math_positive_number">   
-           <field name="NUM">1</field>   
-         </shadow>   
-      </value>   
-      <value name="FREQUENCY">   
-         <shadow type="math_positive_number">   
-           <field name="NUM">1000</field>   
-         </shadow>   
-      </value>   
-
-      <value name="DUTY">   
-         <shadow type="math_positive_number">   
-           <field name="NUM">50</field>   
-         </shadow>   
-      </value>   
-
     </block>   
 
     <block type="readAnalogPinValue">   
@@ -403,6 +386,29 @@
 
     <block type="readHumidity">   
     </block>   
+
+    <block type="readDistance"> 
+      <value name="TRIG">   
+         <shadow type="math_positive_number">   
+           <field name="NUM">15</field>   
+         </shadow>   
+      </value>   
+
+      <value name="ECHO">   
+         <shadow type="math_positive_number">   
+           <field name="NUM">14</field>   
+         </shadow>   
+      </value>  
+    </block>   
+
+    <block type="onIRReceiving">   
+    </block>  
+
+    <block type="isButtonPressed">   
+    </block>  
+
+    <block type="RFIDActivated"></block>
+    <block type="RFIDCode"></block>
   </category>   
 
   <category name="%{BKY_PINOO_LOGIC}" categorystyle="logic_category" iconclass="blocklyTreeIconCustom fas fa-arrow-right-arrow-left fa-2x">
@@ -623,57 +629,6 @@
     </block>
     <block type="lists_length"></block>
     <block type="lists_isEmpty"></block>
-    <block type="lists_indexOf">
-      <field name="END">FIRST</field>
-      <value name="VALUE">
-        <block type="variables_get">
-          <field name="VAR" id="iel@#q]V(SW2-:.5z0wO">list</field>
-        </block>
-      </value>
-    </block>
-    <block type="lists_getIndex">
-      <mutation statement="false" at="true"></mutation>
-      <field name="MODE">GET</field>
-      <field name="WHERE">FROM_START</field>
-      <value name="VALUE">
-        <block type="variables_get">
-          <field name="VAR" id="iel@#q]V(SW2-:.5z0wO">list</field>
-        </block>
-      </value>
-    </block>
-    <block type="lists_setIndex">
-      <mutation at="true"></mutation>
-      <field name="MODE">SET</field>
-      <field name="WHERE">FROM_START</field>
-      <value name="LIST">
-        <block type="variables_get">
-          <field name="VAR" id="iel@#q]V(SW2-:.5z0wO">list</field>
-        </block>
-      </value>
-    </block>
-    <block type="lists_getSublist">
-      <mutation at1="true" at2="true"></mutation>
-      <field name="WHERE1">FROM_START</field>
-      <field name="WHERE2">FROM_START</field>
-      <value name="LIST">
-        <block type="variables_get">
-          <field name="VAR" id="iel@#q]V(SW2-:.5z0wO">list</field>
-        </block>
-      </value>
-    </block>
-    <block type="lists_split">
-      <mutation mode="SPLIT"></mutation>
-      <field name="MODE">SPLIT</field>
-      <value name="DELIM">
-        <shadow type="text">
-          <field name="TEXT">,</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="lists_sort">
-      <field name="TYPE">NUMERIC</field>
-      <field name="DIRECTION">1</field>
-    </block>
   </category>
 
   <category name="%{BKY_PINOO_VARIABLES}" categorystyle="variable_category" iconclass="blocklyTreeIconCustom fas fa-times fa-2x" custom="VARIABLE">

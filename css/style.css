@@ -94,9 +94,9 @@ canvas {
   opacity: 0.85;
 }
 
-.runPythonButton{
-  content: url('../images/buttons/run.png');
-  width: 5rem; 
+.picoBricksSimulator{
+  content: url('../images/buttons/simulator.svg');
+  height: 2.5rem; 
   visibility: visible;
   border-style: none;
   border-width: 0px;
@@ -107,6 +107,17 @@ canvas {
 
 .runPythonButton:hover{
   opacity: 0.85;
+}
+
+.runPythonButton{
+  content: url('../images/buttons/run.png');
+  width: 5rem; 
+  visibility: visible;
+  border-style: none;
+  border-width: 0px;
+  z-index: 101;
+  cursor: pointer;
+  margin: 0.3rem;
 }
 
 .documentsButton{

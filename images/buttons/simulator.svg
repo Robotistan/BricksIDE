@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="katman_2" data-name="katman 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2410.17 482.56">
+  <defs>
+    <style>
+      .cls-1 {
+        letter-spacing: 0em;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5 {
+        fill: #fff;
+      }
+
+      .cls-1, .cls-3, .cls-4, .cls-5 {
+        font-family: Biko-Bold, Biko;
+        font-size: 190.82px;
+        font-weight: 700;
+      }
+
+      .cls-1, .cls-3, .cls-4, .cls-5, .cls-6 {
+        isolation: isolate;
+      }
+
+      .cls-7 {
+        fill: #f8b233;
+      }
+
+      .cls-8 {
+        fill: #ed7131;
+      }
+
+      .cls-9 {
+        fill: #ef8231;
+      }
+
+      .cls-10 {
+        fill: #dc3545;
+      }
+
+      .cls-3 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-4 {
+        letter-spacing: .02em;
+      }
+    </style>
+  </defs>
+  <g>
+    <rect class="cls-2" width="606.95" height="482.56" rx="20.35" ry="20.35"/>
+    <g>
+      <rect class="cls-10" x="24.79" y="33.91" width="23.49" height="416.17" rx="10.37" ry="10.37"/>
+      <rect class="cls-10" x="289.3" y="32" width="23.49" height="416.17" rx="10.37" ry="10.37"/>
+      <rect class="cls-10" x="558.66" y="33.91" width="23.49" height="416.17" rx="10.37" ry="10.37"/>
+      <rect class="cls-10" x="24.79" y="427.07" width="557.36" height="23.49" rx="11.74" ry="11.74"/>
+      <rect class="cls-10" x="67.68" y="36.09" width="201.19" height="168" rx="18.15" ry="18.15"/>
+      <rect class="cls-8" x="67.68" y="222.47" width="201.19" height="85.79" rx="12.97" ry="12.97"/>
+      <rect class="cls-9" x="67.68" y="324.34" width="201.19" height="85.79" rx="12.97" ry="12.97"/>
+      <rect class="cls-8" x="333.7" y="148.94" width="201.19" height="150.13" rx="17.16" ry="17.16"/>
+      <rect class="cls-7" x="333.7" y="36.09" width="201.19" height="85.79" rx="12.97" ry="12.97"/>
+      <rect class="cls-7" x="333.7" y="324.34" width="201.19" height="85.79" rx="12.97" ry="12.97"/>
+    </g>
+  </g>
+  <g class="cls-6">
+    <text class="cls-5" transform="translate(637.79 297.57)"><tspan x="0" y="0">P</tspan></text>
+    <text class="cls-1" transform="translate(742.36 297.57)"><tspan x="0" y="0">i</tspan></text>
+    <text class="cls-3" transform="translate(794.65 297.57)"><tspan x="0" y="0">c</tspan></text>
+    <text class="cls-5" transform="translate(889.11 297.57)"><tspan x="0" y="0">oB</tspan></text>
+    <text class="cls-5" transform="translate(1117.33 297.57)"><tspan x="0" y="0">r</tspan></text>
+    <text class="cls-1" transform="translate(1187.16 297.57)"><tspan x="0" y="0">i</tspan></text>
+    <text class="cls-5" transform="translate(1239.45 297.57)"><tspan x="0" y="0">c</tspan></text>
+    <text class="cls-5" transform="translate(1338.13 297.57)"><tspan x="0" y="0">ks S</tspan></text>
+    <text class="cls-5" transform="translate(1687.9 297.57)"><tspan x="0" y="0">i</tspan></text>
+    <text class="cls-5" transform="translate(1743.23 297.57)"><tspan x="0" y="0">mu</tspan></text>
+    <text class="cls-5" transform="translate(2011.34 297.57)"><tspan x="0" y="0">l</tspan></text>
+    <text class="cls-4" transform="translate(2057.53 297.57)"><tspan x="0" y="0">a</tspan></text>
+    <text class="cls-3" transform="translate(2168.58 297.57)"><tspan x="0" y="0">t</tspan></text>
+    <text class="cls-5" transform="translate(2239.39 297.57)"><tspan x="0" y="0">o</tspan></text>
+    <text class="cls-5" transform="translate(2342.24 297.57)"><tspan x="0" y="0">r</tspan></text>
+  </g>
+</svg>

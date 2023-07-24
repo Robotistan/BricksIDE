@@ -264,13 +264,13 @@ Blockly.Arduino['motor1'] = function(block) {
     return code;
 };
 
-Blockly.Arduino['motor1'] = function(block) {
+Blockly.Arduino['motor2'] = function(block) {
 
     var direction = block.getFieldValue('MOTOR');
     var speed =  100;
 
     var code = "";
-    var pin = pin = MotorPin1;
+    var pin = pin = MotorPin2;
 
     if(editorType == "CPP")
     {
@@ -289,6 +289,35 @@ Blockly.Arduino['motor1'] = function(block) {
 
         code = 'motor_2.duty_u16(' + speed + ')';
     }
+
+    return code;
+};
+
+Blockly.Arduino['neoPixelColour'] = function(block) {
+
+    var colourValue = Blockly.Arduino.valueToCode(block, 'VALUE', Blockly.Arduino.ORDER_NONE);
+    var code = "";
+    var pin = NeoPixelPin;
+
+    var hexRed, hexGreen, hexBlue;
+    var red, green, blue;
+    var colourValueTemp = colourValue.replace("#", "").replace("'", "").replace("\"", "");;
+
+    hexRed = colourValueTemp.substring(0, 2);
+    hexGreen = colourValueTemp.substring(2, 4);
+    hexBlue = colourValueTemp.substring(4, 6);
+
+    red = parseInt(hexRed, 16);
+    green = parseInt(hexGreen, 16);
+    blue = parseInt(hexBlue, 16);
+
+    Blockly.Arduino.imports_['import_Pin'] = 'from machine import Pin';
+    Blockly.Arduino.imports_['import_WS2812'] = 'from picobricks import WS2812';
+
+    Blockly.Arduino.definitions_['define_neo1'] = 'ws2812 = WS2812(' + pin + ', brightness = 1)';
+
+    code = 'ws2812.pixels_fill((' + red + ', ' + green + ', ' + blue + '))\n' +
+           'ws2812.pixels_show()\n';
 
     return code;
 };

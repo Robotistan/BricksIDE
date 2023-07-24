@@ -75,7 +75,7 @@ Blockly.Generator.prototype.STATEMENT_SUFFIX = null;
  * may override this to increase indent or change to tabs.
  * @type {string}
  */
-Blockly.Generator.prototype.INDENT = '  ';
+Blockly.Generator.prototype.INDENT = '    ';
 
 /**
  * Maximum length for a comment before wrapping.  Does not account for

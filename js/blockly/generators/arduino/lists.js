@@ -59,7 +59,7 @@ Blockly.Arduino['lists_length'] = function(block) {
   // String or array length.
   var list = Blockly.Arduino.valueToCode(block, 'VALUE',
       Blockly.Arduino.ORDER_NONE) || '[]';
-  return ['len(' + list + ')', Blockly.Arduino.ORDER_FUNCTION_CALL];
+  return ['len(' + list + ')', Blockly.Arduino.ORDER_NONE];
 };
 
 Blockly.Arduino['lists_isEmpty'] = function(block) {
@@ -67,7 +67,7 @@ Blockly.Arduino['lists_isEmpty'] = function(block) {
   var list = Blockly.Arduino.valueToCode(block, 'VALUE',
       Blockly.Arduino.ORDER_NONE) || '[]';
   var code = 'not len(' + list + ')';
-  return [code, Blockly.Arduino.ORDER_LOGICAL_NOT];
+  return [code, Blockly.Arduino.ORDER_NONE];
 };
 
 Blockly.Arduino['lists_indexOf'] = function(block) {
@@ -360,4 +360,14 @@ Blockly.Arduino['lists_reverse'] = function(block) {
       Blockly.Arduino.ORDER_NONE) || '[]';
   var code = 'list(reversed(' + list + '))';
   return [code, Blockly.Arduino.ORDER_FUNCTION_CALL];
+};
+
+Blockly.Arduino['get_list_item'] = function(block) {
+  // Create a list with one element repeated.
+  var index = Blockly.Arduino.valueToCode(block, 'INDEX', Blockly.Arduino.ORDER_NONE) || '0';
+
+  var variable = Blockly.Arduino.valueToCode(block, 'VARIABLE', Blockly.Arduino.ORDER_NONE) || 'None';
+
+  var code = variable + '[' + index + ']';
+  return [code, Blockly.Arduino.ORDER_NONE];
 };

@@ -157,14 +157,14 @@ async function saveCode(pythoncode, filename)
 
   
   //await writeSerial("04");
-  pythoncode = pythoncode.replace(/(\r\n|\n|\r)/gm, '~');
+  pythoncode = pythoncode.replace(/(\r\n|\n|\r)/gm, '£');
   pythoncode = pythoncode.replace(/"/g, '\\"');
   
   //console.log(pythoncode);
 
   for (var i = 0, s = pythoncode.length; i < s; i += 256) {
     var subcommand = pythoncode.slice(i, Math.min(i + 256, pythoncode.length));
-	  subcommand = subcommand.replace(/~/g, '\\n');
+	  subcommand = subcommand.replace(/£/g, '\\n');
     //console.log(subcommand);
     await exec_raw_no_follow('f.write("' + subcommand + '")');
     await wait(10);
