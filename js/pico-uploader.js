@@ -162,13 +162,27 @@ async function saveCode(pythoncode, filename)
   
   //console.log(pythoncode);
 
+  var elem = document.getElementById("progressBar"); 
+  var width = 0;
+  var parts = pythoncode.length / 256;
+  var incrament = 100 / parts;
+
   for (var i = 0, s = pythoncode.length; i < s; i += 256) {
     var subcommand = pythoncode.slice(i, Math.min(i + 256, pythoncode.length));
-	  subcommand = subcommand.replace(/£/g, '\\n');
+    subcommand = subcommand.replace(/£/g, '\\n');
     //console.log(subcommand);
     await exec_raw_no_follow('f.write("' + subcommand + '")');
     await wait(10);
+
+    width += incrament; 
+    console.log(width);
+    if(Math.round(width) <= 100)
+    {
+      elem.innerHTML = Math.round(width) * 1  + '%';
+      elem.style.width = Math.round(width) + '%'; 
+    }
   }
+
   await exec_raw_no_follow("f.close()");
   await writeSerial("02");
   hideProgressPanel();

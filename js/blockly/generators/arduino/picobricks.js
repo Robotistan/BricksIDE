@@ -229,9 +229,20 @@ Blockly.Arduino['readPotentiometer'] = function(block) {
     var pin = PotentiometerPin;
 
     Blockly.Arduino.imports_['import_machine'] = 'import machine';           
-    Blockly.Arduino.setups_['setup_pot1'] = 'pot = machine.ADC(' + pin + ')';
+    Blockly.Arduino.definitions_['definitions_pot'] = 'pot = machine.ADC(' + pin + ')';
 
     var code = 'pot.read_u16()';
+    return [code, Blockly.Arduino.ORDER_NONE];  
+};
+
+Blockly.Arduino['readLightSersor'] = function(block) {
+ 
+    var pin = LightSersorPin;
+
+    Blockly.Arduino.imports_['import_machine'] = 'import machine';            
+    Blockly.Arduino.definitions_['definitions_lightsersor'] = 'ldr = machine.ADC(' + pin + ')';
+
+    var code = 'ldr.read_u16()';
     return [code, Blockly.Arduino.ORDER_NONE];  
 };
 
@@ -249,17 +260,6 @@ Blockly.Arduino['readIR'] = function(block) {
     var code = 'uart.readline()';
     return [code, Blockly.Arduino.ORDER_NONE];  
 };  
-
-Blockly.Arduino['readLightSersor'] = function(block) {
- 
-    var pin = LightSersorPin;
-
-    Blockly.Arduino.imports_['import_machine'] = 'import machine';            
-    Blockly.Arduino.setups_['setup_lightsersor'] = 'ldr = machine.ADC(' + pin + ')';
-
-    var code = 'ldr.read_u16()';
-    return [code, Blockly.Arduino.ORDER_NONE];  
-};
 
 Blockly.Arduino['readTemperature'] = function(block) {
  

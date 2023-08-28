@@ -103,6 +103,7 @@ Blockly.Arduino['procedures_defnoreturn'] =
     Blockly.Arduino['procedures_defreturn'];
 
 Blockly.Arduino['procedures_callreturn'] = function(block) {
+
   // Call a procedure with a return value.
   var funcName = Blockly.Arduino.variableDB_.getName(block.getFieldValue('NAME'),
       Blockly.Procedures.NAME_TYPE);
@@ -112,7 +113,7 @@ Blockly.Arduino['procedures_callreturn'] = function(block) {
         Blockly.Arduino.ORDER_NONE) || 'None';
   }
   var code = funcName + '(' + args.join(', ') + ')';
-  return [code, Blockly.Arduino.ORDER_FUNCTION_CALL];
+  return [code, Blockly.Arduino.ORDER_NONE];
 };
 
 Blockly.Arduino['procedures_callnoreturn'] = function(block) {

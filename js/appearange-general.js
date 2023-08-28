@@ -11,14 +11,18 @@ function GotoEditor()
   document.querySelector("#modalConnection").style.display = 'none';
 }
 
-function showProgressPanel()
+function showProgressPanel(isSave)
 {
   $("#btSaving").css("visibility", "visible");
+  
+  if(isSave)
+    $("#progressBarDiv").css("visibility", "visible");
 }
 
 function hideProgressPanel()
 {
   $("#btSaving").css("visibility", "hidden");
+  $("#progressBarDiv").css("visibility", "hidden");
 }
 
 function closeProgressPanel()
@@ -55,7 +59,7 @@ function RunCode()
 {
   if(isConnected)
   {
-    showProgressPanel();
+    showProgressPanel(false);
     ClearConsole();
 
     var pythoncode = "";
@@ -67,6 +71,29 @@ function RunCode()
     if(pythoncode != "")
     {
       sendCommand(pythoncode);
+    }
+  }
+  else
+  {
+    showModalDialog("Please connect to the board");
+  }
+}
+
+function SaveCode()
+{
+  if(isConnected)
+  {
+    showProgressPanel(true);
+
+    var pythoncode = "";
+    if(block)
+      pythoncode = latestCode;
+    else
+      pythoncode = editorPython.getValue();
+
+    if(pythoncode != "")
+    {
+      saveCode(pythoncode, "main.py");
     }
   }
   else

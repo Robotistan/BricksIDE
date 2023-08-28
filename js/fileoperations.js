@@ -1,26 +1,3 @@
-function SaveCode()
-{
-  if(isConnected)
-  {
-    showProgressPanel();
-
-    var pythoncode = "";
-    if(block)
-      pythoncode = latestCode;
-    else
-      pythoncode = editorPython.getValue();
-
-    if(pythoncode != "")
-    {
-      saveCode(pythoncode, "main.py");
-    }
-  }
-  else
-  {
-    showModalDialog("Please connect to the board");
-  }
-}
-
 function UploadFirmware()
 {
   $("#modalFirmware").modal('show');
@@ -28,7 +5,7 @@ function UploadFirmware()
 
 function UploadMobile()
 {
-    showProgressPanel();
+    showProgressPanel(true);
 
     $.get('python/mobil.txt', function(data) {
       saveCode(data, "main.py");
@@ -57,7 +34,7 @@ function UploadLibrary()
 {
   if(isConnected)
   {
-    showProgressPanel();
+    showProgressPanel(true);
 
     $.get('python/picobricks-library.txt', function(data) {
       saveCode(data, "picobricks.py");

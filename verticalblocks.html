@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="css/dropdown.css">
 <link rel="stylesheet" href="css/bottompanel.css">
 <link rel="stylesheet" href="css/introjs.min.css">
+<link rel="stylesheet" href="css/w3.css">
 
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
@@ -86,9 +87,12 @@
 <div class="container-fluid">
       
       <img class="savingButton" id="btSaving"/>
+      <div class="w3-light-blue progressBar" id="progressBarDiv">
+        <div class="w3-container w3-green w3-center" style="width:1%; height:20px" id="progressBar">0%</div>
+      </div>
 
       <div class="row" style="background-color:rgb(196, 27, 27);">
-        <div class="col-md-9">
+        <div class="col-md-8">
           <nav class="navbar navbar-expand-lg navbar-light">
             <a href="index.html"><img src="images/picobricks-logo.png" style="height: 3.0vh"></a>
             
@@ -124,7 +128,7 @@
           </nav>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-4">
           <nav class="navbar navbar-expand-lg navbar-light" style="float: left;">
 
             <div id="editorType" style="color: white; margin: 5px;">Block</div>
@@ -144,7 +148,10 @@
                 <a class="dropdown-item" href="#" id="btMobile" onclick="UploadMobile()">Upload Code For Mobile</a>
               </ul>
             </div>
+             
+            <div class="navbar-brand" style="width: 2rem"></div>
             
+            <a href="verticalsimulator.html"><img class="picoBricksSimulator"/></a>
           </nav>
         </div>
       </div>
@@ -629,6 +636,13 @@
     </block>
     <block type="lists_length"></block>
     <block type="lists_isEmpty"></block>
+    <block type="get_list_item">
+       <value name="INDEX">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
   </category>
 
   <category name="%{BKY_PINOO_VARIABLES}" categorystyle="variable_category" iconclass="blocklyTreeIconCustom fas fa-times fa-2x" custom="VARIABLE">
