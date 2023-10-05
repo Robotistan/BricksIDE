@@ -104,10 +104,9 @@
           </div>
 
           <div class="col-md-4 shadow" id="simulatorColumn" style="background-color:#F5F5F5;">
-            
             <div class="row">
               <div class="image" >
-                <img src="picobricks.png" alt="" id="simulatorImage" class="img-fluid" >
+                <img src="picobricks.png" alt="" id="simulatorImage" class="img-fluid">
                 <canvas id="canvasScreen"></canvas>
                 <canvas id="canvasButton1"></canvas>
                 <canvas id="canvasRedLed"></canvas>
@@ -117,13 +116,12 @@
                 <canvas id="canvasMotor1"></canvas>
                 <canvas id="canvasMotor2"></canvas>
                 <canvas id="canvasBuzzer"></canvas>
-               
               </div>
 
               <div class="container-fluid">
                  
-                <div class="row" style="margin: 10px">
-                  <div class="col-md-4" style="color: rgb(84, 75, 75); font-weight: bold"><span id="LDRLabel"> Işık Seviyesi: </span></div>
+                <div class="row">
+                  <div class="col-md-4" style="color: rgb(84, 75, 75);  font-weight: bold; font-size: 80%;"><span id="LDRLabel"> Işık Seviyesi: </span></div>
                   <div class="col-md-6"><input type="range" min="0" max="1024" value="512" class="sliderLDR" id="lightSource"></div>
                   <div class="col-md-2">
                     <div class="btn-group float-right">
@@ -132,8 +130,8 @@
                   </div>
                 </div>
 
-                <div class="row" style="margin: 10px">
-                  <div class="col-md-4" style="color: rgb(84, 75, 75); font-weight: bold;"><span id="tempLabel"> Sıcaklık Seviyesi: </span></div>
+                <div class="row">
+                  <div class="col-md-4" style="color: rgb(84, 75, 75); font-weight: bold; font-size: 80%;"><span id="tempLabel"> Sıcaklık Seviyesi: </span></div>
                   <div class="col-md-6"><input type="range" min="0" max="50" value="30" class="sliderTemp" id="tempSource"></div>
                   <div class="col-md-2">
                     <div class="btn-group float-right">
@@ -142,8 +140,8 @@
                   </div>
                 </div>
 
-                <div class="row" style="margin: 10px">
-                  <div class="col-md-4" style="color: rgb(84, 75, 75); font-weight: bold;"><span id="humodityLabel"> Nem Seviyesi: </span></div>
+                <div class="row">
+                  <div class="col-md-4" style="color: rgb(84, 75, 75); font-weight: bold; font-size: 80%;"><span id="humodityLabel"> Nem Seviyesi: </span></div>
                   <div class="col-md-6"><input type="range" min="0" max="50" value="30" class="sliderHumodity" id="humoditySource"></div>
                   <div class="col-md-2">
                     <div class="btn-group float-right">
@@ -152,8 +150,8 @@
                   </div>
                 </div>
             
-                <div class="row" style="margin: 10px">
-                  <div class="col-md-4" style="color: rgb(84, 75, 75); font-weight: bold;"><span id="potLabel"><span class="glyphicon glyphicon-signal"></span> Potansiyometre: </span></div>
+                <div class="row">
+                  <div class="col-md-4" style="color: rgb(84, 75, 75); font-weight: bold; font-size: 80%;"><span id="potLabel"><span class="glyphicon glyphicon-signal"></span> Potansiyometre: </span></div>
                   <div class="col-md-6"><input type="range" min="0" max="1024" value="500" class="sliderPot" id="potSource"></div>
                   <div class="col-md-2">
                     <div class="btn-group float-right">
@@ -162,8 +160,8 @@
                   </div>
                 </div>
                   
-                <div class="row" style="margin: 10px">
-                  <div class="col-md-4" style="color: rgb(84, 75, 75); font-weight: bold;"><span id="irLabel"> Infrared: </span></div>
+                <div class="row">
+                  <div class="col-md-4" style="color: rgb(84, 75, 75); font-weight: bold; font-size: 80%;"><span id="irLabel"> Infrared: </span></div>
                   <div class="col-md-8">
                       <button type="button" class="btn btn-info btn-circle btn-lg" onmousedown="IRButtonClick('0x18')" onmouseup="IRButtonClick('0')"><i class="fa fa-chevron-up"></i></button>
                       <button type="button" class="btn btn-info btn-circle btn-lg" onmousedown="IRButtonClick('0x52')" onmouseup="IRButtonClick('0')"><i class="fa fa-chevron-down"></i></button>
