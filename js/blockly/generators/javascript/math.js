@@ -380,7 +380,22 @@ Blockly.JavaScript['math_modulo'] = function(block) {
   var code = argument0 + ' % ' + argument1;
   return [code, Blockly.JavaScript.ORDER_MODULUS];
 };
+Blockly.JavaScript['math_rescale'] = function (block) {
+    Blockly.JavaScript.imports_['import_math'] = 'import math';
+    var input = Blockly.JavaScript.valueToCode(block, 'INPUT',
+        Blockly.JavaScript.ORDER_NONE) || '0';
+    var inmin = Blockly.JavaScript.valueToCode(block, 'INMIN',
+        Blockly.JavaScript.ORDER_NONE) || '0';
+    var inmax = Blockly.JavaScript.valueToCode(block, 'INMAX',
+        Blockly.JavaScript.ORDER_NONE) || '0';
+    var outmin = Blockly.JavaScript.valueToCode(block, 'OUTMIN',
+        Blockly.JavaScript.ORDER_NONE) || '0';
+    var outmax = Blockly.JavaScript.valueToCode(block, 'OUTMAX',
+      Blockly.JavaScript.ORDER_NONE) || '0';
 
+    var code = 'round( '+ input +' - '+ inmin +' ) * ( '+ outmax +' - '+ outmin +' ) / ( '+ inmax +' - '+ inmin +' ) + '+ outmin;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
 Blockly.JavaScript['math_constrain'] = function(block) {
   // Constrain a number between two limits.
   var argument0 = Blockly.JavaScript.valueToCode(block, 'VALUE',

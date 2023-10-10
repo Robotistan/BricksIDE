@@ -444,6 +444,43 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     "tooltip": "%{BKY_MATH_MODULO_TOOLTIP}",
     "helpUrl": "%{BKY_MATH_MODULO_HELPURL}"
   },
+  {
+    "type": "math_rescale",
+    "message0": "rescale %1 from ( %2 , %3) to ( %4 , %5 )",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "INPUT",
+        "check": "Number"
+      },
+      {
+        "type": "input_value",
+        "name": "INMIN",
+        "check": "Number"
+      },
+      {
+        "type": "input_value",
+        "name": "INMAX",
+        "check": "Number"
+      },
+      {
+        "type": "input_value",
+        "name": "OUTMIN",
+        "check": "Number"
+      },
+      {
+        "type": "input_value",
+        "name": "OUTMAX",
+        "check": "Number"
+      },
+    ],
+    "inputsInline": true,
+    "output": "Number",
+    "outputShape": Blockly.OUTPUT_SHAPE_ROUND,
+    "style": "math_blocks",
+    "tooltip": "",
+    "helpUrl": ""
+  },
 
   // Block for constraining a number between two limits.
   {

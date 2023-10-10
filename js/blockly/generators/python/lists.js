@@ -28,6 +28,24 @@ goog.provide('Blockly.Python.lists');
 
 goog.require('Blockly.Python');
 
+Blockly.Python['lists_string'] = function (block) {
+    var code = '"' + block.getFieldValue('STRING') + '"';
+    return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['split'] = function (block) {
+  var code = block.getFieldValue('VALUE1') + 'Split, by' + block.getFieldValue('VALUE2') ;
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['list_combined'] = function (block) {
+    var argument0 = Blockly.Python.valueToCode(block, 'STR1',
+        Blockly.Python.ORDER_NONE) || '0';
+    var argument1 = Blockly.Python.valueToCode(block, 'STR2',
+        Blockly.Python.ORDER_NONE) || '0';
+    var code = "str(" + argument0 + ")+str(" + argument1 + ")";
+    return [code, Blockly.Python.ORDER_NONE];
+};
 
 Blockly.Python['lists_create_empty'] = function(block) {
   // Create an empty list.

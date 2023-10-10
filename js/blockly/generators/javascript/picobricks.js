@@ -111,6 +111,14 @@ Blockly.JavaScript['readAnalogPinValue'] = function(block) {
     return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
+Blockly.JavaScript['pinControl']=function(block){
+    var value = block.getFieldValue('VALUE');
+    var input =  Blockly.JavaScript.valueToCode(block, 'INPUT', Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
+
+    code = value + '(Pin(' + input + ')';
+    return code;
+};
+
 Blockly.JavaScript['setLedValue'] = function(block) {
 
     var value = block.getFieldValue('VALUE');

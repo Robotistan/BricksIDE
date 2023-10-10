@@ -28,7 +28,24 @@ goog.provide('Blockly.JavaScript.lists');
 
 goog.require('Blockly.JavaScript');
 
+Blockly.JavaScript['lists_string'] = function (block) {
+    var code = '"' + block.getFieldValue('STRING') + '"';
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
 
+Blockly.JavaScript['split'] = function (block) {
+  var code = block.getFieldValue('VALUE1') + 'Split, by' + block.getFieldValue('VALUE2') ;
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.JavaScript['list_combined'] = function (block) {
+    var argument0 = Blockly.JavaScript.valueToCode(block, 'STR1',
+        Blockly.JavaScript.ORDER_NONE) || '0';
+    var argument1 = Blockly.JavaScript.valueToCode(block, 'STR2',
+        Blockly.JavaScript.ORDER_NONE) || '0';
+    var code = "str(" + argument0 + ")+str(" + argument1 + ")";
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
 Blockly.JavaScript['lists_create_empty'] = function(block) {
   // Create an empty list.
   return ['[]', Blockly.JavaScript.ORDER_ATOMIC];

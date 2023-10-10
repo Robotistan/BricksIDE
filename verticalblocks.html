@@ -207,8 +207,8 @@
       </div><!-- panel-wrapper -->
 </div>
 
-<div id="editorPythonPanel" class="sidepanel">
-  <div id="editorSideNav" class="sidenav" style="padding: 0px;">
+<div id="editorPythonPanel" class="sidepanel" style="padding-left: 5px; transform: rotateY(180deg); ">
+  <div id="editorSideNav" class="sidenav" style="padding: 0px; transform: rotateY(180deg);">
       <pre id="editorBlockPython"></pre>
   </div>
 </div>
@@ -346,6 +346,14 @@
       </value>   
     </block>   
 
+    <block type="pinControl">
+      <value name="INPUT">
+          <shadow type="math_positive_number">
+              <field name="NUM" 0></field>
+          </shadow>
+      </value>
+  </block>
+
     <block type="print">   
         <value name="WriteValue">   
            <shadow type="text">   
@@ -353,6 +361,10 @@
            </shadow>   
         </value>   
     </block>   
+
+    <block type="variable_convert">
+      <value name="VALUE"></value>
+    </block>
   </category>   
 
   <category name="Bricks" id="picosensors" colour="#935df5" secondaryColour="#7a38f1" iconclass="blocklyTreeIconCustom fas fa-th-large fa-2x">
@@ -433,16 +445,8 @@
 
         <block type="logic_compare">
           <field name="OP">EQ</field>
-          <value name="A">
-            <shadow type="math_number">
-              <field name="NUM"></field>
-            </shadow>
-          </value>
-          <value name="B">
-            <shadow type="math_number">
-              <field name="NUM"></field>
-            </shadow>
-          </value>
+          <value name="A"></value>
+          <value name="B"></value>
         </block>
 
        <block type="logic_negate">
@@ -456,193 +460,260 @@
 
   <category name="%{BKY_PINOO_LOOPS}" iconclass="blocklyTreeIconCustom fas fa-arrow-rotate-right fa-2x" categorystyle="loop_category">
 
-    <!--<label text="Temel" web-line="1.0"></label>-->
-    <block type="control_repeat">
-      <value name="TIMES">
-        <shadow type="math_number">
-          <field name="NUM">10</field>
-        </shadow>
-      </value>
-    </block>
-    
-    <block type="for_loop2"> 
-      <value name="VAR">
-        <block type="variables_get"> <field name="VAR" id="v:-ouP}S_3%8Q75+R5}B">i</field> </block>
-      </value>
+      <!--<label text="Temel" web-line="1.0"></label>-->
+      <block type="control_repeat">
+          <value name="TIMES">
+              <shadow type="math_number">
+                  <field name="NUM">10</field>
+              </shadow>
+          </value>
+      </block>
 
-      <value name="TIMES">
-        <shadow type="math_number">
-          <field name="NUM">10</field>
-        </shadow>
-      </value>
-    </block>
+      <block type="for_loop2">
+          <value name="VAR">
+              <block type="variables_get"> <field name="VAR" id="v:-ouP}S_3%8Q75+R5}B">i</field> </block>
+          </value>
 
-    <block type="range1" id="range1">
-      <value name="START">
-        <shadow type="math_number">
-          <field name="NUM">0</field>
-        </shadow>
-      </value>
+          <value name="TIMES">
+              <shadow type="math_number">
+                  <field name="NUM">10</field>
+              </shadow>
+          </value>
+      </block>
 
-      <value name="STOP">
-        <shadow type="math_number">
-          <field name="NUM">10</field>
-        </shadow>
-      </value>
-    </block>
+      <block type="range1" id="range1">
+          <value name="START">
+              <shadow type="math_number">
+                  <field name="NUM">0</field>
+              </shadow>
+          </value>
 
-    <block type="range2" id="range2">
-      <value name="START">
-        <shadow type="math_number">
-          <field name="NUM">0</field>
-        </shadow>
-      </value>
+          <value name="STOP">
+              <shadow type="math_number">
+                  <field name="NUM">10</field>
+              </shadow>
+          </value>
+      </block>
 
-      <value name="STOP">
-        <shadow type="math_number">
-          <field name="NUM">10</field>
-        </shadow>
-      </value>
+      <block type="range2" id="range2">
+          <value name="START">
+              <shadow type="math_number">
+                  <field name="NUM">0</field>
+              </shadow>
+          </value>
 
-      <value name="STEP">
-        <shadow type="math_number">
-          <field name="NUM">1</field>
-        </shadow>
-      </value>
-    </block>
+          <value name="STOP">
+              <shadow type="math_number">
+                  <field name="NUM">10</field>
+              </shadow>
+          </value>
 
-    <block type="control_forever"></block>
+          <value name="STEP">
+              <shadow type="math_number">
+                  <field name="NUM">1</field>
+              </shadow>
+          </value>
+      </block>
 
-    <block type="control_wait">
-      <value name="DURATION">
-        <shadow type="math_number">
-          <field name="NUM">1</field>
-        </shadow>
-      </value>
-    </block>
+      <block type="control_forever"></block>
 
-    <block type="timer">
-    </block>
+      <block type="control_wait">
+          <value name="DURATION">
+              <shadow type="math_number">
+                  <field name="NUM">1</field>
+              </shadow>
+          </value>
+      </block>
 
-    <block type="resettimer">
-    </block>
+      <block type="timer">
+      </block>
 
-    <block type="while_loop">
-    </block>
+      <block type="resettimer">
+      </block>
 
-    <block type="break">
-    </block>
+      <block type="while_times">
+          <value name="TIMES">
+              <shadow type="math_number">
+                  <field name="NUM">10</field>
+              </shadow>
+          </value>
+      </block>
+
+      <block type="while_loop">
+      </block>
+
+      <block type="break">
+      </block>
   </category>
 
   <category name="%{BKY_PINOO_MATH}" categorystyle="math_category" iconclass="blocklyTreeIconCustom fas fa-calculator fa-2x">
 
-    <block type="math_number">
-      <field name="NUM">0</field>
-    </block>
-    <block type="math_arithmetic">
-      <field name="OP">ADD</field>
-      <value name="A">
-        <shadow type="math_number">
-          <field name="NUM">1</field>
-        </shadow>
-      </value>
-      <value name="B">
-        <shadow type="math_number">
-          <field name="NUM">1</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="math_single">
-      <field name="OP">ROOT</field>
-      <value name="NUM">
-        <shadow type="math_number">
-          <field name="NUM">9</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="math_trig">
-      <field name="OP">SIN</field>
-      <value name="NUM">
-        <shadow type="math_number">
-          <field name="NUM">45</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="math_constant">
-      <field name="CONSTANT">PI</field>
-    </block>
-    <block type="math_number_property">
-      <mutation divisor_input="false"></mutation>
-      <field name="PROPERTY">EVEN</field>
-      <value name="NUMBER_TO_CHECK">
-        <shadow type="math_number">
+      <block type="math_number">
           <field name="NUM">0</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="math_round">
-      <field name="OP">ROUND</field>
-      <value name="NUM">
-        <shadow type="math_number">
-          <field name="NUM">3.1</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="math_on_list">
-      <mutation op="SUM"></mutation>
-      <field name="OP">SUM</field>
-    </block>
-    <block type="math_modulo">
-      <value name="DIVIDEND">
-        <shadow type="math_number">
-          <field name="NUM">64</field>
-        </shadow>
-      </value>
-      <value name="DIVISOR">
-        <shadow type="math_number">
-          <field name="NUM">10</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="math_random_int">
-      <value name="FROM">
-        <shadow type="math_number">
-          <field name="NUM">1</field>
-        </shadow>
-      </value>
-      <value name="TO">
-        <shadow type="math_number">
-          <field name="NUM">100</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="math_random_float"></block>
+      </block>
+      <block type="math_arithmetic">
+          <field name="OP">ADD</field>
+          <value name="A">
+              <shadow type="math_number">
+                  <field name="NUM">1</field>
+              </shadow>
+          </value>
+          <value name="B">
+              <shadow type="math_number">
+                  <field name="NUM">1</field>
+              </shadow>
+          </value>
+      </block>
+      <block type="math_single">
+          <field name="OP">ROOT</field>
+          <value name="NUM">
+              <shadow type="math_number">
+                  <field name="NUM">9</field>
+              </shadow>
+          </value>
+      </block>
+      <block type="math_trig">
+          <field name="OP">SIN</field>
+          <value name="NUM">
+              <shadow type="math_number">
+                  <field name="NUM">45</field>
+              </shadow>
+          </value>
+      </block>
+      <block type="math_constant">
+          <field name="CONSTANT">PI</field>
+      </block>
+      <block type="math_number_property">
+          <mutation divisor_input="false"></mutation>
+          <field name="PROPERTY">EVEN</field>
+          <value name="NUMBER_TO_CHECK">
+              <shadow type="math_number">
+                  <field name="NUM">0</field>
+              </shadow>
+          </value>
+      </block>
+      <block type="math_round">
+          <field name="OP">ROUND</field>
+          <value name="NUM">
+              <shadow type="math_number">
+                  <field name="NUM">3.1</field>
+              </shadow>
+          </value>
+      </block>
+      <block type="math_on_list">
+          <mutation op="SUM"></mutation>
+          <field name="OP">SUM</field>
+      </block>
+      <block type="math_modulo">
+          <value name="DIVIDEND">
+              <shadow type="math_number">
+                  <field name="NUM">64</field>
+              </shadow>
+          </value>
+          <value name="DIVISOR">
+              <shadow type="math_number">
+                  <field name="NUM">10</field>
+              </shadow>
+          </value>
+      </block>
+      <block type="math_rescale">
+          <value name="INPUT">
+              <shadow type="math_number">
+                  <field name="NUM">8</field>
+              </shadow>
+          </value>
+          <value name="INMIN">
+              <shadow type="math_number">
+                  <field name="NUM">0</field>
+              </shadow>
+          </value>
+          <value name="INMAX">
+              <shadow type="math_number">
+                  <field name="NUM">0</field>
+              </shadow>
+          </value>
+          <value name="OUTMIN">
+            <shadow type="math_number">
+                <field name="NUM">0</field>
+            </shadow>
+          </value>
+          <value name="OUTMAX">
+            <shadow type="math_number">
+                <field name="NUM">0</field>
+            </shadow>
+          </value>
+      </block>
+
+      <block type="math_random_int">
+          <value name="FROM">
+              <shadow type="math_number">
+                  <field name="NUM">1</field>
+              </shadow>
+          </value>
+          <value name="TO">
+              <shadow type="math_number">
+                  <field name="NUM">100</field>
+              </shadow>
+          </value>
+      </block>
+      <block type="math_random_float"></block>
   </category>
   
   <category name="%{BKY_PINOO_LIST}" categorystyle="list_category" iconclass="blocklyTreeIconCustom fas fa-list fa-2x">
 
-    <block type="lists_create_with">
-      <mutation items="0"></mutation>
+      <block type="lists_string">
+          <field name="STRING">String</field>
+      </block>
+
+      <block type="list_combined">
+        <value name="STR1">
+            <shadow type="text">
+                <field name="TEXT">Pico</field>
+            </shadow>
+        </value>
+        <value name="STR2">
+            <shadow type="text">
+                <field name="TEXT">Bricks</field>
+            </shadow>
+        </value>
     </block>
-    <block type="lists_create_with">
-      <mutation items="3"></mutation>
+
+    <block type="split">
+        <value name="VALUE1">
+            <shadow type="text">
+                <field name="TEXT">Pico, Bricks</field>
+            </shadow>
+        </value>
+        <value name="VALUE2">
+            <shadow type="text">
+                <field name="TEXT">,</field>
+            </shadow>
+        </value>
     </block>
-    <block type="lists_repeat">
-      <value name="NUM">
-        <shadow type="math_number">
-          <field name="NUM">5</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="lists_length"></block>
-    <block type="lists_isEmpty"></block>
-    <block type="get_list_item">
-       <value name="INDEX">
-        <shadow type="math_number">
-          <field name="NUM">0</field>
-        </shadow>
-      </value>
-    </block>
+
+      <block type="lists_create_with">
+          <mutation items="0"></mutation>
+      </block>
+      
+      <block type="lists_create_with">
+          <mutation items="3"></mutation>
+      </block>
+      <block type="lists_repeat">
+          <value name="NUM">
+              <shadow type="math_number">
+                  <field name="NUM">5</field>
+              </shadow>
+          </value>
+      </block>
+      <block type="lists_length"></block>
+      <block type="lists_isEmpty"></block>
+      <block type="get_list_item">
+          <value name="INDEX">
+              <shadow type="math_number">
+                  <field name="NUM">0</field>
+              </shadow>
+          </value>
+      </block>
   </category>
 
   <category name="%{BKY_PINOO_VARIABLES}" categorystyle="variable_category" iconclass="blocklyTreeIconCustom fas fa-times fa-2x" custom="VARIABLE">

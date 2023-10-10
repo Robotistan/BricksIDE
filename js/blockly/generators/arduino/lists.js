@@ -28,7 +28,18 @@ goog.provide('Blockly.Arduino.lists');
 
 goog.require('Blockly.Arduino');
 
-
+Blockly.Arduino['lists_string'] = function (block) {
+    var code = '"' + block.getFieldValue('STRING') + '"';
+    return [code, Blockly.Arduino.ORDER_NONE];
+};
+Blockly.Arduino['list_combined'] = function (block) {
+    var argument0 = Blockly.Arduino.valueToCode(block, 'STR1',
+        Blockly.Arduino.ORDER_NONE) || '0';
+    var argument1 = Blockly.Arduino.valueToCode(block, 'STR2',
+        Blockly.Arduino.ORDER_NONE) || '0';
+    var code = "str(" + argument0 + ")+str(" + argument1 + ")";
+    return [code, Blockly.Arduino.ORDER_NONE];
+};
 Blockly.Arduino['lists_create_empty'] = function(block) {
   // Create an empty list.
   return ['[]', Blockly.Arduino.ORDER_ATOMIC];
@@ -371,3 +382,13 @@ Blockly.Arduino['get_list_item'] = function(block) {
   var code = variable + '[' + index + ']';
   return [code, Blockly.Arduino.ORDER_NONE];
 };
+
+Blockly.Arduino['split'] = function(block) {
+  var value1 = Blockly.Arduino.valueToCode(block, 'VALUE1' , Blockly.Arduino.ORDER_NONE) || '0';
+  var value2 = Blockly.Arduino.valueToCode(block, 'VALUE2' , Blockly.Arduino.ORDER_NONE) || '0';
+  var code = '';
+
+  code = value1 +'.split(' + value2 + ')';
+
+  return [code, Blockly.Arduino.ORDER_NONE];
+}

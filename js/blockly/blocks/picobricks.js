@@ -183,6 +183,24 @@ Blockly.Blocks['readAnalogPinValue'] = {
   }
 };
 
+Blockly.Blocks['pinControl']={
+  init:function(){
+      this.appendDummyInput()
+          .appendField(new Blockly.FieldDropdown([["PWM","PWM"], ["ADC","ADC"]]), "VALUE")
+          .appendField("pin control")
+      this.appendValueInput("INPUT")
+          .setCheck("Number")
+          .setAlign(Blockly.ALIGN_CENTRE)
+
+      this.setOutput(true, null);
+      this.setColour("#19b5fe");
+      this.setTooltip("");
+      this.setHelpUrl("");
+      this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND)
+  }
+};
+
+
 Blockly.Blocks['writeTextScreen'] = {
   init: function() {
     this.appendDummyInput()
@@ -803,4 +821,56 @@ Blockly.Blocks['RFIDCode'] = {
     this.setHelpUrl("");
     this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND)
   }
-}
+};
+
+
+Blockly.Blocks['while_times'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldImage(iconTimer, 30, 30, "icon"))
+            .appendField("while")
+
+        this.appendValueInput("TIMES")
+            .setCheck("Number")
+
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldDropdown([
+                ["millisecond", "ms"],
+                ["second", "s"]]),
+                "VALUE")
+            .setAlign(Blockly.ALIGN_CENTRE);
+
+        this.appendStatementInput("DO")
+            .setCheck(null);
+
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour("#ffab19");
+        this.setTooltip('');
+        this.setHelpUrl('');
+    }
+};
+
+Blockly.Blocks['variable_convert'] = {
+  init: function () {
+
+      this.appendDummyInput()
+          .appendField(new Blockly.FieldDropdown([
+            ["int", "int"], 
+            ["string", "str"], 
+            ["float", "float"], 
+          ]), 
+          "VARIABLE");
+
+      this.appendValueInput("VALUE")
+          .setCheck("Number","String","Array")
+          .setAlign(Blockly.ALIGN_CENTRE)
+
+      this.setColour("#19b5fe");
+      this.setTooltip("");
+      this.setHelpUrl("");
+      this.setOutput(true, null);
+      this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND)
+  }
+};

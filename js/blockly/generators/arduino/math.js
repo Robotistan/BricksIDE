@@ -344,7 +344,22 @@ Blockly.Arduino['math_modulo'] = function(block) {
   var code = argument0 + ' % ' + argument1;
   return [code, Blockly.Arduino.ORDER_NONE];
 };
+Blockly.Arduino['math_rescale'] = function (block) {
+    Blockly.Arduino.imports_['import_math'] = 'import math';
+    var input = Blockly.Arduino.valueToCode(block, 'INPUT',
+        Blockly.Arduino.ORDER_NONE) || '0';
+    var inmin = Blockly.Arduino.valueToCode(block, 'INMIN',
+        Blockly.Arduino.ORDER_NONE) || '0';
+    var inmax = Blockly.Arduino.valueToCode(block, 'INMAX',
+        Blockly.Arduino.ORDER_NONE) || '0';
+    var outmin = Blockly.Arduino.valueToCode(block, 'OUTMIN',
+        Blockly.Arduino.ORDER_NONE) || '0';
+    var outmax = Blockly.Arduino.valueToCode(block, 'OUTMAX',
+      Blockly.Arduino.ORDER_NONE) || '0';
 
+    var code = 'round( '+ input +' - '+ inmin +' ) * ( '+ outmax +' - '+ outmin +' ) / ( '+ inmax +' - '+ inmin +' ) + '+ outmin;
+    return [code, Blockly.Arduino.ORDER_NONE];
+};
 Blockly.Arduino['math_constrain'] = function(block) {
   // Constrain a number between two limits.
   var argument0 = Blockly.Arduino.valueToCode(block, 'VALUE',

@@ -1,7 +1,6 @@
 var c = document.getElementById("canvasScreen");
 var ctx = c.getContext("2d");
                    
-
 function line(x1,y1,x2,y2) {
     ctx.beginPath();
     ctx.strokeStyle = "white";

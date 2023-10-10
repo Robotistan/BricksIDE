@@ -142,6 +142,23 @@ Blockly.Arduino['readAnalogPinValue'] = function(block) {
     return [code, Blockly.Arduino.ORDER_NONE];  
 };
 
+Blockly.Arduino['pinControl'] = function (block) {
+
+    var value = block.getFieldValue('VALUE');
+    var pin = Blockly.Arduino.valueToCode(block, 'INPUT', Blockly.Arduino.ORDER_NONE) || '0';
+    var code = '';
+
+    if (value === "PWM") {
+        Blockly.Arduino.imports_['import_PWM'] = 'from machine import PWM';
+    } else {
+        Blockly.Arduino.imports_['import_ADC'] = 'from machine import ADC';
+    }
+
+    code = value + '(Pin(' + pin + '))';
+
+    return [code, Blockly.Arduino.ORDER_NONE];
+};
+
 Blockly.Arduino['setLedValue'] = function(block) {
 
     var value = block.getFieldValue('VALUE');
@@ -687,6 +704,54 @@ Blockly.Arduino['RFIDActivated'] = function(block) {
 
 Blockly.Arduino['RFIDCode'] = function(block) {
     var code = 'card'; 
+
+    return [code, Blockly.Arduino.ORDER_NONE];  
+}
+
+Blockly.Arduino['while_times'] = function (block) {
+
+    var value = block.getFieldValue('VALUE');
+    var times = Blockly.Arduino.valueToCode(block, 'TIMES', Blockly.Arduino.ORDER_NONE) || '0';
+    var branchCode = Blockly.Arduino.statementToCode(block, 'DO') ||
+        Blockly.Arduino.PASS;
+
+    Blockly.Arduino.imports_['import_Timer'] = 'from machine import Timer';
+    Blockly.Arduino.imports_['import_utime'] = 'import utime';
+
+    Blockly.Arduino.definitions_['define_while_times'] =
+        'currentTime = 0\n' +
+        'previousTime = 0\n' +
+        'elapsedTime = 0\n';
+
+    if (value == "s") {
+        var code =
+            "elapsedTime = 0\n" +
+            "previousTime = currentTime\n" +
+            "while elapsedTime < (" + times + "):\n" +
+            "    currentTime = utime.ticks_ms()\n" +
+            "    elapsedTime = (currentTime - previousTime) / 1000\n" +
+            branchCode + "\n";
+    }
+
+    else if (value == "ms") { 
+        var code =
+            "elapsedTime = 0\n" +
+            "previousTime = currentTime\n" +
+            "while elapsedTime < (" + times + "):\n" +
+            "    currentTime = utime.ticks_ms()\n" +
+            "    elapsedTime = currentTime - previousTime\n" +
+            branchCode + "\n";
+    }
+
+    return code;
+}
+
+Blockly.Arduino['variable_convert'] = function (block) {
+    var variable = block.getFieldValue('VARIABLE');
+    var value = Blockly.Arduino.valueToCode(block, 'VALUE', Blockly.Arduino.ORDER_NONE) || '0';
+    var code = '';
+
+    code = variable + '(' + value + ')';
 
     return [code, Blockly.Arduino.ORDER_NONE];  
 }

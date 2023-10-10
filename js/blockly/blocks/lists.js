@@ -50,6 +50,42 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   //   <mutation items="0"></mutation>
   // </block>
   {
+    "type": "lists_string",
+    "message0": "%1",
+    "args0": [{
+      "type": "field_string",
+      "name": "STRING",
+      "check": String
+    }],
+
+    "output": "String",
+    "outputShape": Blockly.OUTPUT_SHAPE_ROUND,
+    "style": "field_blocks",
+    "helpUrl": "",
+    "tooltip": ""
+    },
+    {
+        "type": "list_combined",
+        "message0": "combined %1 and %2",
+        "args0": [
+            {
+                "type": "input_value",
+                "name": "STR1",
+                "check": ["String", "Number"]
+            },
+            {
+                "type": "input_value",
+                "name": "STR2",
+                "check": ["String", "Number"]
+            }],
+
+        "output": "String",
+        "outputShape": Blockly.OUTPUT_SHAPE_ROUND,
+        "style": "list_blocks",
+        "helpUrl": "",
+        "tooltip": ""
+    },
+  {
     "type": "lists_create_empty",
     "message0": "%{BKY_LISTS_CREATE_EMPTY_TITLE}",
     "output": "Array",
@@ -130,7 +166,27 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     "style": "list_blocks",
     "tooltip": "%{BKY_LISTS_LENGTH_TOOLTIP}",
     "helpUrl": "%{BKY_LISTS_LENGTH_HELPURL}"
-  }
+  },
+  {
+    "type": "split",
+    "message0": "%1 Split, by %2",
+    "args0": [{
+      "type": "input_value",
+      "name": "VALUE1",
+      "check": ["String"]
+    },
+    {
+      "type": "input_value",
+      "name": "VALUE2",
+      "check": ["String"]
+    }],
+
+    "output": "Array",
+    "outputShape": Blockly.OUTPUT_SHAPE_ROUND,
+    "style": "list_blocks",
+    "helpUrl": "",
+    "tooltip": ""
+    },
 ]);  // END JSON EXTRACT (Do not delete this comment.)
 
 Blockly.Blocks['lists_create_with'] = {
