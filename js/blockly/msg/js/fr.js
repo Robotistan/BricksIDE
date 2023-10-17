@@ -450,6 +450,16 @@ Blockly.Msg["PROCEDURES_HUE"] = "290";
 Blockly.Msg["COLOUR_HUE"] = "20";
 Blockly.Msg["VARIABLES_DYNAMIC_HUE"] = "310";
 
+
 Blockly.Msg["PINOO"] = 'PINOO';
+Blockly.Msg["PINOO_BASIC"] = 'Basique';
 Blockly.Msg["PINOO_LOGIC"] = 'Logique';
 Blockly.Msg["PINOO_LOOPS"] = 'Boucles';
+Blockly.Msg["PINOO_MATH"] = 'Mathématiques';
+Blockly.Msg["PINOO_LIST"] = 'Liste';
+Blockly.Msg["PINOO_TEXT"] = 'Texte';
+Blockly.Msg["PINOO_COLOUR"] = 'Couleur';
+Blockly.Msg["PINOO_VARIABLES"] = 'Variables';
+Blockly.Msg["PINOO_FUNCTIONS"] = 'Les fonctions';
+Blockly.Msg["PINOO_DISPLAY"] = 'Afficher';
+Blockly.Msg["PINOO_MOTOR"] = 'Motrice';

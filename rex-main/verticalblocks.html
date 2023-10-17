@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html>
+ <head>
+    <title>REX Blocks</title>
+    <link rel="icon" type="image/x-icon" href="images/x8.png">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/spinner.css">
+    <link rel="stylesheet" href="css/leftpanel.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/toogle.css">
+    <link rel="stylesheet" href="css/dropdown.css">
+    <link rel="stylesheet" href="css/bottompanel.css">
+    <link rel="stylesheet" href="css/introjs.min.css">
+    <link rel="stylesheet" href="../css/w3.css">
+
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script src="../js/assetmanager.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/serial.js"></script>
+    <script src="js/rex-uploader.js"></script>
+    <script src="js/appearange-general.js"></script>
+    <script src="js/appearange-vertical.js"></script>
+    <script src="js/pins.js"></script>
+    <script src="js/fileoperations.js"></script>
+    <script src="../js/bottompanel.js"></script>
+    <script src="../js/intro.min.js"></script>
+    <script src="js/firmware-intro.js"></script>
+    <script src="js/change-language.js"></script>
+    
+    <script src="js/blockly/blockly_uncompressed.js"></script>
+
+    <script src="../js/blockly/generators/arduino.js"></script>
+    <script src="../js/blockly/generators/arduino/logic.js"></script>
+    <script src="js/blockly/generators/arduino/loops.js"></script>
+    <script src="../js/blockly/generators/arduino/math.js"></script>
+    <script src="../js/blockly/generators/arduino/text.js"></script>
+    <script src="../js/blockly/generators/arduino/lists.js"></script>
+    <script src="../js/blockly/generators/arduino/colour.js"></script>
+    <script src="../js/blockly/generators/arduino/variables.js"></script>
+    <script src="../js/blockly/generators/arduino/variables_dynamic.js"></script>
+    <script src="../js/blockly/generators/arduino/procedures.js"></script>
+    <script src="js/blockly/generators/arduino/rex.js"></script>
+
+    <script src="../js/blockly/msg/messages.js"></script>
+    <script src="../js/blockly/blocks/extensions.js"></script>
+    <script src="../js/blockly/blocks/logic.js"></script>
+    <script src="../js/blockly/blocks/loops.js"></script>
+    <script src="../js/blockly/blocks/math.js"></script>
+    <script src="../js/blockly/blocks/text.js"></script>
+    <script src="../js/blockly/blocks/lists.js"></script>
+    <script src="../js/blockly/blocks/colour.js"></script>
+    <script src="../js/blockly/blocks/variables.js"></script>
+    <script src="../js/blockly/blocks/variables_dynamic.js"></script>
+    <script src="../js/blockly/blocks/procedures.js"></script>
+    <script src="../js/blockly/blocks/pxt_blockly_functions.js"></script>
+    <script src="../js/blockly/blocks/test_blocks.js"></script>
+    <script src="../js/blockly/blocks/pxt_test_blocks.js"></script>
+    <script src="js/blockly/blocks/rex.js"></script>
+    <script id="langSc" src="../js/blockly/msg/js/en.js"></script>
+
+    <script src="../editorsrc/ace.js"></script>
+    <script src="../editorsrc/ext-language_tools.js"></script>
+    
+    <!-- our project just needs Font Awesome Solid + Brands -->
+    <script src="https://kit.fontawesome.com/bc06efbf60.js" crossorigin="anonymous"></script>
+
+    <script>
+        window.fwSettings = {
+            'widget_id': 150000003453
+        };
+        !function () { if ("function" != typeof window.FreshworksWidget) { var n = function () { n.q.push(arguments) }; n.q = [], window.FreshworksWidget = n } }()
+    </script>
+    <script type='text/javascript' src='https://widget.freshworks.com/widgets/150000003453.js' async defer></script>
+
+ </head>
+ <body style="background-color: #c3cbdf border;" onload="PageLoad()">
+    <!--CSS Spinner-->
+    <div class="spinner-wrapper" id="preloader">
+        <div class="spinner">
+            <span class="loader"></span>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+
+        <img class="savingButton" id="btSaving"/>
+        <div class="w3-light-blue progressBar" id="progressBarDiv">
+            <div class="w3-container w3-green w3-center" style="width:1%; height:20px" id="progressBar">0%</div>
+        </div>
+
+        <div class="row navbarResp" style="background-color: #162d4a" >
+            <div class="col-md-9">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a href="index.html"><img src="images/rex-ici-dolu.png" style="height: 5.5vh; margin-top:0.2rem; margin-left:0.2rem;"></a>
+
+                    <div class="navbar-brand" style="width: 1.7rem"></div>
+
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
+                            <i class="fa-regular fa-file-lines fa-lg" style="color: #ffffff;"></i>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <a class="dropdown-item" href="#" id="btOpenProject" onclick="NewProject()">New</a>
+                            <a class="dropdown-item" href="#" id="btOpenProject" onclick="OpenProject(dispFile)">Open Project</a>
+                            <a class="dropdown-item" href="#" id="btSaveProject" onclick="SaveProject()">Save Project</a>
+                            <hr>
+                            <a class="dropdown-item" href="#" id="btSaveProject" onclick="SaveCode()">Upload Python File to Board</a>
+                        </ul>
+                    </div>
+
+                    <div style="margin: 2px; color:white;">|</div>
+                    <div id="projectName" style="color: white; font-weight: bold;">RexProject</div>
+                    <div style="margin: 2px; color:white;">|</div>
+
+                    <div class="navbar-brand" style="width: 2rem;"></div>
+                    <img class="runPythonButton" id="btRun" style="margin-top: 0.6rem" onclick="RunCode()" />
+                    <img class="stopButton" id="btStopCode" style="margin-top: 0.6rem" onclick="StopCode()" />
+
+                    <div class="navbar-brand" style="width: 2rem"></div>
+
+                    <img class="notConnectedButton" style="margin-top: 0.6rem" onclick="OpenConnectionForm();" id="btConnect" />
+                    <img class="documentsButton" style="margin-top: 0.6rem" id="btDocuments" onclick="ShowDocumentsPanel()" />
+                    <img class="openCodeButton" style="margin-top: 0.6rem" onclick="ShowEditorBlockPython();" id="btCode" />
+
+                </nav>
+            </div>
+
+            <div class="col-md-2">
+                <nav class="navbar navbar-expand-lg navbar-light" style="float: left; padding: 15px;">
+
+                    <div id="editorType" style="color: white; margin: 5px; font-weight: bold;">Block</div>
+                    <label class="switch">
+                        <input type="checkbox" onclick="OnToogleClick()">
+                        <span class="slider round"></span>
+                    </label>
+
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
+                            <i class="fa fa-bars" aria-hidden="true"></i>
+                        </a>
+                        <ul id="uploadDropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <a class="dropdown-item" href="#" id="btFirmware" onclick="UploadFirmware()">Upload Firmware</a>
+                            <a class="dropdown-item" href="#" id="btLibrary" onclick="Upload_MPU60_Library()">Upload MPU60 Library</a>
+                            <a class="dropdown-item" href="#" id="btLibrary" onclick="Upload_HCSR04_Library()">Upload HC-SR04 Library</a>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="col-md-1">
+                <div class="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white; margin-top: 0.85rem;">
+                        <img src="../images/flags/lang-icon.png" style="width: 1.35rem;" alt="icon">
+                    </a>
+                    <div class="dropdown-menu" style="min-width:4rem;" aria-labelledby="dropdownMenuButton1">
+                        <a class="dropdown-item" href="#" onclick="changeLanguage('en')">
+                            <img src="../images/flags/en.png" alt="en">
+                        </a>
+                        <a class="dropdown-item" href="#" onclick="changeLanguage('tr')">
+                            <img src="../images/flags/tr.png" alt="tr">
+                        </a>
+                        <a class="dropdown-item" href="#" onclick="changeLanguage('es')">
+                            <img src="../images/flags/es.png" alt="es">
+                        </a>
+                        <a class="dropdown-item" href="#" onclick="changeLanguage('fr')">
+                            <img src="../images/flags/fr.png" alt="fr">
+                        </a>
+                        <a class="dropdown-item" href="#" onclick="changeLanguage('de')">
+                            <img src="../images/flags/de.png" alt="de">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" tabindex="-1" role="dialog" id="ModalLangChange">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body" id="dialogText">
+                            Are you sure you want to change the language without saving the changes? Your changes may be lost.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" onclick="reload()">Okey</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row" id="panelPython" style="display: none;">
+            <div class="col-md-12">
+                <div class="row" style="height: 4rem">
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <pre id="editorPython"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" id="panelBlock" style="display: block">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12" id="BlocksPannel" style="margin: 0px; padding:0px;">
+                        <div id="blocklyDiv"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-wrapper" id="panelWrapper">
+            <div class="panel-controller">
+                <div class="tab-controller" style="font-size: large; font-weight: bold; background-color: #162d4a; color: white;" id="lbBottom">Serial Monitor</div>
+            </div><!-- panel-controller -->
+            <div class="panel-content">
+                <div style="text-align: center;">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="centered" style="font-size: small; margin-left: 0px;">
+
+                                <div class="row" style="background-color: white;" id="bottomRow">
+                                    <div class="col-md-12">
+                                        <div style="font-size: 12px; display: block; padding-left: 10px; background-color: #fff;" class="row">
+                                            <textarea id="txtConsole" name="txtConsole" rows="10" cols="50" class="consoleTextArea" readonly>
+                            </textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- content -->
+            </div><!-- panel-content -->
+        </div><!-- panel-wrapper -->
+    </div>
+
+    <div id="editorPythonPanel" class="sidepanel" style="padding-left: 5px; transform: rotateY(180deg);">
+        <div id="editorSideNav" class="sidenav"  style="padding: 0px; transform: rotateY(180deg);">
+            <pre id="editorBlockPython"></pre>
+        </div>
+    </div>
+
+
+    <div id="documentsPanel" class="sidepanel">
+        <iframe src="https://rex-rdt.readthedocs.io/en/latest/" id="documentsFrame" width="100%" height="99%"></iframe>
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalDialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Info</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="dialogText">
+                    Please connect with the board
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalConfirm">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body" id="dialogText">
+                    Do you want to close the connection?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="disConnectSerial()">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalNewProjectConfirm">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body" id="dialogText">
+                    Do you want to close the project?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="NewProjectConfirm()">Okey</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalFirmware">
+        <div class="modal-dialog">
+            <div class="modal-content" id="deneme" style="max-width:58vh;">
+                <div class="modal-header" style="position: relative;">
+                    <h5 class="modal-title" style="color: #57b45b; font-weight: bold;">🚀 FIRMWARE UPDATE</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row" style="text-align: left; align-items: left; margin-bottom: 2rem">
+                        <div class="col-md-12">
+                            Perform the firmware update while the REX Main Board is connected to the device via USB cable and not connected to the REX IDE.
+                        </div>
+                    </div>
+
+                    <div class="row" style="text-align: center; align-items: center; margin: 10px;">
+                        <div class="col-md-6">
+                            <span style="color: #162d4a">ESP32</span>
+                            <img src="images/rexEsp.png" style="width: 65%">
+                        </div>
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-success" onclick="RexFirmware()"><i class="fa fa-download" aria-hidden="true"></i></button>
+                            <button id="introFirmware" type="button" class="btn btn-info" onclick="StartIntroFirmware()"><i class="fa-solid fa-circle-question fa-lg" style="color: #fff;"></i></button>
+                        </div>
+                    </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+    
+    <xml xmlns="https://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
+    
+        <category name="%{BKY_PINOO_BASIC}" style="border-radius:10px; " id="rexbasic" colour="#19b5fe" secondaryColour="#3373CC" iconclass="blocklyTreeIconCustom fas fa-circle fa-2x">
+
+            <block type="Robotistan_Start">
+            </block>
+
+            <block type="setDigitalPinValue">
+                <value name="PIN">
+                    <shadow type="math_number">
+                        <field name="NUM">1</field>
+                    </shadow>
+                </value>
+            </block>
+
+            <block type="readDigitalPinValue">
+                <value name="PIN">
+                    <shadow type="math_number">
+                        <field name="NUM">1</field>
+                    </shadow>
+                </value>
+            </block>
+
+            <block type="setAnalogPinValue">
+            </block>
+
+            <block type="readAnalogPinValue">
+                <value name="PIN">
+                    <shadow type="math_positive_number">
+                        <field name="NUM">1</field>
+                    </shadow>
+                </value>
+            </block>
+
+            <block type="pinControl">
+                <value name="INPUT">
+                    <shadow type="math_positive_number">
+                        <field name="NUM" 0></field>
+                    </shadow>
+                </value>
+            </block>
+
+
+            <block type="print">
+                <value name="WriteValue">
+                    <shadow type="text">
+                        <field name="TEXT">Rex Blocks</field>
+                    </shadow>
+                </value>
+            </block>
+            
+            <block type="variable_convert">
+                <value name="VALUE"></value>
+            </block>
+        </category>
+
+        <category name="REX" id="rexsensors" colour="#162d4a" secondaryColour="#7a38f1" iconclass="blocklyTreeIconCustom fas fa-xmark fa-2x">
+
+            <block type="playBuzzer">
+                <value name="FREQUENCY">
+                    <shadow type="math_positive_number">
+                        <field name="NUM">300</field>
+                    </shadow>
+                </value>
+            </block>
+
+            <block type="buzzerInterval">
+            </block>
+
+            <block type="readDistance">
+
+            </block>
+
+            <block type="DirectionSpeed">
+                <value name="SPEED">
+                    <shadow type="math_positive_number">
+                        <field name="NUM">50</field>
+                    </shadow>
+                </value>
+            </block>
+
+            <block type="stopMotors">
+            </block>
+
+            <block type="trackingState">
+            </block>
+
+            <block type="trackingSensor">
+            </block>
+
+            <block type="axisAcceleration">
+            </block>
+
+            <block type="servoMotor">
+                <value name="ANGLE">
+                    <shadow type="math_positive_number">
+                        <field name="NUM">180</field>
+                    </shadow>
+                </value>
+            </block>
+
+            <block type="dcMotor">
+                <value name="SPEED">
+                    <shadow type="math_positive_number">
+                        <field name="NUM">100</field>
+                    </shadow>
+                </value>
+            </block>
+        </category>
+
+        <category name="%{BKY_PINOO_LOGIC}" categorystyle="logic_category" iconclass="blocklyTreeIconCustom fas fa-arrow-right-arrow-left fa-2x">
+
+            <!--<label text="Eğer Kontrolü" web-line="1.0"></label>-->
+            <block type="controls_if">
+            </block>
+
+            <block type="controls_if">
+                <mutation else="1"></mutation>
+            </block>
+
+            <block type="logic_operation">
+            </block>
+
+            <block type="logic_compare">
+                <field name="OP">EQ</field>
+                <value name="A"></value>
+                <value name="B"></value>
+            </block>
+
+            <block type="logic_negate">
+            </block>
+
+            <block type="logic_boolean">
+                <field name="BOOL">TRUE</field>
+            </block>
+            <block type="logic_null"></block>
+        </category>
+
+        <category name="%{BKY_PINOO_LOOPS}" iconclass="blocklyTreeIconCustom fas fa-arrow-rotate-right fa-2x" categorystyle="loop_category">
+
+            <!--<label text="Temel" web-line="1.0"></label>-->
+            <block type="control_repeat">
+                <value name="TIMES">
+                    <shadow type="math_number">
+                        <field name="NUM">10</field>
+                    </shadow>
+                </value>
+            </block>
+
+            <block type="for_loop2">
+                <value name="VAR">
+                    <block type="variables_get"> <field name="VAR" id="v:-ouP}S_3%8Q75+R5}B">i</field> </block>
+                </value>
+
+                <value name="TIMES">
+                    <shadow type="math_number">
+                        <field name="NUM">10</field>
+                    </shadow>
+                </value>
+            </block>
+
+            <block type="range1" id="range1">
+                <value name="START">
+                    <shadow type="math_number">
+                        <field name="NUM">0</field>
+                    </shadow>
+                </value>
+
+                <value name="STOP">
+                    <shadow type="math_number">
+                        <field name="NUM">10</field>
+                    </shadow>
+                </value>
+            </block>
+
+            <block type="range2" id="range2">
+                <value name="START">
+                    <shadow type="math_number">
+                        <field name="NUM">0</field>
+                    </shadow>
+                </value>
+
+                <value name="STOP">
+                    <shadow type="math_number">
+                        <field name="NUM">10</field>
+                    </shadow>
+                </value>
+
+                <value name="STEP">
+                    <shadow type="math_number">
+                        <field name="NUM">1</field>
+                    </shadow>
+                </value>
+            </block>
+
+            <block type="control_forever"></block>
+
+            <block type="control_wait">
+                <value name="DURATION">
+                    <shadow type="math_number">
+                        <field name="NUM">1</field>
+                    </shadow>
+                </value>
+            </block>
+
+            <block type="timer">
+            </block>
+
+            <block type="resettimer">
+            </block>
+
+            <block type="while_times">
+                <value name="TIMES">
+                    <shadow type="math_number">
+                        <field name="NUM">10</field>
+                    </shadow>
+                </value>
+            </block>
+
+            <block type="while_loop">
+            </block>
+
+            <block type="break">
+            </block>
+        </category>
+
+        <category name="%{BKY_PINOO_MATH}" categorystyle="math_category" iconclass="blocklyTreeIconCustom fas fa-calculator fa-2x">
+
+            <block type="math_number">
+                <field name="NUM">0</field>
+            </block>
+            <block type="math_arithmetic">
+                <field name="OP">ADD</field>
+                <value name="A">
+                    <shadow type="math_number">
+                        <field name="NUM">1</field>
+                    </shadow>
+                </value>
+                <value name="B">
+                    <shadow type="math_number">
+                        <field name="NUM">1</field>
+                    </shadow>
+                </value>
+            </block>
+            <block type="math_single">
+                <field name="OP">ROOT</field>
+                <value name="NUM">
+                    <shadow type="math_number">
+                        <field name="NUM">9</field>
+                    </shadow>
+                </value>
+            </block>
+            <block type="math_trig">
+                <field name="OP">SIN</field>
+                <value name="NUM">
+                    <shadow type="math_number">
+                        <field name="NUM">45</field>
+                    </shadow>
+                </value>
+            </block>
+            <block type="math_constant">
+                <field name="CONSTANT">PI</field>
+            </block>
+            <block type="math_number_property">
+                <mutation divisor_input="false"></mutation>
+                <field name="PROPERTY">EVEN</field>
+                <value name="NUMBER_TO_CHECK">
+                    <shadow type="math_number">
+                        <field name="NUM">0</field>
+                    </shadow>
+                </value>
+            </block>
+            <block type="math_round">
+                <field name="OP">ROUND</field>
+                <value name="NUM">
+                    <shadow type="math_number">
+                        <field name="NUM">3.1</field>
+                    </shadow>
+                </value>
+            </block>
+            <block type="math_on_list">
+                <mutation op="SUM"></mutation>
+                <field name="OP">SUM</field>
+            </block>
+            <block type="math_modulo">
+                <value name="DIVIDEND">
+                    <shadow type="math_number">
+                        <field name="NUM">64</field>
+                    </shadow>
+                </value>
+                <value name="DIVISOR">
+                    <shadow type="math_number">
+                        <field name="NUM">10</field>
+                    </shadow>
+                </value>
+            </block>
+
+            <block type="math_rescale">
+                <value name="INPUT">
+                    <shadow type="math_number">
+                        <field name="NUM">8</field>
+                    </shadow>
+                </value>
+                <value name="INMIN">
+                    <shadow type="math_number">
+                        <field name="NUM">0</field>
+                    </shadow>
+                </value>
+                <value name="INMAX">
+                    <shadow type="math_number">
+                        <field name="NUM">0</field>
+                    </shadow>
+                </value>
+                <value name="OUTMIN">
+                  <shadow type="math_number">
+                      <field name="NUM">0</field>
+                  </shadow>
+                </value>
+                <value name="OUTMAX">
+                  <shadow type="math_number">
+                      <field name="NUM">0</field>
+                  </shadow>
+                </value>
+            </block>
+
+            <block type="math_random_int">
+                <value name="FROM">
+                    <shadow type="math_number">
+                        <field name="NUM">1</field>
+                    </shadow>
+                </value>
+                <value name="TO">
+                    <shadow type="math_number">
+                        <field name="NUM">100</field>
+                    </shadow>
+                </value>
+            </block>
+            <block type="math_random_float"></block>
+        </category>
+
+        <category name="%{BKY_PINOO_LIST}" categorystyle="list_category" iconclass="blocklyTreeIconCustom fas fa-list fa-2x">
+
+            <block type="lists_string">
+                <field name="STRING">String</field>
+            </block>
+            <block type="list_combined">
+                <value name="STR1">
+                    <shadow type="text">
+                        <field name="TEXT">Rex </field>
+                    </shadow>
+                </value>
+                <value name="STR2">
+                    <shadow type="text">
+                        <field name="TEXT">Blocks</field>
+                    </shadow>
+                </value>
+            </block>
+            <block type="split">
+                <value name="VALUE1">
+                    <shadow type="text">
+                        <field name="TEXT">Rex, Blocks</field>
+                    </shadow>
+                </value>
+                <value name="VALUE2">
+                    <shadow type="text">
+                        <field name="TEXT">,</field>
+                    </shadow>
+                </value>
+            </block>
+
+            <block type="lists_create_with">
+                <mutation items="0"></mutation>
+            </block>
+            <block type="lists_create_with">
+                <mutation items="3"></mutation>
+            </block>
+            <block type="lists_repeat">
+                <value name="NUM">
+                    <shadow type="math_number">
+                        <field name="NUM">5</field>
+                    </shadow>
+                </value>
+            </block>
+            <block type="lists_length"></block>
+            <block type="lists_isEmpty"></block>
+            <block type="get_list_item">
+                <value name="INDEX">
+                    <shadow type="math_number">
+                        <field name="NUM">0</field>
+                    </shadow>
+                </value>
+            </block>
+        </category>
+
+        <category name="%{BKY_PINOO_VARIABLES}" categorystyle="variable_category" iconclass="blocklyTreeIconCustom fas fa-times fa-2x" custom="VARIABLE">
+            <!--custom="VARIABLE"-->
+        </category>
+
+        <category name="%{BKY_PINOO_FUNCTIONS}" categorystyle="procedure_category" iconclass="blocklyTreeIconCustom fas puzzle-piece fa-2x" custom="PROCEDURE"></category>
+     
+    </xml>
+    <xml xmlns="https://www.w3.org/1999/xhtml" id="workspaceBlocks" style="display:none"></xml>
+ 
+ </body>
+</html >

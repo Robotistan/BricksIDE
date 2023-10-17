@@ -454,6 +454,7 @@ Blockly.Msg["VARIABLES_DYNAMIC_HUE"] = "310";
  * PİNOO
  */
 Blockly.Msg["PINOO"] = 'PINOO';
+Blockly.Msg["PINOO_BASIC"] = 'Basic';
 Blockly.Msg["PINOO_LOGIC"] = 'Logic';
 Blockly.Msg["PINOO_LOOPS"] = 'Loops';
 Blockly.Msg["PINOO_MATH"] = 'Math';
@@ -462,6 +463,8 @@ Blockly.Msg["PINOO_COLOUR"] = 'Colour';
 Blockly.Msg["PINOO_LIST"] = 'List';
 Blockly.Msg["PINOO_VARIABLES"] = 'Variables';
 Blockly.Msg["PINOO_FUNCTIONS"] = 'Functions';
+Blockly.Msg["PINOO_DISPLAY"] = 'Display';
+Blockly.Msg["PINOO_MOTOR"] = 'Motor';
 Blockly.Msg["PINOOTYPE_PUPPET"] = 'Puppet';
 
 

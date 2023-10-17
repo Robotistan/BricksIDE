@@ -77,13 +77,13 @@ canvas {
 
 .picoBricksSimulator{
   content: url('../images/buttons/simulator.svg');
-  height: 2.5rem; 
+  height: 2.3rem; 
   visibility: visible;
   border-style: none;
   border-width: 0px;
   z-index: 101;
   cursor: pointer;
-  margin: 0.3rem;
+  margin: 0.1rem;
 }
 
 .openConnectButton{

@@ -225,11 +225,13 @@ function change(event) {
     {
       latestCode = Blockly.Arduino.workspaceToCode(workspace);
       editorBlockPython.setValue(latestCode);  
+      editorPython.setValue(latestCode);
     }
     else
     {
       latestCode = "";
       editorBlockPython.setValue(latestCode); 
+      editorPython.setValue(latestCode);
     }
   }
 }

@@ -454,6 +454,7 @@ Blockly.Msg["VARIABLES_DYNAMIC_HUE"] = "310";
  * PİNOO Menu
  */
 Blockly.Msg["PINOO"] = 'PINOO';
+Blockly.Msg["PINOO_BASIC"] = 'Temel';
 Blockly.Msg["PINOO_LOGIC"] = 'Mantık';
 Blockly.Msg["PINOO_LOOPS"] = 'Döngüler';
 Blockly.Msg["PINOO_MATH"] = 'Matematik';
@@ -462,6 +463,8 @@ Blockly.Msg["PINOO_COLOUR"] = 'Renk';
 Blockly.Msg["PINOO_LIST"] = 'Liste';
 Blockly.Msg["PINOO_VARIABLES"] = 'Değişkenler';
 Blockly.Msg["PINOO_FUNCTIONS"] = 'Fonksiyonlar';
+Blockly.Msg["PINOO_DISPLAY"] = 'Görüntüleme';
+Blockly.Msg["PINOO_MOTOR"] = 'Motor';
 Blockly.Msg["PINOOTYPE_PUPPET"] = 'Kukla';
 
 // Pinoo Blocks
