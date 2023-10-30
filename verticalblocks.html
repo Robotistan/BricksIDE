@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="css/toogle.css">
 <link rel="stylesheet" href="css/dropdown.css">
 <link rel="stylesheet" href="css/bottompanel.css">
+<link rel="stylesheet" href="css/navbar-resp.css">
 <link rel="stylesheet" href="css/introjs.min.css">
 <link rel="stylesheet" href="css/w3.css">
 
@@ -96,10 +97,8 @@
       <div class="row" style="background-color:rgb(196, 27, 27);">
         <div class="col-md-7">
           <nav class="navbar navbar-expand-lg navbar-light">
-            <a href="https://picobricks.com/picobricks-ide-robotic-coding-software/"><img src="images/picobricks-logo.png" style="height: 3.0vh"></a>
+            <a href="https://picobricks.com/picobricks-ide-robotic-coding-software/" style="margin-right:2rem;"><img src="images/picobricks-logo.png" style="height: 3.0vh"></a>
             
-            <div class="navbar-brand" style="width: 2rem"></div>
-
             <div class="dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
                   File
@@ -117,11 +116,11 @@
             <div id="projectName" style="color: white;">PicoProject</div>
             <div style="margin: 2px; color:white;">|</div>
 
-            <div class="navbar-brand" style="width: 2rem"></div>
+            <div class="navbar-brand" style="width: 1rem"></div>
             <img class="runPythonButton" id="btRun" onclick="RunCode()"/>
             <img class="stopButton" id="btStopCode" onclick="StopCode()" />
             
-            <div class="navbar-brand" style="width: 2rem"></div>
+            <div class="navbar-brand" style="width: 1rem"></div>
 
             <img class="notConnectedButton" onclick="OpenConnectionForm();" id="btConnect"/>
             <img class="documentsButton" id="btDocuments" onclick="ShowDocumentsPanel()"/>
@@ -130,7 +129,7 @@
           </nav>
         </div>
 
-        <div class="col-md-3" style="margin-left:auto;">
+        <div class="col-md-3" id="sliderResp" style="margin-right:auto;">
           <nav class="navbar navbar-expand-lg navbar-light" style="float: left;">
 
             <div id="editorType" style="color: white; margin: 5px;">Block</div>
@@ -150,14 +149,12 @@
                 <a class="dropdown-item" href="#" id="btMobile" onclick="UploadMobile()">Upload Code For Mobile</a>
               </ul>
             </div>
-             
-            <div class="navbar-brand" style="width: 2rem"></div>
             
-            <a href="verticalsimulator.html"><img class="picoBricksSimulator"/></a>
+            <a href="verticalsimulator.html" id="simulatorResp" style="margin-left: 5rem;"><img class="picoBricksSimulator"/></a>
           </nav>
         </div>
         
-        <div class="col-md-1" style="margin-left:auto;">
+        <div class="col-md-1">
           <div class="dropdown" id="langSelect">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white; margin-top: 0.5rem;">
                   <img src="images/flags/lang-icon.png" style="width: 1.35rem; margin-bottom:0.7rem;" alt="icon">
