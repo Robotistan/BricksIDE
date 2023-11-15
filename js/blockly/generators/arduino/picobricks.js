@@ -418,7 +418,7 @@ Blockly.Arduino['dcMotor'] = function(block) {
     Blockly.Arduino.imports_['import_ADC'] = 'from machine import ADC';
 
     Blockly.Arduino.definitions_['define_motor1' + motor] = 'motor_' + motor + ' = PWM(Pin(' + pin + '))';
-    Blockly.Arduino.definitions_['define_motor2' + motor] = 'motor_' + motor + '.freq(10)';
+    Blockly.Arduino.definitions_['define_motor2' + motor] = 'motor_' + motor + '.freq(50)';
     Blockly.Arduino.definitions_['define_motor3' + motor] = 'motor_' + motor + '.duty_u16(0)';
 
     code = 'motor_' + motor + '.duty_u16(' + speed + ' * 650) \n';
