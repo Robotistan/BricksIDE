@@ -56,17 +56,7 @@ function Upload_MPU60_Library()
 
   }
 }
-function Upload_HCSR04_Library()
-{
-  if(isConnected)
-  {
-    showProgressPanel();
-    $.get('python/hcsr04Lib.txt', function(data) {
-      saveCode(data, "hcsr04.py");
-    });
 
-  }
-}
 function Upload_REX_Library()
 {
   if(isConnected)
