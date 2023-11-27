@@ -475,6 +475,26 @@ Blockly.Arduino['neoPixelColourRGB'] = function(block) {
     return code;
 };
 
+Blockly.Arduino['neoPixelColourRGBwithLedNumber'] = function(block) {
+
+    var code = "";
+    var pin = NeoPixelPin;
+
+    var red = Blockly.Arduino.valueToCode(block, 'RED', Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+    var green =  Blockly.Arduino.valueToCode(block, 'GREEN', Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+    var blue = Blockly.Arduino.valueToCode(block, 'BLUE', Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+    var number = Blockly.Arduino.valueToCode(block, 'NUMBER', Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+
+    Blockly.Arduino.imports_['import_Pin'] = 'from machine import Pin';
+    Blockly.Arduino.imports_['import_WS2812'] = 'from picobricks import WS2812';
+
+    code = 'ws2812 = WS2812(' + number + ', brightness = 1)\n' +
+           'ws2812.pixels_fill((' + red + ', ' + green + ', ' + blue + '))\n' +
+           'ws2812.pixels_show()\n';
+
+    return code;
+};
+
 Blockly.Arduino['neoPixelClear'] = function(block) {
 
     var code = "";
@@ -756,3 +776,22 @@ Blockly.Arduino['variable_convert'] = function (block) {
 
     return [code, Blockly.Arduino.ORDER_NONE];  
 }
+
+Blockly.Arduino['ASCIItoInput'] = function(block) {
+    var code = "";
+    var value =  Blockly.Arduino.valueToCode(block, 'VALUE', Blockly.Arduino.ORDER_NONE);
+
+    code = 'chr('+ value +')';
+
+    return [code, Blockly.Arduino.ORDER_NONE];
+}
+
+Blockly.Arduino['inputToASCII'] = function(block) {
+    var code = "";
+    var value =  Blockly.Arduino.valueToCode(block, 'VALUE', Blockly.Arduino.ORDER_NONE);
+
+    code = "[ord(text) for text in "+ value +"]";
+
+    return [code, Blockly.Arduino.ORDER_NONE];
+}
+

@@ -67,6 +67,17 @@ function Upload_HCSR04_Library()
 
   }
 }
+function Upload_REX_Library()
+{
+  if(isConnected)
+  {
+    showProgressPanel();
+    $.get('python/REX.txt', function(data) {
+      saveCode(data, "rex.py");
+    });
+
+  }
+}
 
 function LoadCode(code)
 {

@@ -463,3 +463,32 @@ Blockly.Msg["PINOO_VARIABLES"] = 'Variables';
 Blockly.Msg["PINOO_FUNCTIONS"] = 'Les fonctions';
 Blockly.Msg["PINOO_DISPLAY"] = 'Afficher';
 Blockly.Msg["PINOO_MOTOR"] = 'Motrice';
+
+
+//Bricks Blocks
+
+Blockly.Msg["BRICKS_SETLED_MSG"] = "Définir les LED";
+Blockly.Msg["BRICKS_SETRELAY_MSG"] = "Définir le relais";
+Blockly.Msg["BRICKS_PLAY_BUZZER_MSG"] = "Jouer au buzzer";
+Blockly.Msg["BRICKS_PLAY_BUZZER_FREQ_MSG"] = "Fréquence";
+Blockly.Msg["BRICKS_STOP_BUZZER_MSG"] = "Arrêter le buzzer";
+Blockly.Msg["BRICKS_INTERVAL_BUZZER_MSG"] = "Intervalle";
+Blockly.Msg["BRICKS_READ_BUTTON_MSG"] = "Bouton Lire";
+Blockly.Msg["BRICKS_READ_POTENTİOMETER_MSG"] = "Lire le potentiomètre";
+Blockly.Msg["BRICKS_READ_LIGHTSENSOR_MSG"] = "Lire le capteur de lumière";
+Blockly.Msg["BRICKS_READ_TEMPERATURE_MSG"] = "Lire la température (°C)";
+Blockly.Msg["BRICKS_READ_HUMIDITY_MSG"] = "Lire l'humidité";
+Blockly.Msg["BRICKS_READ_DISTANCE_MSG"] = "Lire la distance";
+Blockly.Msg["BRICKS_ON_MSG"] = "sur";
+Blockly.Msg["BRICKS_OFF_MSG"] = "désactivé";
+Blockly.Msg["BRICKS_ONIR_RECEIVING_MSG"] = "Sur réception IR";
+Blockly.Msg["BRICKS_IR_BUTTON_MSG"] = "Bouton IR";
+Blockly.Msg["BRICKS_IR_BUTTON_PRESSED_MSG"] = "est pressé";
+Blockly.Msg["UP_MSG"] = "EN HAUT";
+Blockly.Msg["DOWN_MSG"] = "VERS LE BAS";
+Blockly.Msg["LEFT_MSG"] = "GAUCHE";
+Blockly.Msg["RIGHT_MSG"] = "DROITE";
+Blockly.Msg["OK_MSG"] = "D'ACCORD";
+Blockly.Msg["BRICKS_RFID_ACTİVATED_MSG"] = "RFID activé";
+Blockly.Msg["BRICKS_RFID_CARD_ID_MSG"] = "Identifiant de la carte";
+Blockly.Msg["BRICKS_READ_IR_MSG"] = "Lire IR";

@@ -146,6 +146,8 @@
                         </a>
                         <ul id="uploadDropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <a class="dropdown-item" href="#" id="btFirmware" onclick="UploadFirmware()">Upload Firmware</a>
+                            <hr>
+                            <a class="dropdown-item" href="#" id="btLibrary" onclick="Upload_REX_Library()">Upload REX Library</a>
                             <a class="dropdown-item" href="#" id="btLibrary" onclick="Upload_MPU60_Library()">Upload MPU60 Library</a>
                             <a class="dropdown-item" href="#" id="btLibrary" onclick="Upload_HCSR04_Library()">Upload HC-SR04 Library</a>
                         </ul>
@@ -734,7 +736,21 @@
         </category>
 
         <category name="%{BKY_PINOO_FUNCTIONS}" categorystyle="procedure_category" iconclass="blocklyTreeIconCustom fas puzzle-piece fa-2x" custom="PROCEDURE"></category>
-     
+        
+        <category name="      Dabble" id="dabbleCat" colour="#426322" secondaryColour="#426322" iconclass="blocklyTreeIconCustom fa-solid fa-gamepad fa-2x">
+                
+            <block type="dabbleDefinition">   
+            </block>  
+            
+            <block type="dabbleGiveCommand">   
+            </block>  
+
+            <block type="dabbleIsConnected">   
+            </block>  
+            
+            <block type="dabbleRun">   
+            </block>  
+        </category>
     </xml>
     <xml xmlns="https://www.w3.org/1999/xhtml" id="workspaceBlocks" style="display:none"></xml>
  

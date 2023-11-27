@@ -244,6 +244,7 @@ Blockly.Arduino['DirectionSpeed'] = function (block) {
             '   return\n\n';
             
     }
+
     code = direction + '(' + speed + ')\n\n';
 
     return code;
@@ -718,4 +719,47 @@ Blockly.Arduino['variable_convert'] = function (block) {
     code = variable + '(' + value + ')';
 
     return [code, Blockly.Arduino.ORDER_NONE];  
+};
+
+Blockly.Arduino['dabbleDefinition'] = function(block) {
+    var code = '';
+    var branchCode = Blockly.Arduino.statementToCode(block, 'DO') ||
+    Blockly.Arduino.PASS;
+
+    Blockly.Arduino.imports_['import_REXbluetooth'] = 'from rex import BLESimplePeripheral, Servo';
+    Blockly.Arduino.imports_['import_bluetooth'] = 'import bluetooth';
+  
+    Blockly.Arduino.definitions_['define_bluetooth'] = 'ble = bluetooth.BLE()\n';
+    Blockly.Arduino.definitions_['define_REXbluetooth'] = 'sp = BLESimplePeripheral(ble)\n';
+    Blockly.Arduino.definitions_['define_on_rx'] = '\ndef on_rx(data):\n' +
+                                                   '    print("Data received: ", data)\n' +
+                                                   branchCode + '\n';
+
+    return code;
+};
+
+
+Blockly.Arduino['dabbleGiveCommand'] = function(block) {
+    var code = '';
+    var value = block.getFieldValue('VALUE');
+  
+    var code = "data == b'" + value + "'";
+
+    return [code, Blockly.Arduino.ORDER_NONE];
+};
+
+Blockly.Arduino['dabbleRun'] = function(block) {  
+    var code = '';
+
+    code = 'sp.on_write(on_rx)\n';
+    
+    return code;
+};
+
+Blockly.Arduino['dabbleIsConnected'] = function (block) {
+    var code = '';
+
+    code = 'sp.is_connected()';
+
+    return [code, Blockly.Arduino.ORDER_NONE];
 }

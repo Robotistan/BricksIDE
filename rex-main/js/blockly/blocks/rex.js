@@ -453,40 +453,6 @@ Blockly.Blocks['request_find'] = {
   }
 };
 
-Blockly.Blocks['isButtonPressed'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField(new Blockly.FieldImage(iconScreen, 30, 30, "icon"))
-        .appendField("IR Button")
-        .appendField(new Blockly.FieldDropdown([
-                                                ["UP","IR_RX.number_up"], 
-                                                ["DOWN","IR_RX.number_down"],
-                                                ["LEFT","IR_RX.number_left"],
-                                                ["RIGHT","IR_RX.number_right"],
-                                                ["OK","IR_RX.number_ok"],
-                                                ["SHARP KEY","IR_RX.number_sharp"],
-                                                ["STAR KEY","IR_RX.number_star"],
-                                                ["0","IR_RX.number_0"],
-                                                ["1","IR_RX.number_1"],
-                                                ["2","IR_RX.number_2"],
-                                                ["3","IR_RX.number_3"],
-                                                ["4","IR_RX.number_4"],
-                                                ["5","IR_RX.number_5"],
-                                                ["6","IR_RX.number_6"],
-                                                ["7","IR_RX.number_7"],
-                                                ["8","IR_RX.number_8"],
-                                                ["9","IR_RX.number_9"]
-                                                ]), "VALUE")
-        .appendField("is Pressed");
-
-    this.setOutput(true, null);
-    this.setColour("#162d4a");
-    this.setTooltip("");
-    this.setHelpUrl("");
-    this.setOutputShape(Blockly.OUTPUT_SHAPE_HEXAGONAL)
-  }
-};
-
 Blockly.Blocks['while_times'] = {
   init: function () {
       this.appendDummyInput()
@@ -535,5 +501,73 @@ Blockly.Blocks['variable_convert'] = {
       this.setHelpUrl("");
       this.setOutput(true, null);
       this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND)
+  }
+};
+
+Blockly.Blocks['dabbleDefinition'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Dabble definition")
+   	this.appendStatementInput("DO")
+      .setCheck(null);
+    this.setInputsInline(true);
+    this.setColour("#426322");
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
+
+Blockly.Blocks['dabbleGiveCommand'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Do this")
+        .appendField(new Blockly.FieldDropdown([
+                                                ["Select","\\xff\\x01\\x01\\x01\\x02\\x02\\x00\\x00"], 
+                                                ["Start","\\xff\\x01\\x01\\x01\\x02\\x01\\x00\\x00"],
+                                                ["Up","\\xff\\x01\\x01\\x01\\x02\\x00\\x01\\x00"],
+                                                ["Down","\\xff\\x01\\x01\\x01\\x02\\x00\\x02\\x00"],
+                                                ["Left","\\xff\\x01\\x01\\x01\\x02\\x00\\x04\\x00"],
+                                                ["Right","\\xff\\x01\\x01\\x01\\x02\\x00\\x08\\x00"],
+                                                ["Trigle","\\xff\\x01\\x01\\x01\\x02\\x04\\x00\\x00"],
+                                                ["Square","\\xff\\x01\\x01\\x01\\x02 \\x00\\x00"],
+                                                ["Circle","\\xff\\x01\\x01\\x01\\x02\\x08\\x00\\x00"],
+                                                ["Cross","\\xff\\x01\\x01\\x01\\x02\\x10\\x00\\x00"],
+                                                ]), "VALUE")
+        .appendField("");
+
+    this.setOutput(true, null);
+    this.setColour("#426322");
+    this.setTooltip("");
+    this.setHelpUrl("");
+    this.setOutputShape(Blockly.OUTPUT_SHAPE_HEXAGONAL)
+  }
+};
+
+
+Blockly.Blocks['dabbleIsConnected'] = {
+  init: function () {
+      this.appendDummyInput()
+          .appendField("Is connected")
+          
+      this.setOutput(true, null);
+      this.setColour("#426322");
+      this.setTooltip("");
+      this.setHelpUrl("");
+      this.setOutputShape(Blockly.OUTPUT_SHAPE_HEXAGONAL)
+  }
+};
+
+
+Blockly.Blocks['dabbleRun'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Run Dabble")
+
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour("#426322");
+    this.setTooltip("");
+    this.setHelpUrl("");
   }
 };

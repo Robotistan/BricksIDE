@@ -482,3 +482,34 @@ Blockly.Msg["PINOOTYPE_EVENTS"] = 'Olaylar';
 Blockly.Msg["PINOOTYPE_FOLLOWLINE"] = 'Çizgi İzleme';
 Blockly.Msg["PINOOTYPE_NEOPIXEL"] = 'Neopixel Modülü';
 Blockly.Msg["PINOOTYPE_ACCELEROMETER"] = 'İvme Ölçer Modülü';
+
+//Bricks Blocks
+
+Blockly.Msg["BRICKS_SETLED_MSG"] = "Led'i ayarla";
+Blockly.Msg["BRICKS_SETRELAY_MSG"] = "Röle'yi ayarla";
+Blockly.Msg["BRICKS_PLAY_BUZZER_MSG"] = "Buzzer'ı çal";
+Blockly.Msg["BRICKS_PLAY_BUZZER_FREQ_MSG"] = "Frekans";
+Blockly.Msg["BRICKS_STOP_BUZZER_MSG"] = "Buzzer'ı durdur";
+Blockly.Msg["BRICKS_INTERVAL_BUZZER_MSG"] = "aralığı";
+Blockly.Msg["BRICKS_READ_BUTTON_MSG"] = "Butonu oku";
+Blockly.Msg["BRICKS_READ_POTENTİOMETER_MSG"] = "Potansiyometreyi oku";
+Blockly.Msg["BRICKS_READ_LIGHTSENSOR_MSG"] = "Işık Sensörünü oku";
+Blockly.Msg["BRICKS_READ_TEMPERATURE_MSG"] = "Sıcaklığı Oku (°C)";
+Blockly.Msg["BRICKS_READ_HUMIDITY_MSG"] = "Nemi oku";
+Blockly.Msg["BRICKS_READ_DISTANCE_MSG"] = "Mesafeyi oku";
+Blockly.Msg["BRICKS_ON_MSG"] = "açık";
+Blockly.Msg["BRICKS_OFF_MSG"] = "kapalı";
+Blockly.Msg["BRICKS_ONIR_RECEIVING_MSG"] = "IR aralığında";
+Blockly.Msg["BRICKS_IR_BUTTON_MSG"] = "IR Buton";
+Blockly.Msg["BRICKS_IR_BUTTON_PRESSED_MSG"] = "basıldı";
+Blockly.Msg["UP_MSG"] = "YUKARI";
+Blockly.Msg["DOWN_MSG"] = "AŞAĞI";
+Blockly.Msg["LEFT_MSG"] = "SOL";
+Blockly.Msg["RIGHT_MSG"] = "SAĞ";
+Blockly.Msg["OK_MSG"] = "TAMAM";
+Blockly.Msg["BRICKS_RFID_ACTİVATED_MSG"] = "RFID Aktif";
+Blockly.Msg["BRICKS_RFID_CARD_ID_MSG"] = "Kart ID";
+Blockly.Msg["BRICKS_READ_IR_MSG"] = "IR oku";
+
+
+

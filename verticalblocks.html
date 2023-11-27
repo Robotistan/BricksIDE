@@ -247,7 +247,7 @@
       </div><!-- panel-wrapper -->
 </div>
 
-<div id="editorPythonPanel" class="sidepanel" style="padding-left: 5px; transform: rotateY(180deg); ">
+<div id="editorPythonPanel" class="sidepanel" style="padding-left: 2px; transform: rotateY(180deg); ">
   <div id="editorSideNav" class="sidenav" style="padding: 0px; transform: rotateY(180deg);">
       <pre id="editorBlockPython"></pre>
   </div>
@@ -351,6 +351,51 @@
     </div>
   </div>
 </div>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="bleHelpModal">
+  <div class="modal-dialog">
+      <div class="modal-content" id="bleIntro" style="width:80vh;">
+          <div class="modal-header" style="position: relative;">
+              <h5 class="modal-title" style="color: #19b5fe; font-weight: bold;">Bluetooth Blocks</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+              <div class="row" style="text-align: left; align-items: left; margin-bottom: 2rem">
+                  <div class="col-md-6"></div>
+              </div>
+
+              <div class="row" style="text-align: center; align-items: center; margin: 10px;">
+                  <div class="col-md-13">
+                      <span>You should download LightBlue application.</span>
+                      <hr/>
+                      <img src="images/bleTextBlok.png" style="width: 13%; float:left;">
+                      <span>Using with the Read blog helps you add additional features to the tasks you perform.</span>
+                      <hr/>
+                      <img src="images/bleDescriptionBlok.png" style="width: 30%; float:left;">
+                      <span>You can manage the name of the Board for identity operations and within the app from here.</span>
+                      <hr/>
+                      <img src="images/bleReadBlok.png" style="width: 18%; float:left;">
+                      <span>This is the block that allows you to see the data you entered in the app on the serial monitor.</span>
+                      <hr/>
+                      <img src="images/bleWriteBlok.png" style="width: 25%; float:left;">
+                      <span>You can view the data processed in this block on the app.</span>
+                      <hr/>
+                      <span>Utilize a forever loop to ensure the continuous reading and writing of blocks BLE read and BLE write.</span>
+                      <hr/>
+                      <span>You can access more detailed information through the help button for application and board operations.</span>
+                  </div>
+              </div>
+
+          <div class="modal-footer">
+            <button id="introFirmware" type="button" class="btn btn-info" onclick="StartBleHelp()" style="color:#fff"><i class="fa-solid fa-circle-question fa-lg" style="color: #fff;"></i>  Help</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
+          </div>
+          </div>
+      </div>
+  </div>
+</div> 
 
 <xml xmlns="https://www.w3.org/1999/xhtml" id="toolbox" style="display: none;"> 
 
@@ -705,6 +750,22 @@
           <field name="STRING">String</field>
       </block>
 
+      
+      <block type="ASCIItoInput">
+        <value name="VALUE">   
+          <shadow type="math_number">   
+            <field name="TEXT">65</field>   
+          </shadow>   
+      </value>   
+      </block>
+      <block type="inputToASCII">
+        <value name="VALUE">   
+          <shadow type="text">   
+            <field name="TEXT">PicoBricks</field>   
+          </shadow>   
+      </value>   
+      </block>
+
       <block type="list_combined">
         <value name="STR1">
             <shadow type="text">
@@ -826,6 +887,31 @@
         </value>   
      </block>   
 
+     <block type="neoPixelColourRGBwithLedNumber">   
+      <value name="RED">   
+         <shadow type="math_positive_number">   
+           <field name="NUM">255</field>   
+         </shadow>   
+      </value>   
+
+      <value name="GREEN">   
+         <shadow type="math_positive_number">   
+           <field name="NUM">255</field>   
+         </shadow>   
+      </value>   
+
+      <value name="BLUE">   
+         <shadow type="math_positive_number">   
+           <field name="NUM">255</field>   
+         </shadow>   
+      </value>   
+
+      <value name="NUMBER">
+        <shadow type="math_positive_number">   
+          <field name="NUM">5</field>   
+        </shadow>   
+      </value>
+   </block>   
      <block type="neoPixelClear">  
   </category>
 
@@ -920,7 +1006,6 @@
         </value>  
     </block>  
   </category>  
-
 </xml>
 
 <xml xmlns="https://www.w3.org/1999/xhtml" id="workspaceBlocks" style="display:none"></xml>
