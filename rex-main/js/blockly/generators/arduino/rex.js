@@ -370,7 +370,7 @@ Blockly.Arduino['readDistance'] = function (block) {
     var echoPin = EchoPin;
 
     Blockly.Arduino.imports_['import_time_pulse_us'] = 'from machine import time_pulse_us';
-    Blockly.Arduino.imports_['import_HCSR04'] = 'from hcsr04 import HCSR04';
+    Blockly.Arduino.imports_['import_HCSR04'] = 'from rex import HCSR04';
 
     Blockly.Arduino.definitions_['define_distance'] = 'sensor = HCSR04(trigger_pin='+ trigPin +', echo_pin='+ echoPin +', echo_timeout_us=10000)';
 
