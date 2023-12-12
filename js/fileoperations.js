@@ -40,6 +40,9 @@ function UploadLibrary()
       saveCode(data, "picobricks.py");
     });
   }
+  else{
+    $("#modalDialog").modal('show');
+  }
 }
 
 function LoadCode(code)

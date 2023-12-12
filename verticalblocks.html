@@ -157,7 +157,7 @@
         <div class="col-md-1">
           <div class="dropdown" id="langSelect">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white; margin-top: 0.5rem;">
-                  <img src="images/flags/lang-icon.png" style="width: 1.35rem; margin-bottom:0.7rem;" alt="icon">
+                  <img src="images/flags/lang-icon.webp" style="width: 1.35rem; margin-bottom:0.7rem;" alt="icon">
               </a>
               <div class="dropdown-menu" style="min-width: 4rem;" aria-labelledby="dropdownMenuButton1">
                   <a class="dropdown-item" href="#" data-lang="es" onclick="changeLanguage('es');">
@@ -320,7 +320,7 @@
         <div class="row" style="text-align: center; align-items: center; margin: 10px;">
           <div class="col-md-6">
             <span style="color: rgb(196, 27, 27)">Pico</span>
-            <img src="images/pico.png" style="width: 100%">
+            <img src="images/pico.webp" style="width: 100%">
           </div>
           <div class="col-md-6">
               <button type="button" class="btn btn-success" onclick="PicoFirmware()"><i class="fa fa-download" aria-hidden="true"></i></button>
@@ -336,7 +336,7 @@
         <div class="row" style="text-align: center; align-items: center; margin: 10px;">
           <div class="col-md-6">
             <span style="color: rgb(196, 27, 27)">Pico W</span>
-            <img src="images/picow.png" style="width: 100%">
+            <img src="images/picow.webp" style="width: 100%">
           </div>
           <div class="col-md-6">
               <button type="button" class="btn btn-success" onclick="PicoWFirmware()"><i class="fa fa-download" aria-hidden="true"></i></button>
@@ -815,6 +815,32 @@
               </shadow>
           </value>
       </block>
+
+      <block type="appendList">
+        <value name="VALUE">
+          <shadow type="text">
+              <field name="TEXT">PicoBricks</field>
+          </shadow>
+      </value>
+      </block>
+
+      <block type="insertList">
+        <value name="INDEX">
+          <shadow type="math_number">
+              <field name="NUM">0</field>
+          </shadow>
+        </value>
+        <value name="VALUE">
+          <shadow type="text">
+              <field name="TEXT">PicoBricks</field>
+          </shadow>
+      </value>
+      </block>
+
+      <block type="popList"></block>
+
+      <block type="sortList"></block>
+      
   </category>
 
   <category name="%{BKY_PINOO_VARIABLES}" categorystyle="variable_category" iconclass="blocklyTreeIconCustom fas fa-times fa-2x" custom="VARIABLE">

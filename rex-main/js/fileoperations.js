@@ -1,44 +1,20 @@
-function SaveCode()
-{
-  if(isConnected)
-  {
-    showProgressPanel();
-
-    var pythoncode = "";
-    if(block)
-      pythoncode = latestCode;
-    else
-      pythoncode = editorPython.getValue();
-
-    if(pythoncode != "")
-    {
-      saveCode(pythoncode, "main.py");
-    }
-  }
-  else
-  {
-    showModalDialog("Please connect to the board");
-  }
-}
-
-function UploadMobile()
-{
-    showProgressPanel();
-
-    $.get('python/mobil.txt', function(data) {
-      saveCode(data, "main.py");
-    });
-}
-
 function UploadFirmware()
 {
   $("#modalFirmware").modal('show');
 }
 
+function UploadMobile()
+{
+    showProgressPanel(true);
+
+    $.get('pythonFiles/mobil.txt', function(data) {
+      saveCode(data, "main.py");
+    });
+}
 
 async function RexFirmware()
 {
-    fetch('python/flash_download_tool_3.9.5.zip')
+    fetch('pythonFiles/flash_download_tool_3.9.5.zip')
     .then(res => res.blob())
     .then(async blob => { await saveFile(blob, "flash_download_tool_3.9.5.zip"); });
 
@@ -49,23 +25,30 @@ function Upload_MPU60_Library()
 {
   if(isConnected)
   {
-    showProgressPanel();
-    $.get('python/mpu6050_.txt', function(data) {
-        saveCode(data, "mpu6050.py");
-    });
+    showProgressPanel(true);
 
+    $.get('pythonFiles/mpu6050_.txt', function(data) {
+      saveCode(data, "mpu6050.py");
+    });
   }
+}
+
+function library_Modal(){
+  $("#modalLibrary").modal('show');
 }
 
 function Upload_REX_Library()
 {
   if(isConnected)
   {
-    showProgressPanel();
-    $.get('python/REX.txt', function(data) {
-      saveCode(data, "rex.py");
-    });
+    showProgressPanel(true);
 
+    $.get('pythonFiles/REX.txt', function(data) {
+      saveCode(data, "REX.py");
+    });
+  }
+  else{
+    $("#modalDialog").modal('show');
   }
 }
 
@@ -156,7 +139,7 @@ function OpenProject(func) {
     reader.readAsText(file)
 
     var fileName = file.name;
-    fileName = fileName.replace(".rex", "");
+    fileName = fileName.replace(".pb", "");
     fileName = fileName.replace(".py", "");
     $("#projectName").text(fileName);
   }
@@ -177,11 +160,11 @@ async function SaveProject()
       return;
 
     const fileHandle = await window.self.showSaveFilePicker({
-                                      suggestedName: 'RexProject.rex',
+                                      suggestedName: 'RexProject.pb',
                                       types: [{
-                                        description: 'RexBlocks',
+                                        description: 'picobricks',
                                         accept: {
-                                          'text/plain': ['.rex'],
+                                          'text/plain': ['.pb'],
                                         },
                                       }],
                                     })

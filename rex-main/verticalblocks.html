@@ -62,6 +62,7 @@
     <script src="../js/blockly/blocks/test_blocks.js"></script>
     <script src="../js/blockly/blocks/pxt_test_blocks.js"></script>
     <script src="js/blockly/blocks/rex.js"></script>
+
     <script id="langSc" src="../js/blockly/msg/js/en.js"></script>
 
     <script src="../editorsrc/ace.js"></script>
@@ -147,7 +148,7 @@
                         <ul id="uploadDropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <a class="dropdown-item" href="#" id="btFirmware" onclick="UploadFirmware()">Upload Firmware</a>
                             <hr>
-                            <a class="dropdown-item" href="#" id="btLibrary" onclick="Upload_REX_Library()">Upload REX Library</a>
+                            <a class="dropdown-item" href="#" id="btLibrary" onclick="library_Modal()">Upload REX Library</a>
                             <a class="dropdown-item" href="#" id="btLibrary" onclick="Upload_MPU60_Library()">Upload MPU60 Library</a>
                         </ul>
                     </div>
@@ -301,6 +302,23 @@
         </div>
     </div>
 
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalLibrary">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Info</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="dialogText">
+                    Ensure that no circuit is connected to the REX Main Board and that the power is on before installing the library.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="Upload_REX_Library()">Upload</button>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <div class="modal fade" tabindex="-1" role="dialog" id="modalFirmware">
         <div class="modal-dialog">
@@ -412,7 +430,7 @@
             <block type="DirectionSpeed">
                 <value name="SPEED">
                     <shadow type="math_positive_number">
-                        <field name="NUM">100</field>
+                        <field name="NUM">50</field>
                     </shadow>
                 </value>
             </block>
@@ -681,6 +699,22 @@
             <block type="lists_string">
                 <field name="STRING">String</field>
             </block>
+
+            <block type="ASCIItoInput">
+                <value name="VALUE">   
+                  <shadow type="math_number">   
+                    <field name="TEXT">65</field>   
+                  </shadow>   
+              </value>   
+            </block>
+
+            <block type="inputToASCII">
+                <value name="VALUE">   
+                  <shadow type="text">   
+                    <field name="TEXT">PicoBricks</field>   
+                  </shadow>   
+              </value>   
+            </block>
             <block type="list_combined">
                 <value name="STR1">
                     <shadow type="text">
@@ -719,8 +753,11 @@
                     </shadow>
                 </value>
             </block>
+
             <block type="lists_length"></block>
+
             <block type="lists_isEmpty"></block>
+
             <block type="get_list_item">
                 <value name="INDEX">
                     <shadow type="math_number">
@@ -728,6 +765,31 @@
                     </shadow>
                 </value>
             </block>
+
+            <block type="appendList">
+                <value name="VALUE">
+                    <shadow type="text">
+                        <field name="TEXT">PicoBricks</field>
+                    </shadow>
+                </value>
+            </block>
+
+            <block type="insertList">
+                <value name="INDEX">
+                    <shadow type="math_number">
+                        <field name="NUM">0</field>
+                    </shadow>
+                </value>
+                <value name="VALUE">
+                    <shadow type="text">
+                        <field name="TEXT">PicoBricks</field>
+                    </shadow>
+                </value>
+            </block>
+
+            <block type="popList"></block>
+
+            <block type="sortList"></block>
         </category>
 
         <category name="%{BKY_PINOO_VARIABLES}" categorystyle="variable_category" iconclass="blocklyTreeIconCustom fas fa-times fa-2x" custom="VARIABLE">

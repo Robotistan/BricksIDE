@@ -942,3 +942,77 @@ Blockly.Blocks['ASCIItoInput'] = {
       this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND)
   }
 };
+
+Blockly.Blocks['appendList'] = {
+  init: function() {
+    this.appendValueInput("VALUE")
+        .setCheck(["Number", "String"])
+        .appendField("Add element");
+    this.appendValueInput("LIST")
+        .setCheck("VARIABLE")
+        .appendField("to list");
+        
+    this.setColour("#D400D4");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['popList'] = {
+  init: function() {
+    this.appendValueInput("VALUE")
+        .setCheck("Number")
+        .appendField("Delete element this index");
+    this.appendValueInput("LIST")
+        .setCheck("VARIABLE")
+        .appendField("to list");
+        
+    this.setColour("#D400D4");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['sortList'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("From")
+        .appendField(new Blockly.FieldDropdown([
+          ["small to big"," "], 
+          ["big to small","reverse=True"]]), 
+          "VALUE");
+    this.appendValueInput("LIST")
+        .setCheck("VARIABLE")
+        .appendField("to list");
+        
+    this.setColour("#D400D4");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['insertList'] = {
+  init: function() {
+    this.appendValueInput("VALUE")
+        .setCheck(["Number", "String"])
+        .appendField("Add element");
+    this.appendValueInput("INDEX")
+        .setCheck("Number")
+        .appendField("this index");
+    this.appendValueInput("LIST")
+        .setCheck("VARIABLE")
+        .appendField("to list");
+        
+    this.setColour("#D400D4");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};

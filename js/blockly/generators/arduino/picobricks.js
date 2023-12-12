@@ -795,3 +795,44 @@ Blockly.Arduino['inputToASCII'] = function(block) {
     return [code, Blockly.Arduino.ORDER_NONE];
 }
 
+Blockly.Arduino['appendList'] = function(block) {
+    var value =  Blockly.Arduino.valueToCode(block, 'VALUE', Blockly.Arduino.ORDER_NONE);
+    var list =  Blockly.Arduino.valueToCode(block, 'LIST', Blockly.Arduino.ORDER_NONE);
+    var code = "";
+
+    code =  list + '.append(' + value + ')\n';
+
+    return code;
+};
+
+Blockly.Arduino['popList'] = function(block) {
+    var value =  Blockly.Arduino.valueToCode(block, 'VALUE', Blockly.Arduino.ORDER_NONE);
+    var list =  Blockly.Arduino.valueToCode(block, 'LIST', Blockly.Arduino.ORDER_NONE);
+    var code = "";
+
+    code =  list + '.pop(' + value + ')\n';
+
+    return code;
+};
+
+Blockly.Arduino['sortList'] = function(block) {
+    
+    var value = block.getFieldValue('VALUE');
+    var list =  Blockly.Arduino.valueToCode(block, 'LIST', Blockly.Arduino.ORDER_NONE);
+    var code = "";
+
+    code =  list + '.sort(' + value + ')\n';
+
+    return code;
+};
+
+Blockly.Arduino['insertList'] = function(block) {
+    var index =  Blockly.Arduino.valueToCode(block, 'INDEX', Blockly.Arduino.ORDER_NONE);
+    var value =  Blockly.Arduino.valueToCode(block, 'VALUE', Blockly.Arduino.ORDER_NONE);
+    var list =  Blockly.Arduino.valueToCode(block, 'LIST', Blockly.Arduino.ORDER_NONE);
+    var code = "";
+
+    code =  list + '.insert(' + index + ',' + value + ')\n';
+
+    return code;
+};
