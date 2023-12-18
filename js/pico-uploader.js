@@ -50,6 +50,23 @@ async function connectSerial() {
   }
 }
 
+function colorChange(){
+  let id = "robotistanStart";
+
+  var block = Blockly.getMainWorkspace().getAllBlocks().find(function(b) {
+    return b.customId === id;
+  });
+
+  if (block) {
+    block.setColour('#FF0000');
+    
+    setTimeout(function () {
+      block.setColour('#ffbf00');
+    }, 2000);
+
+    readValue = "";
+  }
+}
 
 function readTimer()
 {
@@ -66,6 +83,11 @@ function readTimer()
     {
       readValue = ">> " + readValue;
       document.querySelector('#txtConsole').value = readValue + "\n" + document.querySelector('#txtConsole').value;
+      
+      if (readValue.includes("Error") || readValue.includes("error")) {
+        colorChange();
+      }
+      
       readValue = "";
     }
 }

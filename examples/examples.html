@@ -31,11 +31,12 @@
                     The answer they will give you starts like this; it all started with a flashing LED! LEDs are the language of electronic devices. 
                   </p>
                   <h5>Wiring Diagram</h5><hr>
-                  <img src="images/blink.png" width="500" height="297" alt="blink">
+                  <img src="images/blink.webp" width="500" height="297" alt="blink">
 
                 <div><br>
                   <h5>Project Code</h5><hr>
                   <iframe
+                  loading="lazy"
                   src="https://carbon.now.sh/embed?bg=rgba%28171%2C+184%2C+195%2C+1%29&t=seti&wt=none&l=auto&width=680&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=from%2520time%2520import%2520sleep%250Aimport%2520machine%250Aimport%2520time%250A%250Apin_led%2520%253D%2520machine.Pin%287%252C%2520machine.Pin.OUT%29%250A%250Awhile%2520True%253A%250A%2520%2520pin_led.on%28%29%250A%2520%2520time.sleep%28%280.5%29%29%250A%2520%2520pin_led.off%28%29%250A%2520%2520time.sleep%28%280.5%29%29"
                   style="width: 496px; height: 391px; border:0; transform: scale(1); overflow:hidden;"
                   sandbox="allow-scripts allow-same-origin">
@@ -69,6 +70,7 @@
             </div><br>
             <h5>Project Code</h5><hr>
             <iframe
+              loading="lazy"
               src="https://carbon.now.sh/embed?bg=rgba%28171%2C+184%2C+195%2C+1%29&t=seti&wt=none&l=python&width=681&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=false&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=from%2520time%2520import%2520sleep%250Aimport%2520machine%250Aimport%2520time%250A%250Apin_button%2520%253D%2520machine.Pin%2810%252C%2520machine.Pin.IN%29%250Apin_led%2520%253D%2520machine.Pin%287%252C%2520machine.Pin.OUT%29%250A%250Awhile%2520True%253A%250A%2520%2520if%2520%28pin_button.value%28%29%29%2520%253D%253D%2520%281%29%253A%250A%2520%2520%2520%2520pin_led.on%28%29%250A%2520%2520else%253A%250A%2520%2520%2520%2520pin_led.off%28%29"
               style="width: 681px; height: 392px; border:0; transform: scale(1); overflow:hidden;"
               sandbox="allow-scripts allow-same-origin">
@@ -94,11 +96,12 @@
               electrical signals, that is data. 
             </p>
             <h5>Wiring Diagram</h5><hr>
-                <img src="images/autonomouslighting.png" width="500" height="297" alt="blink">
+                <img src="images/autonomouslighting.webp" width="500" height="297" alt="blink">
 
           </div></br>
           <h5>Project Code</h5><hr>
           <iframe
+            loading="lazy"
             src="https://carbon.now.sh/embed?bg=rgba%28171%2C+184%2C+195%2C+1%29&t=seti&wt=none&l=python&width=680&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=from%2520time%2520import%2520sleep%250Aimport%2520machine%250Afrom%2520machine%2520import%2520Pin%250Afrom%2520picobricks%2520import%2520WS2812%250A%250Aws2812%2520%253D%2520WS2812%286%252C%2520brightness%2520%253D%25201%29%250A%250Aldr%2520%253D%2520machine.ADC%2827%29%250A%250Awhile%2520True%253A%250A%2520%2520print%28ldr.read_u16%28%29%29%250A%2520%2520if%2520%28ldr.read_u16%28%29%29%2520%253E%2520%2820000%29%253A%250A%2520%2520%2520%2520ws2812.pixels_fill%28%28255%252C%2520255%252C%2520255%29%29%250A%2520%2520%2520%2520ws2812.pixels_show%28%29%250A%2520%2520else%253A%250A%2520%2520%2520%2520ws2812.pixels_fill%28%280%2520%252C0%2520%252C0%2520%29%29%250A%2520%2520%2520%2520ws2812.pixels_show%28%29"
             style="width: 500px; height: 500px; border:0; transform: scale(1); overflow:hidden;"
             sandbox="allow-scripts allow-same-origin">
@@ -123,10 +126,11 @@
               temperature values measured by the DHT11 temperature and humidity sensor on the OLED screen.
             </p>
             <h5>Wiring Diagram</h5><hr>
-                <img src="images/thermometer.png" width="500" height="297" alt="blink">
+                <img src="images/thermometer.webp" width="500" height="297" alt="blink">
           </div>
           <h5>Project Code</h5><hr>
           <iframe
+            loading="lazy"
             src="https://carbon.now.sh/embed?bg=rgba%28171%2C+184%2C+195%2C+1%29&t=seti&wt=none&l=python&width=680&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=from%2520time%2520import%2520sleep%250Aimport%2520time%250Afrom%2520machine%2520import%2520Pin%250Afrom%2520machine%2520import%2520I2C%250Afrom%2520picobricks%2520import%2520SSD1306_I2C%250Afrom%2520picobricks%2520import%2520DHT11%250A%250Ai2c%2520%253D%2520I2C%280%252C%2520scl%253DPin%285%29%252C%2520sda%253DPin%284%29%252C%2520freq%253D200000%29%250Aoled%2520%253D%2520SSD1306_I2C%28128%252C%252064%252C%2520i2c%252C%2520addr%253D0x3c%29%250Adht_sensor%2520%253D%2520DHT11%28Pin%2811%29%29%250A%250Adht_read_time%2520%253D%2520time.time%28%29%250A%250Atemp%2520%253D%25200%250A%250Adef%2520getTemp%28%29%253A%250A%2520%2520%2520global%2520dht_read_time%250A%2520%2520%2520global%2520temp%250A%2520%2520%2520if%2520time.time%28%29%2520-%2520dht_read_time%2520%253E%253D%25203%253A%250A%2520%2520%2520%2520%2520%2520%2520dht_read_time%2520%253D%2520time.time%28%29%250A%2520%2520%2520%2520%2520%2520%2520try%253A%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520dht_sensor.measure%28%29%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520temp%2520%253D%2520dht_sensor.temperature%250A%2520%2520%2520%2520%2520%2520%2520except%2520Exception%2520as%2520e%253A%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520pass%250A%2520%2520%2520return%2520temp%250A%250Awhile%2520True%253A%250A%2520%2520time.sleep%28%281%29%29%250A%2520%2520oled.fill%280%29%250A%2520%2520oled.text%28%2522%257B%257D%2522.format%28%2522Temperature%253A%2520%2522%29%252C%252015%252C%252010%29%250A%2520%2520oled.text%28%2522%257B%257D%2522.format%28getTemp%28%29%29%252C%252055%252C%252030%29%250A%2520%2520oled.text%28%2522%257B%257D%2522.format%28%2522degrees%2522%29%252C%252035%252C%252050%29%250A%2520%2520else%253A%250A%2520%2520%2520%2520ws2812.pixels_fill%28%280%2520%252C0%2520%252C0%2520%29%29%250A%2520%2520%2520%2520ws2812.pixels_show%28%29"
             style="width: 546px; height: 900px; border:0; transform: scale(1); overflow:hidden;"
             sandbox="allow-scripts allow-same-origin">
@@ -153,10 +157,11 @@
               In addition, we will simultaneously monitor the electrical change occurring during this process on the Microblocks graphic monitor. 
             </p>
             <h5>Wiring Diagram</h5><hr>
-                <img src="images/graphicmonitor.png" width="500" height="297" alt="blink">
+                <img src="images/graphicmonitor.webp" width="500" height="297" alt="blink">
           </div>
           <h5>Project Code</h5><hr>
           <iframe
+            loading="lazy"
             src="https://carbon.now.sh/embed?bg=rgba%28171%2C+184%2C+195%2C+1%29&t=seti&wt=none&l=python&width=681&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=false&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=from%2520time%2520import%2520sleep%250Aimport%2520machine%250Afrom%2520machine%2520import%2520Pin%250Afrom%2520picobricks%2520import%2520WS2812%250A%250Aimport%2520math%250Aws2812%2520%253D%2520WS2812%286%252C%2520brightness%2520%253D%25201%29%250A%250Apot%2520%253D%2520machine.ADC%2826%29%250A%250Awhile%2520True%253A%250A%2520%2520color%2520%253D%2520round%28%28%28%28pot.read_u16%28%29%29%2520*%2520%28255%29%29%2520%252F%2520%2865535%29%29%2520*%2520%281%29%29%250A%2520%2520ws2812.pixels_fill%28%28color%252C%2520color%252C%2520color%29%29%250A%2520%2520ws2812.pixels_show%28%29"
             style="width: 681px; height: 480px; border:0; transform: scale(1); overflow:hidden;"
             sandbox="allow-scripts allow-same-origin">
@@ -181,10 +186,11 @@
 
             </p>
             <h5>Wiring Diagram</h5><hr>
-                <img src="images/dinasourgame.png" width="500" height="297" alt="blink">
+                <img src="images/dinasourgame.webp" width="500" height="297" alt="blink">
           </div>
           <h5>Project Code</h5><hr>
           <iframe
+            loading="lazy"
             src="https://carbon.now.sh/embed?bg=rgba%28171%2C+184%2C+195%2C+1%29&t=seti&wt=none&l=python&width=681&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=false&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=from%2520time%2520import%2520sleep%250Aimport%2520machine%250Afrom%2520machine%2520import%2520Pin%250Afrom%2520machine%2520import%2520PWM%250A%250Apwm_1%2520%253D%2520PWM%28Pin%2821%29%29%250Apwm_1.freq%2850%29%250A%250Aldr%2520%253D%2520machine.ADC%2827%29%250A%250Awhile%2520True%253A%250A%2520%2520print%28ldr.read_u16%28%29%29%250A%2520%2520if%2520%28ldr.read_u16%28%29%29%2520%253C%2520%2820000%29%253A%250A%2520%2520%2520%2520pwm_1.duty_u16%285000%29%250A%2520%2520else%253A%250A%2520%2520%2520%2520pwm_1.duty_u16%282000%29"
             style="width: 681px; height: 480px; border:0; transform: scale(1); overflow:hidden;"
             sandbox="allow-scripts allow-same-origin">
@@ -209,10 +215,11 @@
               
             </p>
             <h5>Wiring Diagram</h5><hr>
-                <img src="images/alarmclock.png" width="500" height="297" alt="blink">
+                <img src="images/alarmclock.webp" width="500" height="297" alt="blink">
           </div>
           <h5>Project Code</h5> <hr>
           <iframe
+            loading="lazy"
             src="https://carbon.now.sh/embed?bg=rgba%28171%2C+184%2C+195%2C+1%29&t=seti&wt=none&l=python&width=681&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=false&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=from%2520time%2520import%2520sleep%250Afrom%2520machine%2520import%2520Pin%250Afrom%2520machine%2520import%2520I2C%250Afrom%2520picobricks%2520import%2520SSD1306_I2C%250Aimport%2520time%250Aimport%2520machine%250Afrom%2520picobricks%2520import%2520WS2812%250Afrom%2520machine%2520import%2520PWM%250A%250Ai2c%2520%253D%2520I2C%280%252C%2520scl%253DPin%285%29%252C%2520sda%253DPin%284%29%252C%2520freq%253D200000%29%250Aoled%2520%253D%2520SSD1306_I2C%28128%252C%252064%252C%2520i2c%252C%2520addr%253D0x3c%29%250Aws2812%2520%253D%2520WS2812%286%252C%2520brightness%2520%253D%25201%29%250Abuzzer%2520%253D%2520PWM%28Pin%2820%29%29%250A%250Apin_button%2520%253D%2520machine.Pin%2810%252C%2520machine.Pin.IN%29%250A%250Aldr%2520%253D%2520machine.ADC%2827%29%250A%250Aoled.text%28%2522%257B%257D%2522.format%28%2522Good%2520night%2522%29%252C%252025%252C%252032%29%250Aoled.show%28%29%250Atime.sleep%28%282%29%29%250Awhile%2520True%253A%250A%2520%2520time.sleep%28%281%29%29%250A%2520%2520oled.fill%280%29%250A%2520%2520if%2520%28ldr.read_u16%28%29%29%2520%253C%2520%2820000%29%253A%250A%2520%2520%2520%2520oled.text%28%2522%257B%257D%2522.format%28%2522Good%2520Morning%2522%29%252C%252015%252C%252032%29%250A%2520%2520%2520%2520oled.show%28%29%250A%2520%2520%2520%2520ws2812.pixels_fill%28%28255%252C%2520255%252C%2520255%29%29%250A%2520%2520%2520%2520ws2812.pixels_show%28%29%250A%2520%2520%2520%2520buzzer.freq%28300%29%250A%2520%2520%2520%2520buzzer.duty_u16%28100%29%250A%2520%2520%2520%2520if%2520%28pin_button.value%28%29%29%2520%253D%253D%2520%281%29%253A%250A%2520%2520%2520%2520%2520%2520oled.fill%280%29%250A%2520%2520%2520%2520%2520%2520oled.text%28%2522%257B%257D%2522.format%28%2522Have%2520a%2520nice%2520day%2522%29%252C%25200%252C%252032%29%250A%2520%2520%2520%2520%2520%2520oled.show%28%29%250A%2520%2520%2520%2520%2520%2520ws2812.pixels_fill%28%280%2520%252C0%2520%252C0%2520%29%29%250A%2520%2520%2520%2520%2520%2520ws2812.pixels_show%28%29%250A%2520%2520%2520%2520%2520%2520sleep%280.25%29%250A%2520%2520%2520%2520%2520%2520buzzer.duty_u16%280%29%250A%2520%2520%2520%2520%2520%2520break"
             style="width: 681px; height: 950px; border:0; transform: scale(1); overflow:hidden;"
             sandbox="allow-scripts allow-same-origin">
@@ -237,10 +244,11 @@
               
             </p>
             <h5>Wiring Diagram</h5><hr>
-                <img src="images/smartcooler.png" width="500" height="297" alt="blink">
+                <img src="images/smartcooler.webp" width="500" height="297" alt="blink">
           </div>
           <h5>Project Code</h5> <hr>
           <iframe
+            loading="lazy"
             src="https://carbon.now.sh/embed?bg=rgba%28171%2C+184%2C+195%2C+1%29&t=seti&wt=none&l=python&width=681&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=false&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=from%2520time%2520import%2520sleep%250Afrom%2520machine%2520import%2520Pin%250Afrom%2520picobricks%2520import%2520DHT11%250Aimport%2520time%250Afrom%2520machine%2520import%2520PWM%250Afrom%2520machine%2520import%2520ADC%250A%250Adht_sensor%2520%253D%2520DHT11%28Pin%2811%29%29%250A%250Adht_read_time%2520%253D%2520time.time%28%29%250A%250Atemp%2520%253D%25200%250A%250Adef%2520getTemp%28%29%253A%250A%2520%2520%2520global%2520dht_read_time%250A%2520%2520%2520global%2520temp%250A%2520%2520%2520if%2520time.time%28%29%2520-%2520dht_read_time%2520%253E%253D%25203%253A%250A%2520%2520%2520%2520%2520%2520%2520dht_read_time%2520%253D%2520time.time%28%29%250A%2520%2520%2520%2520%2520%2520%2520try%253A%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520dht_sensor.measure%28%29%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520temp%2520%253D%2520dht_sensor.temperature%250A%2520%2520%2520%2520%2520%2520%2520except%2520Exception%2520as%2520e%253A%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520pass%250A%2520%2520%2520return%2520temp%250A%250Amotor_2%2520%253D%2520PWM%28Pin%2822%29%29%250Amotor_2.duty_u16%280%29%250A%250Awhile%2520True%253A%250A%2520%2520print%28getTemp%28%29%29%250A%2520%2520if%2520%28getTemp%28%29%29%2520%253E%253D%2520%2828%29%253A%250A%2520%2520%2520%2520motor_2.duty_u16%28100%29%250A%2520%2520else%253A%250A%2520%2520%2520%2520motor_2.duty_u16%280%29"
             style="width: 681px; height: 830px; border:0; transform: scale(1); overflow:hidden;"
             sandbox="allow-scripts allow-same-origin">
@@ -265,10 +273,11 @@
               
             </p>
             <h5>Wiring Diagram</h5><hr>
-                <img src="images/showyourreaction.png" width="500" height="297" alt="blink">
+                <img src="images/showyourreaction.webp" width="500" height="297" alt="blink">
           </div>
           <h5>Project Code<hr>
-          <iframe
+          <iframe 
+            loading="lazy"
             src="https://carbon.now.sh/embed?bg=rgba%28171%2C+184%2C+195%2C+1%29&t=seti&wt=none&l=python&width=681&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=false&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=from%2520time%2520import%2520sleep%250Aimport%2520machine%250Afrom%2520machine%2520import%2520Pin%250Afrom%2520machine%2520import%2520I2C%250Afrom%2520picobricks%2520import%2520SSD1306_I2C%250Aimport%2520time%250A%250Apin_led%2520%253D%2520machine.Pin%287%252C%2520machine.Pin.OUT%29%250Ai2c%2520%253D%2520I2C%280%252C%2520scl%253DPin%285%29%252C%2520sda%253DPin%284%29%252C%2520freq%253D200000%29%250Aoled%2520%253D%2520SSD1306_I2C%28128%252C%252064%252C%2520i2c%252C%2520addr%253D0x3c%29%250Apin_button%2520%253D%2520machine.Pin%2810%252C%2520machine.Pin.IN%29%250Aimport%2520random%250A%250Adef%2520CountDown%28%29%253A%250A%2520%2520global%2520counter%252C%2520TimeF%250A%2520%2520counter%2520%253D%25203%250A%2520%2520while%2520counter%2520%253E%2520%280%29%253A%250A%2520%2520%2520%2520oled.fill%280%29%250A%2520%2520%2520%2520oled.text%28%2522%257B%257D%2522.format%28counter%29%252C%252060%252C%252030%29%250A%2520%2520%2520%2520oled.show%28%29%250A%2520%2520%2520%2520time.sleep%28%281%29%29%250A%2520%2520%2520%2520counter%2520-%253D%25201%250A%250A%250Adef%2520TimerFunc%28%29%253A%250A%2520%2520global%2520counter%252C%2520TimeF%250A%2520%2520TimeF%2520%253D%25200%250A%2520%2520while%2520%28pin_button.value%28%29%29%2520%253D%253D%2520%280%29%253A%250A%2520%2520%2520%2520TimeF%2520%252B%253D%25201%250A%2520%2520%2520%2520time.sleep%28%281%29%29%250A%250A%2520%2520pin_led.off%28%29%250A%2520%2520print%28TimeF%29%250A%2520%2520oled.fill%280%29%250A%2520%2520oled.text%28%2522%257B%257D%2522.format%28%2522Press%2520the%2520button%2522%29%252C%25200%252C%252010%29%250A%2520%2520oled.text%28%2522%257B%257D%2522.format%28%2522to%2520repeat%2522%29%252C%252025%252C%252025%29%250A%2520%2520oled.show%28%29%250A%2520%2520oled.text%28%2522%257B%257D%2522.format%28%2522Score%253A%2522%29%252C%252025%252C%252040%29%250A%2520%2520oled.text%28%2522%257B%257D%2522.format%28TimeF%29%252C%252070%252C%252040%29%250A%2520%2520time.sleep%28%281%29%29%250A%2520%2520oled.show%28%29%250A%250Apin_led.off%28%29%250Aoled.text%28%2522%257B%257D%2522.format%28%2522Press%2520the%2520button%2522%29%252C%25200%252C%252010%29%250Aoled.text%28%2522%257B%257D%2522.format%28%2522TO%2520START%21%2522%29%252C%252025%252C%252035%29%250Aoled.show%28%29%250Awhile%2520True%253A%250A%2520%2520while%2520%28pin_button.value%28%29%29%2520%253D%253D%2520%281%29%253A%250A%2520%2520%2520%2520oled.fill%280%29%250A%2520%2520%2520%2520CountDown%28%29%250A%2520%2520%2520%2520oled.fill%280%29%250A%2520%2520%2520%2520oled.text%28%2522%257B%257D%2522.format%28%2522GO%21%21%21%2522%29%252C%252060%252C%252030%29%250A%2520%2520%2520%2520oled.show%28%29%250A%2520%2520%2520%2520time.sleep%28%28random.randint%281%252C%25205%29%29%29%250A%2520%2520%2520%2520pin_led.on%28%29%250A%2520%2520%2520%2520TimerFunc%28%29%250A"
             style="width: 681px; height: 1250px; border:0; transform: scale(1); overflow:hidden;"
             sandbox="allow-scripts allow-same-origin">

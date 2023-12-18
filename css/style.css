@@ -87,7 +87,7 @@ canvas {
 }
 
 .openConnectButton{
-  content: url('../images/buttons/connect.png');
+  content: url('../images/buttons/connect.webp');
   width: 5rem; 
   visibility: visible;
   border-style: none;
@@ -117,7 +117,7 @@ canvas {
 }
 
 .runPythonButton{
-  content: url('../images/buttons/run.png');
+  content: url('../images/buttons/run.webp');
   width: 5rem; 
   visibility: visible;
   border-style: none;
@@ -132,7 +132,7 @@ canvas {
 }
 
 .documentsButton{
-  content: url('../images/buttons/doc.png');
+  content: url('../images/buttons/doc.webp');
   width: 5rem; 
   visibility: visible;
   border-style: none;
@@ -147,7 +147,7 @@ canvas {
 }
 
 .notConnectedButton{
-  content: url('../images/buttons/notconnected.png');
+  content: url('../images/buttons/notconnected.webp');
   width: 5rem; 
   visibility: visible;
   border-style: none;
@@ -162,7 +162,7 @@ canvas {
 }
 
 .connectedButton{
-  content: url('../images/buttons/connected.png');
+  content: url('../images/buttons/connected.webp');
   width: 5rem; 
   visibility: visible;
   border-style: none;
@@ -177,7 +177,7 @@ canvas {
 }
 
 .openCodeButton{
-  content: url('../images/buttons/codepanel.png');
+  content: url('../images/buttons/codepanel.webp');
   width: 5rem; 
   visibility: visible;
   border-style: none;
@@ -192,7 +192,7 @@ canvas {
 }
 
 .runButton{
-  content: url('../images/buttons/run.png');
+  content: url('../images/buttons/run.webp');
   width: 5rem; 
   visibility: visible;
   border-style: none;
@@ -218,7 +218,7 @@ canvas {
 }
 
 .stopButton{
-  content: url('../images/buttons/stop.png');
+  content: url('../images/buttons/stop.webp');
   width: 5rem; 
   visibility: visible;
   border-style: none;

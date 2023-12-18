@@ -94,6 +94,7 @@ const iconRFID =
 
 Blockly.Blocks['Robotistan_Start'] = {
   init: function() {
+  this.customId = 'robotistanStart'; 
   this.appendDummyInput()
       .appendField(new Blockly.FieldImage(blockIconURI, 40, 40, "icon"))
       .appendField("PicoBricks   ")
