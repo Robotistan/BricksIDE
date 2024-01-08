@@ -1,0 +1,781 @@
+/*css file:style*/
+
+@font-face {
+    font-family: 'Source_Code_Pro';
+    src: url("../fonts/Source_Code_Pro/static/SourceCodePro-Regular.ttf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  body, html {
+    height: 100%;
+    margin: 0;
+    background-color: #fff;
+    font-family: 'Source_Code_Pro';
+    background-size:auto;
+    background-repeat: no-repeat;
+  }
+  
+  .bg {
+    /* The image used */
+    background: url('../images/background.png'); 
+  
+    /* Full height */
+    height: 100%; 
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  .blocklySvg {
+    background: rgba(255, 255, 255, 1);
+  }
+  
+  canvas {
+    background-color: transparent;
+    z-index:200;
+  }
+  
+  .savingButton {
+    content: url('../images/savefile.gif');
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 5rem; 
+    visibility: visible;
+    border-style: none;
+    border-width: 0px;
+    z-index: 101;
+    cursor: pointer;
+    margin: 0.3rem;
+    opacity: 0.8;
+    visibility: hidden;
+  }
+  
+  .progressBar {
+    position: absolute;
+    top: 55%;
+    left: 40%;
+    width: 20%; 
+    border-width: 0px;
+    z-index: 101;
+    opacity: 0.8;
+    visibility: hidden;
+  }
+  
+  .transparentButton {
+    background-color: transparent; 
+    color: white; 
+    border-style: solid;
+    border-width: 1px;
+    border-color: white;
+    padding: 5px;
+  }
+  
+  .picoBricksSimulator{
+    content: url('../images/buttons/simulator.svg');
+    height: 2.3rem; 
+    visibility: visible;
+    border-style: none;
+    border-width: 0px;
+    z-index: 101;
+    cursor: pointer;
+    margin: 0.1rem;
+  }
+  
+  .openConnectButton{
+    content: url('../images/buttons/connect.webp');
+    width: 5rem; 
+    visibility: visible;
+    border-style: none;
+    border-width: 0px;
+    z-index: 101;
+    cursor: pointer;
+    margin: 0.3rem;
+  }
+  
+  .openConnectButton:hover{
+    opacity: 0.85;
+  }
+  
+  .savePythonButton{
+    content: url('../images/buttons/upload.png');
+    width: 12rem; 
+    visibility: visible;
+    border-style: none;
+    border-width: 0px;
+    z-index: 101;
+    cursor: pointer;
+    margin: 0.3rem;
+  }
+  
+  .savePythonButton:hover{
+    opacity: 0.85;
+  }
+  
+  .runPythonButton{
+    content: url('../images/buttons/run.webp');
+    width: 5rem; 
+    visibility: visible;
+    border-style: none;
+    border-width: 0px;
+    z-index: 101;
+    cursor: pointer;
+    margin: 0.3rem;
+  }
+  
+  .runPythonButton:hover{
+    opacity: 0.85;
+  }
+  
+  .documentsButton{
+    content: url('../images/buttons/doc.webp');
+    width: 5rem; 
+    visibility: visible;
+    border-style: none;
+    border-width: 0px;
+    z-index: 101;
+    cursor: pointer;
+    margin: 0.3rem;
+  }
+  
+  .documentsButton:hover{
+    opacity: 0.85;
+  }
+  
+  .notConnectedButton{
+    content: url('../images/buttons/notconnected.webp');
+    width: 5rem; 
+    visibility: visible;
+    border-style: none;
+    border-width: 0px;
+    z-index: 101;
+    cursor: pointer;
+    margin: 0.3rem;
+  }
+  
+  .notConnectedButton:hover{
+    opacity: 0.85;
+  }
+  
+  .connectedButton{
+    content: url('../images/buttons/connected.webp');
+    width: 5rem; 
+    visibility: visible;
+    border-style: none;
+    border-width: 0px;
+    z-index: 101;
+    cursor: pointer;
+    margin: 0.3rem;
+  }
+  
+  .connectedButton:hover{
+    opacity: 0.85;
+  }
+  
+  .openCodeButton{
+    content: url('../images/buttons/codepanel.webp');
+    width: 5rem; 
+    visibility: visible;
+    border-style: none;
+    border-width: 0px;
+    z-index: 101;
+    cursor: pointer;
+    margin: 0.3rem;
+  }
+  
+  .openCodeButton:hover{
+    opacity: 0.85;
+  }
+  
+  .runButton{
+    content: url('../images/buttons/run.webp');
+    width: 5rem; 
+    visibility: visible;
+    border-style: none;
+    border-width: 0px;
+    z-index: 101;
+    cursor: pointer;
+    margin: 0.3rem;
+  }
+  
+  .runButton:hover{
+    opacity: 0.85;
+  }
+  
+  .runButton-d{
+    content: url('../images/buttons/run-d.png');
+    width: 5rem; 
+    visibility: visible;
+    border-style: none;
+    border-width: 0px;
+    z-index: 101;
+    cursor: pointer;
+    margin: 0.3rem;
+  }
+  
+  .stopButton{
+    content: url('../images/buttons/stop.webp');
+    width: 5rem; 
+    visibility: visible;
+    border-style: none;
+    border-width: 0px;
+    z-index: 101;
+    cursor: pointer;
+    margin: 0.3rem;
+  }
+  
+  .stopButton:hover{
+    opacity: 0.85;
+  }
+  
+  .stopButton-d{
+    content: url('../images/buttons/stop-d.png');
+    width: 5rem; 
+    visibility: visible;
+    border-style: none;
+    border-width: 0px;
+    z-index: 101;
+    cursor: pointer;
+    margin: 0.3rem;
+  }
+  
+  .connectButton
+  {
+    background-color: #fd5d0a;
+    color: white;
+    font-weight: bold;
+    font-size: 11pt;
+  }
+  
+  .connectButton:hover
+  {
+    color: white;
+  }
+  
+  .disconnectButton
+  {
+    background-color: #fd5d0a;
+    color: white;
+    font-weight: bold;
+    font-size: 11pt;
+  }
+  
+  .disconnectButton:hover
+  {
+    color: white;
+  }
+  
+  .gotoEditorButton
+  {
+    background-color: #fd5d0a;
+    color: white;
+    font-weight: bold;
+    font-size: 11pt;
+  }
+  
+  .gotoEditorButton:hover
+  {
+    color: white;
+  }
+  
+  .codeButton{
+    margin:1px;
+    background-color: #2dfe32; 
+    color: #0d277d; 
+    font-size: 1vw; 
+    font-family: sans-serif; 
+    width: 9vw;  
+  }
+  
+  .connectDevicePanel
+  {
+    margin: 5px;
+    padding: 10px; 
+    background-color: #fff; 
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: small;
+  }
+  
+  .blockButton{
+    margin:1px;
+    background-color: #fafe32; 
+    color: #0d277d; 
+    font-size: 1vw; 
+    font-family: sans-serif; 
+  }
+  
+  .img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+  .img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  } 
+  
+  .blocklyDiv
+  {
+    color: white;
+    padding: 1px;
+    font-family: cursive, sans-serif;
+    font-size: 2vw;
+    color: black;
+  }
+  
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #c41b1b; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #c41b1b; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #c41b1b; 
+  }
+  
+  /*Loader*/
+  
+  .spinner {
+    width: 100px;
+    height: 80px;
+    text-align: center;
+    font-size: 20px;
+  
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+  
+  .spinner > div {
+    background-color: #fff;
+    height: 100%;
+    width: 6px;
+    display: inline-block;
+    
+    -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+    animation: sk-stretchdelay 1.2s infinite ease-in-out;
+  }
+  
+  .spinner .rect2 {
+    -webkit-animation-delay: -1.1s;
+    animation-delay: -1.1s;
+  }
+  
+  .spinner .rect3 {
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+  }
+  
+  .spinner .rect4 {
+    -webkit-animation-delay: -0.9s;
+    animation-delay: -0.9s;
+  }
+  
+  .spinner .rect5 {
+    -webkit-animation-delay: -0.8s;
+    animation-delay: -0.8s;
+  }
+  
+  @-webkit-keyframes sk-stretchdelay {
+    0%, 40%, 100% { -webkit-transform: scaleY(0.4) }  
+    20% { -webkit-transform: scaleY(1.0) }
+  }
+  
+  @keyframes sk-stretchdelay {
+    0%, 40%, 100% { 
+      transform: scaleY(0.4);
+      -webkit-transform: scaleY(0.4);
+    }  20% { 
+      transform: scaleY(1.0);
+      -webkit-transform: scaleY(1.0);
+    }
+  }
+  
+  .tab
+  {
+    padding: 10px;
+  }
+  
+  .tablinks
+  {
+    
+  }
+  
+  .menuButton:hover
+  {
+    opacity: 0.8;
+  }
+  
+  .vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+  
+  /* Change background color of buttons on hover */
+  .tab button:hover {
+    color: #ff3333;
+  }
+  
+  /* Create an active/current tablink class */
+  .tab button.active {
+    color: #ff3333;
+  }
+  
+  .tab button.active:hover {
+    color: #ff3333;
+  }
+  
+  .ace_editor {
+    border: 1px solid lightgray;
+    margin: auto;
+    width: 100%;
+  }
+  
+  
+  /* Blockly*/
+  
+  #importExport {
+    font-family: monospace;
+  }
+  
+  .ioLabel>.blocklyFlyoutLabelText {
+    font-style: italic;
+  }
+  
+  .blocklyFlyoutLabelText {
+    fill: white !important;
+  }
+  .blocklyFlyoutHeading>.blocklyFlyoutLabelText {
+    font-size: 1.5rem;
+  }
+  line.blocklyFlyoutLine {
+    stroke: white;
+  }
+  .blocklyFlyoutLabelIcon {
+    font-family: 'Font Awesome\ 5 Free';
+    font-size: 1.5rem;
+    font-weight: 900;
+    fill: white;
+  }
+  
+  .blocklyTreeRow {
+    height: 45px !important;
+  }
+  
+  .basicBlocks
+  {
+    background: url('../images/buttons/Basic1.png');
+    background-repeat: no-repeat; 
+    background-size: cover;
+    margin: 0 .3em;
+    padding: 0.2em;
+    width: 30px !important;
+    height: 100% !important;
+    line-height: 45px;
+    min-height: 45px;
+    vertical-align: middle;
+  }
+  
+  .blocklyTreeIconCustom {
+    background: none !important;
+    font-family: 'Font Awesome\ 5 Free';
+    font-weight: 900;
+    font-size: 1.5rem;
+    margin: 0 .3em;
+    padding: 0.2em;
+    width: 30px !important;
+    height: 100% !important;
+    line-height: 45px;
+    min-height: 45px;
+    vertical-align: middle;
+  }
+  .blocklyTreeIconCustom::before {
+    content: "\f12e";
+  }
+  .blocklyTreeIconCustom.logic::before {
+    content: "\f074";
+  }
+  .blocklyTreeIconCustom.loops::before {
+    content: "\f01e";
+  }
+  .blocklyTreeIconCustom.math::before {
+    content: "\f1ec";
+  }
+  .blocklyTreeIconCustom.text::before {
+    content: "\f031";
+  }
+  .blocklyTreeIconCustom.lists::before {
+    content: "\f0ca";
+  }
+  .blocklyTreeIconCustom.colour::before {
+    content: "\f53f";
+  }
+  .blocklyTreeIconCustom.variables::before {
+    content: "\f0c9";
+  }
+  .blocklyTreeIconCustom.functions::before {
+    content: "\f141";
+  }
+
+  /*css file:spinner*/
+  
+/*Loader*/
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 2px solid #FFF;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+  }
+  .loader::after,
+  .loader::before {
+    content: '';  
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #FF3D00;
+    width: 6px;
+    height: 6px;
+    transform: translate(150%, 150%);
+    border-radius: 50%;
+  }
+  .loader::before {
+    left: auto;
+    top: auto;
+    right: 0;
+    bottom: 0;
+    transform: translate(-150%, -150%);
+  }
+  
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  } 
+  
+  .spinner {
+    width: 100px;
+    height: 80px;
+    text-align: center;
+    font-size: 20px;
+  
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+  
+  .spinner > div {
+    background-color: #fff;
+    height: 100%;
+    width: 6px;
+    display: inline-block;
+    
+    -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+    animation: sk-stretchdelay 1.2s infinite ease-in-out;
+  }
+  
+  .spinner .rect1 {
+    -webkit-animation-delay: -1.2s;
+    animation-delay: -1.2s;
+  }
+  
+  .spinner .rect2 {
+    -webkit-animation-delay: -1.1s;
+    animation-delay: -1.1s;
+  }
+  
+  .spinner .rect3 {
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+  }
+  
+  .spinner .rect4 {
+    -webkit-animation-delay: -0.9s;
+    animation-delay: -0.9s;
+  }
+  
+  .spinner .rect5 {
+    -webkit-animation-delay: -0.8s;
+    animation-delay: -0.8s;
+  }
+  
+  @-webkit-keyframes sk-stretchdelay {
+    0%, 40%, 100% { -webkit-transform: scaleY(0.4) }  
+    20% { -webkit-transform: scaleY(1.0) }
+  }
+  
+  @keyframes sk-stretchdelay {
+    0%, 40%, 100% { 
+      transform: scaleY(0.4);
+      -webkit-transform: scaleY(0.4);
+    }  20% { 
+      transform: scaleY(1.0);
+      -webkit-transform: scaleY(1.0);
+    }
+  }
+  
+  .spinner-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #c41b1b;
+    z-index: 999999;
+  }
+
+  /*css file:leftpanel*/
+  .sidepanel {
+    width: 0;
+    position: fixed;
+    z-index: 99;
+    height: 85vh;
+    top: 10vh;
+    right: 0;
+    background-color: #fff;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 0px;
+    resize: horizontal;
+}
+
+
+/*css file:modal*/
+/* The Modal (background) */
+.modal-custom {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    padding-top: 10vh; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(93,160,254); /* Fallback color */
+    background-color: rgba(93,160,254,0.9); /* Black w/ opacity */
+    z-index: 999;
+  }
+  
+  /* Modal Content */
+  .modal-content-custom {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+  }
+  
+  /* Add Animation */
+  @-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+  }
+  
+  @keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+  }
+  
+  /* The Close Button */
+  .close-custom {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close-custom:hover,
+  .close-custom:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .modal-header-custom {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+  }
+  
+  .modal-body-custom {padding: 2px 16px;}
+  
+  .modal-footer-custom {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+  }
+
+
+  /*css file:dropdown*/
+  .dropbtn {
+    background-color: transparent;
+    color: white;
+    box-sizing: border-box;
+    border: none;
+    cursor: pointer;
+    font-size: medium;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 12rem;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    font-size: 0.8rem;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .dropdown-content a:hover {background-color: #f1f1f1}
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown:hover .dropbtn {
+    background-color: hsla(0, 0%, 0%, 0.15);
+  }
+  
