@@ -225,7 +225,7 @@ Blockly.Arduino['DirectionSpeed'] = function (block) {
             '   motor_C1.duty_u16(speedLeft * 650)\n' +
             '   motor_C2.duty_u16(0 * 650)\n\n' +
             '   motor_D1.duty_u16(speedLeft * 650)\n' +
-            '   motor_D2.duty_u16(0 * 650)\n' +
+            '   motor_D2.duty_u16(0 * 650)\n\n' +
             '   return\n\n';
 
     }
@@ -240,12 +240,12 @@ Blockly.Arduino['DirectionSpeed'] = function (block) {
             '   motor_C1.duty_u16(0 * 650)\n' +
             '   motor_C2.duty_u16(speedRight * 650)\n\n' +
             '   motor_D1.duty_u16(0 * 650)\n' +
-            '   motor_D2.duty_u16(speedRight * 650)\n' +
+            '   motor_D2.duty_u16(speedRight * 650)\n\n' +
             '   return\n\n';
             
     }
 
-    code = direction + '(' + speed + ')\n\n';
+    code = direction + '(' + speed + ')\n';
 
     return code;
 };
@@ -403,14 +403,14 @@ Blockly.Arduino['servoMotor'] = function(block) {
     Blockly.Arduino.imports_['import_PWM'] = 'from machine import PWM';
     Blockly.Arduino.imports_['import_fabs'] = 'from math import fabs';
 
+    Blockly.Arduino.definitions_['define_angleFunc'] = 
+                                                        'def CalculateAngle(angle):\n' +
+                                                        '   angle = fabs((angle * (6000 / 180)) + 2000)\n' +
+                                                        '   angle = round(angle)\n' +
+                                                        '   return angle\n';
+                                                        
     Blockly.Arduino.definitions_['define_servo1' + motor] = 'pwm_' + motor + ' = PWM(Pin(' + pin + '))';
     Blockly.Arduino.definitions_['define_servo2' + motor] = 'pwm_' + motor + '.freq(50)';
-
-    Blockly.Arduino.definitions_['define_angleFunc'] = 
-                                                        'def CalculateAngle(angle): \n' +
-                                                        '   angle = fabs((angle * (6000 / 180)) + 2000) \n' +
-                                                        '   angle = round(angle) \n' +
-                                                        '   return angle \n';
     
     code = 'pwm_' + motor + '.duty_u16(CalculateAngle(' + angle + '))\n';
 
@@ -536,60 +536,6 @@ Blockly.Arduino['resettimer'] = function(block) {
     return code;
 }
 
-Blockly.Arduino['connect_wifi'] = function(block) {
-
-    var ssid =  Blockly.Arduino.valueToCode(block, 'SSID', Blockly.Arduino.ORDER_NONE);
-    var password =  Blockly.Arduino.valueToCode(block, 'Password', Blockly.Arduino.ORDER_NONE);
-    
-    ssid = ssid.replaceAll("\"", "");
-    password = password.replaceAll("\"", "");
-
-    var code = "";
-    Blockly.Arduino.imports_['import_network'] = 'import network';
-    Blockly.Arduino.imports_['import_socket'] = 'import socket';
-
-    code = 
-            "ssid = '" + ssid + "'\n" +
-            "password = '" + password + "' \n" +
-            "wlan = network.WLAN(network.STA_IF) \n" +
-            "wlan.active(True) \n" +
-            "wlan.connect(ssid, password) \n";
-
-    return code;
-}
-
-Blockly.Arduino['html_input'] = function(block) {
- 
-    var html =  Blockly.Arduino.valueToCode(block, 'HTML', Blockly.Arduino.ORDER_NONE);
-    var code = '';
-
-    code = '\"\"' + html + '\"\"';
-    return [code, Blockly.Arduino.ORDER_NONE];  
-};
-
-Blockly.Arduino['ip_address'] = function(block) {
-    return ["status[0]", Blockly.Arduino.ORDER_NONE];  
-};
-
-Blockly.Arduino['show_ip'] = function(block) {
-
-    var ipadress =  Blockly.Arduino.valueToCode(block, 'IP_Address', Blockly.Arduino.ORDER_NONE);
-
-    ipadress = ipadress.replaceAll("\"", "");
-
-    var code = "";
-
-    code = 
-            "if wlan.status() != 3: \n" +
-            "   raise RuntimeError('network connection failed') \n" +
-            "else: \n" +
-            "   print('Connected') \n" +
-            "   status = wlan.ifconfig() \n" +
-            "   print( 'ip = ' + " + ipadress + " ) \n";
-
-    return code;
-}
-
 Blockly.Arduino['open_socket'] = function(block) {
 
     var ipadress =  Blockly.Arduino.valueToCode(block, 'IP_Address', Blockly.Arduino.ORDER_NONE);
@@ -623,21 +569,6 @@ Blockly.Arduino['wait_for_connection'] = function(block) {
             "    max_wait -= 1 \n" +
             "    print('waiting for connection...') \n" +
             "    time.sleep(1) \n";
-
-    return code;
-}
-
-Blockly.Arduino['accept_connection'] = function(block) {
-
-    var html =  Blockly.Arduino.valueToCode(block, 'HTML', Blockly.Arduino.ORDER_NONE);
-
-    var code = "";
-    
-    code = 
-            "cl, addr = s.accept() \n" +
-            "cl.send('HTTP/1.0 200 OK\\r\\nContent-type: text/html\\r\\n\\r\\n') \n" +
-            "cl.send(" + html + ") \n" +
-            "cl.close() \n";
 
     return code;
 }
@@ -743,7 +674,7 @@ Blockly.Arduino['dabbleGiveCommand'] = function(block) {
     var code = '';
     var value = block.getFieldValue('VALUE');
   
-    var code = "data == b'" + value + "'";
+    var code = "data == " + value ;
 
     return [code, Blockly.Arduino.ORDER_NONE];
 };
@@ -824,3 +755,16 @@ Blockly.Arduino['insertList'] = function(block) {
 
     return code;
 };
+
+
+Blockly.Arduino['globalVariables'] = function(block) {
+
+    var elements = new Array(block.itemCount_);
+    for (var i = 0; i < block.itemCount_; i++) {
+      elements[i] = Blockly.Arduino.valueToCode(block, 'ADD' + i,
+          Blockly.Arduino.ORDER_NONE) || 'None';
+    }
+    var code = 'global ' + elements.join(', ') ;
+    var codeLast = code + "\n";
+    return codeLast;
+  };

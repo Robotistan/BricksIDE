@@ -188,18 +188,7 @@
     border-color: white;
     padding: 5px;
   }
-  
-  .picoBricksSimulator{
-    content: url('../images/buttons/simulator.webp');
-    height: 2.3rem; 
-    visibility: visible;
-    border-style: none;
-    border-width: 0px;
-    z-index: 101;
-    cursor: pointer;
-    margin: 0.1rem;
-  }
-  
+
   .openConnectButton{
     content: url('../images/buttons/connect.webp');
     width: 5rem; 
@@ -272,6 +261,36 @@
   }
   
   .notConnectedButton:hover{
+    opacity: 0.85;
+  }
+  
+  .connectedButtonBLE{
+    content: url('../images/buttons/connectedBLE.webp');
+    width: 5rem; 
+    visibility: visible;
+    border-style: none;
+    border-width: 0px;
+    z-index: 101;
+    cursor: pointer;
+    margin: 0.3rem;
+  }
+  
+  .connectedButtonBLE:hover{
+    opacity: 0.85;
+  }
+  
+  .notConnectedButtonBLE{
+    content: url('../images/buttons/notconnectedBLE.webp');
+    width: 5rem; 
+    visibility: visible;
+    border-style: none;
+    border-width: 0px;
+    z-index: 101;
+    cursor: pointer;
+    margin: 0.3rem;
+  }
+  
+  .notConnectedButtonBLE:hover{
     opacity: 0.85;
   }
   
@@ -650,14 +669,18 @@
   }
 
   /*css file:navbar-resp*/
-  @media (max-width: 1200px) and (min-width: 991px){
+
+  @media (max-width: 1201px) and (min-width: 991px){
     #btRun{
       max-width: 10%;
     }
     #btStopCode{
-      max-width: 10%;
+      max-width: 10%; 
     }
     #btConnect{
+      max-width: 10%;
+    }
+    #btConnectBLE{
       max-width: 10%;
     }
     #btDocuments{
@@ -665,10 +688,6 @@
     }
     #btCode{
       max-width: 10%;
-    }
-    .picoBricksSimulator{
-      margin-left:1rem;
-      max-width: 5.5rem;
     }
     #navbarResp{
       max-width: 50%;
@@ -678,18 +697,33 @@
       margin: 5px;
       font-size: 12px;
     }
+    #editorTypeResp{
+      margin-left:3rem !important;
+    }
     #sliderResp{
-      margin-left:5.8rem !important;
+      margin-left:5.5rem !important;
+      margin-right: 0rem !important;
     }
     #simulatorResp{
       margin-left: 0rem !important;
     }
-    #langSelect {
-      position: absolute;
-      top: 0;
-      right: 10px;
+    #simulatorIcon{
+      max-height:1.6rem;
+      margin-left:0.5rem;
+    }
+    #navbarDarkDropdownMenuLink{
+      padding:5px;
+    }
+    #langSelect{
+      float:right;
+      margin-left:1rem;
+    }
+    .switch{
+      max-width:40%;
+      max-height:40%;
     }
   }
+
 
   /*css file:modal*/
   /* The Modal (background) */

@@ -30,10 +30,9 @@ function closeProgressPanel()
     document.querySelector("#modalProgress").style.display = "none";
 }
 
-function showModalDialog(message)
+function showModalDialog()
 {
   $("#modalDialog").modal('show');
-  $("#dialogText").text(message);
 }
 
 function showConfirmDialog()
@@ -73,9 +72,14 @@ function RunCode()
       sendCommand(pythoncode);
     }
   }
+  else if(isConnectedBLE){
+    runButtonBLE();
+  }
   else
   {
-    showModalDialog("Please connect to the board");
+    
+    disconnectBluetooth();
+    showModalDialog();
   }
 }
 
@@ -98,7 +102,7 @@ function SaveCode()
   }
   else
   {
-    showModalDialog("Please connect to the board");
+    showModalDialog();
   }
 }
 
@@ -112,7 +116,7 @@ function StopCode()
   }
   else
   {
-    showModalDialog("Please connect to the board");
+    showModalDialog();
   }
 }
 

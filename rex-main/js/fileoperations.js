@@ -14,7 +14,7 @@ function UploadMobile()
 
 async function RexFirmware()
 {
-    fetch('pythonFiles/flash_download_tool_3.9.5.zip')
+  fetch('pythonFiles/flash_download_tool_3.9.5.zip')
     .then(res => res.blob())
     .then(async blob => { await saveFile(blob, "flash_download_tool_3.9.5.zip"); });
 
@@ -31,6 +31,9 @@ function Upload_MPU60_Library()
       saveCode(data, "mpu6050.py");
     });
   }
+  else{
+    showModalDialog();
+  }
 }
 
 function library_Modal(){
@@ -44,11 +47,11 @@ function Upload_REX_Library()
     showProgressPanel(true);
 
     $.get('pythonFiles/REX.txt', function(data) {
-      saveCode(data, "REX.py");
+      saveCode(data, "rex.py");
     });
   }
   else{
-    $("#modalDialog").modal('show');
+    showModalDialog();
   }
 }
 
@@ -139,7 +142,7 @@ function OpenProject(func) {
     reader.readAsText(file)
 
     var fileName = file.name;
-    fileName = fileName.replace(".pb", "");
+    fileName = fileName.replace(".rex", "");
     fileName = fileName.replace(".py", "");
     $("#projectName").text(fileName);
   }
@@ -160,11 +163,11 @@ async function SaveProject()
       return;
 
     const fileHandle = await window.self.showSaveFilePicker({
-                                      suggestedName: 'RexProject.pb',
+                                      suggestedName: 'RexProject.rex',
                                       types: [{
-                                        description: 'picobricks',
+                                        description: 'rexblocks',
                                         accept: {
-                                          'text/plain': ['.pb'],
+                                          'text/plain': ['.rex'],
                                         },
                                       }],
                                     })

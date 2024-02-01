@@ -209,7 +209,7 @@ async function saveCode(pythoncode, filename)
   await writeSerial("02");
   hideProgressPanel();
 
-  showModalDialog("Python file saved into the Pico");
+  $("#modalDownload").modal('show');
 
   ClearConsole();
   setTimeout(ClearConsole, 500);
@@ -228,3 +228,111 @@ async function exec_raw_no_follow(command) {
 
   await writeSerial("04");
 }
+
+
+
+
+let isConnectedBLE = false;
+let connectedDeviceBLE = null;
+let characteristic;
+
+function OpenConnectionFormBLE(){
+if(isConnectedBLE)
+  showConfirmDialogBLE();
+else
+  connectBLE();  
+}
+
+function showConfirmDialogBLE(){
+  $("#modalConfirmBLE").modal('show');
+}
+
+function ConnectedBLEPort(){
+  isConnectedBLE = true;
+  $("#btConnectBLE").removeClass("notConnectedButtonBLE");
+  $("#btConnectBLE").addClass("connectedButtonBLE");
+}
+function DisconnectedBLEPort(){
+  isConnectedBLE = false;
+  $("#btConnectBLE").removeClass("connectedButtonBLE");
+  $("#btConnectBLE").addClass("notConnectedButtonBLE");
+}
+
+async function sendBluetoothData(data) {
+  try {
+    const dataSize = 10;
+    for (let i = 0; i < data.length; i += dataSize) {
+      const newData = data.substring(i, i + dataSize);
+      await characteristic.writeValue(new TextEncoder().encode(newData));
+    }
+  } catch (error) {
+    console.error('Veri gönderme hatası:', error);
+  }
+}
+
+async function connectBLE() {
+if (navigator.bluetooth) {
+  try {
+    const device = await navigator.bluetooth.requestDevice({
+      acceptAllDevices: true,
+      optionalServices: ['6e400001-b5a3-f393-e0a9-e50e24dcca9e'],
+    });
+
+    connectedDeviceBLE = device;
+    await device.gatt.connect();
+    const server = await device.gatt.connect();
+    const service = await server.getPrimaryService('6e400001-b5a3-f393-e0a9-e50e24dcca9e');
+    characteristic = await service.getCharacteristic('6e400002-b5a3-f393-e0a9-e50e24dcca9e');
+    characteristic2 = await service.getCharacteristic('6e400003-b5a3-f393-e0a9-e50e24dcca9e');
+
+    await characteristic2.startNotifications();
+
+    characteristic2.addEventListener('characteristicvaluechanged', (event) => {
+    const value = event.target.value;
+    const decodedValue = new TextDecoder().decode(value);
+    receiveBluetoothData(decodedValue);
+    readValue += decodedValue;
+    readTimer();
+    });
+
+    ConnectedBLEPort();
+    //console.log('Cihaz adı:', device.name);
+    //console.log('Cihaz ID:', device.id);
+    isConnectedBLE= true;
+  } catch (error) {
+    console.error('Bluetooth cihazı bulma hatası:', error);
+  }
+}
+}
+
+async function runButtonBLE(){
+  let key = 'EoChunk';
+  pythoncode = editorPython.getValue();
+  await sendBluetoothData(pythoncode + key);
+}
+
+async function disconnectBluetooth() {
+  try {
+    $("#modalConfirmBLE").modal('hide');
+    if (connectedDeviceBLE && connectedDeviceBLE.gatt && connectedDeviceBLE.gatt.connected) {
+      await connectedDeviceBLE.gatt.disconnect();
+      isConnectedBLE = false;
+      DisconnectedBLEPort();
+      console.log('Bluetooth bağlantısı başarıyla sonlandırıldı.');
+    } else {
+      console.warn('Bluetooth cihazı zaten bağlı değil.');
+    }
+  } catch (error) {
+    console.error('Bluetooth bağlantısı sonlandırma hatası:', error);
+  }
+}  
+
+/*function checkConnectionStatus() {
+  if (connectedDeviceBLE && connectedDeviceBLE.gatt && connectedDeviceBLE.gatt.connected) {
+    console.log('Bluetooth bağlantısı devam ediyor.');
+  } else {
+    console.warn('Bluetooth bağlantısı kesildi veya yok.');
+  }
+}
+setInterval(checkConnectionStatus, 2000);
+*/

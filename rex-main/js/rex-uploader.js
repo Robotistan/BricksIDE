@@ -36,7 +36,7 @@ async function connectSerial() {
           console.log(value);
           readValue += value;
 
-          setInterval(readTimer, 500);
+          setInterval(readTimer, 1000);
         }
         
       } 
@@ -122,7 +122,6 @@ async function sendCommand(pythoncode)
 
     await writeSerial("04");
 
-    
     await writeSerial("03");
     
     await writeSerial("03");
@@ -140,8 +139,7 @@ async function sendCommand(pythoncode)
   }
 }
 
-async function saveCode(pythoncode, filename)
-{
+async function saveCode(pythoncode, filename) {
   await writeSerial("03");
   await writeSerial("03");
   
@@ -155,26 +153,23 @@ async function saveCode(pythoncode, filename)
   var command = "f = open('" + filename + "', 'wb')";
   await exec_raw_no_follow(command);
 
-  
-  //await writeSerial("04");
-  pythoncode = pythoncode.replace(/(\r\n|\n|\r)/gm, '£');
+  // pythoncode = pythoncode.replace(/(\r\n|\n|\r)/gm, '£');
+
   pythoncode = pythoncode.replace(/"/g, '\\"');
-  
-  //console.log(pythoncode);
 
-  var elem = document.getElementById("progressBar"); 
+  var elem = document.getElementById("progressBar");
+
   var width = 0;
-  var parts = pythoncode.length / 256;
-  var incrament = 100 / parts;
+  var lines = pythoncode.split(/\r?\n/); // \n'e göre bölme
 
-  for (var i = 0, s = pythoncode.length; i < s; i += 256) {
-    var subcommand = pythoncode.slice(i, Math.min(i + 256, pythoncode.length));
-    subcommand = subcommand.replace(/£/g, '\\n');
-    //console.log(subcommand);
-    await exec_raw_no_follow('f.write("' + subcommand + '")');
+  for (var i = 0; i < lines.length; i++) {
+    var subcommand = lines[i];
+    await exec_raw_no_follow('f.write("' + subcommand + '\\n")');
     await wait(10);
 
-    width += incrament; 
+    console.log(subcommand);
+
+    width += (100 / lines.length);
     console.log(width);
     if(Math.round(width) <= 100)
     {
@@ -186,9 +181,7 @@ async function saveCode(pythoncode, filename)
   await exec_raw_no_follow("f.close()");
   await writeSerial("02");
   hideProgressPanel();
-
-  showModalDialog("Python file saved into the Rex Main Board");
-
+  $("#modalDownload").modal('show');
   ClearConsole();
   setTimeout(ClearConsole, 500);
 }
