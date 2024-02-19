@@ -2,32 +2,26 @@
 <html>
  <head>
     <title>REX Blocks</title>
-    <link rel="icon" type="image/x-icon" href="images/x8.png">
+    <link rel="icon" type="image/x-icon" href="images/x8.ico">
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/spinner.css">
-    <link rel="stylesheet" href="css/leftpanel.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/modal.css">
-    <link rel="stylesheet" href="css/toogle.css">
-    <link rel="stylesheet" href="css/dropdown.css">
-    <link rel="stylesheet" href="css/bottompanel.css">
+    <link rel="stylesheet" href="css/rexStyle.css">
     <link rel="stylesheet" href="css/introjs.min.css">
     <link rel="stylesheet" href="../css/w3.css">
 
     <script src="../js/jquery-3.3.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    <script src="../js/assetmanager.js"></script>
-    <script src="../js/utils.js"></script>
+    <script async src="../js/assetmanager.js"></script>
+    <script async src="../js/utils.js"></script>
     <script src="../js/serial.js"></script>
     <script src="js/rex-uploader.js"></script>
-    <script src="js/appearange-general.js"></script>
-    <script src="js/appearange-vertical.js"></script>
-    <script src="js/pins.js"></script>
-    <script src="js/fileoperations.js"></script>
+    <script async src="js/appearange-general.js"></script>
+    <script async src="js/appearange-vertical.js"></script>
+    <script async src="js/pins.js"></script>
+    <script async src="js/fileoperations.js"></script>
     <script src="../js/bottompanel.js"></script>
     <script src="../js/intro.min.js"></script>
     <script src="js/firmware-intro.js"></script>
@@ -47,21 +41,21 @@
     <script src="../js/blockly/generators/arduino/procedures.js"></script>
     <script src="js/blockly/generators/arduino/rex.js"></script>
 
-    <script src="../js/blockly/msg/messages.js"></script>
-    <script src="../js/blockly/blocks/extensions.js"></script>
-    <script src="../js/blockly/blocks/logic.js"></script>
-    <script src="../js/blockly/blocks/loops.js"></script>
-    <script src="../js/blockly/blocks/math.js"></script>
-    <script src="../js/blockly/blocks/text.js"></script>
-    <script src="../js/blockly/blocks/lists.js"></script>
-    <script src="../js/blockly/blocks/colour.js"></script>
-    <script src="../js/blockly/blocks/variables.js"></script>
-    <script src="../js/blockly/blocks/variables_dynamic.js"></script>
-    <script src="../js/blockly/blocks/procedures.js"></script>
-    <script src="../js/blockly/blocks/pxt_blockly_functions.js"></script>
-    <script src="../js/blockly/blocks/test_blocks.js"></script>
-    <script src="../js/blockly/blocks/pxt_test_blocks.js"></script>
-    <script src="js/blockly/blocks/rex.js"></script>
+    <script async src="../js/blockly/msg/messages.js"></script>
+    <script async src="../js/blockly/blocks/extensions.js"></script>
+    <script async src="../js/blockly/blocks/logic.js"></script>
+    <script async src="../js/blockly/blocks/loops.js"></script>
+    <script async src="../js/blockly/blocks/math.js"></script>
+    <script async src="../js/blockly/blocks/text.js"></script>
+    <script async src="../js/blockly/blocks/lists.js"></script>
+    <script async src="../js/blockly/blocks/colour.js"></script>
+    <script async src="../js/blockly/blocks/variables.js"></script>
+    <script async src="../js/blockly/blocks/variables_dynamic.js"></script>
+    <script async src="../js/blockly/blocks/procedures.js"></script>
+    <script async src="../js/blockly/blocks/pxt_blockly_functions.js"></script>
+    <script async src="../js/blockly/blocks/test_blocks.js"></script>
+    <script async src="../js/blockly/blocks/pxt_test_blocks.js"></script>
+    <script async src="js/blockly/blocks/rex.js"></script>
 
     <script id="langSc" src="../js/blockly/msg/js/en.js"></script>
 
@@ -98,7 +92,7 @@
         <div class="row navbarResp" style="background-color: #162d4a" >
             <div class="col-md-9">
                 <nav class="navbar navbar-expand-lg navbar-light">
-                    <a href="index.html"><img src="images/rex-ici-dolu.png" style="height: 5.5vh; margin-top:0.2rem; margin-left:0.2rem;"></a>
+                    <a href="index.html"><img src="images/rex-ici-dolu.webp" style="height: 5.5vh; margin-top:0.2rem; margin-left:0.2rem;"></a>
 
                     <div class="navbar-brand" style="width: 1.7rem"></div>
 
@@ -254,7 +248,7 @@
 
 
     <div id="documentsPanel" class="sidepanel">
-        <iframe src="https://rex-rdt.readthedocs.io/en/latest/" id="documentsFrame" width="100%" height="99%"></iframe>
+        <iframe loading="lazy" src="https://rex-rdt.readthedocs.io/en/latest/" id="documentsFrame" width="100%" height="99%"></iframe>
     </div>
 
     <div class="modal fade" tabindex="-1" role="dialog" id="modalDialog">
@@ -356,7 +350,7 @@
                     <div class="row" style="text-align: center; align-items: center; margin: 10px;">
                         <div class="col-md-6">
                             <span style="color: #162d4a">ESP32</span>
-                            <img src="images/rexEsp.png" style="width: 65%">
+                            <img src="images/rexEsp.webp" style="width: 65%">
                         </div>
                         <div class="col-md-6">
                             <button type="button" class="btn btn-success" onclick="RexFirmware()"><i class="fa fa-download" aria-hidden="true"></i></button>
