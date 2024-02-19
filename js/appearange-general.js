@@ -72,13 +72,8 @@ function RunCode()
       sendCommand(pythoncode);
     }
   }
-  else if(isConnectedBLE){
-    runButtonBLE();
-  }
   else
   {
-    
-    disconnectBluetooth();
     showModalDialog();
   }
 }

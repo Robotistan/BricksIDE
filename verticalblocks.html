@@ -116,7 +116,6 @@
             <div class="navbar-brand" style="width: 1rem"></div>
 
             <img class="notConnectedButton" onclick="OpenConnectionForm();" id="btConnect"/>
-            <img class="notConnectedButtonBLE" onclick="OpenConnectionFormBLE();" id="btConnectBLE"/>
             <img class="documentsButton" id="btDocuments" onclick="ShowDocumentsPanel()"/>
             <img class="openCodeButton" onclick="ShowEditorBlockPython();" id="btCode"/>
             
@@ -271,6 +270,24 @@
   </div>
 </div>
 
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modalSafari">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">BricksIDE is Currently Only Available in Google Chrome</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="dialogText">
+        Please use Google Chrome for a seamless experience. We are working on resolving this issue.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="modal fade" tabindex="-1" role="dialog" id="modalConfirm">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -280,20 +297,6 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" onclick="disConnectSerial()">Confirm</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" tabindex="-1" role="dialog" id="modalConfirmBLE">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-body" id="dialogText">
-        Do you want to close the connection?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="disconnectBluetooth()">Confirm</button>
       </div>
     </div>
   </div>

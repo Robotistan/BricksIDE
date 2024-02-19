@@ -25,6 +25,8 @@ var editorPython;
 var isShowEditorBlockPython = false;
 var isShowDocumentsPanel = false;
 var block = true; 
+var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
 
 function fadeOutEffect() {
     var fadeTarget = document.querySelector('#preloader');
@@ -42,6 +44,11 @@ function fadeOutEffect() {
 }
 
 function PageLoad() {
+
+  if (isSafari) {
+  $("#modalSafari").modal('show');
+  }
+
   storage = window.localStorage;
   storage.setItem("Page", "Vertical");
   setAppearance();
