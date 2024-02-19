@@ -26,7 +26,7 @@ var isShowEditorBlockPython = false;
 var isShowDocumentsPanel = false;
 var block = true; 
 var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-
+var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 
 function fadeOutEffect() {
     var fadeTarget = document.querySelector('#preloader');
@@ -45,7 +45,7 @@ function fadeOutEffect() {
 
 function PageLoad() {
 
-  if (isSafari) {
+  if (isSafari || isFirefox) {
   $("#modalSafari").modal('show');
   }
 
