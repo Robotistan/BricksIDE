@@ -468,17 +468,17 @@
   
   /* Track */
   ::-webkit-scrollbar-track {
-    background: #c41b1b; 
+    background: white; 
   }
    
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #c41b1b; 
+    background: #CECDCE; 
   }
   
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #c41b1b; 
+    background: #CECDCE;
   }
   
   /*Loader*/
@@ -542,11 +542,6 @@
   .tab
   {
     padding: 10px;
-  }
-  
-  .tablinks
-  {
-    
   }
   
   .menuButton:hover

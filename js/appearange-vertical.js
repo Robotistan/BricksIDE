@@ -44,7 +44,7 @@ function fadeOutEffect() {
 }
 
 function PageLoad() {
-
+  fadeOutEffect()
   if (isSafari || isFirefox) {
   $("#modalSafari").modal('show');
   }

@@ -23,4 +23,71 @@ textarea {
     width: 2em;
     color: #ccc;
     text-align: right;
-  }
+  }   
+  .card{
+  margin-bottom: 15px;
+  margin-right: 15px;
+}
+.btn.btn-primary {
+  background-color: rgb(196, 27, 27);
+  border-color:  rgb(196, 27, 27);
+  padding: 0.2rem 0.2rem; 
+  position: absolute;
+  bottom: 1rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.btn.btn-primary:hover {
+  background-color: rgb(150, 15, 15);
+  border-color:  rgb(150, 15, 15);
+  transform: scale(1.03); 
+  position: absolute;
+  bottom: 1rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.btn.btn-primary2 {
+  background-color: rgb(226, 98, 48);
+  border-color:   rgb(234,56,15);
+  padding: 0.2rem 0.2rem; 
+  color:white;
+  position: absolute;
+  bottom: 1rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  
+}
+.btn.btn-primary2:hover {
+  background-color: rgb(234,56,15);
+  border-color:  rgb(234,56,15);
+  transform: scale(1.03); 
+  color:white;
+  position: absolute;
+  bottom: 1rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+
+.card-title_enlarged-title2{
+  font-size: 20px;
+  font-weight: 600;
+  color: rgb(226, 98, 48);
+}
+.card{
+min-height: 12.5rem;
+}
+
+body{
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+font-size: 1rem;
+}
+
+.card-title_enlarged-title{
+  font-size: 20px;
+  font-weight: 600;
+  color: rgb(196, 27, 27);
+}
+h5{
+  font-size:medium;
+}
