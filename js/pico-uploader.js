@@ -136,7 +136,6 @@ async function sendCommand(pythoncode)
 
     await writeSerial("03");
     
-
     for (var i = 0; i < 5; i++ ) {
       await writeSerial("01");
       
@@ -144,14 +143,13 @@ async function sendCommand(pythoncode)
 
     await writeSerial("04");
 
-    
     await writeSerial("03");
     
     await writeSerial("03");
  
     await exec_raw_no_follow(pythoncode);
     
-    await writeSerial("04");
+    //await writeSerial("04");
 
     hideProgressPanel();
     ClearConsole();

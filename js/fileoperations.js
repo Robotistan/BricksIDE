@@ -45,6 +45,30 @@ function UploadLibrary()
   }
 }
 
+async function UploadBerryFirmware()
+{
+  fetch('python/berry-firmware.uf2')
+    .then(res => res.blob())
+    .then(async blob => { await saveFile(blob, "berry-firmware.uf2"); });
+
+    $("#modalFirmware").modal('hide');
+}
+
+function UploadBerryLibrary()
+{
+  if(isConnected)
+  {
+    showProgressPanel(true);
+
+    $.get('python/berry.txt', function(data) {
+      saveCode(data, "berry-library.py");
+    });
+  }
+  else{
+    $("#modalDialog").modal('show');
+  }
+}
+
 function LoadCode(code)
 {
   xmlText = code;

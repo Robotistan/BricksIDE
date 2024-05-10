@@ -1,5 +1,15 @@
 /*css file:spinner*/
-
+.BerryBotIcon {
+  background-image: url("../images/morBerry.svg");
+  background-repeat: no-repeat;
+  margin-left:1.2rem;
+  padding: 0.1em;
+  width: 30px !important;
+  height: 100% !important;
+  line-height: 50px;
+  min-height: 50px;
+  vertical-align: middle;
+}
 /*Loader*/
 .loader {
     width: 48px;

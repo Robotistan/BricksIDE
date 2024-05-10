@@ -38,6 +38,15 @@ Blockly.JavaScript['Robotistan_Start'] = function(block) {
     return code;
 }
 
+Blockly.JavaScript['Berry_Start'] = function(block) {
+// TODO: Assemble JavaScript into code variable.
+    var code = "";
+
+    code = "PicoBricksStart();\n";
+
+    return code;
+}
+
 Blockly.JavaScript['writeTextScreen'] = function(block) {
 
     var writeValue =  Blockly.JavaScript.valueToCode(block, 'WriteValue', Blockly.JavaScript.ORDER_ASSIGNMENT);

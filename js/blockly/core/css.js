@@ -999,7 +999,9 @@ Blockly.Css.CONTENT = [
   '.blocklyTreeSelected .blocklyTreeIcon {',
     'color: #fff;',
   '}',
-
+  '.blocklyTreeSelected .blocklyTreeIcon {',
+  'background-image: url("images/beyazBerry.svg");',
+  '}',
 
 
   /* Colour Picker Field */

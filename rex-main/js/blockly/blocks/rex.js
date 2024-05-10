@@ -105,23 +105,50 @@ Blockly.Blocks['stopMotors'] = {
 };
 
 Blockly.Blocks['trackingState'] = {
-    init: function () {
-        this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(iconTracking, 30, 30, "icon"))
-            .appendField("Tracking state is")
-            .appendField(new Blockly.FieldDropdown([
-                [" \u2B24  \u2B24", "forward"],
-                [" \u3007  \u2B24", "right"],
-                [" \u2B24  \u3007", "left"],
-                [" \u3007  \u3007", "backward"],
-            ]), "VALUE");
+  init: function () {
+      this.appendDummyInput()
+          .appendField(new Blockly.FieldImage(iconTracking, 30, 30, "icon"))
+          .appendField("Tracking state is")
+          .appendField(new Blockly.FieldDropdown([
+              [" \u2B24  \u2B24", "forward"],
+              [" \u3007  \u2B24", "right"],
+              [" \u2B24  \u3007", "left"],
+              [" \u3007  \u3007", "backward"],
+          ]), "VALUE");
 
-        this.setOutput(true, null);
-        this.setColour("#162d4a");
-        this.setTooltip("");
-        this.setHelpUrl("");
-        this.setOutputShape(Blockly.OUTPUT_SHAPE_HEXAGONAL)
-    }
+      this.setOutput(true, null);
+      this.setColour("#162d4a");
+      this.setTooltip("");
+      this.setHelpUrl("");
+      this.setOutputShape(Blockly.OUTPUT_SHAPE_HEXAGONAL)
+      this.setOnChange(function(changeEvent) {
+        if (this.workspace.trackingColor) {
+          console.log("Current tracking color: " + this.workspace.trackingColor); //kaydedilen değeri oku
+        }
+      });
+  }
+};
+
+Blockly.Blocks['trackingThreshold'] = {
+init: function(){
+  this.appendDummyInput()
+          .appendField(new Blockly.FieldImage(iconTracking, 30, 30, "icon"))
+          .appendField("Tracking line color")
+          .appendField(new Blockly.FieldDropdown([
+              ["White", "White"],
+              ["Black", "Black"],
+          ]), "COLOR");
+
+      this.setColour("#162d4a");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setTooltip("");
+      this.setHelpUrl("");
+  this.setOnChange(function(changeEvent) {
+    // Değeri workspace'e kaydet
+    this.workspace.trackingColor = this.getFieldValue('COLOR');
+  });
+}
 };
 
 Blockly.Blocks['trackingSensor'] = {

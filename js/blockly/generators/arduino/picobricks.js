@@ -836,3 +836,341 @@ Blockly.Arduino['insertList'] = function(block) {
 
     return code;
 };
+
+
+
+var drawingIndex = 0;
+
+Blockly.Arduino['Berry_Start'] = function(block) {
+    // TODO: Assemble JavaScript into code variable.
+    var code = "";
+    drawingIndex = 1;
+    return code;
+}
+
+Blockly.Arduino['BerryController'] = function(block) {
+    var options = block.getFieldValue('OPTIONS');
+    var code = "";
+
+    Blockly.Arduino.imports_['import_Pin'] = 'from machine import Pin';
+    Blockly.Arduino.imports_['import_NEC16'] = 'from berrybot import NEC_16';
+    Blockly.Arduino.imports_['import_IRRX'] = 'from berrybot import IR_RX';
+
+    Blockly.Arduino.definitions_['define_BerryControllerVar'] = 'IR_PIN = 20\n' + 
+                                                                'ir_data = 0\n' + 
+                                                                'data_rcvd = False\n';
+    Blockly.Arduino.definitions_['define_BerryControllerDef'] = 'def ir_callback(data, addr, ctrl):\n' +
+                                                                '   global ir_data\n' +
+                                                                '   global ir_addr, data_rcvd\n' +
+                                                                '   if data > 0:\n' +
+                                                                '       ir_data = data\n' +
+                                                                '       ir_addr = addr\n' +
+                                                                '       print("Data {:02x} Addr {:04x}".format(data, addr))\n' +
+                                                                '       data_rcvd = True\n';
+    Blockly.Arduino.definitions_['define_BerryController'] = "ir = NEC_16(Pin(20, Pin.IN), ir_callback)";
+    
+    code = 'ir_data == '+options;
+    return [code, Blockly.Arduino.ORDER_NONE];
+};
+
+Blockly.Arduino['BerryDirectionSpeed'] = function(block) {
+    var direction = block.getFieldValue('Direction');
+    var speed = Blockly.Arduino.valueToCode(block, 'SPEED', Blockly.Arduino.ORDER_NONE) || '0';
+    var code = '';
+
+    Blockly.Arduino.imports_['import_Pin'] = 'from machine import Pin';
+    Blockly.Arduino.imports_['import_TB6612'] = 'from berrybot import TB6612';
+
+    //burda pin tanımlamadan direkt pin.js'den de çekebilirim pinler buzzerda olduğu gibi
+    Blockly.Arduino.definitions_['define_BerryMotorsPins'] = 'MOTOR_A1_PIN = 25\n'+
+                                                             'MOTOR_A2_PIN = 24\n'+
+                                                             'MOTOR_B1_PIN = 22\n'+
+                                                             'MOTOR_B2_PIN = 23\n'+
+                                                             'MOTOR_PWM_A_PIN = 15\n'+
+                                                             'MOTOR_PWM_B_PIN = 21\n';
+    Blockly.Arduino.definitions_['define_BerryMotors'] = 'motor = TB6612(MOTOR_A1_PIN, MOTOR_A2_PIN, MOTOR_B1_PIN, MOTOR_B2_PIN, MOTOR_PWM_A_PIN, MOTOR_PWM_B_PIN)\n';
+
+    code = "motor." + direction +"("+ speed +" * 650)\n";
+
+    return code;
+}
+
+Blockly.Arduino['BerryStopMotors'] = function(block){
+    return "motor.stop()\n";
+}
+
+Blockly.Arduino['BerryPlayBuzzer'] = function(block) {
+
+    var frequency =  Blockly.Arduino.valueToCode(block, 'FREQUENCY', Blockly.Arduino.ORDER_NONE) || '0';
+
+    var code = "";
+    var pin = BerryBuzzer;
+
+    Blockly.Arduino.imports_['import_Pin'] = 'from machine import Pin';
+    Blockly.Arduino.imports_['import_PWM'] = 'from machine import PWM';
+    Blockly.Arduino.definitions_['define_buzzer1'] = 'buzzer = PWM(Pin(' + pin + '))\n';
+    code = 
+            'buzzer.freq(' + frequency + ')\n' +
+            'buzzer.duty_u16(2000)\n';
+
+    return code;
+};
+
+Blockly.Arduino['BerryBuzzerInterval'] = function(block) {
+    var noteTime = block.getFieldValue('INTERVAL');
+    var code = "";
+    var interval = 0;
+
+    if(noteTime == "1")
+        interval = 0.250;
+    else if(noteTime == "2")
+        interval = 0.500;
+    else if(noteTime == "3")
+        interval = 1;
+
+    code =  'sleep(' + interval + ')\n' +
+            'buzzer.duty_u16(0)\n';
+
+    return code;
+};
+
+Blockly.Arduino['BerryShow_leds'] = function(block) {
+    var code = '';
+    var hexCode = [];
+    var ledStates = [];
+    for (var i = 0; i < 5; i++) {
+        for (var j = 0; j < 5; j++) {
+            var index = i * 5 + j;
+            ledStates.push(block.getFieldValue('ICON' + index) === 'images/checked.png' ? 1 : 0);
+        }
+    }
+
+    var rowValues = [];
+    for (var i = 0; i < 5; i++) {
+        rowValues.push(Math.pow(2, i)); // satırlarda 2 üzerili işlem
+    }
+    
+    var colResults = [];
+    for (var i = 4; i >= 0; i--) {
+        var colResult = 0;
+        for (var j = 4; j >= 0; j--) {
+            var index = j * 5 + i;
+            colResult += rowValues[j] * ledStates[index]; // sütun değerleri toplamı
+        }
+        colResults.push("0x" + colResult.toString(16).padStart(2, '0')); // dec değeri hex'e çevirme
+    }
+    
+    hexCode += '[' + colResults.join(', ') + ']';
+    
+
+    var drawingVarName = 'yourDrawing' + drawingIndex;
+    //console.log(drawingVarName);
+
+    Blockly.Arduino.imports_['import_Pin'] = 'from machine import Pin';
+    Blockly.Arduino.imports_['import_Timer'] = 'from machine import Timer';
+    Blockly.Arduino.imports_['import_UART'] = "from machine import UART";
+    Blockly.Arduino.imports_['import_I2C'] = "from machine import I2C";
+    Blockly.Arduino.imports_['import_PWM'] = "from machine import PWM";
+    Blockly.Arduino.imports_['import_time_utime'] = "import time, utime";
+    Blockly.Arduino.imports_['import_berryBot'] = 'from berrybot import TB6612, NEC_ABC, NEC_16, WS2812, IR_RX';
+
+    Blockly.Arduino.definitions_['define_BerryShowVar'] = 'ledRow = 0\n' +
+                                                          'ledArrayBuffer = bytearray(5)\n' +
+                                                          'rowPins= [7, 11, 12, 13, 17]\n' +
+                                                          'colPins = [3, 2, 16, 19, 18]\n\n';
+
+    Blockly.Arduino.definitions_['define_BerryShowVarDraw' + drawingIndex] = drawingVarName + ' = bytearray(' + hexCode + ')\n';
+
+    Blockly.Arduino.definitions_['define_BerryShowLedFuncs'] = 'def setLedMatrix():\n' +
+                                                                '    for i in range(0, 5):\n' +
+                                                                '        machine.Pin(colPins[i], machine.Pin.OUT)\n' +
+                                                                '        machine.Pin(rowPins[i], machine.Pin.OUT)\n\n' +
+                                                                'def drawScreen(buffer):\n' +
+                                                                '    for i in range(0, 5):\n' +
+                                                                '        ledArrayBuffer[i] = buffer[i]\n\n' +
+                                                                'def setColumns(b):\n' +
+                                                                '    machine.Pin(colPins[0]).value((~b >> 0) & 0x01)\n' +
+                                                                '    machine.Pin(colPins[1]).value((~b >> 1) & 0x01)\n' +
+                                                                '    machine.Pin(colPins[2]).value((~b >> 2) & 0x01)\n' +
+                                                                '    machine.Pin(colPins[3]).value((~b >> 3) & 0x01)\n' +
+                                                                '    machine.Pin(colPins[4]).value((~b >> 4) & 0x01)\n\n' +
+                                                                'def tick(timer):\n' +
+                                                                '    global ledRow, drawing\n' +
+                                                                '    drawScreen(drawing)\n' +
+                                                                '    if (ledRow == 5):\n' +
+                                                                '        ledRow = 0\n' +
+                                                                '    setColumns(ledArrayBuffer[ledRow])\n' +
+                                                                '    machine.Pin(rowPins[ledRow]).value(1)\n' +
+                                                                '    time.sleep_ms(1)\n' +
+                                                                '    machine.Pin(rowPins[ledRow]).value(0)\n' +
+                                                                '    ledRow = ledRow + 1\n';
+
+    code += 'drawing = ' + drawingVarName + '\n';
+    code += 'setLedMatrix()\n';
+    code += 'myTimer = Timer(-1)\n';
+    code += 'myTimer.init(period=5, mode=Timer.PERIODIC, callback=tick)\n';
+
+    drawingIndex++;  
+    return code;
+}; 
+
+Blockly.Arduino['BerryReadDistance'] = function(block) {
+    var code = "";
+
+    Blockly.Arduino.imports_['import_time_pulse_us'] = 'from machine import time_pulse_us';
+    Blockly.Arduino.imports_['import_Berry_hcsr04'] = 'from berrybot import HCSR04';
+
+    //pinler değişecek
+    Blockly.Arduino.definitions_['define_Berry_HCSR04sensor'] = 'sensor = HCSR04(trigger_pin=8, echo_pin=9, echo_timeout_us=10000)';
+
+    code = 'sensor.distance_cm()';
+
+    return [code, Blockly.Arduino.ORDER_NONE];
+}
+
+Blockly.Arduino['BerryTrackingState'] = function (block) {
+    var value = block.getFieldValue('VALUE');
+    var code = '';
+    var rightPin = 1; //değişecek
+    var leftPin = 1; //değişecek
+
+    Blockly.Arduino.imports_['import_machine'] = 'import machine';
+    Blockly.Arduino.imports_['import_Pin'] = 'from machine import Pin';
+    Blockly.Arduino.imports_['import_ADC'] = 'from machine import ADC';
+
+    Blockly.Arduino.definitions_['define_stackingState'] = 'rightSensor = ADC(Pin('+rightPin+'))\n'+
+                                                           'leftSensor = ADC(Pin('+leftPin+'))\n'+
+                                                           'THRESHOLD = 50000';
+    
+    if (value == "forward") {
+        code = 'leftSensor.read_u16() >= THRESHOLD and rightSensor.read_u16() >= THRESHOLD'
+    }
+    else if (value == "right") {
+        code = 'leftSensor.read_u16() < THRESHOLD and rightSensor.read_u16() > THRESHOLD'
+    }
+    else if (value == "left") {
+        code = 'leftSensor.read_u16() > THRESHOLD and rightSensor.read_u16() < THRESHOLD'
+    }
+    else if (value == "backward") {
+        code = 'leftSensor.read_u16() < THRESHOLD and rightSensor.read_u16() < THRESHOLD'
+    }
+
+    return [code, Blockly.Arduino.ORDER_NONE];
+};
+
+Blockly.Arduino['Berry_LDR'] = function(block) {
+    var code = '';
+    var option = block.getFieldValue('VALUE');
+    
+    Blockly.Arduino.imports_['import_Pin'] = 'from machine import Pin';
+    Blockly.Arduino.imports_['import_ADC']  = "from machine import ADC";
+
+    var pinRight = BerryLDR_right;
+    var pinLeft = BerryLDR_left
+
+    if(option === 'right')  {Blockly.Arduino.definitions_['define_BerryLDR_RightPin'] = 'ldr_right = ADC('+ pinRight +')';}
+    else if(option === 'left')  {Blockly.Arduino.definitions_['define_BerryLDR_LeftPin'] = 'ldr_left = ADC('+ pinLeft +')';}
+
+    code = 'ldr_' + option +'.read_u16()';
+
+    return [code, Blockly.Arduino.ORDER_NONE];
+}
+
+Blockly.Arduino['Berry_SelectLedsDrawing'] = function(block) {
+    var code = '';
+    var drawing = block.getFieldValue('DRAWINGS');
+    var hexCode = '';
+
+    hexCode = drawing;
+
+    var drawingVarName = hexCode + drawingIndex;
+    //console.log(drawingVarName);
+
+    Blockly.Arduino.imports_['import_Pin'] = 'from machine import Pin';
+    Blockly.Arduino.imports_['import_Timer'] = 'from machine import Timer';
+    Blockly.Arduino.imports_['import_UART'] = "from machine import UART";
+    Blockly.Arduino.imports_['import_I2C'] = "from machine import I2C";
+    Blockly.Arduino.imports_['import_PWM'] = "from machine import PWM";
+    Blockly.Arduino.imports_['import_time_utime'] = "import time, utime";
+    Blockly.Arduino.imports_['import_berryBot'] = 'from berrybot import TB6612, NEC_ABC, NEC_16, WS2812, IR_RX';
+
+    Blockly.Arduino.definitions_['define_BerryShowVar'] = 'ledRow = 0\n' +
+                                                          'ledArrayBuffer = bytearray(5)\n' +
+                                                          'rowPins= [7, 11, 12, 13, 17]\n' +
+                                                          'colPins = [3, 2, 16, 19, 18]\n\n';
+
+    if(drawing === "Smile"){
+        Blockly.Arduino.definitions_['define_BerryShowVarDraw' + drawingIndex] = drawingVarName + ' = bytearray([0x08,0x13,0x10,0x13,0x08])\n';}
+    else if(drawing === "Heart"){
+        Blockly.Arduino.definitions_['define_BerryShowVarDraw' + drawingIndex] = drawingVarName + ' = bytearray([0x06,0x0F,0x1E,0x0F,0x06])\n';}
+    else if(drawing === "Yes"){
+        Blockly.Arduino.definitions_['define_BerryShowVarDraw' + drawingIndex] = drawingVarName + ' = bytearray([0x02,0x04,0x08,0x10,0x08])\n';}
+    else if(drawing === "No"){
+        Blockly.Arduino.definitions_['define_BerryShowVarDraw' + drawingIndex] = drawingVarName + ' = bytearray([0x11,0x0A,0x04,0x0A,0x11])\n';}
+    else if(drawing === "Forward"){
+        Blockly.Arduino.definitions_['define_BerryShowVarDraw' + drawingIndex] = drawingVarName + ' = bytearray([0x04,0x08,0x1F,0x08,0x04])\n';}
+    else if(drawing === "Backward"){
+        Blockly.Arduino.definitions_['define_BerryShowVarDraw' + drawingIndex] = drawingVarName + ' = bytearray([0x04,0x02,0x1F,0x02,0x04])\n';}
+    else if(drawing === "Left"){
+        Blockly.Arduino.definitions_['define_BerryShowVarDraw' + drawingIndex] = drawingVarName + ' = bytearray([0x04,0x0E,0x15,0x04,0x04])\n';}
+    else if(drawing === "Right"){
+        Blockly.Arduino.definitions_['define_BerryShowVarDraw' + drawingIndex] = drawingVarName + ' = bytearray([0x04,0x04,0x15,0x0E,0x04])\n';}
+    else if(drawing === "Empty"){
+        Blockly.Arduino.definitions_['define_BerryShowVarDraw' + drawingIndex] = drawingVarName + ' = bytearray([0x00,0x00,0x00,0x00,0x00])\n';}
+    else if(drawing === "Full"){
+        Blockly.Arduino.definitions_['define_BerryShowVarDraw' + drawingIndex] = drawingVarName + ' = bytearray([0x1F,0x1F,0x1F,0x1F,0x1F])\n';}
+    else if(drawing === "Diamond"){
+        Blockly.Arduino.definitions_['define_BerryShowVarDraw' + drawingIndex] = drawingVarName + ' = bytearray([0x04,0x0A,0x11,0x0A,0x04])\n';}
+    else if(drawing === "Duck"){
+        Blockly.Arduino.definitions_['define_BerryShowVarDraw' + drawingIndex] = drawingVarName + ' = bytearray([0x04,0x1E,0x1E,0x18,0x08])\n';}
+    else if(drawing === "Bluetooth"){
+        Blockly.Arduino.definitions_['define_BerryShowVarDraw' + drawingIndex] = drawingVarName + ' = bytearray([0x01,0x05,0x15,0x05,0x01])\n';}
+    else if(drawing === "Ghost"){
+        Blockly.Arduino.definitions_['define_BerryShowVarDraw' + drawingIndex] = drawingVarName + ' = bytearray([0x1E,0x0D,0x1F,0x0D,0x1E])\n';}
+    else if(drawing === "Giraffe"){
+        Blockly.Arduino.definitions_['define_BerryShowVarDraw' + drawingIndex] = drawingVarName + ' = bytearray([0x00,0x18,0x08,0x1F,0x01])\n';}
+    else if(drawing === "Sad"){
+        Blockly.Arduino.definitions_['define_BerryShowVarDraw' + drawingIndex] = drawingVarName + ' = bytearray([0x10,0x0A,0x08,0x0A,0x10])\n';}
+    else if(drawing === "Square"){
+        Blockly.Arduino.definitions_['define_BerryShowVarDraw' + drawingIndex] = drawingVarName + ' = bytearray([0x00,0x0E,0x0A,0x0E,0x00])\n';}
+    else if(drawing === "Sunny"){
+        Blockly.Arduino.definitions_['define_BerryShowVarDraw' + drawingIndex] = drawingVarName + ' = bytearray([0x11,0x0E,0x0A,0x0E,0x11])\n';}
+    else if(drawing === "Umbrella"){
+        Blockly.Arduino.definitions_['define_BerryShowVarDraw' + drawingIndex] = drawingVarName + ' = bytearray([0x02,0x03,0x1F,0x13,0x02])\n';}
+    else if(drawing === "Tracker"){
+        Blockly.Arduino.definitions_['define_BerryShowVarDraw' + drawingIndex] = drawingVarName + ' = bytearray([0x07,0x04,0x1F,0x04,0x07])\n';}
+
+
+
+    Blockly.Arduino.definitions_['define_BerryShowLedFuncs'] = 'def setLedMatrix():\n' +
+                                                                '    for i in range(0, 5):\n' +
+                                                                '        machine.Pin(colPins[i], machine.Pin.OUT)\n' +
+                                                                '        machine.Pin(rowPins[i], machine.Pin.OUT)\n\n' +
+                                                                'def drawScreen(buffer):\n' +
+                                                                '    for i in range(0, 5):\n' +
+                                                                '        ledArrayBuffer[i] = buffer[i]\n\n' +
+                                                                'def setColumns(b):\n' +
+                                                                '    machine.Pin(colPins[0]).value((~b >> 0) & 0x01)\n' +
+                                                                '    machine.Pin(colPins[1]).value((~b >> 1) & 0x01)\n' +
+                                                                '    machine.Pin(colPins[2]).value((~b >> 2) & 0x01)\n' +
+                                                                '    machine.Pin(colPins[3]).value((~b >> 3) & 0x01)\n' +
+                                                                '    machine.Pin(colPins[4]).value((~b >> 4) & 0x01)\n\n' +
+                                                                'def tick(timer):\n' +
+                                                                '    global ledRow, drawing\n' +
+                                                                '    drawScreen(drawing)\n' +
+                                                                '    if (ledRow == 5):\n' +
+                                                                '        ledRow = 0\n' +
+                                                                '    setColumns(ledArrayBuffer[ledRow])\n' +
+                                                                '    machine.Pin(rowPins[ledRow]).value(1)\n' +
+                                                                '    time.sleep_ms(1)\n' +
+                                                                '    machine.Pin(rowPins[ledRow]).value(0)\n' +
+                                                                '    ledRow = ledRow + 1\n';
+
+    code += 'drawing = ' + drawingVarName + '\n';
+    code += 'setLedMatrix()\n';
+    code += 'myTimer = Timer(-1)\n';
+    code += 'myTimer.init(period=5, mode=Timer.PERIODIC, callback=tick)\n';
+
+    drawingIndex++;  
+    return code;
+}

@@ -204,6 +204,10 @@ function change(event) {
       {
           StartBlockId = id;
       }
+      else if(block.childBlocks_ != null && block.type == "Berry_Start")
+      {
+          StartBlockId = id;
+      }
     }
   }
   else
@@ -223,12 +227,22 @@ function change(event) {
       {
           startCode = Blockly.Arduino.blockToCode(block.childBlocks_[0]);
       }
+      if(block.childBlocks_ != null && block.type == "Berry_Start")
+      {
+          startCode = Blockly.Arduino.blockToCode(block.childBlocks_[0]);
+      }
     }
   }
 
   if (startXmlText != xmlText) {
 
     if(xmlText.indexOf("Robotistan_Start") >= 0)
+    {
+      latestCode = Blockly.Arduino.workspaceToCode(workspace);
+      editorBlockPython.setValue(latestCode);  
+      editorPython.setValue(latestCode);
+    }
+    else if(xmlText.indexOf("Berry_Start") >= 0)
     {
       latestCode = Blockly.Arduino.workspaceToCode(workspace);
       editorBlockPython.setValue(latestCode);  

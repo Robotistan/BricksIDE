@@ -273,35 +273,64 @@ Blockly.Arduino['stopMotors'] = function (block) {
     return code;
 };
 
+Blockly.Arduino['trackingThreshold'] = function(block){
+    var colorTrackingLine = block.getFieldValue('COLOR');
+    var code = '';
+
+    if(colorTrackingLine === 'Black'){
+    Blockly.Arduino.definitions_['define_trackingThreshould'] = 'THRESHOLD = 50000';}
+    else if(colorTrackingLine === 'White'){
+    Blockly.Arduino.definitions_['define_trackingThreshould'] = 'THRESHOLD = 10000';}
+
+    return code;
+};
+
 Blockly.Arduino['trackingState'] = function (block) {
     var value = block.getFieldValue('VALUE');
     var code = '';
     var A0pin = IR_A0_pin;
     var A1pin = IR_A1_pin;
-
+    
     Blockly.Arduino.imports_['import_machine'] = 'import machine';
     Blockly.Arduino.imports_['import_Pin'] = 'from machine import Pin';
     Blockly.Arduino.imports_['import_ADC'] = 'from machine import ADC';
 
     Blockly.Arduino.definitions_['define_stackingState'] = 'rightSensor = ADC(Pin('+A1pin+'))\n'+
-                                                           'leftSensor = ADC(Pin('+A0pin+'))\n'+
-                                                           'THRESHOLD = 50000';
+                                                           'leftSensor = ADC(Pin('+A0pin+'))';
     
-    if (value == "forward") {
-        code = 'leftSensor.read_u16() >= THRESHOLD and rightSensor.read_u16() >= THRESHOLD'
+    var colorTrackingLine = block.workspace.trackingColor || 'Black';
+    console.log(colorTrackingLine);
+    if(colorTrackingLine === 'Black'){
+        if (value == "forward") {
+            code = 'leftSensor.read_u16() >= THRESHOLD and rightSensor.read_u16() >= THRESHOLD'
+        }
+        else if (value == "right") {
+            code = 'leftSensor.read_u16() < THRESHOLD and rightSensor.read_u16() > THRESHOLD'
+        }
+        else if (value == "left") {
+            code = 'leftSensor.read_u16() > THRESHOLD and rightSensor.read_u16() < THRESHOLD'
+        }
+        else if (value == "backward") {
+            code = 'leftSensor.read_u16() < THRESHOLD and rightSensor.read_u16() < THRESHOLD'
+        }
     }
-    else if (value == "right") {
-        code = 'leftSensor.read_u16() < THRESHOLD and rightSensor.read_u16() > THRESHOLD'
+    else if(colorTrackingLine === 'White'){
+        if (value == "forward") {
+            code = 'leftSensor.read_u16() <= THRESHOLD and rightSensor.read_u16() <= THRESHOLD'
+        }
+        else if (value == "right") {
+            code = 'leftSensor.read_u16() > THRESHOLD and rightSensor.read_u16() < THRESHOLD'
+        }
+        else if (value == "left") {
+            code = 'leftSensor.read_u16() < THRESHOLD and rightSensor.read_u16() > THRESHOLD'
+        }
+        else if (value == "backward") {
+            code = 'leftSensor.read_u16() > THRESHOLD and rightSensor.read_u16() > THRESHOLD'
+        }
     }
-    else if (value == "left") {
-        code = 'leftSensor.read_u16() > THRESHOLD and rightSensor.read_u16() < THRESHOLD'
-    }
-    else if (value == "backward") {
-        code = 'leftSensor.read_u16() < THRESHOLD and rightSensor.read_u16() < THRESHOLD'
-    }
-
     return [code, Blockly.Arduino.ORDER_NONE];
 };
+
 
 Blockly.Arduino['trackingSensor'] = function (block) {
     var value = block.getFieldValue('VALUE');

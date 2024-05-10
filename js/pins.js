@@ -11,3 +11,7 @@ var ServoPin2 = 22;
 var MotorPin1 = 21;
 var MotorPin2 = 22;
 var NeoPixelPin = 6;
+
+var BerryBuzzer = 14;
+var BerryLDR_right = 28;
+var BerryLDR_left = 29;

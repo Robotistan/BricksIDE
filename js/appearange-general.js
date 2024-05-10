@@ -101,10 +101,11 @@ function SaveCode()
   }
 }
 
-function StopCode()
+async function StopCode()
 {
   if(isConnected)
   {
+      await writeSerial("04");
       writeSerial("03");
       ClearConsole();
       setTimeout(ClearConsole, 200);
