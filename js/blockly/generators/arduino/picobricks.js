@@ -1026,7 +1026,16 @@ Blockly.Arduino['BerryReadDistance'] = function(block) {
     code = 'sensor.distance_cm()';
 
     return [code, Blockly.Arduino.ORDER_NONE];
-}
+};
+
+Blockly.Arduino['BerryReadButton'] = function(block) {
+    var pin = 10;
+
+    Blockly.Arduino.imports_['import_machine'] = "import machine";
+    Blockly.Arduino.definitions_['define_button'] = 'pin_button = machine.Pin(' + pin + ', machine.Pin.IN)';  
+    var code = 'pin_button.value()';
+    return [code, Blockly.Arduino.ORDER_NONE];  
+};
 
 Blockly.Arduino['BerryTrackingState'] = function (block) {
     var value = block.getFieldValue('VALUE');
