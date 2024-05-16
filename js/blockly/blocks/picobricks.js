@@ -1304,6 +1304,61 @@ Blockly.Blocks['Berry_LDR'] = {
   }
 };
 
+Blockly.Blocks['BerryNeoPixelwithValues'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["RGB LED1","0"], 
+                                                ["RGB LED2","1"], 
+                                                ["RGB LED3","2"], 
+                                                ["RGB LED4","3"], 
+                                                ["RGB LED5","4"], 
+                                                ["RGB LED6","5"]
+                                                ]), "LED");
+    this.appendValueInput("RED")
+    .appendField("R")
+    .setCheck("Number")
+    .setAlign(Blockly.ALIGN_CENTRE);
+
+    this.appendValueInput("GREEN")
+        .appendField("G")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_CENTRE);
+
+    this.appendValueInput("BLUE")
+        .appendField("B")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_CENTRE);
+                                                                      
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour("#592D72");
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['BerryNeoPixelwithColourPalette'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["RGB LED 1","0"], 
+                                                ["RGB LED 2","1"], 
+                                                ["RGB LED 3","2"], 
+                                                ["RGB LED 4","3"], 
+                                                ["RGB LED 5","4"], 
+                                                ["RGB LED 6","5"]
+                                                ]), "LED");
+
+    this.appendValueInput("ColourValue")
+      .setAlign(Blockly.ALIGN_CENTRE);
+    this.appendDummyInput();   
+    
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour("#592D72");
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
 Blockly.Blocks['Berry_SelectLedsDrawing'] = {
   init: function() {
     var options = [

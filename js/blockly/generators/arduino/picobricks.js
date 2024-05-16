@@ -1083,7 +1083,59 @@ Blockly.Arduino['Berry_LDR'] = function(block) {
     code = 'ldr_' + option +'.read_u16()';
 
     return [code, Blockly.Arduino.ORDER_NONE];
-}
+};
+
+
+Blockly.Arduino['BerryNeoPixelwithColourPalette'] = function(block) {
+    var berryLeds = block.getFieldValue('LED');
+    var colourValue = Blockly.Arduino.valueToCode(block, 'ColourValue', Blockly.Arduino.ORDER_ATOMIC);
+    var code = "";
+    var pin = 6;
+
+    var hexRed, hexGreen, hexBlue;
+    var red, green, blue;
+    var colourValueTemp = colourValue.replace("#", "").replace("'", "").replace("\"", "");;
+
+    hexRed = colourValueTemp.substring(0, 2);
+    hexGreen = colourValueTemp.substring(2, 4);
+    hexBlue = colourValueTemp.substring(4, 6);
+
+    red = parseInt(hexRed, 16);
+    green = parseInt(hexGreen, 16);
+    blue = parseInt(hexBlue, 16);
+
+    Blockly.Arduino.imports_['import_Pin'] = 'from machine import Pin';
+    Blockly.Arduino.imports_['import_BerryWS2812'] = 'from berrybot import WS2812';
+
+    Blockly.Arduino.definitions_['define_neo1'] = 'ws2812 = WS2812(num_leds = 6, pin_num = ' + pin + ',brightness = 0.2)';
+
+    code = 'ws2812.pixels_set('+ berryLeds +',(' + red + ', ' + green + ', ' + blue + '))\n' +
+           'ws2812.pixels_show()\n';
+ 
+    return code;
+};
+
+Blockly.Arduino['BerryNeoPixelwithValues'] = function(block) {
+
+    var code = "";
+    var pin = 6;
+
+    var berryLed = block.getFieldValue('LED');
+    var red = Blockly.Arduino.valueToCode(block, 'RED', Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+    var green =  Blockly.Arduino.valueToCode(block, 'GREEN', Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+    var blue = Blockly.Arduino.valueToCode(block, 'BLUE', Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+
+    Blockly.Arduino.imports_['import_Pin'] = 'from machine import Pin';
+    Blockly.Arduino.imports_['import_BerryWS2812'] = 'from berrybot import WS2812';
+
+    Blockly.Arduino.definitions_['define_neo1'] = 'ws2812 = WS2812(num_leds = 6, pin_num = ' + pin + ',brightness = 0.2)';
+
+    code = 'ws2812.pixels_set('+berryLed+',(' + red + ', ' + green + ', ' + blue + '))\n' +
+           'ws2812.pixels_show()\n';
+           
+    return code;
+};
+
 
 Blockly.Arduino['Berry_SelectLedsDrawing'] = function(block) {
     var code = '';
