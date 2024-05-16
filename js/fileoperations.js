@@ -60,8 +60,8 @@ function UploadBerryLibrary()
   {
     showProgressPanel(true);
 
-    $.get('python/berry.txt', function(data) {
-      saveCode(data, "berry-library.py");
+    $.get('python/berry-library.txt', function(data) {
+      saveCode(data, "berrybot.py");
     });
   }
   else{
