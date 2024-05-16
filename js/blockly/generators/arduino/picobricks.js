@@ -1040,8 +1040,8 @@ Blockly.Arduino['BerryReadButton'] = function(block) {
 Blockly.Arduino['BerryTrackingState'] = function (block) {
     var value = block.getFieldValue('VALUE');
     var code = '';
-    var rightPin = 1; //değişecek
-    var leftPin = 1; //değişecek
+    var rightPin = 27;
+    var leftPin = 26;
 
     Blockly.Arduino.imports_['import_machine'] = 'import machine';
     Blockly.Arduino.imports_['import_Pin'] = 'from machine import Pin';
