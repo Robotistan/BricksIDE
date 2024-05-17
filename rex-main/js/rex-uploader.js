@@ -126,9 +126,9 @@ async function sendCommand(pythoncode)
     
     await writeSerial("03");
  
-    await exec_raw_no_follow(pythoncode);
+    await divide_by_row_head(pythoncode);
     
-    await writeSerial("04");
+    //await writeSerial("04");
 
     hideProgressPanel();
     ClearConsole();
@@ -197,5 +197,21 @@ async function exec_raw_no_follow(command) {
      await wait(10);
   }
 
+  await writeSerial("04");
+}
+
+async function divide_by_row_head(command) {
+  var line = command.replace(/"/g, '\\"');
+  var lines = line.split(/\r?\n/); // \n'e göre bölme
+  //document.querySelector('#txtConsole').value = command + "\n" + document.querySelector('#txtConsole').value;
+  // write command
+  for (var i = 0, s = lines.length; i < s; i += 1) {
+    var enc = new TextEncoder(); // always utf-8
+    let dataToSend = enc.encode(lines[i]+"\n");
+    //var dataToHuman = new TextDecoder().decode(dataToSend);
+    //console.log(dataToHuman);
+     await writer.write(dataToSend);
+     await wait(10);
+  }
   await writeSerial("04");
 }

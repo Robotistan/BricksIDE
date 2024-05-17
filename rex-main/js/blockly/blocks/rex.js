@@ -121,11 +121,11 @@ Blockly.Blocks['trackingState'] = {
       this.setTooltip("");
       this.setHelpUrl("");
       this.setOutputShape(Blockly.OUTPUT_SHAPE_HEXAGONAL)
-      this.setOnChange(function(changeEvent) {
-        if (this.workspace.trackingColor) {
-          console.log("Current tracking color: " + this.workspace.trackingColor); //kaydedilen değeri oku
-        }
-      });
+      //this.setOnChange(function(changeEvent) {
+        //if (this.workspace.trackingColor) {
+          //console.log("Current tracking color: " + this.workspace.trackingColor); //kaydedilen değeri oku
+        //}
+      //});
   }
 };
 

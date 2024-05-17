@@ -299,7 +299,7 @@ Blockly.Arduino['trackingState'] = function (block) {
                                                            'leftSensor = ADC(Pin('+A0pin+'))';
     
     var colorTrackingLine = block.workspace.trackingColor || 'Black';
-    console.log(colorTrackingLine);
+    //console.log(colorTrackingLine);
     if(colorTrackingLine === 'Black'){
         if (value == "forward") {
             code = 'leftSensor.read_u16() >= THRESHOLD and rightSensor.read_u16() >= THRESHOLD'
