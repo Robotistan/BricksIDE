@@ -1307,12 +1307,12 @@ Blockly.Blocks['Berry_LDR'] = {
 Blockly.Blocks['BerryNeoPixelwithValues'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField(new Blockly.FieldDropdown([["RGB LED1","0"], 
-                                                ["RGB LED2","1"], 
-                                                ["RGB LED3","2"], 
-                                                ["RGB LED4","3"], 
-                                                ["RGB LED5","4"], 
-                                                ["RGB LED6","5"]
+        .appendField(new Blockly.FieldDropdown([["RGB LED 1","0"], 
+                                                ["RGB LED 2","1"], 
+                                                ["RGB LED 3","2"], 
+                                                ["RGB LED 4","3"], 
+                                                ["RGB LED 5","4"], 
+                                                ["RGB LED 6","5"]
                                                 ]), "LED");
     this.appendValueInput("RED")
     .appendField("R")
