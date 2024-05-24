@@ -201,8 +201,8 @@ async function exec_raw_no_follow(command) {
 }
 
 async function divide_by_row_head(command) {
-  var line = command.replace(/"/g, '\\"');
-  var lines = line.split(/\r?\n/); // \n'e göre bölme
+  //var line = command.replace(/"/g, '\\"');
+  var lines = command.split(/\r?\n/); // \n'e göre bölme
   //document.querySelector('#txtConsole').value = command + "\n" + document.querySelector('#txtConsole').value;
   // write command
   for (var i = 0, s = lines.length; i < s; i += 1) {
