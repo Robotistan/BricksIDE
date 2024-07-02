@@ -48,7 +48,7 @@ Blockly.Arduino['writeTextScreen'] = function(block) {
     Blockly.Arduino.imports_['import_I2C'] = "from machine import I2C";
     Blockly.Arduino.imports_['import_SSD1306_I2C'] = "from picobricks import SSD1306_I2C";
 
-    Blockly.Arduino.definitions_['define_oled1'] ='i2c = I2C(0, scl=Pin(5), sda=Pin(4), freq=200000)';
+    Blockly.Arduino.definitions_['define_oled1'] ='i2c = I2C(0, scl=Pin(5), sda=Pin(4))';
     Blockly.Arduino.definitions_['define_oled2'] ='oled = SSD1306_I2C(128, 64, i2c, addr=0x3c)'; 
 
     code += 'oled.text("{}".format(' + writeValue + '), ' + xPos + ', ' + yPos + ')\n';
