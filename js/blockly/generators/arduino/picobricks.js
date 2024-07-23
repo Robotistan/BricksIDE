@@ -439,7 +439,8 @@ Blockly.Arduino['servoMotorV2'] = function(block) {
     Blockly.Arduino.imports_['import_MotorDriver'] = "from picobricks import MotorDriver";
 
     Blockly.Arduino.definitions_['define_servoMotorV2'] = 'i2c = I2C(0, scl=Pin(5), sda=Pin(4))\n' +
-                                                          'motor = MotorDriver(i2c)';
+                                                          'motor = MotorDriver(i2c)\n' +
+                                                          'motor.servo('+motor+', 0)';
 
     code = 'motor.servo('+motor+','+angle+')\n';
 
@@ -484,7 +485,8 @@ Blockly.Arduino['dcMotorV2'] = function(block) {
     Blockly.Arduino.imports_['import_MotorDriver'] = "from picobricks import MotorDriver";
 
     Blockly.Arduino.definitions_['define_dcMotorV2'] = 'i2c = I2C(0, scl=Pin(5), sda=Pin(4))\n' +
-                                                       'motor = MotorDriver(i2c)';
+                                                       'motor = MotorDriver(i2c)\n' +
+                                                       'motor.dc('+motor+', 0, 0)';
 
     code = 'motor.dc('+motor+','+speed+','+direction+')';
 
