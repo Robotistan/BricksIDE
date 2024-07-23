@@ -442,7 +442,7 @@ Blockly.Arduino['servoMotorV2'] = function(block) {
                                                           'motor = MotorDriver(i2c)\n' +
                                                           'motor.servo('+motor+', 0)';
 
-    code = 'motor.servo('+motor+','+angle+')\n';
+    code = 'motor.servo('+motor+', '+angle+')\n';
 
     return code;
 };
@@ -488,7 +488,7 @@ Blockly.Arduino['dcMotorV2'] = function(block) {
                                                        'motor = MotorDriver(i2c)\n' +
                                                        'motor.dc('+motor+', 0, 0)';
 
-    code = 'motor.dc('+motor+','+speed+','+direction+')';
+    code = 'motor.dc('+motor+', '+speed+', '+direction+')';
 
     return code;
 };
