@@ -522,7 +522,13 @@
     <block type="readTemperature">   
     </block>   
 
+    <block type="readTemperatureV2">   
+    </block>   
+    
     <block type="readHumidity">   
+    </block>   
+
+    <block type="readHumidityV2">   
     </block>   
 
     <block type="readDistance"> 
@@ -984,7 +990,15 @@
            </shadow>   
         </value>   
      </block>   
-
+     
+     <block type="servoMotorV2">   
+        <value name="ANGLE">   
+           <shadow type="math_positive_number">   
+             <field name="NUM">180</field>   
+           </shadow>   
+        </value>   
+     </block>   
+     
      <block type="dcMotor">   
         <value name="SPEED">   
            <shadow type="math_positive_number">   
@@ -992,6 +1006,15 @@
            </shadow>   
         </value>   
      </block>   
+     
+     <block type="dcMotorV2">   
+      <value name="SPEED">   
+         <shadow type="math_positive_number">   
+           <field name="NUM">0</field>   
+         </shadow>   
+      </value>   
+   </block>   
+     
   </category>  
   
   <category name="  Wi-Fi" id="picowifi" colour="#cc5633" secondaryColour="#cc5633" iconclass="blocklyTreeIconCustom fas fa-wifi fa-2x"> 

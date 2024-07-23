@@ -11,6 +11,74 @@ import framebuf
 import rp2
 from math import ceil
 from os import uname
+
+##########Motor Driver Library##########
+class MotorDriver:
+    def __init__(self, i2c):
+        self.i2c = i2c
+        
+    def servo(self, servoNumber, angle):
+        buf = bytearray(5)
+        buf[0] = 0x26
+        buf[1] = servoNumber + 2
+        buf[2] = 0
+        buf[3] = angle
+        buf[4] = buf[1] ^ buf[2] ^ buf[3]
+        self.i2c.writeto(0x22,buf, False)
+        
+    def dc(self, dcNumber, speed, direction):
+        buf = bytearray(5)
+        buf[0] = 0x26
+        buf[1] = dcNumber
+        buf[2] = speed
+        buf[3] = direction
+        buf[4] = buf[1] ^ buf[2] ^ buf[3]
+        self.i2c.writeto(0x22,buf, False)
+    
+##########SHTC3 Library##########
+class SHTC3:
+    def __init__(self, i2c):
+        buf = bytearray(2)
+        buf1 = bytearray(3)
+        
+        self.i2c = i2c
+        buf[0] = 0x35
+        buf[1] = 0x17
+        self.i2c.writeto(0x70,buf, False)
+        time.sleep_ms(500)
+        buf[0] = 0xEF
+        buf[1] = 0xC8
+        self.i2c.writeto(0x70,buf, False)
+        time.sleep_ms(500)
+        self.i2c.readfrom_into(0x70,buf1, True)
+        
+    def temperature(self):
+        buf = bytearray(2)
+        buf1 = bytearray(2)
+        
+        buf[0] = 0x78
+        buf[1] = 0x66
+        self.i2c.writeto(0x70, buf, False)
+        time.sleep_ms(100)
+        self.i2c.readfrom_into(0x70, buf1, True)
+        time.sleep_ms(100)
+        _temperature = ((buf1[0] << 8) | buf1[1])
+        _temperature = (((4375 * _temperature) >> 14) - 4500) / 100
+        return _temperature
+    
+    def humidity(self):
+        buf = bytearray(2)
+        buf1 = bytearray(5)
+        
+        buf[0] = 0x78
+        buf[1] = 0x66
+        self.i2c.writeto(0x70, buf, False)
+        time.sleep_ms(100)
+        self.i2c.readfrom_into(0x70, buf1, True)
+        time.sleep_ms(100)
+        _humidity = ((buf1[3] << 8) | buf1[4])
+        _humidity = ((625 * _humidity) >> 12) / 100
+        return _humidity
  
 ##########MFRC522##########
 class MFRC522:

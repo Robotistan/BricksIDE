@@ -307,6 +307,20 @@ Blockly.Arduino['readTemperature'] = function(block) {
     return [code, Blockly.Arduino.ORDER_NONE];  
 };
 
+Blockly.Arduino['readTemperatureV2'] = function(block) {
+ 
+    Blockly.Arduino.imports_['import_Pin'] = "from machine import Pin";
+    Blockly.Arduino.imports_['import_I2C'] = "from machine import I2C";
+    Blockly.Arduino.imports_['import_SHTC3'] = "from picobricks import SHTC3";
+
+    Blockly.Arduino.definitions_['define_temperatureV2'] = 'i2c = I2C(0, scl=Pin(5), sda=Pin(4))\n' +
+                                                           'shtc_sensor = SHTC3(i2c)';
+
+    var code = 'shtc_sensor.temperature()'; 
+
+    return [code, Blockly.Arduino.ORDER_NONE];  
+};
+
 Blockly.Arduino['readHumidity'] = function(block) {
  
     var pin = HumidityPin;
@@ -332,6 +346,20 @@ Blockly.Arduino['readHumidity'] = function(block) {
                                                             '   return humidity\n';
 
     var code = 'getHumidity()';
+
+    return [code, Blockly.Arduino.ORDER_NONE];  
+};
+
+Blockly.Arduino['readHumidityV2'] = function(block) {
+ 
+    Blockly.Arduino.imports_['import_Pin'] = "from machine import Pin";
+    Blockly.Arduino.imports_['import_I2C'] = "from machine import I2C";
+    Blockly.Arduino.imports_['import_SHTC3'] = "from picobricks import SHTC3";
+
+    Blockly.Arduino.definitions_['define_temperatureV2'] = 'i2c = I2C(0, scl=Pin(5), sda=Pin(4))\n' +
+                                                           'shtc_sensor = SHTC3(i2c)';
+
+    var code = 'shtc_sensor.humidity()';
 
     return [code, Blockly.Arduino.ORDER_NONE];  
 };
@@ -400,6 +428,24 @@ Blockly.Arduino['servoMotor'] = function(block) {
     return code;
 };
 
+Blockly.Arduino['servoMotorV2'] = function(block) {
+
+    var motor = block.getFieldValue('MOTOR');
+    var angle =  Blockly.Arduino.valueToCode(block, 'ANGLE', Blockly.Arduino.ORDER_NONE) || '0';
+    var code = "";
+    
+    Blockly.Arduino.imports_['import_Pin'] = "from machine import Pin";
+    Blockly.Arduino.imports_['import_I2C'] = "from machine import I2C";
+    Blockly.Arduino.imports_['import_MotorDriver'] = "from picobricks import MotorDriver";
+
+    Blockly.Arduino.definitions_['define_servoMotorV2'] = 'i2c = I2C(0, scl=Pin(5), sda=Pin(4))\n' +
+                                                          'motor = MotorDriver(i2c)';
+
+    code = 'motor.servo('+motor+','+angle+')\n';
+
+    return code;
+};
+
 Blockly.Arduino['dcMotor'] = function(block) {
 
     var motor = block.getFieldValue('MOTOR');
@@ -422,6 +468,25 @@ Blockly.Arduino['dcMotor'] = function(block) {
     Blockly.Arduino.definitions_['define_motor3' + motor] = 'motor_' + motor + '.duty_u16(0)';
 
     code = 'motor_' + motor + '.duty_u16(' + speed + ' * 650) \n';
+
+    return code;
+};
+
+Blockly.Arduino['dcMotorV2'] = function(block) {
+
+    var motor = block.getFieldValue('MOTOR');
+    var direction = block.getFieldValue('DIRECTION');    
+    var speed =  Blockly.Arduino.valueToCode(block, 'SPEED', Blockly.Arduino.ORDER_NONE) || '0';
+    var code = "";    
+
+    Blockly.Arduino.imports_['import_Pin'] = "from machine import Pin";
+    Blockly.Arduino.imports_['import_I2C'] = "from machine import I2C";
+    Blockly.Arduino.imports_['import_MotorDriver'] = "from picobricks import MotorDriver";
+
+    Blockly.Arduino.definitions_['define_dcMotorV2'] = 'i2c = I2C(0, scl=Pin(5), sda=Pin(4))\n' +
+                                                       'motor = MotorDriver(i2c)';
+
+    code = 'motor.dc('+motor+','+speed+','+direction+')';
 
     return code;
 };

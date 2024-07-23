@@ -510,11 +510,37 @@ Blockly.Blocks['readTemperature'] = {
   }
 }
 
+Blockly.Blocks['readTemperatureV2'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage(iconTemp, 30, 30, "icon"))
+        .appendField(Blockly.Msg.BRICKS_READ_TEMPERATURE_V2_MSG);
+    this.setOutput(true, null);
+    this.setColour("#935df5");
+    this.setTooltip("");
+    this.setHelpUrl("");
+    this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND)
+  }
+}
+
 Blockly.Blocks['readHumidity'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage(iconHum, 30, 30, "icon"))
         .appendField(Blockly.Msg.BRICKS_READ_HUMIDITY_MSG);
+    this.setOutput(true, null);
+    this.setColour("#935df5");
+    this.setTooltip("");
+    this.setHelpUrl("");
+    this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND)
+  }
+}
+
+Blockly.Blocks['readHumidityV2'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage(iconHum, 30, 30, "icon"))
+        .appendField(Blockly.Msg.BRICKS_READ_HUMIDITY_V2_MSG);
     this.setOutput(true, null);
     this.setColour("#935df5");
     this.setTooltip("");
@@ -569,6 +595,31 @@ Blockly.Blocks['servoMotor'] = {
   }
 };
 
+Blockly.Blocks['servoMotorV2'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage(iconServo, 30, 30, "icon"))
+        .appendField("Set Servo")
+
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["M1","1"], ["M2","2"], ["M3","3"], ["M4","4"]]), "MOTOR");
+        
+    this.appendValueInput("ANGLE")
+          .appendField("Angle")
+          .setCheck("Number")
+          .setAlign(Blockly.ALIGN_CENTRE);
+
+    this.appendDummyInput()
+    .appendField("(V2)")
+
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour("#0a6939");
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
 Blockly.Blocks['dcMotor'] = {
   init: function() {
     this.appendDummyInput()
@@ -591,6 +642,33 @@ Blockly.Blocks['dcMotor'] = {
   }
 };
 
+Blockly.Blocks['dcMotorV2'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage(iconMotor, 30, 30, "icon"))
+        .appendField("DC Motor")
+
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["M1","1"], ["M2","2"]]), "MOTOR");
+        
+    this.appendValueInput("SPEED")
+          .appendField("Speed (0-255)")
+          .setCheck("Number")
+          
+    this.appendDummyInput()
+          .appendField("Direction")
+          .appendField(new Blockly.FieldDropdown([["forward","0"], ["backward","1"]]), "DIRECTION")
+          .appendField("(V2)")
+          //.setAlign(Blockly.ALIGN_CENTRE);
+
+
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour("#0a6939");
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
 
 Blockly.Blocks['timer'] = {
   init: function() {
