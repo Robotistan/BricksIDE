@@ -488,7 +488,7 @@ Blockly.Arduino['dcMotorV2'] = function(block) {
                                                        'motor = MotorDriver(i2c)\n' +
                                                        'motor.dc('+motor+', 0, 0)';
 
-    code = 'motor.dc('+motor+', '+speed+', '+direction+')';
+    code = 'motor.dc('+motor+', '+speed+', '+direction+')\n';
 
     return code;
 };
