@@ -1364,6 +1364,25 @@ Blockly.Blocks["BerryController"] = {
   }
 }
 
+
+Blockly.Blocks['Berry_onIRReceiving'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage(iconScreen, 30, 30, "icon"))
+        .appendField("on IR Receiving")
+    
+   	this.appendStatementInput("DO")
+      .setCheck(null);
+      
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour("#592D72");
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
 Blockly.Blocks['Berry_LDR'] = {
   init: function() {
     this.appendDummyInput()

@@ -922,6 +922,19 @@ Blockly.Arduino['BerryController'] = function(block) {
     Blockly.Arduino.imports_['import_Pin'] = 'from machine import Pin';
     Blockly.Arduino.imports_['import_NEC16'] = 'from berrybot import NEC_16';
     Blockly.Arduino.imports_['import_IRRX'] = 'from berrybot import IR_RX';
+    
+    code = 'ir_data == '+options;
+    return [code, Blockly.Arduino.ORDER_NONE];
+};
+
+Blockly.Arduino['Berry_onIRReceiving'] = function(block) {
+
+    var branch = Blockly.Arduino.statementToCode(block, 'DO') ;
+    branch = Blockly.Arduino.addLoopTrap(branch, block);
+
+    Blockly.Arduino.imports_['import_Pin'] = "from machine import Pin";
+    Blockly.Arduino.imports_['import_NEC16'] = 'from berrybot import NEC_16';
+    Blockly.Arduino.imports_['import_IRRX'] = 'from berrybot import IR_RX';
 
     Blockly.Arduino.definitions_['define_BerryControllerVar'] = 'IR_PIN = 20\n' + 
                                                                 'ir_data = 0\n' + 
@@ -934,10 +947,14 @@ Blockly.Arduino['BerryController'] = function(block) {
                                                                 '       ir_addr = addr\n' +
                                                                 '       print("Data {:02x} Addr {:04x}".format(data, addr))\n' +
                                                                 '       data_rcvd = True\n';
-    Blockly.Arduino.definitions_['define_BerryController'] = "ir = NEC_16(Pin(20, Pin.IN), ir_callback)";
+    Blockly.Arduino.definitions_['define_BerryController'] = "ir = NEC_16(Pin(IR_PIN, Pin.IN), ir_callback)";
+
+    var code = 
+               "if data_rcvd == True: \n" +
+               "    data_rcvd = False \n" +
+               branch;
     
-    code = 'ir_data == '+options;
-    return [code, Blockly.Arduino.ORDER_NONE];
+    return code;
 };
 
 Blockly.Arduino['BerryDirectionSpeed'] = function(block) {
