@@ -60,8 +60,11 @@
 <script src="editorsrc/ace.js"></script>
 <script src="editorsrc/ext-language_tools.js"></script>
 
-<script src="https://kit.fontawesome.com/bc06efbf60.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js" integrity="sha512-6sSYJqDreZRZGkJ3b+YfdhB3MzmuP9R7X1QZ6g5aIXhRvR1Y/N/P47jmnkENm7YL3oqsmI6AK+V6AD99uWDnIw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
+<script src="https://unpkg.com/p5ble@0.0.7/dist/p5.ble.js"></script>
 
 <script>
   window.fwSettings={
@@ -84,6 +87,12 @@
       <img class="savingButton" id="btSaving"/>
       <div class="w3-light-blue progressBar" id="progressBarDiv">
         <div class="w3-container w3-green w3-center" style="width:1%; height:20px" id="progressBar">0%</div>
+      </div>
+
+      <div class="text-center" id="spinnerBLE">
+        <div class="spinner-border" role="status" >
+          <span class="visually-hidden">Loading...</span>
+        </div>
       </div>
 
       <div class="row" style="background-color:rgb(196, 27, 27);">
@@ -115,6 +124,7 @@
             <div class="navbar-brand" style="width: 1rem"></div>
 
             <img class="notConnectedButton" onclick="OpenConnectionForm();" id="btConnect"/>
+            <img class="notConnectedButtonBLE" onclick="OpenConnectionFormBLE()" id="btConnectBLE"/>
             <img class="documentsButton" id="btDocuments" onclick="ShowDocumentsPanel()"/>
             <img class="openCodeButton" onclick="ShowEditorBlockPython();" id="btCode"/>
             
@@ -137,6 +147,8 @@
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <a class="dropdown-item" href="#" id="btFirmware" onclick="UploadFirmware()">Upload Firmware</a>
                 <a class="dropdown-item" href="#" id="btLibrary" onclick="UploadLibrary()">Upload Library</a>
+                <hr>
+                <a class="dropdown-item" href="#" id="btLibBLE" onclick="UploadBLE()">Upload Bluetooth Files</a>
                 <hr>
                 <a class="dropdown-item" href="#" id="btLibrary" onclick="UploadBerryFirmware()">Upload BerryBot's Firmware</a>
                 <a class="dropdown-item" href="#" id="btLibrary" onclick="UploadBerryLibrary()">Upload BerryBot's Library</a>
@@ -299,6 +311,76 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" onclick="disConnectSerial()">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modalConfirmBLE">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body" id="dialogText">
+        Do you want to close the connection?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="disconnectToBle()">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modalBLEwarning" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body" id="dialogText">
+        If you want to stop the loop in a project where you use the forever block, press the reset button of the Picobricks.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Okey</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modalBLE">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="position: relative;">
+        <h5 class="modal-title" style="color: #57b45b; font-weight: bold;">Upload Bluetooth Files</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div id="carouselExample" class="carousel slide">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="images/serialButtonGif.gif" style="width: 100px; height: auto; margin:10px; display:block; margin:0 auto;"/>
+              <p class="carousel-text">In order to use Bluetooth, you need to upload the following two files to the device via serial port. After connecting Picobricks to your computer via USB, download the Library and Bluetooth Runner via serial port, then connect to PBricks device via bluetooth connection.</p>
+            </div>
+            <div class="carousel-item">
+              <img src="images/bleConButtonGif.gif" style="width: 100px; height: auto; margin:10px; display:block; margin:0 auto;"/>
+              <p class="carousel-text">After the bluetooth connection, you can run the block codes you want in Picobricks by pressing the Run button.</p>
+              <img src="images/runButtonBLE.png" style="display:block; margin:10px auto; width: 100px; height: auto;"/>
+            </div>
+            <div class="carousel-item">
+              <img src="images/resetButton.png" style="display:block; margin:0 auto; width: 150px; height: auto;"/>
+              <p class="carousel-text">Where you use the Forever block to create infinite loop, use the Reset button on Picobricks to stop the code in cases. It will automatically reconnect in a few seconds. Reconnect if the connection fails.</p>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+        
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" onclick="UploadLibraryBLE()">Upload Library<i class="fa fa-download" aria-hidden="true"></i></button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" onclick="UploadMainBLE()">Upload Bluetooth Runner<i class="fa fa-download" aria-hidden="true"></i></button>
       </div>
     </div>
   </div>

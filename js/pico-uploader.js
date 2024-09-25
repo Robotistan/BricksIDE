@@ -207,7 +207,7 @@ async function saveCode(pythoncode, filename)
   await writeSerial("02");
   hideProgressPanel();
 
-  $("#modalDownload").modal('show');
+  //$("#modalDownload").modal('show');
 
   ClearConsole();
   setTimeout(ClearConsole, 500);
@@ -225,4 +225,217 @@ async function exec_raw_no_follow(command) {
   }
 
   await writeSerial("04");
+}
+
+
+
+var blueToothCharacteristic;
+var otherCharacteristic;
+let characteristics = [];
+let blueTooth;
+var serviceUuid = "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
+var isUserInitiatedDisconnect = false;  
+var receivedDataBLE;
+var isValueReceived = false;
+
+function OpenConnectionFormBLE() {
+  if (blueTooth && blueTooth.isConnected()) {
+    $("#modalConfirmBLE").modal('show');
+  } else {
+    connectToBle();
+  }
+}
+
+function updateConnectionStatus() {
+  if (blueTooth && blueTooth.isConnected()) {
+    $("#btConnectBLE").removeClass("notConnectedButtonBLE");
+    $("#btConnectBLE").addClass("connectedButtonBLE");
+
+    $("#btConnectBLE").off("click").on("click", function () { 
+      $("#modalConfirmBLE").modal("show");
+    });
+  } else {
+    $("#btConnectBLE").removeClass("connectedButtonBLE");
+    $("#btConnectBLE").addClass("notConnectedButtonBLE");
+
+    $("#btConnectBLE").off("click");
+  }
+}
+
+
+let isFirstConnection = true;
+function connectToBle() {
+  try {
+    blueTooth = new p5ble();
+    blueTooth.connect(serviceUuid, gotCharacteristics);
+    updateConnectionStatus();
+  } catch (err) {
+    alert(err.message);
+  }
+}
+
+
+async function disconnectToBle() {
+  isUserInitiatedDisconnect = true;
+  if (blueTooth && blueTooth.isConnected()) {
+    blueTooth.disconnect();
+    updateConnectionStatus();
+    $("#modalConfirmBLE").modal("hide");
+  }
+}
+
+async function onDisconnected() {
+  console.log("Device got disconnected.");
+  updateConnectionStatus();
+
+  if (!isUserInitiatedDisconnect) {  
+    await delayPromise(1500);
+    reconnectToBle();
+  } else {
+    isUserInitiatedDisconnect = false;
+  }
+}
+
+
+async function reconnectToBle() {
+  if (blueTooth.device.gatt.connected) {
+    await blueTooth.device.gatt.disconnect();
+  }
+
+  //await delayPromise(3500);
+
+  try {
+    const server = await blueTooth.device.gatt.connect();
+    console.log("Bağlantı kuruldu");
+
+    const service = await server.getPrimaryService('6e400001-b5a3-f393-e0a9-e50e24dcca9e'); 
+
+    blueToothCharacteristic = await service.getCharacteristic('6e400002-b5a3-f393-e0a9-e50e24dcca9e');
+    console.log("Yeni characteristic alındı");
+
+    console.log("connection= ", blueTooth.device.gatt.connected);
+    updateConnectionStatus();
+
+  } catch (error) {
+    console.error("Bağlantı başarısız oldu: ", error);
+  }
+}
+
+function gotCharacteristics(error, characteristics) {
+  if (error) {
+    console.log('error: ', error);
+  } else {
+    blueToothCharacteristic = characteristics[0];
+    otherCharacteristic = characteristics[1];
+    isBTConnected = blueTooth.isConnected();
+    isConnectedBLE = isBTConnected;
+    updateConnectionStatus();
+
+    otherCharacteristic.startNotifications()
+      .then(characteristic => {
+        characteristic.addEventListener('characteristicvaluechanged', gotValue);
+      })
+      .catch(error => {
+        console.error('Error starting notifications:', error);
+      });
+      if (isFirstConnection) {
+        $('#modalBLEwarning').modal('show');
+        isFirstConnection = false;
+    }
+    blueTooth.onDisconnected(onDisconnected);
+  }
+}
+
+function gotValue(event) {
+  if (event.target && event.target.value && !isValueReceived) { 
+    const decoder = new TextDecoder('utf-8');
+    receivedDataBLE = decoder.decode(event.target.value);
+    console.log('Alınan veri:', receivedDataBLE);
+
+    readValue += receivedDataBLE;
+    isValueReceived = true; 
+    readTimer();
+  }
+}
+
+async function writeBLE(send) {
+  let data;
+  if (send == "01")
+    data = new Uint8Array([0x01]);
+  else if (send == "02")
+    data = new Uint8Array([0x02]);
+  else if (send == "03")
+    data = new Uint8Array([0x03]);
+  else if (send == "04") 
+    data = new Uint8Array([0x04]);
+
+  await blueToothCharacteristic.writeValue(data);
+  await delayPromise(10);
+}
+
+async function sendCommandBLE(pythoncode) {
+  try {
+    await writeBLE("03");
+
+    await writeBLE("03");
+    var abcd = new TextDecoder()
+    var enc = new TextEncoder(); // always utf-8
+    let command_bytes = enc.encode(pythoncode);
+    for (var i = 0; i < command_bytes.length; i += 20) {
+      let chunk = command_bytes.slice(i, i + 20);
+      console.log(abcd.decode(chunk))
+      await blueToothCharacteristic.writeValue(chunk);
+    }
+
+    await writeBLE("04");
+    
+
+  } catch (err) {
+    console.log("Error: " + err.message)
+  }
+}
+
+async function saveCodeBLE(pythoncode, filename)
+{
+  await sendCommandBLE("f.close()");
+  await writeBLE("03");
+  await writeBLE("03");
+  
+  for (var i = 0; i < 5; i++ ) {
+    await writeBLE("01");
+  }
+
+  var commandBLE = "f = open('" + filename + "', 'wb')";
+  await sendCommandBLE(commandBLE);
+  
+  pythoncode = "from bleRepl import start\nstart()\n" + pythoncode;
+  pythoncode = pythoncode.replace(/(\r\n|\n|\r)/gm, '£');
+  pythoncode = pythoncode.replace(/"/g, '\\"');
+  
+  console.log("pythoncode =", pythoncode);
+
+  for (var i = 0, s = pythoncode.length; i < s; i += 20) {
+    var subcommand = pythoncode.slice(i, Math.min(i + 20, pythoncode.length));
+    subcommand = subcommand.replace(/£/g, '\\n');
+    console.log("subcommand = ",subcommand);
+    await sendCommandBLE('f.write("' + subcommand + '")');
+    $("#spinnerBLE").css("visibility", "visible");
+  }
+
+  await sendCommandBLE("f.close()");
+  
+  await sendCommandBLE("exec(open('"+ filename +"').read())");
+
+  $("#spinnerBLE").css("visibility", "hidden");
+
+  reconnectToBle();
+  
+}
+
+async function delayPromise(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function UploadBLE(){
+  $("#modalBLE").modal('show');
 }

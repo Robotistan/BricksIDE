@@ -189,7 +189,38 @@
     opacity: 0.8;
     visibility: hidden;
   }
-  
+
+  #spinnerBLE {
+    position: absolute;
+    top: 45%;
+    left: 40%;
+    width: 20%; 
+    color:rgba(196, 27, 27, 0.8);
+    border-width: 0px;
+    z-index: 101;
+    visibility: hidden;
+  }
+  #spinnerBLE .spinner-border {
+    width: 3rem;
+    height: 3rem;
+    border-width: 0.4rem;
+  }
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    background-color: #57b45b;
+    border-radius: 50%;
+    padding: 10px;
+  }
+
+  .carousel-control-prev-icon:hover,
+  .carousel-control-next-icon:hover {
+    background-color: #3d8c45; 
+  }
+  .carousel-text {
+    margin-left: 60px; 
+    margin-right: 60px;
+  }
+
   .transparentButton {
     background-color: transparent; 
     color: white; 

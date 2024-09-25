@@ -69,6 +69,34 @@ function UploadBerryLibrary()
   }
 }
 
+function UploadLibraryBLE(){
+  if(isConnected)
+    {
+      showProgressPanel(true);
+  
+      $.get('python/bleLib.txt', function(data) {
+        saveCode(data, "bleRepl.py");
+      });
+
+    }
+    else{
+      $("#modalDialog").modal('show');
+    }
+}
+function UploadMainBLE(){
+  if(isConnected)
+    {
+      showProgressPanel(true);
+  
+      $.get('python/bleMain.txt', function(data) {
+        saveCode(data, "main.py");
+      });
+          
+    }
+    else{
+      $("#modalDialog").modal('show');
+    }
+}
 function LoadCode(code)
 {
   xmlText = code;
