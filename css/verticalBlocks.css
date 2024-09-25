@@ -321,7 +321,7 @@
   }
   
   .notConnectedButtonBLE{
-    content: url('../images/buttons/notconnectedBLE.webp');
+    content: url('../images/buttons/notConnectedBLE.webp');
     width: 5rem; 
     visibility: visible;
     border-style: none;
