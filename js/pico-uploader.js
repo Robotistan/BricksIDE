@@ -395,41 +395,31 @@ async function sendCommandBLE(pythoncode) {
   }
 }
 
-async function saveCodeBLE(pythoncode, filename)
-{
+async function saveCodeBLE(pythoncode, filename) {
   await sendCommandBLE("f.close()");
   await writeBLE("03");
   await writeBLE("03");
-  
+
   for (var i = 0; i < 5; i++ ) {
     await writeBLE("01");
   }
-
-  var commandBLE = "f = open('" + filename + "', 'wb')";
-  await sendCommandBLE(commandBLE);
   
-  pythoncode = "from bleRepl import start\nstart()\n" + pythoncode;
-  pythoncode = pythoncode.replace(/(\r\n|\n|\r)/gm, '£');
-  pythoncode = pythoncode.replace(/"/g, '\\"');
-  
-  console.log("pythoncode =", pythoncode);
+  await sendCommandBLE(`f = open('${filename}', 'wb')`);
 
-  for (var i = 0, s = pythoncode.length; i < s; i += 20) {
-    var subcommand = pythoncode.slice(i, Math.min(i + 20, pythoncode.length));
-    subcommand = subcommand.replace(/£/g, '\\n');
-    console.log("subcommand = ",subcommand);
-    await sendCommandBLE('f.write("' + subcommand + '")');
-    $("#spinnerBLE").css("visibility", "visible");
+  let lines = pythoncode.split("\n");
+
+  $("#spinnerBLE").css("visibility", "visible");
+
+  for (let i = 0; i < lines.length; i++) {
+      let line = lines[i].replace(/"/g, '\\"'); 
+      await sendCommandBLE(`f.write("${line}\\n")`);
   }
-
   await sendCommandBLE("f.close()");
-  
-  await sendCommandBLE("exec(open('"+ filename +"').read())");
+
+  await sendCommandBLE(`exec(open('${filename}').read())`);
 
   $("#spinnerBLE").css("visibility", "hidden");
-
   reconnectToBle();
-  
 }
 
 async function delayPromise(ms) {
