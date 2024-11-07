@@ -163,6 +163,8 @@ Blockly.Arduino['DirectionSpeed'] = function (block) {
     Blockly.Arduino.imports_['import_ADC'] = 'from machine import ADC';
     Blockly.Arduino.imports_['import_PWM'] = 'from machine import PWM';
 
+    Blockly.Arduino.definitions_['define_direction_pwm'] = 'motor_pwm = Pin(13, Pin.OUT)\n';
+
     Blockly.Arduino.definitions_['define_direction_motorA'] = '#motorA\n' +
                                                               'motor_A1 = PWM(Pin('+ A1pin +'))\n' +
                                                               'motor_A1.duty_u16(0)\n' +
@@ -190,6 +192,7 @@ Blockly.Arduino['DirectionSpeed'] = function (block) {
     if (direction == "forward") {
         Blockly.Arduino.definitions_['define_direction_forward'] =
             'def ' + direction + '(speedForward):\n' +
+            '   motor_pwm.value(1)\n' +
             '   motor_A1.duty_u16(speedForward * 650)\n' +
             '   motor_A2.duty_u16(0 * 650)\n\n' +
             '   motor_B1.duty_u16(speedForward * 650)\n' +
@@ -204,6 +207,7 @@ Blockly.Arduino['DirectionSpeed'] = function (block) {
     else if (direction == "backward") {
         Blockly.Arduino.definitions_['define_direction_backward'] =
             'def ' + direction + '(speedBackward):\n' +
+            '   motor_pwm.value(1)\n' +
             '   motor_A1.duty_u16(0 * 650)\n' +
             '   motor_A2.duty_u16(speedBackward * 650)\n\n' +
             '   motor_B1.duty_u16(0 * 650)\n' +
@@ -218,6 +222,7 @@ Blockly.Arduino['DirectionSpeed'] = function (block) {
     else if (direction == "left") {
         Blockly.Arduino.definitions_['define_direction_left'] =
             'def ' + direction + '(speedLeft):\n' +
+            '   motor_pwm.value(1)\n' +
             '   motor_A1.duty_u16(0 * 650)\n' +
             '   motor_A2.duty_u16(speedLeft * 650)\n\n' +
             '   motor_B1.duty_u16(0 * 650)\n' +
@@ -233,6 +238,7 @@ Blockly.Arduino['DirectionSpeed'] = function (block) {
     else if (direction == "right") {
         Blockly.Arduino.definitions_['define_direction_right'] =
             'def ' + direction + '(speedRight):\n' +
+            '   motor_pwm.value(1)\n' +
             '   motor_A1.duty_u16(speedRight * 650)\n' +
             '   motor_A2.duty_u16(0 * 650)\n\n' +
             '   motor_B1.duty_u16(speedRight * 650)\n' +
@@ -259,6 +265,7 @@ Blockly.Arduino['stopMotors'] = function (block) {
 
     Blockly.Arduino.definitions_['define_stop_motors'] =
         'def stop():\n' +
+        '   motor_pwm.value(0)\n' +
         '   motor_A1.duty_u16(0 * 650)\n' +
         '   motor_A2.duty_u16(0 * 650)\n\n' +
         '   motor_B1.duty_u16(0 * 650)\n' +
@@ -439,7 +446,7 @@ Blockly.Arduino['servoMotor'] = function(block) {
                                                         '   return angle\n';
                                                         
     Blockly.Arduino.definitions_['define_servo1' + motor] = 'pwm_' + motor + ' = PWM(Pin(' + pin + '))';
-    Blockly.Arduino.definitions_['define_servo2' + motor] = 'pwm_' + motor + '.freq(50)';
+    Blockly.Arduino.definitions_['define_servo2' + motor] = 'pwm_' + motor + '.freq(50)\n';
     
     code = 'pwm_' + motor + '.duty_u16(CalculateAngle(' + angle + '))\n';
 
