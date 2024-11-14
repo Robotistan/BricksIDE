@@ -90,6 +90,29 @@ Blockly.Blocks['DirectionSpeed'] = {
     }
 };
 
+Blockly.Blocks['DirectionSpeedV2'] = {
+  init: function () {
+      this.appendDummyInput()
+          .appendField(new Blockly.FieldImage(iconMotor, 30, 30, "icon"))
+          .appendField("Go")
+          .appendField(new Blockly.FieldDropdown([["Forward", "forward"], ["Backward", "backward"], ["Left", "left"], ["Right", "right"]]), "Direction")
+          .appendField("at speed");
+
+      this.appendValueInput("SPEED")
+          .setCheck("Number")
+          .setAlign(Blockly.ALIGN_CENTRE)
+          .appendField("%")
+
+      this.appendDummyInput()
+          .appendField("(V2)")
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour("#162d4a");
+      this.setTooltip("");
+      this.setHelpUrl("");
+  }
+};
+
 Blockly.Blocks['stopMotors'] = {
     init: function () {
         this.appendDummyInput()

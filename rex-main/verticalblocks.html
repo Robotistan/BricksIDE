@@ -366,7 +366,7 @@
     
     <xml xmlns="https://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
     
-        <category name="Basic" style="border-radius:10px; " id="rexbasic" colour="#19b5fe" secondaryColour="#3373CC" iconclass="blocklyTreeIconCustom fas fa-circle fa-2x">
+        <category name="Basic" style="border-radius:10px;" id="rexbasic" colour="#19b5fe" secondaryColour="#3373CC" iconclass="blocklyTreeIconCustom fas fa-circle fa-2x">
 
             <block type="Robotistan_Start">
             </block>
@@ -442,6 +442,14 @@
             </block>
 
             <block type="DirectionSpeed">
+                <value name="SPEED">
+                    <shadow type="math_positive_number">
+                        <field name="NUM">50</field>
+                    </shadow>
+                </value>
+            </block>
+
+            <block type="DirectionSpeedV2">
                 <value name="SPEED">
                     <shadow type="math_positive_number">
                         <field name="NUM">50</field>

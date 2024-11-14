@@ -163,6 +163,112 @@ Blockly.Arduino['DirectionSpeed'] = function (block) {
     Blockly.Arduino.imports_['import_ADC'] = 'from machine import ADC';
     Blockly.Arduino.imports_['import_PWM'] = 'from machine import PWM';
 
+    Blockly.Arduino.definitions_['define_direction_motorA'] = '#motorA\n' +
+                                                              'motor_A1 = PWM(Pin('+ A1pin +'))\n' +
+                                                              'motor_A1.duty_u16(0)\n' +
+                                                              'motor_A2 = PWM(Pin('+ A2pin +'))\n' +
+                                                              'motor_A2.duty_u16(0)\n\n';
+
+    Blockly.Arduino.definitions_['define_direction_motorB'] = '#motorB\n' +
+                                                              'motor_B1 = PWM(Pin('+ B1pin +'))\n' +
+                                                              'motor_B1.duty_u16(0)\n' +
+                                                              'motor_B2 = PWM(Pin('+ B2pin +'))\n' +
+                                                              'motor_B2.duty_u16(0)\n\n';
+
+    Blockly.Arduino.definitions_['define_direction_motorC'] = '#motorC\n' +
+                                                              'motor_C1 = PWM(Pin('+ C1pin +'))\n' +
+                                                              'motor_C1.duty_u16(0)\n' +
+                                                              'motor_C2 = PWM(Pin('+ C2pin +'))\n' +
+                                                              'motor_C2.duty_u16(0)\n\n';
+
+    Blockly.Arduino.definitions_['define_direction_motorD'] = '#motorD\n' +
+                                                              'motor_D1 = PWM(Pin('+ D1pin +'))\n' +
+                                                              'motor_D1.duty_u16(0)\n' +
+                                                              'motor_D2 = PWM(Pin('+ D2pin +'))\n' +
+                                                              'motor_D2.duty_u16(0)\n\n';
+
+    if (direction == "forward") {
+        Blockly.Arduino.definitions_['define_direction_forward'] =
+            'def ' + direction + '(speedForward):\n' +
+            '   motor_A1.duty_u16(speedForward * 650)\n' +
+            '   motor_A2.duty_u16(0 * 650)\n\n' +
+            '   motor_B1.duty_u16(speedForward * 650)\n' +
+            '   motor_B2.duty_u16(0 * 650)\n\n' +
+            '   motor_C1.duty_u16(speedForward * 650)\n' +
+            '   motor_C2.duty_u16(0 * 650)\n\n' +
+            '   motor_D1.duty_u16(speedForward * 650)\n' +
+            '   motor_D2.duty_u16(0 * 650)\n\n' +
+            '   return\n\n';
+
+    }
+    else if (direction == "backward") {
+        Blockly.Arduino.definitions_['define_direction_backward'] =
+            'def ' + direction + '(speedBackward):\n' +
+            '   motor_A1.duty_u16(0 * 650)\n' +
+            '   motor_A2.duty_u16(speedBackward * 650)\n\n' +
+            '   motor_B1.duty_u16(0 * 650)\n' +
+            '   motor_B2.duty_u16(speedBackward * 650)\n\n' +
+            '   motor_C1.duty_u16(0 * 650)\n' +
+            '   motor_C2.duty_u16(speedBackward * 650)\n\n' +
+            '   motor_D1.duty_u16(0 * 650)\n' +
+            '   motor_D2.duty_u16(speedBackward * 650)\n\n' +
+            '   return\n\n';
+
+    }
+    else if (direction == "left") {
+        Blockly.Arduino.definitions_['define_direction_left'] =
+            'def ' + direction + '(speedLeft):\n' +
+            '   motor_A1.duty_u16(0 * 650)\n' +
+            '   motor_A2.duty_u16(speedLeft * 650)\n\n' +
+            '   motor_B1.duty_u16(0 * 650)\n' +
+            '   motor_B2.duty_u16(speedLeft * 650)\n\n' +
+            '   motor_C1.duty_u16(speedLeft * 650)\n' +
+            '   motor_C2.duty_u16(0 * 650)\n\n' +
+            '   motor_D1.duty_u16(speedLeft * 650)\n' +
+            '   motor_D2.duty_u16(0 * 650)\n\n' +
+            '   return\n\n';
+
+    }
+
+    else if (direction == "right") {
+        Blockly.Arduino.definitions_['define_direction_right'] =
+            'def ' + direction + '(speedRight):\n' +
+            '   motor_A1.duty_u16(speedRight * 650)\n' +
+            '   motor_A2.duty_u16(0 * 650)\n\n' +
+            '   motor_B1.duty_u16(speedRight * 650)\n' +
+            '   motor_B2.duty_u16(0 * 650)\n\n' +
+            '   motor_C1.duty_u16(0 * 650)\n' +
+            '   motor_C2.duty_u16(speedRight * 650)\n\n' +
+            '   motor_D1.duty_u16(0 * 650)\n' +
+            '   motor_D2.duty_u16(speedRight * 650)\n\n' +
+            '   return\n\n';
+            
+    }
+
+    code = direction + '(' + speed + ')\n';
+
+    return code;
+};
+
+Blockly.Arduino['DirectionSpeedV2'] = function (block) {
+
+    var direction = block.getFieldValue('Direction');
+    var speed = Blockly.Arduino.valueToCode(block, 'SPEED', Blockly.Arduino.ORDER_NONE) || '0';
+    var code = '';
+    
+    var A1pin = Motor_A1_pin;
+    var A2pin = Motor_A2_pin;
+    var B1pin = Motor_B1_pin;
+    var B2pin = Motor_B2_pin;
+    var C1pin = Motor_C1_pin;
+    var C2pin = Motor_C2_pin;
+    var D1pin = Motor_D1_pin;
+    var D2pin = Motor_D2_pin;
+
+    Blockly.Arduino.imports_['import_Pin'] = 'from machine import Pin';
+    Blockly.Arduino.imports_['import_ADC'] = 'from machine import ADC';
+    Blockly.Arduino.imports_['import_PWM'] = 'from machine import PWM';
+
     Blockly.Arduino.definitions_['define_direction_pwm'] = 'motor_pwm = Pin(13, Pin.OUT)\n';
 
     Blockly.Arduino.definitions_['define_direction_motorA'] = '#motorA\n' +
