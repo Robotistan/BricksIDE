@@ -677,6 +677,112 @@ Blockly.Arduino['dcMotor'] = function(block) {
     return code;
 };
 
+
+Blockly.Arduino['dcMotorV5'] = function(block) {
+
+    var motor = block.getFieldValue('MOTOR');
+    var speed =  Blockly.Arduino.valueToCode(block, 'SPEED', Blockly.Arduino.ORDER_NONE) || '0';
+    var value = block.getFieldValue('VALUE');
+    var code = "";
+    var pin1 = 0;
+    var pin2 = 0;
+    
+    var A1 = Motor_A1_pin;
+    var A2 = Motor_A2_pin;
+    var B1 = Motor_B1_pin;
+    var B2 = Motor_B2_pin;
+    var C1 = Motor_C1_pin;
+    var C2 = Motor_C2_pin;
+    var D1 = Motor_D1_pin;
+    var D2 = Motor_D2_pin;
+
+    Blockly.Arduino.imports_['import_PWM'] = 'from machine import PWM';
+    Blockly.Arduino.imports_['import_Pin'] = 'from machine import Pin';
+
+    
+    Blockly.Arduino.definitions_['define_direction_pwm'] = 'motor_pwm = Pin(13, Pin.OUT)\n';
+
+    if(motor == "A"){
+        pin1 = A1;
+        pin2 = A2;
+        
+        if(value == "forward"){
+            Blockly.Arduino.definitions_['define_motorA1'] = 'motor_' + motor + '1 = PWM(Pin(' + pin1 + '))\n'+
+                                                        'motor_' + motor + '2 = PWM(Pin(' + pin2 + '))\n';
+        code = 'motor_pwm.value(1)\n' +
+               'motor_' + motor + '1.duty_u16(' + speed + ')\n'+
+               'motor_' + motor + '2.duty_u16(0)\n'; 
+        }
+        else if (value == "backward"){
+            Blockly.Arduino.definitions_['define_motorA2'] = 'motor_' + motor + '1 = PWM(Pin(' + pin1 + '))\n'+
+                                                        'motor_' + motor + '2 = PWM(Pin(' + pin2 + '))\n';
+            code = 'motor_pwm.value(1)\n' + 
+               'motor_' + motor + '1.duty_u16(0)\n'+
+               'motor_' + motor + '2.duty_u16(' + speed + ')\n';
+        }
+    }
+    
+    if(motor == "B"){
+        pin1 = B1;
+        pin2 = B2;
+        
+        if(value == "forward"){
+            Blockly.Arduino.definitions_['define_motorB1'] = 'motor_' + motor + '1 = PWM(Pin(' + pin1 + '))\n'+
+                                                        'motor_' + motor + '2 = PWM(Pin(' + pin2 + '))\n';
+            code = 'motor_pwm.value(1)\n' +
+               'motor_' + motor + '1.duty_u16(' + speed + ')\n'+
+               'motor_' + motor + '2.duty_u16(0)\n'; 
+        }
+        else if (value == "backward"){
+            Blockly.Arduino.definitions_['define_motorB2'] = 'motor_' + motor + '1 = PWM(Pin(' + pin1 + '))\n'+
+                                                        'motor_' + motor + '2 = PWM(Pin(' + pin2 + '))\n';
+            code = 'motor_pwm.value(1)\n' +
+               'motor_' + motor + '1.duty_u16(0)\n'+
+               'motor_' + motor + '2.duty_u16(' + speed + ')\n';
+        }
+    }
+    if(motor == "C"){
+        pin1 = C1;
+        pin2 = C2;
+        
+        if(value == "forward"){
+            Blockly.Arduino.definitions_['define_motorC1'] = 'motor_' + motor + '1 = PWM(Pin(' + pin1 + '))\n'+
+                                                        'motor_' + motor + '2 = PWM(Pin(' + pin2 + '))\n';
+            code = 'motor_pwm.value(1)\n' +
+               'motor_' + motor + '1.duty_u16(' + speed + ')\n'+
+               'motor_' + motor + '2.duty_u16(0)\n'; 
+        }
+        else if (value == "backward"){
+            Blockly.Arduino.definitions_['define_motorC2'] = 'motor_' + motor + '1 = PWM(Pin(' + pin1 + '))\n'+
+                                                        'motor_' + motor + '2 = PWM(Pin(' + pin2 + '))\n';
+            code = 'motor_pwm.value(1)\n' +
+               'motor_' + motor + '1.duty_u16(0)\n'+
+               'motor_' + motor + '2.duty_u16(' + speed + ')\n';
+        }
+    }
+    if(motor == "D"){
+        pin1 = D1;
+        pin2 = D2;
+        
+        if(value == "forward"){
+            Blockly.Arduino.definitions_['define_motorD1'] = 'motor_' + motor + '1 = PWM(Pin(' + pin1 + '))\n'+
+                                                        'motor_' + motor + '2 = PWM(Pin(' + pin2 + '))\n';
+            code = 'motor_pwm.value(1)\n' + 
+               'motor_' + motor + '1.duty_u16(' + speed + ')\n'+
+               'motor_' + motor + '2.duty_u16(0)\n'; 
+        }
+        else if (value == "backward"){
+            Blockly.Arduino.definitions_['define_motorD2'] = 'motor_' + motor + '1 = PWM(Pin(' + pin1 + '))\n'+
+                                                        'motor_' + motor + '2 = PWM(Pin(' + pin2 + '))\n';
+            code = 'motor_pwm.value(1)\n' +
+               'motor_' + motor + '1.duty_u16(0)\n'+
+               'motor_' + motor + '2.duty_u16(' + speed + ')\n';
+        }
+    }
+    
+    return code;
+};
+
 Blockly.Arduino['timer'] = function(block) {
 
     var code = "";

@@ -454,6 +454,32 @@ Blockly.Blocks['dcMotor'] = {
   }
 };
 
+Blockly.Blocks['dcMotorV5'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage(iconMotor, 30, 30, "icon"))
+        .appendField("DC Motor")
+
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["M1", "A"], ["M2", "B"], ["M3", "C"], ["M4", "D"]]), "MOTOR");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["Forward", "forward"], ["Backward", "backward"]]), "VALUE");
+        
+    this.appendValueInput("SPEED")
+          .appendField("Speed")
+          .setCheck("Number")
+          .setAlign(Blockly.ALIGN_CENTRE);
+    
+    this.appendDummyInput()
+        .appendField("(V5)");
+
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour("#162d4a");
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
 
 Blockly.Blocks['timer'] = {
   init: function() {
