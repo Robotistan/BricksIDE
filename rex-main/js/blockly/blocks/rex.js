@@ -90,7 +90,7 @@ Blockly.Blocks['DirectionSpeed'] = {
     }
 };
 
-Blockly.Blocks['DirectionSpeedV2'] = {
+Blockly.Blocks['DirectionSpeedV5'] = {
   init: function () {
       this.appendDummyInput()
           .appendField(new Blockly.FieldImage(iconMotor, 30, 30, "icon"))
@@ -104,7 +104,7 @@ Blockly.Blocks['DirectionSpeedV2'] = {
           .appendField("%")
 
       this.appendDummyInput()
-          .appendField("(V2)")
+          .appendField("(V5)")
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
       this.setColour("#162d4a");
@@ -125,6 +125,20 @@ Blockly.Blocks['stopMotors'] = {
         this.setTooltip("");
         this.setHelpUrl("");
     }
+};
+
+Blockly.Blocks['stopMotorsV5'] = {
+  init: function () {
+      this.appendDummyInput()
+          .appendField(new Blockly.FieldImage(iconStopMotor, 30, 30, "icon"))
+      this.appendDummyInput()
+          .appendField("Stop Motors (V5)");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour("#162d4a");
+      this.setTooltip("");
+      this.setHelpUrl("");
+  }
 };
 
 Blockly.Blocks['trackingState'] = {

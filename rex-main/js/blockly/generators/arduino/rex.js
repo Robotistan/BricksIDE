@@ -250,7 +250,7 @@ Blockly.Arduino['DirectionSpeed'] = function (block) {
     return code;
 };
 
-Blockly.Arduino['DirectionSpeedV2'] = function (block) {
+Blockly.Arduino['DirectionSpeedV5'] = function (block) {
 
     var direction = block.getFieldValue('Direction');
     var speed = Blockly.Arduino.valueToCode(block, 'SPEED', Blockly.Arduino.ORDER_NONE) || '0';
@@ -370,6 +370,29 @@ Blockly.Arduino['stopMotors'] = function (block) {
     Blockly.Arduino.imports_['import_ADC'] = 'from machine import ADC';
 
     Blockly.Arduino.definitions_['define_stop_motors'] =
+        'def stop():\n' +
+        '   motor_A1.duty_u16(0 * 650)\n' +
+        '   motor_A2.duty_u16(0 * 650)\n\n' +
+        '   motor_B1.duty_u16(0 * 650)\n' +
+        '   motor_B2.duty_u16(0 * 650)\n\n' +
+        '   motor_C1.duty_u16(0 * 650)\n' +
+        '   motor_C2.duty_u16(0 * 650)\n\n' +
+        '   motor_D1.duty_u16(0 * 650)\n' +
+        '   motor_D2.duty_u16(0 * 650)\n\n';
+
+    code = 'stop()\n';
+
+    return code;
+};
+
+Blockly.Arduino['stopMotorsV5'] = function (block) {
+    var code = '';
+
+    Blockly.Arduino.imports_['import_Pin'] = 'from machine import Pin';
+    Blockly.Arduino.imports_['import_PWM'] = 'from machine import PWM';
+    Blockly.Arduino.imports_['import_ADC'] = 'from machine import ADC';
+
+    Blockly.Arduino.definitions_['define_stop_motorsV5'] =
         'def stop():\n' +
         '   motor_pwm.value(0)\n' +
         '   motor_A1.duty_u16(0 * 650)\n' +
