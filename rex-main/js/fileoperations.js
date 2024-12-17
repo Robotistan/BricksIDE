@@ -14,9 +14,9 @@ function UploadMobile()
 
 async function RexFirmware()
 {
-  fetch('pythonFiles/flash_download_tool_3.9.5.zip')
+  fetch('pythonFiles/REX_IDE_FW.rar')
     .then(res => res.blob())
-    .then(async blob => { await saveFile(blob, "flash_download_tool_3.9.5.zip"); });
+    .then(async blob => { await saveFile(blob, "REX_IDE_FW.rar"); });
 
     $("#modalFirmware").modal('hide');
 }

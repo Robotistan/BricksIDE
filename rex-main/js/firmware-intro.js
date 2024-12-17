@@ -13,38 +13,24 @@ function StartIntroFirmware() {
                     {
                         element: document.querySelector('#deneme'),
                         title: "Download RAR",
-                        intro: '<div><p>After downloading the RAR, drag the flash_download_tool_3.9.5 file to the desktop and open the application</p><img src="images/gif1.gif" alt="Step 1 GIF"></div>',
+                        intro: '<div><p>After downloading the RAR, drag the REX_IDE_FW file to the desktop and open the "uploadFirmware" application</p><img src="images/gif1.gif" alt="Step 1 GIF"></div>',
                     },
                     {
                         element: document.querySelector('#deneme'),
-                        title: "Select ESP32",
-                        intro: '<div><p>Select ESP32 from screen DOWNLOAD TOOL MODE</p><img src="images/gif2.gif" alt="Step 2 GIF"></div>',
+                        title: "Enter COM",
+                        intro: '<div><p>Type your COM port (for example: COM3). You can check your COM in Device Manager.</p><img src="images/gif2.gif" alt="Step 2 GIF"></div>',
                     },
                     {
                         element: document.querySelector('#deneme'),
-                        title: ".bin file",
-                        intro: '<div"><p>Select bin file by pressing 3 dots in SPIDownload</p><img src="images/gif3.gif" alt="Step 3 GIF"></div>',
+                        title: "",
+                        intro: '<div><p>The tool will automatically erase the flash and write MicroPython to your device.</p><p> - If you see the message “Failed to get PID of a device on COM*, using standard reset sequence.” <p>and the dots keep appearing on the screen (“....”),</p><p>try reinstalling the software by holding down the “BOOT” key on your device.</p></div>',
                     },
                     {
                         element: document.querySelector('#deneme'),
-                        title: "0x1000",
-                        intro: '<div><p>Enter the value 0x1000 on the box, then click checkbox</p><img src="images/gif4.gif" alt="Step 4 GIF"></div>',
+                        title: "Process Completed Successfully!",
+                        intro: '<div"><p>When the process is complete, you will receive the message “process completed successfully. Press and key to continue” message. You can complete the process by pressing any button or closing the screen!</p><img src="images/gif3.gif" alt="Step 3 GIF"></div>',
                     },
-                    {
-                        element: document.querySelector('#deneme'),
-                        title: "COM",
-                        intro: '<div><p>Select your device from the dropdown COM field</p><img src="images/gif5.gif" alt="Step 5 GIF"></div>',
-                    },
-                    {
-                        element: document.querySelector('#deneme'),
-                        title: "ERASE",
-                        intro: '<div><p>Click ERASE and wait for it to download</p><img src="images/gif6.gif" alt="Step 6 GIF"></div>',
-                    },
-                    {
-                        element: document.querySelector('#deneme'),
-                        title: "START",
-                        intro: '<div><p>click START and wait for it to download then you can close and start your project</p><img src="images/gif7.gif" alt="Step 7 GIF"></div>',
-                    }
+                    
                 ],
             tooltipClass: 'customTooltip',
             tooltipPosition: 'right',
