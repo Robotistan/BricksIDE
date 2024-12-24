@@ -598,9 +598,9 @@ Blockly.Blocks['dabbleDefinition'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Dabble definition")
-   	this.appendStatementInput("DO")
-      .setCheck(null);
-    this.setInputsInline(true);
+   
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
     this.setColour("#426322");
     this.setTooltip("");
     this.setHelpUrl("");
@@ -662,6 +662,23 @@ Blockly.Blocks['dabbleRun'] = {
   }
 };
 
+
+Blockly.Blocks['dabbleUse'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Use Dabble")
+    
+   	this.appendStatementInput("DO")
+      .setCheck(null);
+      
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour("#426322");
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
 
 Blockly.Blocks['inputToASCII'] = {
   init: function () {

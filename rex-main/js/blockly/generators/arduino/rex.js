@@ -925,30 +925,47 @@ Blockly.Arduino['variable_convert'] = function (block) {
 
 Blockly.Arduino['dabbleDefinition'] = function(block) {
     var code = '';
-    var branchCode = Blockly.Arduino.statementToCode(block, 'DO') ||
-    Blockly.Arduino.PASS;
-
+  
     Blockly.Arduino.imports_['import_REXbluetooth'] = 'from rex import BLESimplePeripheral, Servo';
     Blockly.Arduino.imports_['import_bluetooth'] = 'import bluetooth';
   
     Blockly.Arduino.definitions_['define_bluetooth'] = 'ble = bluetooth.BLE()\n';
     Blockly.Arduino.definitions_['define_REXbluetooth'] = 'sp = BLESimplePeripheral(ble)\n';
+  
+    Blockly.Arduino.definitions_['define_dabbleVariable'] = 'bleDataReceived = False\n' +
+                                                            'dataReceived = bytearray()\n';
+  
     Blockly.Arduino.definitions_['define_on_rx'] = '\ndef on_rx(data):\n' +
-                                                   '    print("Data received: ", data)\n' +
-                                                   branchCode + '\n';
-
+                                                   '    global dataReceived, bleDataReceived\n' + 
+                                                   '    dataReceived = data\n' +
+                                                   '    bleDataReceived = True\n' +
+                                                   '    print("Data received: ", data)\n';
+  
     return code;
-};
-
-
-Blockly.Arduino['dabbleGiveCommand'] = function(block) {
+  };
+  
+  
+  Blockly.Arduino['dabbleUse'] = function(block) {
+  
+    var branch = Blockly.Arduino.statementToCode(block, 'DO') ;
+    branch = Blockly.Arduino.addLoopTrap(branch, block);
+  
+    var code = 
+               "if bleDataReceived == True: \n" +
+               "    bleDataReceived = False \n" +
+               branch;
+    
+    return code;
+  }
+  
+  Blockly.Arduino['dabbleGiveCommand'] = function(block) {
     var code = '';
     var value = block.getFieldValue('VALUE');
   
-    var code = "data == " + value ;
-
+    var code = "dataReceived == " + value ;
+  
     return [code, Blockly.Arduino.ORDER_NONE];
-};
+  };
 
 Blockly.Arduino['dabbleRun'] = function(block) {  
     var code = '';
