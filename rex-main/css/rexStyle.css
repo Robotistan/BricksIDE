@@ -1,3 +1,14 @@
+.PicoBricksGoIcon {
+  background-image: url("../images/go_renkli.svg");
+  background-repeat: no-repeat;
+  margin-top:0.5rem;
+  margin-left: 0.4rem;
+  /* background-position: center bottom; Simgeyi alta hizalar */
+  /*padding-bottom: 5px;  Alt boşluk oluşturur */
+  width: 30px !important;
+  height: 100% !important;
+  vertical-align: middle;
+}
 /*css file: dropdown*/
 .dropbtn {
     background-color: transparent;

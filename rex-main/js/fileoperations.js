@@ -55,6 +55,21 @@ function Upload_REX_Library()
   }
 }
 
+function Upload_App_Library()
+{
+  if(isConnected)
+  {
+    showProgressPanel(true);
+
+    $.get('pythonFiles/AppLib.txt', function(data) {
+      saveCode(data, "rex.py");
+    });
+  }
+  else{
+    showModalDialog();
+  }
+}
+
 function LoadCode(code)
 {
   xmlText = code;

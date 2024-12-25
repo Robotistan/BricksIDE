@@ -142,6 +142,7 @@
                             <a class="dropdown-item" href="#" id="btFirmware" onclick="UploadFirmware()">Upload Firmware</a>
                             <hr>
                             <a class="dropdown-item" href="#" id="btLibrary" onclick="library_Modal()">Upload REX Library</a>
+                            <a class="dropdown-item" href="#" id="btLibrary" onclick="Upload_App_Library()">Upload App Library</a>
                             <a class="dropdown-item" href="#" id="btLibrary" onclick="Upload_MPU60_Library()">Upload MPU60 Library</a>
                         </ul>
                     </div>
@@ -444,7 +445,7 @@
             <block type="DirectionSpeed">
                 <value name="SPEED">
                     <shadow type="math_positive_number">
-                        <field name="NUM">50</field>
+                        <field name="NUM">100</field>
                     </shadow>
                 </value>
             </block>
@@ -452,7 +453,7 @@
             <block type="DirectionSpeedV5">
                 <value name="SPEED">
                     <shadow type="math_positive_number">
-                        <field name="NUM">50</field>
+                        <field name="NUM">100</field>
                     </shadow>
                 </value>
             </block>
@@ -747,7 +748,7 @@
             <block type="inputToASCII">
                 <value name="VALUE">   
                   <shadow type="text">   
-                    <field name="TEXT">PicoBricks</field>   
+                    <field name="TEXT">REX</field>   
                   </shadow>   
               </value>   
             </block>
@@ -805,7 +806,7 @@
             <block type="appendList">
                 <value name="VALUE">
                     <shadow type="text">
-                        <field name="TEXT">PicoBricks</field>
+                        <field name="TEXT">REX</field>
                     </shadow>
                 </value>
             </block>
@@ -818,7 +819,7 @@
                 </value>
                 <value name="VALUE">
                     <shadow type="text">
-                        <field name="TEXT">PicoBricks</field>
+                        <field name="TEXT">REX</field>
                     </shadow>
                 </value>
             </block>
@@ -834,21 +835,50 @@
 
         <category name="%{BKY_PINOO_FUNCTIONS}" categorystyle="procedure_category" iconclass="blocklyTreeIconCustom fas fa-puzzle-piece fa-2x" custom="PROCEDURE"></category>
         
+        <category name="PicoBricksGO!" iconclass="PicoBricksGoIcon" colour="#D30015">
+            <block type="BLE_App">
+            </block>
+            
+            <block type="CheckBLE_App">
+            </block>
+
+            <block type="clearBLE_App">
+            </block>
+            
+            <block type="robotTypesApp">
+            </block>
+
+            <block type="ButtonsApp">
+            </block>
+        
+            <block type="SelectApp">
+            </block>
+            
+            <block type="Jotstick_Def_app">
+            </block>
+            
+            <block type="Joystick_Speed_App">
+            </block>
+
+            <block type="Joystick_App_direction">
+            </block>
+            
+            <block type="Omni_direction_app">
+            </block>
+        </category>
+        
         <category name="      Dabble" id="dabbleCat" colour="#426322" secondaryColour="#426322" iconclass="blocklyTreeIconCustom fa-solid fa-gamepad fa-2x">
               
             <block type="dabbleDefinition">   
             </block>  
             
-            <block type="dabbleUse">   
-            </block>  
-
-            <block type="dabbleRun">   
+            <block type="dabbleGiveCommand">   
             </block>  
 
             <block type="dabbleIsConnected">   
             </block>  
             
-            <block type="dabbleGiveCommand">   
+            <block type="dabbleRun">   
             </block>  
             
         </category>
