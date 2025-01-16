@@ -965,7 +965,6 @@ Blockly.Arduino['BerryDirectionSpeed'] = function(block) {
     Blockly.Arduino.imports_['import_Pin'] = 'from machine import Pin';
     Blockly.Arduino.imports_['import_TB6612'] = 'from berrybot import TB6612';
 
-    //burda pin tanımlamadan direkt pin.js'den de çekebilirim pinler buzzerda olduğu gibi
     Blockly.Arduino.definitions_['define_BerryMotorsPins'] = 'MOTOR_A1_PIN = 25\n'+
                                                              'MOTOR_A2_PIN = 24\n'+
                                                              'MOTOR_B1_PIN = 22\n'+
@@ -1056,7 +1055,11 @@ Blockly.Arduino['BerryShow_leds'] = function(block) {
     Blockly.Arduino.imports_['import_I2C'] = "from machine import I2C";
     Blockly.Arduino.imports_['import_PWM'] = "from machine import PWM";
     Blockly.Arduino.imports_['import_time_utime'] = "import time, utime";
-    Blockly.Arduino.imports_['import_berryBot'] = 'from berrybot import TB6612, NEC_ABC, NEC_16, WS2812, IR_RX';
+    Blockly.Arduino.imports_['import_berry_TB6612'] = 'from berrybot import TB6612';
+    Blockly.Arduino.imports_['import_berry_NEC_ABC'] = 'from berrybot import NEC_ABC';
+    Blockly.Arduino.imports_['import_berry_NEC_16'] = 'from berrybot import NEC_16';
+    Blockly.Arduino.imports_['import_berry_WS2812'] = 'from berrybot import WS2812';
+    Blockly.Arduino.imports_['import_berry_IR_IX'] = 'from berrybot import IR_RX';
 
     Blockly.Arduino.definitions_['define_BerryShowVar'] = 'ledRow = 0\n' +
                                                           'ledArrayBuffer = bytearray(5)\n' +
@@ -1119,6 +1122,28 @@ Blockly.Arduino['BerryReadButton'] = function(block) {
     Blockly.Arduino.definitions_['define_button'] = 'pin_button = machine.Pin(' + pin + ', machine.Pin.IN)';  
     var code = 'pin_button.value()';
     return [code, Blockly.Arduino.ORDER_NONE];  
+};
+
+Blockly.Arduino['BerryTrackingSensorValue'] = function (block) {
+    var value = block.getFieldValue('VALUE');
+    var code = '';
+    var rightPin = 27;
+    var leftPin = 26;
+
+    Blockly.Arduino.imports_['import_machine'] = 'import machine';
+    Blockly.Arduino.imports_['import_Pin'] = 'from machine import Pin';
+    Blockly.Arduino.imports_['import_ADC'] = 'from machine import ADC';
+
+    if(value == "right"){
+        Blockly.Arduino.definitions_['define_stackingRightSensor'] = 'rightSensor = ADC(Pin('+rightPin+'))';
+        code = 'rightSensor.read_u16()';
+    }
+    else if(value == "left"){
+        Blockly.Arduino.definitions_['define_stackingLeftSensor'] = 'leftSensor = ADC(Pin('+leftPin+'))';
+        code = 'leftSensor.read_u16()';
+    }
+
+    return [code, Blockly.Arduino.ORDER_NONE];
 };
 
 Blockly.Arduino['BerryTrackingState'] = function (block) {
@@ -1237,7 +1262,11 @@ Blockly.Arduino['Berry_SelectLedsDrawing'] = function(block) {
     Blockly.Arduino.imports_['import_I2C'] = "from machine import I2C";
     Blockly.Arduino.imports_['import_PWM'] = "from machine import PWM";
     Blockly.Arduino.imports_['import_time_utime'] = "import time, utime";
-    Blockly.Arduino.imports_['import_berryBot'] = 'from berrybot import TB6612, NEC_ABC, NEC_16, WS2812, IR_RX';
+    Blockly.Arduino.imports_['import_berry_TB6612'] = 'from berrybot import TB6612';
+    Blockly.Arduino.imports_['import_berry_NEC_ABC'] = 'from berrybot import NEC_ABC';
+    Blockly.Arduino.imports_['import_berry_NEC_16'] = 'from berrybot import NEC_16';
+    Blockly.Arduino.imports_['import_berry_WS2812'] = 'from berrybot import WS2812';
+    Blockly.Arduino.imports_['import_berry_IR_IX'] = 'from berrybot import IR_RX';
 
     Blockly.Arduino.definitions_['define_BerryShowVar'] = 'ledRow = 0\n' +
                                                           'ledArrayBuffer = bytearray(5)\n' +
@@ -1317,5 +1346,208 @@ Blockly.Arduino['Berry_SelectLedsDrawing'] = function(block) {
     code += 'myTimer.init(period=5, mode=Timer.PERIODIC, callback=tick)\n';
 
     drawingIndex++;  
+    return code;
+}
+
+Blockly.Arduino['berry_connectBLE_App'] = function(block) {
+    var code = '';
+
+    Blockly.Arduino.imports_['import_berry_ble'] = 'from berrybot import BLE';
+    Blockly.Arduino.imports_['import_UART'] = "from machine import UART";
+    Blockly.Arduino.imports_['import_Pin'] = 'from machine import Pin';
+
+    Blockly.Arduino.definitions_['define_UART_BLE'] = 'uart = UART(0, 115200, parity=None, stop = 1, bits = 8, tx=Pin(0), rx=Pin(1),timeout=10)';
+    Blockly.Arduino.definitions_['define_connectBLEberry'] = 'ble = BLE(uart)\nble.configure()';
+    Blockly.Arduino.definitions_['define_ble_buf'] =  'ble_buf = bytes()\n';
+
+    code = 'ble.connect()\n'+
+           'ble_buf = ble.read()\n';
+    return code;
+};
+
+Blockly.Arduino['berry_checkBLE_App'] = function(block) {
+    var code = '';
+
+    code = "ble_buf != b''";
+    return [code, Blockly.Arduino.ORDER_NONE];
+};
+
+Blockly.Arduino['berry_options_App'] = function(block) {
+    var code = '';
+    var options = block.getFieldValue('OPTIONS');
+
+    code = options;
+    return [code, Blockly.Arduino.ORDER_NONE];
+};
+
+Blockly.Arduino['joystick_XY_def_berryApp'] = function(block) {
+    var code = '';
+    var value = block.getFieldValue('VALUE');
+    
+    Blockly.Arduino.definitions_['define_mapValue_berryApp'] = 'def map_value(x, in_min, in_max, out_min, out_max):\n' +
+                                                               '    return (x - in_min) * (out_max - out_min) // (in_max - in_min) + out_min\n';
+
+    if (value == 'X'){
+        code =  'joyX = ble_buf[2]\n' +
+                'mappedX = map_value(joyX, 0, 255, -255, 255)\n\n';
+    }
+    else {
+        code =  'joyY = ble_buf[3]\n'+
+                'mappedY = map_value(joyY, 0, 255, -255, 255)\n\n';
+
+    }
+            
+    return code;
+};
+
+Blockly.Arduino['joystick_XY_value_berryApp'] = function(block) {
+
+    var code = '';
+    var value = block.getFieldValue('VALUE');
+
+    if(value == 'X'){
+        code = 'mappedX';
+    }
+    if(value == 'Y'){
+        code = 'mappedY';
+    }
+
+    return [code, Blockly.Arduino.ORDER_NONE];
+}
+
+Blockly.Arduino['joystick_leftRight_berryApp'] = function(block) {
+    var code = '';
+    var value = block.getFieldValue('VALUE');
+    
+    if (value == 'right'){
+        code = 'rightMotorSpeed';
+    }
+    else {
+        code = 'leftMotorSpeed';
+
+    }
+            
+    return [code, Blockly.Arduino.ORDER_NONE];
+};
+
+Blockly.Arduino['joystick_motor_berryApp'] = function(block) {
+
+    var value1 =  Blockly.Arduino.valueToCode(block, 'VALUE1', Blockly.Arduino.ORDER_NONE) || '0';
+    var value2 =  Blockly.Arduino.valueToCode(block, 'VALUE2', Blockly.Arduino.ORDER_NONE) || '0';
+    var code = "";
+
+    Blockly.Arduino.imports_['import_berry_TB6612'] = 'from berrybot import TB6612';
+    Blockly.Arduino.definitions_['define_constrain_berryApp'] = 'def constrain(x, min_val, max_val):\n' +
+                                                                '   return max(min(x, max_val), min_val)\n';
+    Blockly.Arduino.definitions_['define_BerryMotorsPins'] = 'MOTOR_A1_PIN = 25\n'+
+                                                             'MOTOR_A2_PIN = 24\n'+
+                                                             'MOTOR_B1_PIN = 22\n'+
+                                                             'MOTOR_B2_PIN = 23\n'+
+                                                             'MOTOR_PWM_A_PIN = 15\n'+
+                                                             'MOTOR_PWM_B_PIN = 21\n';
+    Blockly.Arduino.definitions_['define_BerryMotors'] = 'motor = TB6612(MOTOR_A1_PIN, MOTOR_A2_PIN, MOTOR_B1_PIN, MOTOR_B2_PIN, MOTOR_PWM_A_PIN, MOTOR_PWM_B_PIN)\n';
+
+    code =  'leftMotorSpeed = mappedY + mappedX\n' +
+            'rightMotorSpeed = mappedY - mappedX\n\n' +
+
+            'leftMotorSpeed = constrain(leftMotorSpeed, -255, 255)\n' +
+            'rightMotorSpeed = constrain(rightMotorSpeed, -255, 255)\n\n' +
+            'motor.setMotorSpeed(' + value1 + ', ' + value2 + ')\n';
+
+    return code;
+}
+
+Blockly.Arduino['RGB_LedMatrix_def_berryApp'] = function(block) {
+    var code = "";
+    var select = block.getFieldValue('SELECT');
+
+    var workspace = block.workspace;
+    var rgbBlinkBlocks = workspace.getBlocksByType('RGB_blink_berryApp', true);
+
+    if (select == "RGB"){
+        Blockly.Arduino.imports_['import_Pin'] = "from machine import Pin";
+        Blockly.Arduino.imports_['import_berry_WS2812'] = 'from berrybot import WS2812';
+        Blockly.Arduino.definitions_['define_RGB_berryApp'] =  'rgb_value = [[0, 0, 127], [0, 0, 127], [0, 0, 127], [0, 0, 127], [0, 0, 127], [0, 0, 127],[0, 0, 127]]';
+        Blockly.Arduino.definitions_['define_rgb_ws2812'] = 'rgb = WS2812(7, 6, 0.2)';
+        Blockly.Arduino.definitions_['define_rgb_updateLedColors'] ='def update_led_colors(rgb, rgb_value):\n' +
+                                                                    '   for i in range(len(rgb_value)):\n' +
+                                                                    '       rgb.pixels_set(i, (rgb_value[i][0], rgb_value[i][1], rgb_value[i][2]))\n' +
+                                                                    '   rgb.pixels_show()\n';
+
+
+        if (rgbBlinkBlocks.length === 0) {
+            code =  'rgb_value[ble_buf[2]-1][0] = ble_buf[3]\n' +
+                    'rgb_value[ble_buf[2]-1][1] = ble_buf[4]\n' +
+                    'rgb_value[ble_buf[2]-1][2] = ble_buf[5]\n' +
+                    'update_led_colors(rgb, rgb_value)\n';
+        }else {
+        code =  'rgb_value[ble_buf[2]-1][0] = ble_buf[3]\n' +
+                'rgb_value[ble_buf[2]-1][1] = ble_buf[4]\n' +
+                'rgb_value[ble_buf[2]-1][2] = ble_buf[5]\n';
+    }
+
+    }
+
+    else if (select == "LedMatrix"){
+        Blockly.Arduino.imports_['import_berry_IR_IX'] = 'from berrybot import LEDMatrix';
+        Blockly.Arduino.imports_['import_Timer'] = 'from machine import Timer';
+        
+        Blockly.Arduino.definitions_['define_LedMatrix_berryApp'] =  'user_led_matrix = bytearray(5)\n' +
+                                                                     'rowPins= [7, 11, 12, 13, 17]\n' +
+                                                                     'colPins = [18, 19, 16, 2, 3]\n' +
+                                                                     'matrix = LEDMatrix(rowPins, colPins)\n' +
+                                                                     'matrix.set_led_matrix()\n\n' +
+                                                                     'myTimer = Timer(-1)\n' +
+                                                                     'myTimer.init(period=5, mode=Timer.PERIODIC, callback=matrix.tick)\n\n';
+        Blockly.Arduino.definitions_['define_drawScreen'] = 'def drawScreen(buffer):\n'
+        Blockly.Arduino.definitions_['define_drawScreen'] = 'def drawScreen(buffer):\n' +
+                                                            '   led_array_buffer = [0] * 5\n' +
+                                                            '   for i in range(5):\n' +
+                                                            '       led_array_buffer[i] = buffer[i]\n' +
+                                                            '   matrix.draw_screen(buffer)\n' +
+                                                            '   return led_array_buffer\n';
+        code =  'user_led_matrix[0] = ble_buf[2]\n' +
+                'user_led_matrix[1] = ble_buf[3]\n' +
+                'user_led_matrix[2] = ble_buf[4]\n' +
+                'user_led_matrix[3] = ble_buf[5]\n' +
+                'user_led_matrix[4] = ble_buf[6]\n\n' +
+
+                'drawScreen(user_led_matrix)\n';
+    }
+    return code;
+};
+
+Blockly.Arduino['RGB_LedMatrix_desc_berryApp'] = function(block) {
+    var code = "";
+    var select = block.getFieldValue('SELECT');
+    code = select;
+
+    return [code, Blockly.Arduino.ORDER_NONE];
+}
+
+Blockly.Arduino['RGB_blink_berryApp'] = function(block) {
+    var code = '';
+    var second = block.getFieldValue('SECOND');
+
+    Blockly.Arduino.imports_['import_Pin'] = "from machine import Pin";
+    Blockly.Arduino.imports_['import_berry_WS2812'] = 'from berrybot import WS2812';
+    Blockly.Arduino.imports_['import_time'] = "import time";
+    Blockly.Arduino.imports_['import_thread'] = "import _thread";
+
+    Blockly.Arduino.definitions_['define_RGB_berryApp'] =  'rgb_value = [[0, 0, 127], [0, 0, 127], [0, 0, 127], [0, 0, 127], [0, 0, 127], [0, 0, 127],[0, 0, 127]]';
+    Blockly.Arduino.definitions_['define_rgb_ws2812'] = 'rgb = WS2812(7, 6, 0.2)';
+    Blockly.Arduino.definitions_['define_rgb_blink'] =  'def continuous_blink(rgb, rgb_value, delay):\n' +
+                                                        '    blink_state = True\n' +
+                                                        '    while True:\n' +
+                                                        '        if blink_state:\n' +
+                                                        '            update_led_colors(rgb, rgb_value)\n' +
+                                                        '        else:\n' +
+                                                        '            for i in range(len(rgb_value)):\n' +
+                                                        '                rgb.pixels_set(i, (0, 0, 0))\n' +
+                                                        '            rgb.pixels_show()\n' +
+                                                        '        blink_state = not blink_state\n' +
+                                                        '        sleep(delay)\n\n' +
+                                                        '_thread.start_new_thread(continuous_blink, (rgb, rgb_value, '+second+'))\n';
+
     return code;
 }

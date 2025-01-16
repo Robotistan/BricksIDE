@@ -265,19 +265,8 @@ Blockly.Arduino['DirectionSpeedV5'] = function (block) {
     var D1pin = Motor_D1_pin;
     var D2pin = Motor_D2_pin;
 
-    var workspace = Blockly.getMainWorkspace();
-    var bleAppBlocks = workspace.getAllBlocks().filter(function(b) {
-        return b.type === 'BLE_App';
-    });
-
-    if (bleAppBlocks.length > 0) {
-        Blockly.Arduino.definitions_['define_direction_pwm'] = 'motor_pwm = PWM(Pin(13))';
-        var pwm_value1 = '';
-
-    } else {
-        var pwm_value1 = '   motor_pwm.value(1)\n';
-        Blockly.Arduino.definitions_['define_direction_pwm'] = 'motor_pwm = Pin(13, Pin.OUT)';
-    }
+    var pwm_value1 = '   motor_pwm.value(1)\n';
+    Blockly.Arduino.definitions_['define_direction_pwm'] = 'motor_pwm = Pin(13, Pin.OUT)';
 
     Blockly.Arduino.imports_['import_Pin'] = 'from machine import Pin';
     Blockly.Arduino.imports_['import_ADC'] = 'from machine import ADC';
@@ -466,17 +455,7 @@ Blockly.Arduino['stopMotorsV5'] = function (block) {
     Blockly.Arduino.imports_['import_PWM'] = 'from machine import PWM';
     Blockly.Arduino.imports_['import_ADC'] = 'from machine import ADC';
 
-    var workspace = Blockly.getMainWorkspace();
-    var bleAppBlocks = workspace.getAllBlocks().filter(function(b) {
-        return b.type === 'BLE_App';
-    });
-
-    if (bleAppBlocks.length > 0) {
-        var pwm_value = '';
-
-    } else {
-        var pwm_value = '   motor_pwm.value(0)\n';
-    }
+    var pwm_value = '   motor_pwm.value(0)\n';
 
     Blockly.Arduino.definitions_['define_stop_motorsV5'] =
         'def stop():\n' +
