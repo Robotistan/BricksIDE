@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Deneme</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+       
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js" integrity="sha512-6sSYJqDreZRZGkJ3b+YfdhB3MzmuP9R7X1QZ6g5aIXhRvR1Y/N/P47jmnkENm7YL3oqsmI6AK+V6AD99uWDnIw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <style>
+            body {
+                background-color: rgb(238, 168, 39) !important;
+                background-image:url("../img/background.png");
+                
+                background-size:contain;
+            }
+            .card {
+                margin: 10px;
+                text-align: center; 
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between; 
+                min-height: 20rem; 
+                padding: 1rem;
+            }
+
+            .card img {
+                max-width: 14rem;
+                margin-bottom: 1rem; 
+            }
+
+            .card .card-body {
+                flex: 1; 
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .btn.btn-primary {
+                background-color: rgb(22, 19, 66);
+                border-color: rgb(22, 19, 66);
+                padding: 0.5rem 0.5rem; 
+                margin-top: auto; 
+            }
+
+            .btn.btn-primary:hover {
+                background-color: rgb(238, 168, 39);
+                border-color: rgb(238, 168, 39);
+                transform: scale(1.03);
+            }
+
+            .card-title_enlarged-title2 {
+                font-size: 20px;
+                font-weight: 600;
+                color: rgb(22, 19, 66);
+                margin-bottom: 1rem; 
+            }
+            .allcards .row {
+                overflow-x: hidden !important;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <i class="fa-solid fa-arrow-left-long fa-2xl back-arrow" style="color: #161342; margin-left:10px; margin-top:5px" onclick="goBack()"></i>
+
+        <div class="allcards">
+            <div class="row row-cols-1 row-cols-md-3 g-0">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title_enlarged-title2">Quick Start Guide</h5>
+                            <img src="../img/guidekapak.png" alt="jr" style="max-width: 14rem;"><br>
+                            <a href="../rex/Rex8.pdf" target="_blank" class="btn btn-primary">Open PDF</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title_enlarged-title2">Arm Bot</h5>
+                            <img src="../img/armbot.png" alt="jr" style="max-width: 14rem;"><br>
+                            <a href="../rex/Rex1.pdf" target="_blank" class="btn btn-primary">Open PDF</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title_enlarged-title2">Omni Bot</h5>
+                            <img src="../img/omnibot.png" alt="jr" style="max-width: 14rem;"><br>
+                            <a href="../rex/Rex9.pdf" target="_blank" class="btn btn-primary">Open PDF</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title_enlarged-title">Sonic Bot</h5>
+                            <img src="../img/sonicbot.png" alt="jr" style="max-width: 14rem;"><br>
+                            <a href="../rex/Rex5.pdf" target="_blank" class="btn btn-primary">Open PDF</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title_enlarged-title">Tracker Bot</h5>
+                            <img src="../img/trackerbot.png" alt="jr" style="max-width: 15rem;"><br>
+                            <a href="../rex/Rex3.pdf" target="_blank" class="btn btn-primary">Open PDF</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title_enlarged-title">Sumo Bot</h5>
+                            <img src="../img/sumobot.png" alt="jr" style="max-width: 14rem;"><br>
+                            <a href="../rex/Rex4.pdf" target="_blank" class="btn btn-primary">Open PDF</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title_enlarged-title">Rover Bot</h5>
+                            <img src="../img/roverbot.png" alt="jr" style="max-width: 14rem;"><br>
+                            <a href="../rex/Rex6.pdf" target="_blank" class="btn btn-primary">Open PDF</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title_enlarged-title">Wi-Bot</h5>
+                            <img src="../img/wibot.png" alt="jr" style="max-width: 14rem;"><br>
+                            <a href="../rex/Rex2.pdf" target="_blank" class="btn btn-primary">Open PDF</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title_enlarged-title">Balance Bot</h5>
+                            <img src="../img/balancebot.png" alt="jr" style="max-width: 14rem;"><br>
+                            <a href="../rex/Rex7.pdf" target="_blank" class="btn btn-primary">Open PDF</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script>
+            function goBack() {
+                window.location.href = "index.html"; 
+            }
+        </script>
+
+    </body>
+</html>

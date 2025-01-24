@@ -1135,7 +1135,9 @@ Blockly.Arduino['SelectApp'] = function (block) {
 
     return [code, Blockly.Arduino.ORDER_NONE];
 }
-Blockly.Arduino['Jotstick_Def_app'] = function (block) {
+
+Blockly.Arduino['Jotstick_DefXY_app'] = function (block) {
+    var value = block.getFieldValue('VALUE');
     var code = "";
     
     Blockly.Arduino.definitions_['define_JoystickDef'] = 'def custom_map(value, in_min, in_max, out_min, out_max):\n' +
@@ -1143,19 +1145,24 @@ Blockly.Arduino['Jotstick_Def_app'] = function (block) {
                                                          'def constrain(val, min_val, max_val):\n' +
                                                          '    return max(min_val, min(max_val, val))\n\n';
    
-    code =  
-    'xValue = buffer[3]\n' +
-    'yValue = buffer[4]\n' +
-    'centerX = 127\n' +
-    'centerY = 127\n' +
-    'deadZone = 20\n\n' +
-    'xSpeed = custom_map(abs(xValue - centerX), 0, 127, 0, 255)\n' +
-    'ySpeed = custom_map(abs(yValue - centerY), 0, 127, 0, 255)\n\n' +
-    'xSpeed = constrain(xSpeed, 0, 100)\n' +
-    'ySpeed = constrain(ySpeed, 0, 100)\n\n';    
+    if (value == 'x'){
+        code = 'xValue = buffer[3]\n' +
+               'centerX = 127\n' +
+               'deadZone = 20\n\n' +
+               'xSpeed = custom_map(abs(xValue - centerX), 0, 127, 0, 255)\n' +
+               'xSpeed = constrain(xSpeed, 0, 100)\n';
+    }
+    else if(value == 'y'){
+        code = 'yValue = buffer[4]\n' +
+        'centerY = 127\n' +
+        'deadZone = 20\n\n' +
+        'ySpeed = custom_map(abs(yValue - centerY), 0, 127, 0, 255)\n\n' +
+        'ySpeed = constrain(ySpeed, 0, 100)\n\n';   
+    }
 
     return code;
 }
+
 Blockly.Arduino['Joystick_Speed_App'] = function (block) {
     
     var select = block.getFieldValue('Select');
@@ -1429,6 +1436,236 @@ Blockly.Arduino['dabbleIsConnected'] = function (block) {
     return [code, Blockly.Arduino.ORDER_NONE];
 }
 
+
+Blockly.Arduino['dabble_jotstickDef'] = function (block) {
+    var value = block.getFieldValue('VALUE');
+    var code = "";
+    
+    Blockly.Arduino.imports_['import_math_cosSinPi'] = 'from math import cos, sin, pi';
+    Blockly.Arduino.definitions_['define_JoystickVar'] = 'centerX = 0\n' +
+                                                         'centerY = 0\n' +
+                                                         'deadZone = 0.2';
+    Blockly.Arduino.definitions_['define_JoystickDef'] = 'def custom_map(value, in_min, in_max, out_min, out_max):\n' +
+                                                         '    return (value - in_min) * (out_max - out_min) // (in_max - in_min) + out_min\n\n' +
+                                                         'def constrain(val, min_val, max_val):\n' +
+                                                         '    return max(min_val, min(max_val, val))\n\n';
+
+    Blockly.Arduino.definitions_['define_JoystickCalculate'] =  'def calculate_joystick(joystick_data):\n' +
+                                                                '   angle = (joystick_data >> 3) * 15\n' +
+                                                                '   radius = joystick_data & 0x07\n\n' +
+                                                                '   x = radius * cos(angle * pi / 180)\n' +
+                                                                '   y = radius * sin(angle * pi / 180)\n\n' +
+                                                                '   return x, y';
+
+    
+    if (value == 'x') {
+        code += 'joystick_data = data[6]\n' +
+                'x = calculate_joystick(joystick_data)[0]\n' +
+                'xSpeed = int(custom_map(abs(x), 0, 7, 0, 255))\n' +
+                'xSpeed = constrain(xSpeed, 0, 100)\n\n';
+    } else if (value == 'y') {
+        code += 'joystick_data = data[6]\n' +
+                'y = calculate_joystick(joystick_data)[1]\n' +
+                'ySpeed = int(custom_map(abs(y), 0, 7, 0, 255))\n' +
+                'ySpeed = constrain(ySpeed, 0, 100)\n\n';
+    }
+
+    return code;
+};
+
+Blockly.Arduino['dabble_JoystickMotor'] = function (block) {
+
+    var direction = block.getFieldValue('Direction');
+    var speed = Blockly.Arduino.valueToCode(block, 'SPEED', Blockly.Arduino.ORDER_NONE) || '0';
+    var code = '';
+    
+    var A1pin = Motor_A1_pin;
+    var A2pin = Motor_A2_pin;
+    var B1pin = Motor_B1_pin;
+    var B2pin = Motor_B2_pin;
+    var C1pin = Motor_D1_pin;
+    var C2pin = Motor_D2_pin;
+    var D1pin = Motor_C1_pin;
+    var D2pin = Motor_C2_pin;
+
+    Blockly.Arduino.imports_['import_Pin'] = 'from machine import Pin';
+    Blockly.Arduino.imports_['import_ADC'] = 'from machine import ADC';
+    Blockly.Arduino.imports_['import_PWM'] = 'from machine import PWM';
+
+    
+    var pwm_value1 = '   motor_pwm.value(1)\n';
+    Blockly.Arduino.definitions_['define_direction_pwm'] = 'motor_pwm = Pin(13, Pin.OUT)';
+
+    Blockly.Arduino.definitions_['define_direction_motorA'] = '#motorA\n' +
+                                                              'motor_A1 = PWM(Pin('+ A1pin +'))\n' +
+                                                              'motor_A1.duty_u16(0)\n' +
+                                                              'motor_A2 = PWM(Pin('+ A2pin +'))\n' +
+                                                              'motor_A2.duty_u16(0)\n\n';
+
+    Blockly.Arduino.definitions_['define_direction_motorB'] = '#motorB\n' +
+                                                              'motor_B1 = PWM(Pin('+ B1pin +'))\n' +
+                                                              'motor_B1.duty_u16(0)\n' +
+                                                              'motor_B2 = PWM(Pin('+ B2pin +'))\n' +
+                                                              'motor_B2.duty_u16(0)\n\n';
+
+    Blockly.Arduino.definitions_['define_direction_motorC'] = '#motorC\n' +
+                                                              'motor_C1 = PWM(Pin('+ C1pin +'))\n' +
+                                                              'motor_C1.duty_u16(0)\n' +
+                                                              'motor_C2 = PWM(Pin('+ C2pin +'))\n' +
+                                                              'motor_C2.duty_u16(0)\n\n';
+
+    Blockly.Arduino.definitions_['define_direction_motorD'] = '#motorD\n' +
+                                                              'motor_D1 = PWM(Pin('+ D1pin +'))\n' +
+                                                              'motor_D1.duty_u16(0)\n' +
+                                                              'motor_D2 = PWM(Pin('+ D2pin +'))\n' +
+                                                              'motor_D2.duty_u16(0)\n\n';
+
+    if (direction == "backward") {
+        Blockly.Arduino.definitions_['define_direction_backward_omni_dabble'] =
+            'def ' + direction + '_omni (speedBackward):\n' +
+            pwm_value1 +
+            '   motor_A1.duty_u16(speedBackward * 650)\n' +
+            '   motor_A2.duty_u16(0 * 650)\n\n' +
+            '   motor_B1.duty_u16(speedBackward * 650)\n' +
+            '   motor_B2.duty_u16(0 * 650)\n\n' +
+            '   motor_C1.duty_u16(speedBackward * 650)\n' +
+            '   motor_C2.duty_u16(0 * 650)\n\n' +
+            '   motor_D1.duty_u16(speedBackward * 650)\n' +
+            '   motor_D2.duty_u16(0 * 650)\n\n' +
+            '   return\n\n';
+
+    }
+    else if (direction == "forward") {
+        Blockly.Arduino.definitions_['define_direction_forward_omni_dabble'] =
+            'def ' + direction + '_omni (speedForward):\n' +
+            pwm_value1 +
+            '   motor_A1.duty_u16(0 * 650)\n' +
+            '   motor_A2.duty_u16(speedForward * 650)\n\n' +
+            '   motor_B1.duty_u16(0 * 650)\n' +
+            '   motor_B2.duty_u16(speedForward * 650)\n\n' +
+            '   motor_C1.duty_u16(0 * 650)\n' +
+            '   motor_C2.duty_u16(speedForward * 650)\n\n' +
+            '   motor_D1.duty_u16(0 * 650)\n' +
+            '   motor_D2.duty_u16(speedForward * 650)\n\n' +
+            '   return\n\n';
+
+    }
+    else if (direction == "right") {
+        Blockly.Arduino.definitions_['define_direction_right_omni_dabble'] =
+            'def ' + direction + '_omni (speedRight):\n' +
+            pwm_value1 +
+            '   motor_A1.duty_u16(0 * 650)\n' +
+            '   motor_A2.duty_u16(speedRight * 650)\n\n' +
+            '   motor_B1.duty_u16(speedRight * 650)\n' +
+            '   motor_B2.duty_u16(0 * 650)\n\n' +
+            '   motor_C1.duty_u16(0 * 650)\n' +
+            '   motor_C2.duty_u16(speedRight * 650)\n\n' +
+            '   motor_D1.duty_u16(speedRight * 650)\n' +
+            '   motor_D2.duty_u16(0 * 650)\n\n' +
+            '   return\n\n';
+
+    }
+
+    else if (direction == "left") {
+        Blockly.Arduino.definitions_['define_direction_left_omni_dabble'] =
+            'def ' + direction + '_omni (speedLeft):\n' +
+            pwm_value1 +
+            '   motor_A1.duty_u16(speedLeft * 650)\n' +
+            '   motor_A2.duty_u16(0 * 650)\n\n' +
+            '   motor_B1.duty_u16(0 * 650)\n' +
+            '   motor_B2.duty_u16(speedLeft * 650)\n\n' +
+            '   motor_C1.duty_u16(speedLeft * 650)\n' +
+            '   motor_C2.duty_u16(0 * 650)\n\n' +
+            '   motor_D1.duty_u16(0 * 650)\n' +
+            '   motor_D2.duty_u16(speedLeft * 650)\n\n' +
+            '   return\n\n';
+            
+    }
+    
+    else if (direction == "forward_right") {
+        Blockly.Arduino.definitions_['define_appMotors_forward_right_omni_dabble'] =
+        'def ' + direction + '_omni (speed_'+ direction +'):\n' +
+        pwm_value1 +
+        '   motor_A1.duty_u16(0 * 650)\n' +
+        '   motor_A2.duty_u16(speed_'+ direction +' * 650)\n\n' +
+        '   motor_B1.duty_u16(0 * 650)\n' +
+        '   motor_B2.duty_u16(0 * 650)\n\n' +
+        '   motor_C1.duty_u16(0 * 650)\n' +
+        '   motor_C2.duty_u16(speed_'+ direction +' * 650)\n\n' +
+        '   motor_D1.duty_u16(0 * 650)\n' +
+        '   motor_D2.duty_u16(0 * 650)\n\n' +
+        '   return\n\n';
+    }
+    
+    else if (direction == "forward_left") {
+        Blockly.Arduino.definitions_['define_appMotors_forward_left_omni_dabble'] =
+        'def ' + direction + '_omni (speed_'+ direction +'):\n' +
+        pwm_value1 +
+        '   motor_A1.duty_u16(0 * 650)\n' +
+        '   motor_A2.duty_u16(0 * 650)\n\n' +
+        '   motor_B1.duty_u16(0 * 650)\n' +
+        '   motor_B2.duty_u16(speed_'+ direction +' * 650)\n\n' +
+        '   motor_C1.duty_u16(0 * 650)\n' +
+        '   motor_C2.duty_u16(0 * 650)\n\n' +
+        '   motor_D1.duty_u16(0 * 650)\n' +
+        '   motor_D2.duty_u16(speed_'+ direction +' * 650)\n\n' +
+        '   return\n\n';
+    }
+    else if (direction == "backward_right") {
+        Blockly.Arduino.definitions_['define_appMotors_backward_right_omni_dabble'] =
+        'def ' + direction + '_omni (speed_'+ direction +'):\n' +
+        pwm_value1 +
+        '   motor_A1.duty_u16(0 * 650)\n' +
+        '   motor_A2.duty_u16(0 * 650)\n\n' +
+        '   motor_B1.duty_u16(speed_'+ direction +' * 650)\n' +
+        '   motor_B2.duty_u16(0 * 650)\n\n' +
+        '   motor_C1.duty_u16(0 * 650)\n' +
+        '   motor_C2.duty_u16(0 * 650)\n\n' +
+        '   motor_D1.duty_u16(speed_'+ direction +' * 650)\n' +
+        '   motor_D2.duty_u16(0 * 650)\n\n' +
+        '   return\n\n';
+    }
+    else if (direction == "backward_left") {
+        Blockly.Arduino.definitions_['define_appMotors_backward_left_omni_dabble'] =
+        'def ' + direction + '_omni (speed_'+ direction +'):\n' +
+        pwm_value1 +
+        '   motor_A1.duty_u16(speed_'+ direction +' * 650)\n' +
+        '   motor_A2.duty_u16(0 * 650)\n\n' +
+        '   motor_B1.duty_u16(0 * 650)\n' +
+        '   motor_B2.duty_u16(0 * 650)\n\n' +
+        '   motor_C1.duty_u16(speed_'+ direction +' * 650)\n' +
+        '   motor_C2.duty_u16(0 * 650)\n\n' +
+        '   motor_D1.duty_u16(0 * 650)\n' +
+        '   motor_D2.duty_u16(0 * 650)\n\n' +
+        '   return\n\n';
+    }
+
+    code = direction + '_omni(' + speed + ')\n';
+
+    return code;
+};
+
+Blockly.Arduino['dabble_jotstick_XYspeed'] = function(block) {
+    var value = block.getFieldValue('VALUE'); 
+    var code = "";
+
+    if (value === 'Right-Left') {
+        code = 'xSpeed';
+    } else if (value === 'Turning') {
+        code = 'ySpeed';
+    }
+
+    return [code, Blockly.Arduino.ORDER_NONE];
+};
+
+Blockly.Arduino['dabble_JoystickDirections'] = function(block) {
+    var code = "";
+    var value =  Blockly.Arduino.valueToCode(block, 'VALUE', Blockly.Arduino.ORDER_NONE);
+
+    code == value
+
+    return [code, Blockly.Arduino.ORDER_NONE];
+}
 
 
 Blockly.Arduino['ASCIItoInput'] = function(block) {

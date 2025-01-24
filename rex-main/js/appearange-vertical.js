@@ -286,7 +286,7 @@ function openDocumentsPanel() {
     isShowDocumentsPanel = true;
     document.getElementById("documentsPanel").style.width = "50vw";
 
-    $("#documentsFrame").attr('src', "https://rex-rdt.readthedocs.io/en/latest/");
+    $("#documentsFrame").attr('src', "docRex/index.html");
 
 }
 function closeDocumentsPanel() {

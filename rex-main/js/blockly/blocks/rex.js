@@ -738,12 +738,17 @@ Blockly.Blocks['Joystick_Speed_App'] = {
   }
 };
 
-Blockly.Blocks['Jotstick_Def_app'] = {
+Blockly.Blocks['Jotstick_DefXY_app'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage(iconApp, 30, 30, "icon"))
-        .appendField("Joystick definitions")
-      
+        .appendField("Joystick ")
+        .appendField(new Blockly.FieldDropdown([
+                                            ["X", "x"], 
+                                            ["Y", "y"],
+                                          ]), "VALUE")
+        .appendField("definition");
+
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -871,6 +876,99 @@ Blockly.Blocks['dabbleRun'] = {
     this.setColour("#426322");
     this.setTooltip("");
     this.setHelpUrl("");
+  }
+};
+
+
+Blockly.Blocks['dabble_jotstickDef'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Joystick ")
+        .appendField(new Blockly.FieldDropdown([
+                                            ["X", "x"], 
+                                            ["Y", "y"],
+                                          ]), "VALUE")
+        .appendField("definition");
+
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour("#426322");
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['dabble_JoystickMotor'] = {
+  init: function () {
+      this.appendDummyInput()
+          .appendField("Go")
+          .appendField(new Blockly.FieldDropdown([
+            ["Forward", "forward"], 
+            ["Backward", "backward"], 
+            ["Left", "left"], 
+            ["Right", "right"],
+            ["Forward-Right","forward_right"],
+            ["Forward-Left","forward_left"],
+            ["Backward-Right","backward_right"],
+            ["Backward-Left","backward_left"]
+          ]), "Direction")
+          .appendField("at speed");
+
+      this.appendValueInput("SPEED")
+          .setAlign(Blockly.ALIGN_CENTRE)
+
+      this.appendDummyInput()
+      .appendField("with joystick")
+
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour("#426322");
+      this.setTooltip("");
+      this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['dabble_JoystickDirections'] = {
+  init: function () {
+      this.appendDummyInput()
+          .appendField("Joystick movement")
+          .appendField(new Blockly.FieldDropdown([
+            ["Forward", "y > deadZone and abs(x) <= deadZone"], 
+            ["Backward", "y < -deadZone and abs(x) <= deadZone"], 
+            ["Left", "x < -deadZone and abs(y) <= deadZone"], 
+            ["Right", "x > deadZone and abs(y) <= deadZone"],
+            ["Forward-Right","y > deadZone and x > deadZone"],
+            ["Forward-Left","y > deadZone and x < -deadZone"],
+            ["Backward-Right","y < -deadZone and x > deadZone"],
+            ["Backward-Left","y < -deadZone and x < -deadZone"]
+          ]), "Direction")
+      
+      this.setOutput(true, null);
+      this.setColour("#426322");
+      this.setTooltip("");
+      this.setHelpUrl("");
+      this.setOutputShape(Blockly.OUTPUT_SHAPE_HEXAGONAL)
+  }
+};
+
+Blockly.Blocks['dabble_jotstick_XYspeed'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Joystick")
+        .appendField(new Blockly.FieldDropdown([
+                                            ["Right-Left", "Right-Left"], 
+                                            ["Turning", "Turning"],
+                                          ]), "VALUE")
+        
+      this.appendDummyInput()
+      .appendField("speed")
+
+    this.setColour("#426322");
+    this.setTooltip("");
+    this.setHelpUrl("");
+    this.setOutput(true, null);
+    this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND)
   }
 };
 
